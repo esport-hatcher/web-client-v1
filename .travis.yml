@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t agamblin/eh-client-test -f ./client/Dockerfile.dev ./client
+  - docker build -t agamblin/eh-client-test -f ./Dockerfile.dev .
 
 script:
   - docker run agamblin/eh-client-test yarn test --coverage
