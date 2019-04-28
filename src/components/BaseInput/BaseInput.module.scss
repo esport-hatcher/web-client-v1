@@ -1,0 +1,19 @@
+@import '../../styles/theming';
+@import '../../styles/text-styles.scss';
+
+.shape {
+  width: 300px;
+  height: 40px;
+  border-radius: 14px;
+  background-color: $dark-three;
+  border: 0;
+  padding: 8px 24px;
+}
+
+::-webkit-input-placeholder {
+  @include Placeholder-Medium;
+}
+
+.error {
+  border-color: red;
+}
