@@ -32,7 +32,8 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"launch-tests": "react-app-rewired test",
+		"launch-tests": "react-app-rewired test --env=jsdom",
+		"launch-tests-ci": "CI=true react-app-rewired test --env=jsdom",
 		"eject": "react-app-rewired eject",
 		"test": "sh launch-tests.sh",
 		"storybook": "start-storybook -p 9009 -s public",
