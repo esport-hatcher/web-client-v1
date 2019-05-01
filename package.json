@@ -36,6 +36,7 @@
 		"launch-tests-ci": "CI=true react-app-rewired test --env=jsdom",
 		"eject": "react-app-rewired eject",
 		"test": "sh launch-tests.sh",
+		"shell": "sh launch-shell.sh",
 		"storybook": "start-storybook -p 9009 -s public",
 		"build-storybook": "build-storybook -s public"
 	},
