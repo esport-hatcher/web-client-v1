@@ -2706,7 +2706,7 @@ babel-helper-to-multiple-sequence-expressions@^0.5.0:
   resolved "https://registry.yarnpkg.com/babel-helper-to-multiple-sequence-expressions/-/babel-helper-to-multiple-sequence-expressions-0.5.0.tgz#a3f924e3561882d42fcf48907aa98f7979a4588d"
   integrity sha512-m2CvfDW4+1qfDdsrtf4dwOslQC3yhbgyBFptncp4wvtdrDHqueW7slsYv4gArie056phvQFhT2nRcGS4bnm6mA==
 
-babel-jest@24.7.1:
+babel-jest@24.7.1, babel-jest@^24.8.0:
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.7.1.tgz#73902c9ff15a7dfbdc9994b0b17fcefd96042178"
   integrity sha512-GPnLqfk8Mtt0i4OemjWkChi73A3ALs4w2/QbG64uAj8b5mmwzxc7jbJVRZt8NJkxi6FopVHog9S3xX6UJKb2qg==
@@ -2719,20 +2719,7 @@ babel-jest@24.7.1:
     chalk "^2.4.2"
     slash "^2.0.0"
 
-babel-jest@^24.8.0:
-  version "24.8.0"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.8.0.tgz#5c15ff2b28e20b0f45df43fe6b7f2aae93dba589"
-  integrity sha512-+5/kaZt4I9efoXzPlZASyK/lN9qdRKmmUav9smVc0ruPQD7IsfucQ87gpOE8mn2jbDuS6M/YOW6n3v9ZoIfgnw==
-  dependencies:
-    "@jest/transform" "^24.8.0"
-    "@jest/types" "^24.8.0"
-    "@types/babel__core" "^7.1.0"
-    babel-plugin-istanbul "^5.1.0"
-    babel-preset-jest "^24.6.0"
-    chalk "^2.4.2"
-    slash "^2.0.0"
-
-babel-loader@8.0.5:
+babel-loader@8.0.5, babel-loader@^8.0.5:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.5.tgz#225322d7509c2157655840bba52e46b6c2f2fe33"
   integrity sha512-NTnHnVRd2JnRqPC0vW+iOQWU5pchDbYXsG2E6DMXEpMfUcQKclF9gmf3G3ZMhzG7IG9ji4coL0cm+FxeWxDpnw==
@@ -2877,10 +2864,15 @@ babel-plugin-minify-type-constructors@^0.4.3:
   dependencies:
     babel-helper-is-void-0 "^0.4.3"
 
-babel-plugin-named-asset-import@^0.3.0, babel-plugin-named-asset-import@^0.3.2:
+babel-plugin-named-asset-import@^0.3.0:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-0.3.2.tgz#20978ed446b8e1bf4a2f42d0a94c0ece85f75f4f"
   integrity sha512-CxwvxrZ9OirpXQ201Ec57OmGhmI8/ui/GwTDy0hSp6CmRvgRC0pSair6Z04Ck+JStA0sMPZzSJ3uE4n17EXpPQ==
+
+babel-plugin-named-asset-import@^1.0.0-next.103+4b5b76b7:
+  version "1.0.0-next.fb6e6f70"
+  resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-1.0.0-next.fb6e6f70.tgz#80df32d6a487817573ad1d63a02a37bcf317fbea"
+  integrity sha512-Ewwdp+52u2td+DD2bMK1uz0y3FmCrR1kpRGUeRcKUaco8e3LATBfyMxFYtsFZAAdNTqpyAi4baX7BiOLeLNdIw==
 
 babel-plugin-react-docgen@^2.0.2:
   version "2.0.2"
@@ -3035,7 +3027,7 @@ babel-preset-react-app@^7.0.0:
     babel-plugin-macros "2.5.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
 
-babel-preset-react-app@^8.0.0:
+babel-preset-react-app@^8.0.0-next.74+4b5b76b7:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/babel-preset-react-app/-/babel-preset-react-app-8.0.0.tgz#930b6e28cdcfdff97ddb8bef9226d504f244d326"
   integrity sha512-6Dmj7e8l7eWE+R6sKKLRrGEQXMfcBqBYlphaAgT1ml8qT1NEP+CyTZyfjmgKGqHZfwH3RQCUOuP6y4mpGc7tgg==
@@ -4922,7 +4914,7 @@ escodegen@^1.11.0, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-react-app@^4.0.0:
+eslint-config-react-app@^4.0.0-next.74+4b5b76b7:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-4.0.0.tgz#1651f44b3830d863817af6ebed0916193aa870c3"
   integrity sha512-SeFxaI+0NAzWPFAI9AT+Vp9Xe2u5RCnn0JVEXkE338HgoPujc38Bc0upCJw4BWmavvIN/ODmE6EuzHoAEn3ozw==
@@ -5037,7 +5029,7 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
 
-eslint@^5.16.0:
+eslint@5.16.0:
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.16.0.tgz#a1e3ac1aae4a3fbd8296fcf8f7ab7314cbb6abea"
   integrity sha512-S3Rz11i7c8AA5JPv7xAH+dOyq/Cu/VXHiHXBPOU1k/JAM5dXqQPt3qcrhpHSorXmrpu2g0gkIBVXAqCpzfoZIg==
@@ -5681,10 +5673,13 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
-fsevents@2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.0.6.tgz#87b19df0bfb4a1a51d7ddb51b01b5f3bedb40c33"
-  integrity sha512-vfmKZp3XPM36DNF0qhW+Cdxk7xm7gTEHY1clv1Xq1arwRQuKZgAhw+NZNWbJBtuaNxzNXwhfdPYRrvIbjfS33A==
+fsevents@1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.7.tgz#4851b664a3783e52003b3c66eb0eee1074933aa4"
+  integrity sha512-Pxm6sI2MeBD7RdD12RYsqaP0nMiwx8eZBXCa6z2L+mRHm2DYrOYwihmhjpkdjUHwQhslWQjRpEgNq4XvBmaAuw==
+  dependencies:
+    nan "^2.9.2"
+    node-pre-gyp "^0.10.0"
 
 fsevents@^1.2.7:
   version "1.2.9"
@@ -8355,7 +8350,7 @@ mute-stream@0.0.7:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-nan@^2.12.1, nan@^2.13.2:
+nan@^2.12.1, nan@^2.13.2, nan@^2.9.2:
   version "2.13.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.13.2.tgz#f51dc7ae66ba7d5d55e1e6d4d8092e802c9aefe7"
   integrity sha512-TghvYc72wlMGMVMluVo9WRJc0mB8KxxF/gZ4YYFy7V2ZQX9l7rgbPg7vjS9mt6U5HXODVFVI2bOduCzwOMv/lw==
@@ -8517,6 +8512,22 @@ node-notifier@^5.2.1:
     shellwords "^0.1.1"
     which "^1.3.0"
 
+node-pre-gyp@^0.10.0:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.10.3.tgz#3070040716afdc778747b61b6887bf78880b80fc"
+  integrity sha512-d1xFs+C/IPS8Id0qPTZ4bUT8wWryfR/OzzAFxweG+uLN85oPzyo2Iw6bVlLQ/JOdgNonXLCoRyqDzDWq4iw72A==
+  dependencies:
+    detect-libc "^1.0.2"
+    mkdirp "^0.5.1"
+    needle "^2.2.1"
+    nopt "^4.0.1"
+    npm-packlist "^1.1.6"
+    npmlog "^4.0.2"
+    rc "^1.2.7"
+    rimraf "^2.6.1"
+    semver "^5.3.0"
+    tar "^4"
+
 node-pre-gyp@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.12.0.tgz#39ba4bb1439da030295f899e3b520b7785766149"
@@ -8540,7 +8551,7 @@ node-releases@^1.1.13, node-releases@^1.1.17, node-releases@^1.1.3:
   dependencies:
     semver "^5.3.0"
 
-node-sass@^4.12.0:
+node-sass@^4.11.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.12.0.tgz#0914f531932380114a30cc5fa4fa63233a25f017"
   integrity sha512-A1Iv4oN+Iel6EPv77/HddXErL2a+gZ4uBeZUy+a8O35CFYTXhgA8MgLCWBtwpGZdCvTvQ9d+bQxX/QC36GDPpQ==
@@ -10258,7 +10269,7 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-app-polyfill@^1.0.0:
+react-app-polyfill@^1.0.0-next.74+4b5b76b7:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.0.tgz#735c725c1d4261b710cb200c498789c8b80e0f74"
   integrity sha512-fbZxEZdfx+rVENMvGTFjUcDDOZGKHaiavA8Y+FwM2I/o8gJT6pCYZk19XfeOntVzGZH2F1qqH7SLjXMhUM+YJw==
@@ -10317,7 +10328,7 @@ react-dev-utils@^7.0.0, react-dev-utils@^7.0.1:
     strip-ansi "5.0.0"
     text-table "0.2.0"
 
-react-dev-utils@^9.0.0:
+react-dev-utils@^9.0.0-next.68+4b5b76b7:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.0.0.tgz#356d95db442441c5d4748e0e49f4fd1e71aecbbd"
   integrity sha512-HXvxOnABzIQH804ros5dBFryw4x0FU7Tl5KU2xg71jKx0EDsJYK0LuVVdj9qoLIgD1pmjzpjl7q7pjwXKIe37A==
@@ -10504,10 +10515,10 @@ react-router@5.0.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scripts@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.0.0.tgz#a715613ef3eace025907b409cec8505096e0233e"
-  integrity sha512-F4HegoBuUKZvEzXYksQu05Y6vJqallhHkQUEL6M7OQ5rYLBQC/4MTK6km9ZZvEK9TqMy1XA8SSEJGJgTEr6bSQ==
+react-scripts@3.0.0-next.68:
+  version "3.0.0-next.68"
+  resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.0.0-next.68.tgz#4f679e9ef031af4ce01a14f4a5b13061a4aa2004"
+  integrity sha512-bMezwY2Y6+ViqRHDbnqLrTfFOHIkzVc3ECgf4Rn5DTx+Ir8tUc/G6VVmCH+NmdheHVJDUwNYs5/+q6qg5s/R1g==
   dependencies:
     "@babel/core" "7.4.3"
     "@svgr/webpack" "4.1.0"
@@ -10516,14 +10527,14 @@ react-scripts@^3.0.0:
     babel-eslint "10.0.1"
     babel-jest "24.7.1"
     babel-loader "8.0.5"
-    babel-plugin-named-asset-import "^0.3.2"
-    babel-preset-react-app "^8.0.0"
+    babel-plugin-named-asset-import "^1.0.0-next.103+4b5b76b7"
+    babel-preset-react-app "^8.0.0-next.74+4b5b76b7"
     case-sensitive-paths-webpack-plugin "2.2.0"
     css-loader "2.1.1"
     dotenv "6.2.0"
     dotenv-expand "4.2.0"
-    eslint "^5.16.0"
-    eslint-config-react-app "^4.0.0"
+    eslint "5.16.0"
+    eslint-config-react-app "^4.0.0-next.74+4b5b76b7"
     eslint-loader "2.1.2"
     eslint-plugin-flowtype "2.50.1"
     eslint-plugin-import "2.16.0"
@@ -10547,11 +10558,10 @@ react-scripts@^3.0.0:
     postcss-normalize "7.0.1"
     postcss-preset-env "6.6.0"
     postcss-safe-parser "4.0.1"
-    react-app-polyfill "^1.0.0"
-    react-dev-utils "^9.0.0"
+    react-app-polyfill "^1.0.0-next.74+4b5b76b7"
+    react-dev-utils "^9.0.0-next.68+4b5b76b7"
     resolve "1.10.0"
     sass-loader "7.1.0"
-    semver "6.0.0"
     style-loader "0.23.1"
     terser-webpack-plugin "1.2.3"
     url-loader "1.1.2"
@@ -10560,7 +10570,7 @@ react-scripts@^3.0.0:
     webpack-manifest-plugin "2.0.4"
     workbox-webpack-plugin "4.2.0"
   optionalDependencies:
-    fsevents "2.0.6"
+    fsevents "1.2.7"
 
 react-syntax-highlighter@^8.0.1:
   version "8.1.0"
@@ -11253,7 +11263,7 @@ semver@5.5.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
   integrity sha512-4SJ3dm0WAwWy/NVeioZh5AntkdJoWKxHxcmyP622fOkgHa4z3R0TdBJICINyaSDE6uNwVc8gZr+ZinwZAH4xIA==
 
-semver@6.0.0, semver@^6.0.0:
+semver@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.0.0.tgz#05e359ee571e5ad7ed641a6eec1e547ba52dea65"
   integrity sha512-0UewU+9rFapKFnlbirLi3byoOuhrSsli/z/ihNnvM24vgF+8sNBiI1LZPBSH9wJKUwaUbw+s3hToDLCXkrghrQ==
