@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '@/services/history';
-import 'normalize.css';
 
 import HomePage from '@/screens/Home';
 import LoginPage from '@/screens/Login';
