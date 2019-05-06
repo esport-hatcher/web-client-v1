@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import styles from './Input.module.scss';
+import classes from './Input.module.scss';
 
 export class Input extends Component {
     render() {
         return (
             <input
-                className={`${styles.shape} ${styles.normal}`}
+                className={`${classes.shape} ${classes.normal}`}
                 type='text'
                 placeholder='namaste'
             />
