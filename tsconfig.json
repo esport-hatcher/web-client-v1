@@ -27,6 +27,6 @@
   "exclude": [
     "src/node_modules",
     "src/styles/**/*"
-],
+  ],
   "extends": "./tsconfig.paths.json"
 }
