@@ -67,7 +67,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/src/app/$1"
+      "@/(.*)": "<rootDir>/src/app/$1",
+      "@styles/(.*)": "<rootDir>/src/styles/$1"
     }
   },
   "browserslist": [
