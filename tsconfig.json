@@ -20,7 +20,13 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "typings"
+  ],
+  "exclude": [
+    "src/node_modules",
+    "src/styles/**/*"
   ],
   "extends": "./tsconfig.paths.json"
 }

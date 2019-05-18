@@ -6,7 +6,7 @@ import HomePage from '@/screens/Home';
 import LoginPage from '@/screens/Login';
 
 // tslint:disable-next-line: no-import-side-effect
-import '@/styles/reset.scss';
+import '@styles/sass/main.scss';
 
 export class App extends Component {
     render() {

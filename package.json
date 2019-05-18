@@ -23,10 +23,10 @@
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "24.0.11",
     "@types/node": "11.11.6",
+    "@types/node-sass": "^4.11.0",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.3",
     "@types/react-router-dom": "^4.3.2",
-    "babel-loader": "^8.0.5",
     "prettier": "^1.17.0",
     "react-app-rewired": "^2.1.3",
     "tslint": "^5.16.0",
@@ -35,7 +35,8 @@
     "typescript": "^3.4.5"
   },
   "resolutions": {
-    "babel-jest": "24.7.1"
+    "babel-jest": "24.7.1",
+    "babel-loader": "8.0.5"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -58,15 +59,16 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "tslint -t stylish --project tsconfig.json --config tslint.json",
+    "src/**/*.{js,jsx,ts,tsx,json,md}": [
+      "npm run lint",
       "prettier --config .prettierrc.json --write",
       "git add"
     ]
   },
   "jest": {
     "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/src/app/$1"
+      "@/(.*)": "<rootDir>/src/app/$1",
+      "@styles/(.*)": "<rootDir>/src/styles/$1"
     }
   },
   "browserslist": [
