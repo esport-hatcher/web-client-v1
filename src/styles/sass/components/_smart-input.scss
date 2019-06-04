@@ -1,0 +1,68 @@
+.input-text {
+    position: relative;
+    margin: 3rem;
+    overflow: hidden;
+
+
+    i {
+        top: 50%;
+        left: 2rem;
+        transform: translateY(-50%);
+        transition: all .3s;
+        color: $color-light-grey;
+        position: absolute;
+        font-size: 20px;
+    }
+
+    &__input {
+    background-color: $color-dark-medium;
+    border-radius: 14px;
+    outline: none;
+    border: none;
+    height: 4rem;
+    width: 30rem;
+    padding: 1rem 2rem;
+    padding-left: 6rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.20rem;
+    color: $color-white;
+    transition: all .3s;
+    border: 1px solid rgba($color-white, 0);
+
+    &--error {
+        border-color: $color-rosy-pink;
+
+        & + i {
+            color: $color-rosy-pink !important;
+        }
+    }
+
+    &--success {
+        border-color: $color-green-light;
+
+        & + i {
+            color: $color-green-light;
+        }
+    }
+
+    &:focus + i {
+        top: -2rem !important;
+        left: 2rem !important;
+    }
+
+    &:valid + i[class*='spinner'] {
+        position: absolute ;
+        top: 1rem;
+    }
+
+    &:focus {
+        padding-left: 2rem;
+        border: 1px solid $color-white;
+    }
+
+    &::placeholder {
+        @extend .placeholder-medium;
+    }
+}
+}
+
