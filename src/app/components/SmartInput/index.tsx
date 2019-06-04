@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { sleep } from '@/services/utils';
+import { sleep } from '@/shared/utils';
 import api from '@/api';
 
 interface ISmartInputP {
@@ -169,6 +169,7 @@ export class SmartInput extends Component<ISmartInputP> {
                     pattern={pattern}
                     onBlur={this.validationCheck}
                     required={required}
+                    value={this.state.input}
                     onChange={this.onInputChange}
                 />
                 <i className={iconClass} />

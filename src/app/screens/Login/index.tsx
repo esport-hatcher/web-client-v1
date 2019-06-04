@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import SmartInput from '@/components/SmartInput';
-import { isEmail } from '@/services/utils';
-
-const checkIfMinMax = (value: string) => {
-    if (value.length < 5) {
-        return false;
-    }
-    return true;
-};
+import { isEmail, getMinMaxFunction } from '@/shared/utils';
 
 export class LoginPage extends Component {
     render() {
+        const minMax = getMinMaxFunction(5, 20);
         return (
             <div>
                 <SmartInput
@@ -23,7 +17,7 @@ export class LoginPage extends Component {
                 <SmartInput
                     type='password'
                     name='password'
-                    customValidation={checkIfMinMax}
+                    customValidation={minMax}
                     placeholder='Password'
                 />
             </div>
