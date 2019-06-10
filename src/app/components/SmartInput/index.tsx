@@ -152,7 +152,7 @@ export class SmartInput extends Component<ISmartInputP> {
         if (!validated && !error && !loading) {
             inputClass = '';
         }
-        return `input-text__input--${inputClass}`;
+        return `smart-input__input--${inputClass}`;
     };
 
     render() {
@@ -160,9 +160,9 @@ export class SmartInput extends Component<ISmartInputP> {
         const iconClass = this.iconType();
         const inputClass = this.inputType();
         return (
-            <div className='input-text'>
+            <div className='smart-input'>
                 <input
-                    className={`input-text__input ${inputClass}`}
+                    className={`smart-input__input ${inputClass}`}
                     type={type}
                     placeholder={placeholder}
                     name={name}

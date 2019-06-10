@@ -1,4 +1,4 @@
-.input-text {
+.smart-input {
     position: relative;
     margin: 3rem;
     overflow: hidden;
@@ -14,7 +14,7 @@
         font-size: 20px;
     }
 
-    &__input {
+    &__input { 
     background-color: $color-dark-medium;
     border-radius: 14px;
     outline: none;
