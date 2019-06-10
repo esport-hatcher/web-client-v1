@@ -9,7 +9,7 @@
         left: 2rem;
         transform: translateY(-50%);
         transition: all .3s;
-        color: $color-light-grey;
+        color: $color-grey-light;
         position: absolute;
         font-size: 20px;
     }
@@ -30,10 +30,10 @@
     border: 1px solid rgba($color-white, 0);
 
     &--error {
-        border-color: $color-rosy-pink;
+        border-color: $color-pink-rosy;
 
         & + i {
-            color: $color-rosy-pink !important;
+            color: $color-pink-rosy !important;
         }
     }
 
