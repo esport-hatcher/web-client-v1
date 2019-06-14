@@ -6,6 +6,8 @@ interface ISmartInputP {
     placeholder: string;
     name: string;
     type: 'email' | 'text' | 'password';
+    // tslint:disable-next-line: no-any
+    onChange: (event: any) => void;
     pattern?: string;
     required?: boolean;
     icon?: string;
@@ -85,6 +87,7 @@ export class SmartInput extends Component<ISmartInputP> {
      * Set the input's value in the component's state
      */
     onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.onChange(event);
         this.setState({
             input: event.target.value,
             validated: false,

@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import SmartInput from '@/components/SmartInput';
-import { isEmail, getMinMaxFunction } from '@/shared/utils';
+import AuthBanner from '@/layouts/AuthScreen/Banner';
+import AuthForm from '@/layouts/AuthScreen/Form';
 
 export class LoginPage extends Component {
+    state = { loginMode: false };
+
+    checkIt = () => this.setState({ loginMode: !this.state.loginMode });
+
     render() {
-        const minMax = getMinMaxFunction(5, 20);
         return (
-            <div>
-                <SmartInput
-                    type='email'
-                    name='Email'
-                    customValidation={isEmail}
-                    placeholder='Email'
-                    register={true}
+            <div className='auth-screen'>
+                <input
+                    type='checkbox'
+                    name='slider'
+                    className='auth-screen__checkbox'
+                    checked={this.state.loginMode}
+                    // tslint:disable-next-line: no-empty
+                    onChange={() => {}}
                 />
-                <SmartInput
-                    type='password'
-                    name='password'
-                    customValidation={minMax}
-                    placeholder='Password'
-                />
+                <div className='auth-screen__banner'>
+                    <AuthBanner
+                        onButtonClick={this.checkIt}
+                        loginMode={this.state.loginMode}
+                    />
+                </div>
+                <div className='auth-screen__form'>
+                    <AuthForm loginMode={this.state.loginMode} />
+                </div>
             </div>
         );
     }

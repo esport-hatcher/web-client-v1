@@ -1,0 +1,20 @@
+.banner {
+    width: 40vw;
+    height: 100vh;
+    position: relative;
+    background: $color-dark-medium url('../../assets/bg-auth-screen.png');
+    background-size: cover;
+
+    &__container {
+        @include absCenter();
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    &__container > *:not(:last-child) {
+        margin-bottom: 5rem;
+    }
+
+}

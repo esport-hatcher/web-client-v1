@@ -16,3 +16,18 @@
         letter-spacing: 0.20rem;
     }
 }
+
+.title {
+    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif; 
+    color: $color-white;
+    font-weight: bold;
+
+    &--big {
+        font-size: 4.4rem;
+    }
+
+    &--xs {
+        font-size: 2rem;
+    }
+}
