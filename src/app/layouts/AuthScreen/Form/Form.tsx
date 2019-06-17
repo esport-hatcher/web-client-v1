@@ -6,10 +6,22 @@ import { getCompareStringFunction } from '../../../shared/utils';
 import { SERVER_ERROR } from '@/actions/types';
 
 interface IAuthFormP {
+    /**
+     * Is the form used to login or register ?
+     */
     loginMode: boolean;
+    /**
+     * Is their any error from Redux ?
+     */
     errorMsg?: string;
+    /**
+     * When logging execute this function
+     */
     // tslint:disable-next-line: no-any
     onLogin: (email: string, password: string) => Promise<void>;
+    /**
+     * When register execute this function
+     */
     onRegister: (
         email: string,
         username: string,
@@ -38,6 +50,9 @@ export class AuthForm extends Component<IAuthFormP> {
         },
     };
 
+    /**
+     * Keep a trace of the value for each field
+     */
     // tslint:disable-next-line: no-any
     onChangeField = (event: React.ChangeEvent<HTMLInputElement>) => {
         // tslint:disable-next-line: no-console
@@ -49,10 +64,16 @@ export class AuthForm extends Component<IAuthFormP> {
         });
     };
 
+    /**
+     * Keep a trace of the validity of each field => (valid || not valid)
+     */
     onChangeStatus = (field: string, valid: boolean) => {
         this.setState({ [field]: { ...this.state[field], valid } });
     };
 
+    /**
+     * Check if one of the fields is not valid
+     */
     checkIfError = () => {
         const { email, username, password, passwordConfirm } = this.state;
         const { loginMode } = this.props;
@@ -74,6 +95,9 @@ export class AuthForm extends Component<IAuthFormP> {
         return true;
     };
 
+    /**
+     * If register then it render the username field
+     */
     userNameField = () => {
         const { loginMode } = this.props;
 
@@ -93,6 +117,9 @@ export class AuthForm extends Component<IAuthFormP> {
         }
     };
 
+    /**
+     * If register then it render the confirm password field
+     */
     confirmPwdField = () => {
         const { loginMode } = this.props;
         const {
@@ -134,6 +161,9 @@ export class AuthForm extends Component<IAuthFormP> {
         return null;
     };
 
+    /**
+     * Function called when submitting the form
+     */
     onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const { email, username, password } = this.state;
         const { loginMode, onLogin, onRegister } = this.props;
@@ -154,8 +184,14 @@ export class AuthForm extends Component<IAuthFormP> {
         }
     };
 
+    /**
+     * renderer
+     */
     render() {
         const { loginMode } = this.props;
+        /**
+         * Curried function who returns a function checking if a string is between 5 & 20 characters
+         */
         const minMaxPwd = getMinMaxFunction(5, 20);
 
         return (

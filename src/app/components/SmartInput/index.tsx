@@ -10,9 +10,18 @@ interface ISmartInputP {
     required?: boolean;
     icon?: string;
     register?: boolean;
+    /**
+     * Function who is executed to see if an input is valid or not
+     */
     customValidation?: (value: string) => boolean;
     // tslint:disable-next-line: no-any
+    /**
+     * CallBack function to keep trace of every input value in the form component
+     */
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    /**
+     * Callback function who have to be called everytime the input is detected  valid or invalid. Allow to say if it's okay to submit the form or not
+     */
     onChangeStatus?: (field: string, value: boolean) => void;
 }
 
