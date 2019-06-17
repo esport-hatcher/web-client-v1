@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import history from '@/services/history';
 
 import HomePage from '@/screens/Home';
-import LoginPage from '@/screens/Login';
+import AuthPage from '@/screens/Auth';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
@@ -15,7 +15,16 @@ export class App extends Component {
                 <Router history={history}>
                     <Switch>
                         <Route path='/' exact component={HomePage} />
-                        <Route path='/login' exact component={LoginPage} />
+                        <Route
+                            path='/login'
+                            exact
+                            render={props => <AuthPage isLogin={true} />}
+                        />
+                        <Route
+                            path='/register'
+                            exact
+                            render={props => <AuthPage isLogin={false} />}
+                        />
                     </Switch>
                 </Router>
             </div>

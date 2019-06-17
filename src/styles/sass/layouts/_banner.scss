@@ -11,6 +11,10 @@
         flex-direction: column;
         text-align: center;
         align-items: center;
+
+        &__sub-title {
+            width: 35rem;
+        }
     }
 
     &__container > *:not(:last-child) {

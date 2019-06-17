@@ -6,13 +6,14 @@ interface ISmartInputP {
     placeholder: string;
     name: string;
     type: 'email' | 'text' | 'password';
-    // tslint:disable-next-line: no-any
-    onChange: (event: any) => void;
     pattern?: string;
     required?: boolean;
     icon?: string;
-    customValidation?: (value: string) => boolean;
     register?: boolean;
+    customValidation?: (value: string) => boolean;
+    // tslint:disable-next-line: no-any
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeStatus?: (field: string, value: boolean) => void;
 }
 
 export class SmartInput extends Component<ISmartInputP> {
@@ -23,14 +24,28 @@ export class SmartInput extends Component<ISmartInputP> {
      * TODO: Pass this function to props so that the component stays independent
      */
     checkIfNotTaken = async () => {
+        const { onChangeStatus, name } = this.props;
+
         await sleep(1000);
-        try {
-            await api.post('/users/email', {
-                email: this.state.input,
-            });
-            this.setState({ loading: false, validated: true, error: false });
-        } catch {
-            this.setState({ loading: false, validated: false, error: true });
+        if (onChangeStatus) {
+            try {
+                await api.post('/users/email', {
+                    email: this.state.input,
+                });
+                this.setState({
+                    loading: false,
+                    validated: true,
+                    error: false,
+                });
+                onChangeStatus(name, true);
+            } catch {
+                this.setState({
+                    loading: false,
+                    validated: false,
+                    error: true,
+                });
+                onChangeStatus(name, false);
+            }
         }
     };
 
@@ -38,13 +53,20 @@ export class SmartInput extends Component<ISmartInputP> {
      * Execute the validationCheck passed to props to see if it's passing the set his state to success || error
      */
     validationCheck = async () => {
-        const { customValidation, type, register } = this.props;
+        const {
+            customValidation,
+            type,
+            register,
+            onChangeStatus,
+            name,
+        } = this.props;
+        const { input } = this.state;
 
-        if (customValidation) {
+        if (customValidation && onChangeStatus) {
             /**
              * Validation check execution
              */
-            if (customValidation(this.state.input)) {
+            if (customValidation(input)) {
                 if (register && type === 'email') {
                     /**
                      * If the input is an email and the input is in mode "register" then we check it's unique in the database
@@ -60,6 +82,7 @@ export class SmartInput extends Component<ISmartInputP> {
                         validated: true,
                         error: false,
                     });
+                    onChangeStatus(name, true);
                 }
             } else {
                 /**
@@ -70,11 +93,15 @@ export class SmartInput extends Component<ISmartInputP> {
                     error: true,
                     validated: false,
                 });
+                onChangeStatus(name, false);
             }
         } else {
             /**
              * If not validation rule is passed to the component than his state is always valid
              */
+            if (onChangeStatus) {
+                onChangeStatus(name, true);
+            }
             this.setState({
                 loading: false,
                 validated: true,
@@ -117,18 +144,19 @@ export class SmartInput extends Component<ISmartInputP> {
      */
     iconType = () => {
         const { error, loading, validated } = this.state;
+        const { onChangeStatus } = this.props;
         let iconClass: string = '';
         const defaultIcon = this.defaultIcon();
-        if (error) {
+        if (error && onChangeStatus) {
             iconClass = 'fas fa-times';
         }
-        if (loading) {
+        if (loading && onChangeStatus) {
             iconClass = 'fas fa-spinner';
         }
-        if (validated) {
+        if (validated && onChangeStatus) {
             iconClass = 'fas fa-check';
         }
-        if (!validated && !error && !loading) {
+        if ((!validated && !error && !loading) || !onChangeStatus) {
             /**
              * Use the icon passed in props in priority otherwise use the default icon related to the type (see defaultIcon above)
              */
@@ -142,17 +170,18 @@ export class SmartInput extends Component<ISmartInputP> {
      */
     inputType = () => {
         const { error, loading, validated } = this.state;
+        const { onChangeStatus } = this.props;
         let inputClass: string = '';
-        if (error) {
+        if (error && onChangeStatus) {
             inputClass = 'error';
         }
-        if (loading) {
+        if (loading && onChangeStatus) {
             inputClass = 'loading';
         }
-        if (validated) {
+        if (validated && onChangeStatus) {
             inputClass = 'success';
         }
-        if (!validated && !error && !loading) {
+        if ((!validated && !error && !loading) || !onChangeStatus) {
             inputClass = '';
         }
         return `smart-input__input--${inputClass}`;

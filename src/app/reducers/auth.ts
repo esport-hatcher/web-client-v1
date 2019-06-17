@@ -1,27 +1,41 @@
-import { AUTH_LOGIN, AUTH_ERROR, AUTH_LOGOUT } from '@/actions/types';
+import {
+    LOGIN_ERROR_CREDENTIALS,
+    LOGIN_ERROR_MAIL,
+    LOGIN_SUCCESS,
+    SERVER_ERROR,
+} from '@/actions/types';
 import { IAction } from 'src/typings/states/global';
 
-export default (state = {}, action: IAction) => {
+interface IAuthReducer {
+    token?: string;
+    errorMsg?: string;
+}
+
+export default (state = {} as IAuthReducer, action: IAction) => {
     switch (action.type) {
-        case AUTH_LOGIN:
+        case LOGIN_SUCCESS:
             return {
                 ...state,
                 token: action.payload,
                 errorMsg: undefined,
             };
-        case AUTH_ERROR:
+        case LOGIN_ERROR_MAIL:
             return {
                 ...state,
-                errorMsg: action.payload,
-                user: undefined,
+                errorMsg: 'Unknown user',
                 token: undefined,
             };
-        case AUTH_LOGOUT:
+        case LOGIN_ERROR_CREDENTIALS:
             return {
                 ...state,
                 token: undefined,
-                user: undefined,
-                errorMsg: undefined,
+                errorMsg: 'Bad password',
+            };
+        case SERVER_ERROR:
+            return {
+                ...state,
+                errorMsg: 'Unknown error',
+                token: undefined,
             };
         default:
             return state;
