@@ -148,7 +148,9 @@ export class AuthForm extends Component<IAuthFormP> {
         if (loginMode) {
             await onLogin(email.value, password.value);
         } else {
-            await onRegister(email.value, username.value, password.value);
+            if (this.checkIfError()) {
+                await onRegister(email.value, username.value, password.value);
+            }
         }
     };
 
