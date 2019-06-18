@@ -11,6 +11,8 @@ describe('when trying to render an email input', () => {
             placeholder='email'
             name='email'
             customValidation={isEmail}
+            onChange={() => null}
+            onChangeStatus={() => null}
         />
     );
 
@@ -41,7 +43,10 @@ describe('when trying to render a password input', () => {
             type='password'
             placeholder='password'
             name='password'
+            register={true}
             customValidation={minMax}
+            onChange={() => null}
+            onChangeStatus={() => null}
         />
     );
 

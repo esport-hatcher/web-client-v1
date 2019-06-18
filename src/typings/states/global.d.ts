@@ -10,6 +10,5 @@ export interface IAction {
 
 export interface IAuthState {
     token?: string;
-    user?: IUser;
     errorMsg?: string;
 }

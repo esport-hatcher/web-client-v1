@@ -6,6 +6,7 @@
 
 .body-text {
     color: $color-white;
+    
     &--big {
         font-size: 1.6rem;
         letter-spacing: 0.28rem;
@@ -14,5 +15,24 @@
     &--medium {
         font-size: 1.2rem;
         letter-spacing: 0.20rem;
+    }
+
+    &--error {
+        color: $color-rosy-pink;
+    }
+}
+
+.title {
+    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif; 
+    color: $color-white;
+    font-weight: bold;
+
+    &--big {
+        font-size: 4.4rem;
+    }
+
+    &--xs {
+        font-size: 2rem;
     }
 }

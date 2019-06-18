@@ -9,7 +9,7 @@
 html {
   font-size: 62.5%; // this defines what 1 rem is (default on navigator: 16px)
   font-family: 'Open Sans', sans-serif;
-  background-color: grey;
+  background-color: $color-dark;
 }
 
 body {

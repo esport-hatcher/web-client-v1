@@ -1,3 +1,4 @@
-export const AUTH_LOGIN = 'AUTH_LOGIN';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const LOGIN_ERROR_MAIL = 'LOGIN_ERROR_MAIL';
+export const LOGIN_ERROR_CREDENTIALS = 'LOGIN_ERROR_CREDENTIALS';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const SERVER_ERROR = 'SERVER_ERROR';
