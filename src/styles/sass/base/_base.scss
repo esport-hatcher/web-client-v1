@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; // this defines what 1 rem is (default on navigator: 16px)
+  font-family: 'Open Sans', sans-serif;
+  background-color: $color-dark;
+}
+
+body {
+  box-sizing: border-box;
+}

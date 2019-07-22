@@ -1,0 +1,60 @@
+.btn {
+    width: 32rem;
+    height: 6.8rem;
+    text-align: center;
+    font-family: inherit;
+    letter-spacing: 0.4rem;
+    display: inline-block;
+    background-color: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all .3s;
+    outline: none;
+    font-weight: 700;
+
+    &--outline {
+        border: 0.3rem solid $color-white;
+        border-radius: 3.5rem;
+        transition: all .3s;
+
+        &:hover {
+            background-color: white;
+            color: $color-dark-medium;
+        }
+    }
+
+    &--white {
+        color: $color-white;
+    }
+
+    &:hover {
+        transform: translateY(-0.5rem) scale(1.1);
+        box-shadow: 0 1rem 2rem $color-dark;
+    }
+
+    &:active {
+        transform: translateY(0.1rem) scale(1);
+        box-shadow: 0 .5rem 1rem rgba($color-dark, .8);
+    }
+
+    &--round {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100%;
+        background-image: linear-gradient(176deg, #4c617b, $color-dark);
+        border: none;
+        color: $color-white;
+        position: relative;
+
+        i {
+            position : absolute;
+            top: 50%;
+            left: 50%;
+            transform : translate(-35%, -50%);
+            font-size : 25px;
+
+        }
+    }
+
+   
+}
