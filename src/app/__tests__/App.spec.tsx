@@ -10,5 +10,5 @@ beforeEach(() => {
 });
 
 it('renders the App component', () => {
-    expect(wrapped.html()).toContain('HomePage');
+    expect(wrapped.find('.container').length).toEqual(1);
 });
