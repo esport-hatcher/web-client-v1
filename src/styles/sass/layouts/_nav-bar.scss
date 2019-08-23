@@ -1,6 +1,6 @@
 .nav-bar {
-    position: fixed;
     height: 100vh;
+    grid-column: 1 / 2;
     background-color: $color-dark;
     border: $sidebar-border;
     width: $sidebar-size;
