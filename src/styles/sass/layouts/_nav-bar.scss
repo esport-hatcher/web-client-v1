@@ -41,6 +41,12 @@
             font-weight: 500;
         }
 
+        &:active {
+            background-color: darken($color-dark-four, 2.5%);
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
         &--active {
               background-color: $color-dark-four;
         }
