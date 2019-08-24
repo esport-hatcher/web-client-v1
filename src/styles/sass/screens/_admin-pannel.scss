@@ -1,0 +1,19 @@
+.admin-pannel {
+    display: grid;
+    height: 100%;
+    grid-template-rows: repeat(2, min-content) 1fr;
+    grid-template-columns: 1fr max-content;
+    grid-row-gap: $admin-pannel-row-gap;
+    // align-items: center;
+
+    &__search {
+        grid-column: 1 / -1;
+        position: relative;
+        padding: 0 $admin-pannel-padding-content-sides;
+    }
+
+    &__grid {
+        grid-column: 1 / -1;
+        padding: 0 $admin-pannel-padding-content-sides;
+    }
+}

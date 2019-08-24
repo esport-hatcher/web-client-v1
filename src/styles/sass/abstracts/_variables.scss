@@ -14,7 +14,14 @@ $color-white: #fff;
 $color-light-grey:  #748192;
 $color-green-light: rgb(30, 226, 30);
 
+
 /*
+HEADER
+*/
+$header-padding-top-bottom: 4rem;
+$header-padding-sides: 12rem;
+/*
+
 SIDEBAR
 */
 $sidebar-size: 10rem;
@@ -24,3 +31,34 @@ $sidebar-animation-duration: .3s;
 $sidebar-item-spacing: 8rem;
 $sidebar-border: 1px solid $color-dark-four;
 $sidebar-item-padding: 3rem;
+
+/*
+ADMIN FILTERS
+*/
+$admin-filters-spacing: 4rem;
+
+/*
+ADMIN PANNEL
+*/
+$admin-pannel-padding-content-sides: 8rem;
+$admin-pannel-row-gap: 4rem;
+
+/*
+FILTER ITEM
+*/
+$filter-item-spacing-name-count: 1rem;
+$filter-animation-duration: .5s;
+
+/*
+LABEL
+*/
+$label-count-padding: .7rem;
+$label-count-font-size: 1rem;
+
+/*
+SEARCH FIELD
+*/
+$search-field-padding: 1rem;
+$search-field-animation-duration: .3s;
+$search-field-width: 24rem;
+$search-field-icon-size: 3rem;

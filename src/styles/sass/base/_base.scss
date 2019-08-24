@@ -20,6 +20,12 @@ body {
   display: grid;
   grid-template-columns:
     [sidebar-start] $sidebar-size [sidebar-end full-start] 1fr [full-end];
+  transition: all $sidebar-animation-duration ease-out;
+  grid-template-rows: minmax(100vh, min-content);
+
+  &__content {
+    grid-column: full-start / full-end;
+  }
 
     &--expanded {
        grid-template-columns:

@@ -1,0 +1,10 @@
+.admin-filters {
+    display: flex;
+    border-bottom: $sidebar-border;
+    align-items: center;
+    padding-right: $header-padding-sides;
+
+    .filter-item:not(:last-of-type) {
+        margin-right: $admin-filters-spacing;
+    }
+}

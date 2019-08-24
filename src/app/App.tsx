@@ -29,29 +29,35 @@ export class App extends Component {
             >
                 <Router history={history}>
                     <Navigation expandGridSidebar={this.expandSidebar} />
-                    <Switch>
-                        <Route path={routes.home} exact component={HomePage} />
-                        <Route
-                            path={routes.login}
-                            exact
-                            render={props => <AuthPage isLogin={true} />}
-                        />
-                        <Route
-                            path={routes.register}
-                            exact
-                            render={props => <AuthPage isLogin={false} />}
-                        />
-                        <Route
-                            path={routes.adminPannel}
-                            exact
-                            render={props => <AdminPannel />}
-                        />
-                        <Route
-                            path={routes.settings}
-                            exact
-                            render={props => <Settings />}
-                        />
-                    </Switch>
+                    <div className='container__content'>
+                        <Switch>
+                            <Route
+                                path={routes.home}
+                                exact
+                                component={HomePage}
+                            />
+                            <Route
+                                path={routes.login}
+                                exact
+                                render={props => <AuthPage isLogin={true} />}
+                            />
+                            <Route
+                                path={routes.register}
+                                exact
+                                render={props => <AuthPage isLogin={false} />}
+                            />
+                            <Route
+                                path={routes.adminPannel}
+                                exact
+                                render={props => <AdminPannel />}
+                            />
+                            <Route
+                                path={routes.settings}
+                                exact
+                                render={props => <Settings />}
+                            />
+                        </Switch>
+                    </div>
                 </Router>
             </div>
         );
