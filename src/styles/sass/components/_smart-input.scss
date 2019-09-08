@@ -59,9 +59,7 @@
         border: 1px solid $color-white;
     }
 
-    &::placeholder {
-        @extend .placeholder-medium;
-    }
+    @include input-placeholder($color-light-grey);
 }
 }
 

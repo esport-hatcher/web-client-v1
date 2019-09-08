@@ -4,6 +4,7 @@
     align-items: center;
     width: $search-field-width;
     position: relative;
+    overflow: hidden;
    
 
     &__input {
@@ -21,17 +22,12 @@
         font-family: inherit;
         transition: all $search-field-animation-duration;
 
-        &::-webkit-input-placeholder,
-        &::-moz-placeholder,
-        &::placeholder {
-            color: $color-light-grey;
-            font-weight: 200;
-            opacity: 1;
-        }
+        @include input-placeholder($color-light-grey);
 
         &:focus {
             color: $color-white;
             border: 1px solid $color-white;
+            padding-left: $search-field-padding * 2;
         }
     }
 
@@ -47,6 +43,7 @@
 
         &--active {
             fill: $color-white;
+            top: -50%;
         }
     }
 }
