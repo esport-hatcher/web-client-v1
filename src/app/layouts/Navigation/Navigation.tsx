@@ -4,11 +4,7 @@ import sprites from '../../../assets/sprite.svg';
 import routes from '@/config/routes';
 import NavigationItem from '@/components/NavigationItem/index';
 
-interface INavigationP {
-    expandGridSidebar: () => void;
-}
-
-export class Navigation extends Component<INavigationP> {
+export class Navigation extends Component {
     state = { expanded: false, textDisplay: false, currentItem: '' };
 
     componentDidMount() {
@@ -26,12 +22,6 @@ export class Navigation extends Component<INavigationP> {
         }
     };
 
-    onExpandSideBarClick = () => {
-        const { expandGridSidebar } = this.props;
-        this.expandNavBar();
-        expandGridSidebar();
-    };
-
     // tslint:disable-next-line: no-any
     onItemClick = (e: any) => {
         this.setState({ currentItem: e.currentTarget.getAttribute('href') });
@@ -42,6 +32,11 @@ export class Navigation extends Component<INavigationP> {
 
         return (
             <React.Fragment>
+                <div
+                    className={`nav-bar__placeholder ${
+                        expanded ? 'nav-bar__placeholder--expanded' : ''
+                    }`}
+                />
                 <nav
                     className={`nav-bar ${expanded ? 'nav-bar--expanded' : ''}`}
                 >
@@ -81,7 +76,7 @@ export class Navigation extends Component<INavigationP> {
                         className={`nav-bar__button-expand ${
                             expanded ? 'nav-bar__button-expand--expanded' : ''
                         }`}
-                        onClick={this.onExpandSideBarClick}
+                        onClick={this.expandNavBar}
                     >
                         <svg className='nav-bar__button-expand__icon'>
                             <use xlinkHref={`${sprites}#icon-chevron-right`} />

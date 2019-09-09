@@ -5,15 +5,14 @@ import { IState } from 'src/typings/states/global';
 
 interface IRNavigationP {
     auth?: string;
-    expandGridSidebar: () => void;
 }
 
 class RNavigation extends Component<IRNavigationP> {
     render() {
-        const { auth, expandGridSidebar } = this.props;
+        const { auth } = this.props;
 
         if (auth) {
-            return <Navigation expandGridSidebar={expandGridSidebar} />;
+            return <Navigation />;
         }
         return null;
     }
