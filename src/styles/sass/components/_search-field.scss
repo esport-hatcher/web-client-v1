@@ -5,7 +5,6 @@
     width: $search-field-width;
     position: relative;
     overflow: hidden;
-   
 
     &__input {
         width: 100%;
@@ -20,7 +19,9 @@
         font-size: 1.5rem;
         display: block;
         font-family: inherit;
-        transition: all $search-field-animation-duration;
+        transition: padding-left $search-field-animation-duration,
+            color $search-field-animation-duration,
+            border $search-field-animation-duration;
 
         @include input-placeholder($color-light-grey);
 

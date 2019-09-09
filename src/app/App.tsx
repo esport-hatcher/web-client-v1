@@ -13,22 +13,11 @@ import Navigation from '@/layouts/Navigation';
 import '@styles/sass/main.scss';
 
 export class App extends Component {
-    state = { sidebarExpanded: false };
-
-    expandSidebar = () =>
-        this.setState({ sidebarExpanded: !this.state.sidebarExpanded });
-
     render() {
-        const { sidebarExpanded } = this.state;
-
         return (
-            <div
-                className={`container ${
-                    sidebarExpanded ? 'container--expanded' : ''
-                }`}
-            >
+            <div className='container'>
                 <Router history={history}>
-                    <Navigation expandGridSidebar={this.expandSidebar} />
+                    <Navigation />
                     <div className='container__content'>
                         <Switch>
                             <Route
