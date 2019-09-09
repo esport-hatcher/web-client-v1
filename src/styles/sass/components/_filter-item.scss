@@ -7,11 +7,11 @@
 
     &__count {
         margin-left: $filter-item-spacing-name-count;
-        transition: all $filter-animation-duration;
+        transition: background-color $filter-animation-duration;
     }
 
     &__name {
-        transition: all $filter-animation-duration;
+        transition: color $filter-animation-duration;
     }
 
     &--active {

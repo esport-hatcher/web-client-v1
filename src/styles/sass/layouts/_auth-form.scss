@@ -14,7 +14,6 @@
         & > *:not(:last-child) {
             margin-bottom: 4rem;
         }
-
     }
 
     &__form {
@@ -38,5 +37,4 @@
             transform: translateX(-50%);
         }
     }
-
 }
