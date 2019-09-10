@@ -11,5 +11,3 @@ export class RoundButton extends Component {
         );
     }
 }
-
-export default RoundButton;

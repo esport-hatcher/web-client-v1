@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import AuthForm from './Form';
-import { IState } from 'src/typings/states/global';
+import { _AuthForm } from './Form';
+import { IStoreState } from '@/reducers';
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: IStoreState) => {
     return {
-        errorMsg: state.auth.errorMsg,
+        errorMsg: state.authentication.errorMsg,
     };
 };
 
-export default connect(mapStateToProps)(AuthForm);
+export const AuthForm = connect(mapStateToProps)(_AuthForm);

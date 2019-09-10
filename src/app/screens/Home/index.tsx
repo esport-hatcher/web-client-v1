@@ -5,5 +5,3 @@ export class HomePage extends Component {
         return <div>HomePage</div>;
     }
 }
-
-export default HomePage;

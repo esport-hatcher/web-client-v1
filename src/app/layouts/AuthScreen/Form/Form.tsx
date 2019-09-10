@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { isEmail, getMinMaxFunction } from '@/shared/utils';
-import SmartInput from '@/components/SmartInput';
-import RoundButton from '@/components/RoundButton/index';
-import { getCompareStringFunction } from '../../../shared/utils';
-import { SERVER_ERROR } from '@/actions/types';
+import {
+    isEmail,
+    getMinMaxFunction,
+    getCompareStringFunction,
+} from '@/shared/utils';
+import { SmartInput, RoundButton } from '@/components';
 
 interface IAuthFormP {
     /**
@@ -29,7 +30,7 @@ interface IAuthFormP {
     ) => Promise<void>;
 }
 
-export class AuthForm extends Component<IAuthFormP> {
+export class _AuthForm extends Component<IAuthFormP> {
     // tslint:disable-next-line: no-any
     state: any = {
         email: {
@@ -149,9 +150,9 @@ export class AuthForm extends Component<IAuthFormP> {
      * Render the error message if stored in the redux store
      */
     displayErrorMsg = () => {
-        const { errorMsg, loginMode } = this.props;
+        const { errorMsg } = this.props;
 
-        if (errorMsg && (loginMode || errorMsg === SERVER_ERROR)) {
+        if (errorMsg) {
             return (
                 <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
                     {errorMsg}
@@ -234,5 +235,3 @@ export class AuthForm extends Component<IAuthFormP> {
         );
     }
 }
-
-export default AuthForm;

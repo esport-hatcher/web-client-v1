@@ -16,13 +16,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // tslint:disable-next-line: no-any
 const initialState: any = {
-    auth: { token: localStorage.getItem('ehToken') },
+    authentication: { token: localStorage.getItem('ehToken') },
 };
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(thunk))
 );
-
-export default store;

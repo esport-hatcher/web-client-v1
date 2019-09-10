@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // tslint:disable-next-line: match-default-export-name
 import sprites from '../../../assets/sprite.svg';
-import routes from '@/config/routes';
-import NavigationItem from '@/components/NavigationItem/index';
+import { routes } from '@/config';
+import { NavigationItem } from '@/components';
 
-export class Navigation extends Component {
+export class NavBar extends Component {
     state = { expanded: false, textDisplay: false, currentItem: '' };
 
     componentDidMount() {
@@ -87,5 +87,3 @@ export class Navigation extends Component {
         );
     }
 }
-
-export default Navigation;

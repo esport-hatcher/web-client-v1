@@ -4,7 +4,7 @@ interface IHeaderP {
     title: string;
 }
 
-export class Header extends Component<IHeaderP> {
+export class HeaderPage extends Component<IHeaderP> {
     render() {
         const { title } = this.props;
 
@@ -15,5 +15,3 @@ export class Header extends Component<IHeaderP> {
         );
     }
 }
-
-export default Header;
