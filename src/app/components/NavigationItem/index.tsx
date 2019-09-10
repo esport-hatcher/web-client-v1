@@ -38,5 +38,3 @@ export class NavigationItem extends Component<INavigationItemP> {
         );
     }
 }
-
-export default NavigationItem;

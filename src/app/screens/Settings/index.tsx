@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-export class Settings extends Component {
+export class SettingsPage extends Component {
     render() {
         return <div>Settings</div>;
     }
 }
-
-export default Settings;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import history from '@/services/history';
-import AuthBanner from '@/layouts/AuthScreen/Banner';
-import AuthForm from '@/layouts/AuthScreen/Form';
+import { AuthBanner, AuthForm } from '@/layouts';
 
 interface IAuthPageP {
     isLogin: boolean;
@@ -13,7 +12,7 @@ interface IAuthPageP {
     login?: (email: string, password: string) => Promise<void>;
 }
 
-export class AuthPage extends Component<IAuthPageP> {
+export class _AuthPage extends Component<IAuthPageP> {
     state = { loginMode: this.props.isLogin };
 
     checkIt = () => {
@@ -60,5 +59,3 @@ export class AuthPage extends Component<IAuthPageP> {
         );
     }
 }
-
-export default AuthPage;

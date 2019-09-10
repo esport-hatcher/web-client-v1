@@ -20,7 +20,7 @@ interface ISmartInputP {
      */
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     /**
-     * Callback function who have to be called everytime the input is detected  valid or invalid. Allow to say if it's okay to submit the form or not
+     * Callback function who have to be called every time the input is detected  valid or invalid. Allow to say if it's okay to submit the form or not
      */
     onChangeStatus?: (field: string, value: boolean) => void;
 }
@@ -218,5 +218,3 @@ export class SmartInput extends Component<ISmartInputP> {
         );
     }
 }
-
-export default SmartInput;

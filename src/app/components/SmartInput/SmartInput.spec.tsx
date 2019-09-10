@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { isEmail, getMinMaxFunction } from '@/shared/utils';
 
-import SmartInput from './index';
+import { SmartInput } from './index';
 
 describe('when trying to render an email input', () => {
     const wrapped = shallow(

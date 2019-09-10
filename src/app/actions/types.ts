@@ -1,4 +1,11 @@
-export const LOGIN_ERROR_MAIL = 'LOGIN_ERROR_MAIL';
-export const LOGIN_ERROR_CREDENTIALS = 'LOGIN_ERROR_CREDENTIALS';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const SERVER_ERROR = 'SERVER_ERROR';
+import { ILoginErrorAction, ILoginSuccessAction } from './authentication';
+import { IStoreState } from '@/reducers';
+
+export enum ActionTypes {
+    loginSuccess,
+    loginError,
+}
+
+export type Action = ILoginErrorAction | ILoginSuccessAction;
+
+export type IGetState = () => IStoreState;

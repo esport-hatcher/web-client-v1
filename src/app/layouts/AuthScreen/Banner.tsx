@@ -47,5 +47,3 @@ export class AuthBanner extends Component<IAuthBannerP> {
         );
     }
 }
-
-export default AuthBanner;

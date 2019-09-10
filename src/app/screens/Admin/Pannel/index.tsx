@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Header from '@/layouts/Header';
-import AdminFilters from '@/layouts/Admin/Filters';
-import SearchField from '@/components/SearchField/index';
+import { AdminFilters } from '@/layouts';
+import { SearchField, HeaderPage } from '@/components';
 
 export class AdminPannel extends Component {
     render() {
         return (
             <div className='admin-pannel'>
-                <Header title='Admin Pannel' />
+                <HeaderPage title='Admin Pannel' />
                 <AdminFilters />
                 <div className='admin-pannel__search'>
                     <SearchField />
@@ -17,5 +16,3 @@ export class AdminPannel extends Component {
         );
     }
 }
-
-export default AdminPannel;

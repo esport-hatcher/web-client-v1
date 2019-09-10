@@ -24,5 +24,3 @@ export class FilterItem extends Component<IFilterItemP> {
         );
     }
 }
-
-export default FilterItem;

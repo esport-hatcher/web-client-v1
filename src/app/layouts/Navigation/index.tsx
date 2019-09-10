@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Navigation } from './Navigation';
+import { NavBar } from './Navigation';
 import { connect } from 'react-redux';
-import { IState } from 'src/typings/states/global';
+import { IStoreState } from '@/reducers';
 
 interface IRNavigationP {
     auth?: string;
@@ -12,15 +12,16 @@ class RNavigation extends Component<IRNavigationP> {
         const { auth } = this.props;
 
         if (auth) {
-            return <Navigation />;
+            return <NavBar />;
         }
         return null;
     }
 }
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: IStoreState) => {
     return {
-        auth: state.auth.token,
+        auth: state.authentication.token,
     };
 };
-export default connect(mapStateToProps)(RNavigation);
+
+export const Navigation = connect(mapStateToProps)(RNavigation);

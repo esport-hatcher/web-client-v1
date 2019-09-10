@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { register, login } from '@/actions/auth';
-import AuthPage from './AuthPage';
+import { register, login } from '@/actions/authentication';
+import { _AuthPage } from './AuthPage';
 
-export default connect(
+export const AuthPage = connect(
     null,
     {
         register,
         login,
     }
-)(AuthPage);
+)(_AuthPage);

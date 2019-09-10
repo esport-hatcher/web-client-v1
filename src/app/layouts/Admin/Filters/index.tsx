@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FilterItem from '@/components/FilterItem';
+import { FilterItem } from '@/components';
 
 export class AdminFilters extends Component {
     state = { currentKey: 'all' };
@@ -42,5 +42,3 @@ export class AdminFilters extends Component {
         );
     }
 }
-
-export default AdminFilters;
