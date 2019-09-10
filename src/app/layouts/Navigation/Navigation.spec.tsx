@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { Router, Link } from 'react-router-dom';
-import Navigation from './Navigation';
+import { NavBar } from './Navigation';
 import history from '@/services/history';
 
 let wrapped: ReactWrapper;
@@ -10,7 +10,7 @@ describe('<Navigation />', () => {
     beforeEach(() => {
         wrapped = mount(
             <Router history={history}>
-                <Navigation expandGridSidebar={() => null} />
+                <NavBar />
             </Router>
         );
     });
