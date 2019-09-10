@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
-import { fetchUserSession } from '@/actions/authentication';
+import { fetchUserSession } from '@/actions';
 
 /**
  * The component wrapped will look each times it's render if their is a property authentication.token present and no user associated.
