@@ -12,7 +12,10 @@
         font-size: 20px;
     }
 
-    &__input {
+    &__input,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus,
+    :-webkit-autofill:active {
         background-color: $color-dark-medium;
         border-radius: 14px;
         outline: none;
