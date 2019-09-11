@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import history from '@/services/history';
-import { AuthBanner, AuthForm } from '@/layouts';
+import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
 
-interface IAuthPageP {
+interface IAuthPageProps {
     isLogin: boolean;
-    register?: (
+    errorMsg?: string;
+    register: (
         email: string,
         username: string,
         password: string
     ) => Promise<void>;
-    login?: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
 }
 
-export class _AuthPage extends Component<IAuthPageP> {
+export class _AuthPage extends Component<IAuthPageProps> {
     state = { loginMode: this.props.isLogin };
 
     checkIt = () => {
@@ -25,16 +26,13 @@ export class _AuthPage extends Component<IAuthPageP> {
     };
 
     renderForm = () => {
-        if (this.props.login && this.props.register) {
-            return (
-                <AuthForm
-                    loginMode={this.state.loginMode}
-                    onLogin={this.props.login}
-                    onRegister={this.props.register}
-                />
-            );
+        const { loginMode } = this.state;
+        const { errorMsg, login, register } = this.props;
+
+        if (loginMode) {
+            return <LoginForm errorMsg={errorMsg} onLogin={login} />;
         }
-        return null;
+        return <RegisterForm errorMsg={errorMsg} onRegister={register} />;
     };
 
     render() {
@@ -45,8 +43,7 @@ export class _AuthPage extends Component<IAuthPageP> {
                     name='slider'
                     className='auth-screen__checkbox'
                     checked={this.state.loginMode}
-                    // tslint:disable-next-line: no-empty
-                    onChange={() => {}}
+                    onChange={() => null}
                 />
                 <div className='auth-screen__banner'>
                     <AuthBanner
