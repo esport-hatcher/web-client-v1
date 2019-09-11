@@ -58,7 +58,7 @@ export class RegisterForm extends Component<
     };
 
     onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, username, password, passwordConfirm } = this.state;
+        const { email, username, password } = this.state;
         const { onRegister } = this.props;
         e.preventDefault();
 
