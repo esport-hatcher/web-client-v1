@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import history from '@/services/history';
 import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
-import { RegisterFormStages } from '@/layouts/AuthScreen';
-import { registerFormFill, IRegisterForm, IRegisterProps } from '@/actions';
+import {
+    registerFormFill,
+    IRegisterForm,
+    IRegisterProps,
+    RegisterFormStages,
+    registerFormSetStage,
+} from '@/actions';
 
 interface IAuthPageProps {
     isLogin: boolean;
@@ -11,11 +16,12 @@ interface IAuthPageProps {
     fieldsValue: IRegisterProps;
     register: (registerProps: IRegisterForm) => Promise<void>;
     login: (email: string, password: string) => Promise<void>;
+    setStage: typeof registerFormSetStage;
+    stage: RegisterFormStages;
 }
 
 interface IAuthPageState {
     loginMode: boolean;
-    registerFormStage: RegisterFormStages;
 }
 
 export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
@@ -23,7 +29,6 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
         super(props);
         this.state = {
             loginMode: this.props.isLogin,
-            registerFormStage: RegisterFormStages.basic,
         };
     }
 
@@ -44,6 +49,8 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
             register,
             registerFormFill,
             fieldsValue,
+            stage,
+            setStage,
         } = this.props;
 
         if (loginMode) {
@@ -52,8 +59,8 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
         return (
             <RegisterForm
                 errorMsg={errorMsg}
-                setStage={this.setRegisterFormStages}
-                stage={RegisterFormStages.basic}
+                setStage={setStage}
+                stage={stage}
                 onSubmit={register}
                 onChangeFields={registerFormFill}
                 fieldsValue={fieldsValue}
@@ -61,13 +68,7 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
         );
     };
 
-    isStageMore = (): boolean => {
-        const { registerFormStage } = this.state;
-        return registerFormStage === RegisterFormStages.more;
-    };
-
-    setRegisterFormStages = (stage: RegisterFormStages) =>
-        this.setState({ registerFormStage: stage });
+    isStageMore = (): boolean => this.props.stage === RegisterFormStages.more;
 
     render() {
         const { loginMode } = this.state;

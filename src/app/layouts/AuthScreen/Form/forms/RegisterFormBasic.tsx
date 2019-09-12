@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { SmartInput, RoundButton } from '@/components';
-import { RegisterFormStages } from '../RegisterForm';
-import { registerFormFill, IRegisterProps } from '@/actions';
+import {
+    registerFormFill,
+    IRegisterProps,
+    RegisterFormStages,
+} from '@/actions';
 import {
     isEmail,
     getMinMaxFunction,

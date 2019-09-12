@@ -1,41 +1,59 @@
-import { Action, ActionTypes, IRegisterProps } from '@/actions';
+import {
+    Action,
+    ActionTypes,
+    IRegisterProps,
+    RegisterFormStages,
+} from '@/actions';
+
+export interface IRegisterFormReducer {
+    stage: RegisterFormStages;
+    fields: IRegisterProps;
+}
 
 const INITIAL_STATE = {
-    username: {
-        value: '',
-        valid: false,
-    },
-    password: {
-        value: '',
-        valid: false,
-    },
-    passwordConfirm: {
-        value: '',
-        valid: false,
-    },
-    email: {
-        value: '',
-        valid: false,
-    },
-    firstName: {
-        value: '',
-        valid: false,
-    },
-    lastName: {
-        value: '',
-        valid: false,
+    stage: RegisterFormStages.basic,
+    fields: {
+        username: {
+            value: '',
+            valid: false,
+        },
+        password: {
+            value: '',
+            valid: false,
+        },
+        passwordConfirm: {
+            value: '',
+            valid: false,
+        },
+        email: {
+            value: '',
+            valid: false,
+        },
+        firstName: {
+            value: '',
+            valid: false,
+        },
+        lastName: {
+            value: '',
+            valid: false,
+        },
     },
 };
 
 export const registerFormReducer = (
-    state: IRegisterProps = INITIAL_STATE,
+    state: IRegisterFormReducer = INITIAL_STATE,
     action: Action
-): IRegisterProps => {
+): IRegisterFormReducer => {
     switch (action.type) {
         case ActionTypes.registerFormFill:
             return {
                 ...state,
-                ...action.payload,
+                fields: { ...state.fields, ...action.payload },
+            };
+        case ActionTypes.registerFormSetStage:
+            return {
+                ...state,
+                stage: action.payload,
             };
         default:
             return state;

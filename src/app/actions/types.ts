@@ -1,16 +1,21 @@
 import { ILoginErrorAction, ILoginSuccessAction } from './authentication';
-import { IRegisterFormFillAction } from './registerForm';
+import {
+    IRegisterFormFillAction,
+    IRegisterFormSetStageAction,
+} from './registerForm';
 import { IStoreState } from '@/reducers';
 
 export enum ActionTypes {
     loginSuccess,
     loginError,
     registerFormFill,
+    registerFormSetStage,
 }
 
 export type Action =
     | ILoginErrorAction
     | ILoginSuccessAction
-    | IRegisterFormFillAction;
+    | IRegisterFormFillAction
+    | IRegisterFormSetStageAction;
 
 export type IGetState = () => IStoreState;

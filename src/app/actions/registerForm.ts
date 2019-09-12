@@ -5,6 +5,11 @@ type FormInput = {
     value: string;
 };
 
+export enum RegisterFormStages {
+    basic,
+    more,
+}
+
 export interface IRegisterProps {
     username: FormInput;
     password: FormInput;
@@ -25,5 +30,17 @@ export const registerFormFill = (
     return {
         type: ActionTypes.registerFormFill,
         payload: data,
+    };
+};
+
+export interface IRegisterFormSetStageAction {
+    type: ActionTypes.registerFormSetStage;
+    payload: RegisterFormStages;
+}
+
+export const registerFormSetStage = (stage: RegisterFormStages) => {
+    return {
+        type: ActionTypes.registerFormSetStage,
+        payload: stage,
     };
 };

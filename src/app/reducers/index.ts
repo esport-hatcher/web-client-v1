@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import { authenticationReducer, IAuthentication } from './authentication';
-import { registerFormReducer } from './registerForm';
-import { IRegisterProps } from '@/actions';
+import { registerFormReducer, IRegisterFormReducer } from './registerForm';
 
 export interface IStoreState {
     authentication: IAuthentication;
-    registerForm: IRegisterProps;
+    registerForm: IRegisterFormReducer;
 }
 
 export default combineReducers<IStoreState>({

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { RegisterFormBasic } from './forms/RegisterFormBasic';
 import { RegisterFormMore } from './forms/RegisterFormMore';
-import { registerFormFill, IRegisterProps } from '@/actions';
-
-export enum RegisterFormStages {
-    basic,
-    more,
-}
+import {
+    registerFormFill,
+    IRegisterProps,
+    RegisterFormStages,
+} from '@/actions';
 
 interface IRegisterFormProps {
     errorMsg?: string;
