@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SmartInput, RoundButton } from '@/components';
 import {
     registerFormFill,
+    registerFormSetStage,
     IRegisterProps,
     RegisterFormStages,
 } from '@/actions';
@@ -13,8 +14,9 @@ import {
 
 interface IRegisterFormBasicProps {
     onChangeFields: typeof registerFormFill;
-    setNextStage: (stage: RegisterFormStages) => void;
+    setStage: typeof registerFormSetStage;
     fieldsValue: IRegisterProps;
+    stage: RegisterFormStages;
     errorMsg?: string;
 }
 
@@ -38,12 +40,12 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
     };
 
     onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { setNextStage } = this.props;
+        const { setStage } = this.props;
 
         e.preventDefault();
 
         if (this.checkIfError()) {
-            setNextStage(RegisterFormStages.more);
+            setStage(RegisterFormStages.more);
         }
     };
 

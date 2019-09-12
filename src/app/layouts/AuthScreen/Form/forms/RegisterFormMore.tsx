@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { SmartInput, RoundButton } from '@/components';
-import { registerFormFill, IRegisterProps } from '@/actions';
+import {
+    registerFormFill,
+    registerFormSetStage,
+    IRegisterProps,
+    RegisterFormStages,
+} from '@/actions';
 
 interface IRegisterFormMoreProps {
     onSubmit: Function;
     errorMsg?: string;
     onChangeFields: typeof registerFormFill;
     fieldsValue: IRegisterProps;
+    stage: RegisterFormStages;
+    setStage: typeof registerFormSetStage;
     // registerFormProps: IRegisterFormProps;
 }
 
