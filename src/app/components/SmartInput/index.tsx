@@ -10,6 +10,7 @@ interface ISmartInputP {
     required?: boolean;
     icon?: string;
     register?: boolean;
+    value?: string;
     /**
      * Function who is executed to see if an input is valid or not
      */
@@ -33,13 +34,13 @@ export class SmartInput extends Component<ISmartInputP> {
      * TODO: Pass this function to props so that the component stays independent
      */
     checkIfNotTaken = async () => {
-        const { onChangeStatus, name } = this.props;
+        const { onChangeStatus, name, value } = this.props;
 
         await sleep(1000);
         if (onChangeStatus) {
             try {
                 await api.post('/users/email', {
-                    email: this.state.input,
+                    email: value || this.state.input,
                 });
                 this.setState({
                     loading: false,
@@ -123,7 +124,9 @@ export class SmartInput extends Component<ISmartInputP> {
      * Set the input's value in the component's state
      */
     onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.onChange(event);
+        const { onChange } = this.props;
+
+        onChange(event);
         this.setState({
             input: event.target.value,
             validated: false,
@@ -197,7 +200,14 @@ export class SmartInput extends Component<ISmartInputP> {
     };
 
     render() {
-        const { placeholder, name, pattern, type, required } = this.props;
+        const {
+            placeholder,
+            name,
+            pattern,
+            type,
+            required,
+            value,
+        } = this.props;
         const iconClass = this.iconType();
         const inputClass = this.inputType();
         return (
@@ -210,7 +220,7 @@ export class SmartInput extends Component<ISmartInputP> {
                     pattern={pattern}
                     onBlur={this.validationCheck}
                     required={required}
-                    value={this.state.input}
+                    value={value || this.state.input}
                     onChange={this.onInputChange}
                 />
                 <i className={iconClass} />

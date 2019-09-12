@@ -16,6 +16,14 @@ export interface IUser {
     updatedAt: string;
 }
 
+export interface IRegisterForm {
+    username: string;
+    password: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+
 export interface ILoginSuccess {
     token: string;
     user: IUser;
@@ -40,17 +48,11 @@ export interface ILoginErrorAction {
     payload: ILoginFailure;
 }
 
-export const register = (
-    email: string,
-    username: string,
-    password: string
-) => async (dispatch: Dispatch) => {
+export const register = (registerProps: IRegisterForm) => async (
+    dispatch: Dispatch
+) => {
     try {
-        const { data } = await api.post<ILoginSuccess>('/users', {
-            email,
-            username,
-            password,
-        });
+        const { data } = await api.post<ILoginSuccess>('/users', registerProps);
         dispatch<ILoginSuccessAction>({
             type: ActionTypes.loginSuccess,
             payload: data,
@@ -105,6 +107,7 @@ export const fetchUserSession = () => async (
             });
         }
     } catch ({ response: { data } }) {
+        localStorage.removeItem('ehToken');
         dispatch<ILoginErrorAction>({
             type: ActionTypes.loginError,
             payload: data,

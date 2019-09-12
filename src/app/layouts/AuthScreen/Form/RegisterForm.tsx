@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { SmartInput, RoundButton } from '@/components';
-import {
-    isEmail,
-    getMinMaxFunction,
-    getCompareStringFunction,
-} from '@/shared/utils';
+import { RegisterFormBasic } from './forms/RegisterFormBasic';
+import { RegisterFormMore } from './forms/RegisterFormMore';
+import { registerFormFill, IRegisterProps } from '@/actions';
 
-interface IRegisterFormState {
-    [key: string]: {
-        value: string;
-        valid: boolean;
-    };
+export enum RegisterFormStages {
+    basic,
+    more,
 }
 
 interface IRegisterFormProps {
     errorMsg?: string;
-    onRegister: Function;
+    stage: RegisterFormStages;
+    setStage: (stage: RegisterFormStages) => void;
+    onSubmit: Function;
+    onChangeFields: typeof registerFormFill;
+    fieldsValue: IRegisterProps;
+}
+
+export interface IRegisterFormState {
+    stage: RegisterFormStages;
 }
 
 export class RegisterForm extends Component<
@@ -24,134 +27,46 @@ export class RegisterForm extends Component<
 > {
     constructor(props: IRegisterFormProps) {
         super(props);
-        this.state = {
-            email: {
-                value: '',
-                valid: false,
-            },
-            username: {
-                value: '',
-                valid: false,
-            },
-            password: {
-                value: '',
-                valid: false,
-            },
-            passwordConfirm: {
-                value: '',
-                valid: false,
-            },
-        };
+        this.state = { stage: this.props.stage };
     }
 
-    checkIfError = () => {
-        const { email, username, password, passwordConfirm } = this.state;
-        if (
-            !email.valid ||
-            !username.valid ||
-            !password.valid ||
-            !passwordConfirm.valid
-        ) {
-            return false;
+    _setStage = (stage: RegisterFormStages) => {
+        this.setState({ stage });
+        this.props.setStage(stage);
+    };
+
+    renderForm = () => {
+        const { stage } = this.state;
+        const { onSubmit, errorMsg, onChangeFields, fieldsValue } = this.props;
+
+        switch (stage) {
+            case RegisterFormStages.basic:
+                return (
+                    <RegisterFormBasic
+                        setNextStage={this._setStage}
+                        errorMsg={errorMsg}
+                        onChangeFields={onChangeFields}
+                        fieldsValue={fieldsValue}
+                    />
+                );
+            case RegisterFormStages.more:
+                return (
+                    <RegisterFormMore
+                        onSubmit={onSubmit}
+                        errorMsg={errorMsg}
+                        onChangeFields={onChangeFields}
+                        fieldsValue={fieldsValue}
+                    />
+                );
+            default:
+                return null;
         }
-        return true;
-    };
-
-    onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, username, password } = this.state;
-        const { onRegister } = this.props;
-        e.preventDefault();
-
-        if (this.checkIfError()) {
-            await onRegister(email.value, username.value, password.value);
-        }
-    };
-
-    onChangeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            [event.target.name]: {
-                ...this.state[event.target.name],
-                value: event.target.value,
-            },
-        });
-    };
-
-    onChangeStatus = (field: string, valid: boolean) => {
-        this.setState({ [field]: { ...this.state[field], valid } });
-    };
-
-    displayErrorMsg = () => {
-        const { errorMsg } = this.props;
-
-        if (errorMsg) {
-            return (
-                <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
-                    {errorMsg}
-                </p>
-            );
-        }
-        return null;
     };
 
     render() {
-        /**
-         * Curried function who returns a function checking if a string is between 5 & 20 characters
-         */
-        const {
-            password: { value },
-        } = this.state;
-        const minMaxPwd = getMinMaxFunction(5, 20);
-        const minMaxUserName = getMinMaxFunction(3, 20);
-        const compareString = getCompareStringFunction(value);
-
         return (
             <div className='auth-form'>
-                <div className='auth-form__container'>
-                    <div className='auth-form__container__title title title--big'>
-                        Register to <br />
-                        Esport-Hatcher
-                    </div>
-                    <form className='auth-form__form' onSubmit={this.onSubmit}>
-                        <SmartInput
-                            type='email'
-                            placeholder='Email'
-                            name='email'
-                            register={true}
-                            onChange={this.onChangeField}
-                            onChangeStatus={this.onChangeStatus}
-                            customValidation={isEmail}
-                        />
-                        <SmartInput
-                            type='text'
-                            placeholder='Username'
-                            name='username'
-                            register={true}
-                            onChange={this.onChangeField}
-                            onChangeStatus={this.onChangeStatus}
-                            customValidation={minMaxUserName}
-                        />
-                        <SmartInput
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            register={true}
-                            onChange={this.onChangeField}
-                            onChangeStatus={this.onChangeStatus}
-                            customValidation={minMaxPwd}
-                        />
-                        <SmartInput
-                            name='passwordConfirm'
-                            type='password'
-                            register={true}
-                            placeholder='Confirm Password'
-                            onChange={this.onChangeField}
-                            onChangeStatus={this.onChangeStatus}
-                            customValidation={compareString}
-                        />
-                        {this.displayErrorMsg()}
-                        <RoundButton onClick={() => null} />
-                    </form>
-                </div>
+                <div className='auth-form__container'>{this.renderForm()}</div>
             </div>
         );
     }
