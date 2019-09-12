@@ -10,7 +10,7 @@ const mapStateToProps = ({
 }: IStoreState) => {
     return {
         errorMsg,
-        fieldsValue: fields,
+        fields,
         stage,
     };
 };

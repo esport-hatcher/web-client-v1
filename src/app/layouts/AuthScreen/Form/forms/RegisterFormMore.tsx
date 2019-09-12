@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { SmartInput, RoundButton } from '@/components';
+import { RegisterBaseForm } from './RegisterBaseForm';
+import { IRegisterForm } from '../../../../actions/authentication';
 import {
     registerFormFill,
     registerFormSetStage,
@@ -11,25 +13,14 @@ interface IRegisterFormMoreProps {
     onSubmit: Function;
     errorMsg?: string;
     onChangeFields: typeof registerFormFill;
-    fieldsValue: IRegisterProps;
+    fields: IRegisterProps;
     stage: RegisterFormStages;
     setStage: typeof registerFormSetStage;
-    // registerFormProps: IRegisterFormProps;
 }
 
-interface IRegisterFormMoreState {
-    [key: string]: {
-        value: string;
-        valid: boolean;
-    };
-}
-
-export class RegisterFormMore extends Component<
-    IRegisterFormMoreProps,
-    IRegisterFormMoreState
-> {
+export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
     checkIfError = () => {
-        const { firstName, lastName } = this.state;
+        const { firstName, lastName } = this.props.fields;
         if (!firstName.valid || !lastName.valid) {
             return false;
         }
@@ -37,49 +28,27 @@ export class RegisterFormMore extends Component<
     };
 
     onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { onSubmit, fieldsValue } = this.props;
+        const { onSubmit, fields } = this.props;
+        const fieldsValue: IRegisterForm = {
+            username: '',
+            password: '',
+            email: '',
+            firstName: '',
+            lastName: '',
+        };
+
         e.preventDefault();
+
+        for (const key in fields) {
+            if (key !== 'passwordConfirm') {
+                fieldsValue[key as keyof IRegisterForm] =
+                    fields[key as keyof IRegisterProps].value;
+            }
+        }
 
         if (this.checkIfError()) {
             onSubmit(fieldsValue);
         }
-    };
-
-    onChangeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { onChangeFields, fieldsValue } = this.props;
-
-        onChangeFields({
-            ...fieldsValue,
-            [event.target.name]: {
-                ...fieldsValue[event.target.name as keyof IRegisterProps],
-                value: event.target.value,
-            },
-        });
-    };
-
-    onChangeStatus = (field: string, valid: boolean) => {
-        const { fieldsValue, onChangeFields } = this.props;
-
-        onChangeFields({
-            ...fieldsValue,
-            [field]: {
-                ...fieldsValue[field as keyof IRegisterProps],
-                valid,
-            },
-        });
-    };
-
-    displayErrorMsg = () => {
-        const { errorMsg } = this.props;
-
-        if (errorMsg) {
-            return (
-                <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
-                    {errorMsg}
-                </p>
-            );
-        }
-        return null;
     };
 
     render() {
@@ -94,7 +63,7 @@ export class RegisterFormMore extends Component<
                 </div>
                 <form className='auth-form__form' onSubmit={this.onSubmit}>
                     <SmartInput
-                        value={this.props.fieldsValue.firstName.value}
+                        value={this.props.fields.firstName.value}
                         type='text'
                         placeholder='First name'
                         name='firstName'
@@ -104,7 +73,7 @@ export class RegisterFormMore extends Component<
                         customValidation={() => true}
                     />
                     <SmartInput
-                        value={this.props.fieldsValue.lastName.value}
+                        value={this.props.fields.lastName.value}
                         type='text'
                         placeholder='Last name'
                         name='lastName'

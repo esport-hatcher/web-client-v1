@@ -14,7 +14,7 @@ interface IRegisterFormProps {
     setStage: typeof registerFormSetStage;
     onSubmit: Function;
     onChangeFields: typeof registerFormFill;
-    fieldsValue: IRegisterProps;
+    fields: IRegisterProps;
 }
 
 export class RegisterForm extends Component<IRegisterFormProps> {
@@ -23,7 +23,7 @@ export class RegisterForm extends Component<IRegisterFormProps> {
             onSubmit,
             errorMsg,
             onChangeFields,
-            fieldsValue,
+            fields,
             setStage,
             stage,
         } = this.props;
@@ -35,7 +35,7 @@ export class RegisterForm extends Component<IRegisterFormProps> {
                         setStage={setStage}
                         errorMsg={errorMsg}
                         onChangeFields={onChangeFields}
-                        fieldsValue={fieldsValue}
+                        fields={fields}
                         stage={stage}
                     />
                 );
@@ -45,7 +45,7 @@ export class RegisterForm extends Component<IRegisterFormProps> {
                         onSubmit={onSubmit}
                         errorMsg={errorMsg}
                         onChangeFields={onChangeFields}
-                        fieldsValue={fieldsValue}
+                        fields={fields}
                         stage={stage}
                         setStage={setStage}
                     />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SmartInput, RoundButton } from '@/components';
+import { RegisterBaseForm } from './RegisterBaseForm';
 import {
     registerFormFill,
     registerFormSetStage,
@@ -15,19 +16,21 @@ import {
 interface IRegisterFormBasicProps {
     onChangeFields: typeof registerFormFill;
     setStage: typeof registerFormSetStage;
-    fieldsValue: IRegisterProps;
+    fields: IRegisterProps;
     stage: RegisterFormStages;
     errorMsg?: string;
 }
 
-export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
+export class RegisterFormBasic extends RegisterBaseForm<
+    IRegisterFormBasicProps
+> {
     checkIfError = () => {
         const {
             email,
             username,
             password,
             passwordConfirm,
-        } = this.props.fieldsValue;
+        } = this.props.fields;
         if (
             !email.valid ||
             !username.valid ||
@@ -49,51 +52,13 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
         }
     };
 
-    onChangeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { onChangeFields, fieldsValue } = this.props;
-
-        // console.log(event.target.name);
-        onChangeFields({
-            ...fieldsValue,
-            [event.target.name]: {
-                ...fieldsValue[event.target.name as keyof IRegisterProps],
-                value: event.target.value,
-            },
-        });
-    };
-
-    onChangeStatus = (field: string, valid: boolean) => {
-        const { fieldsValue, onChangeFields } = this.props;
-
-        onChangeFields({
-            ...fieldsValue,
-            [field]: {
-                ...fieldsValue[field as keyof IRegisterProps],
-                valid,
-            },
-        });
-    };
-
-    displayErrorMsg = () => {
-        const { errorMsg } = this.props;
-
-        if (errorMsg) {
-            return (
-                <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
-                    {errorMsg}
-                </p>
-            );
-        }
-        return null;
-    };
-
     render() {
         /**
          * Curried function who returns a function checking if a string is between 5 & 20 characters
          */
         const {
             password: { value },
-        } = this.props.fieldsValue;
+        } = this.props.fields;
         const minMaxPwd = getMinMaxFunction(5, 20);
         const minMaxUserName = getMinMaxFunction(3, 20);
         const compareString = getCompareStringFunction(value);
@@ -106,7 +71,7 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
                 </div>
                 <form className='auth-form__form' onSubmit={this.onSubmit}>
                     <SmartInput
-                        value={this.props.fieldsValue.email.value}
+                        value={this.props.fields.email.value}
                         type='email'
                         placeholder='Email'
                         name='email'
@@ -116,7 +81,7 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
                         customValidation={isEmail}
                     />
                     <SmartInput
-                        value={this.props.fieldsValue.username.value}
+                        value={this.props.fields.username.value}
                         type='text'
                         placeholder='Username'
                         name='username'
@@ -126,7 +91,7 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
                         customValidation={minMaxUserName}
                     />
                     <SmartInput
-                        value={this.props.fieldsValue.password.value}
+                        value={this.props.fields.password.value}
                         type='password'
                         placeholder='Password'
                         name='password'
@@ -136,7 +101,7 @@ export class RegisterFormBasic extends Component<IRegisterFormBasicProps> {
                         customValidation={minMaxPwd}
                     />
                     <SmartInput
-                        value={this.props.fieldsValue.passwordConfirm.value}
+                        value={this.props.fields.passwordConfirm.value}
                         name='passwordConfirm'
                         type='password'
                         register={true}

@@ -13,7 +13,7 @@ interface IAuthPageProps {
     isLogin: boolean;
     errorMsg?: string;
     registerFormFill: typeof registerFormFill;
-    fieldsValue: IRegisterProps;
+    fields: IRegisterProps;
     register: (registerProps: IRegisterForm) => Promise<void>;
     login: (email: string, password: string) => Promise<void>;
     setStage: typeof registerFormSetStage;
@@ -48,7 +48,7 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
             login,
             register,
             registerFormFill,
-            fieldsValue,
+            fields,
             stage,
             setStage,
         } = this.props;
@@ -63,7 +63,7 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
                 stage={stage}
                 onSubmit={register}
                 onChangeFields={registerFormFill}
-                fieldsValue={fieldsValue}
+                fields={fields}
             />
         );
     };
