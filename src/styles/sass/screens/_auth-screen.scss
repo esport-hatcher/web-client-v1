@@ -7,22 +7,22 @@
     }
 
     &__form {
-        transition: transform 0.6s ease-in-out, width 1s ease-out;
+        transition: transform $auth-screen-animation-duration
+            $auth-screen-animation-style;
         width: 100%;
 
         &--login {
             transform: translateX(-66%);
         }
-
-        // &--register {
-        //     transform: translateX(-33%);
-        // }
     }
 
     &__banner {
         box-shadow: 1rem 1rem 2rem rgba($color-dark-four, 0.4);
         z-index: 10;
-        transition: transform 0.4s ease-in, width 1s ease-out;
+        transition: transform $auth-screen-animation-duration
+                $auth-screen-animation-style,
+            width 0s $auth-screen-animation-style
+                $auth-screen-animation-duration;
         width: $auth-screen-banner-width;
 
         &--login {
@@ -31,6 +31,7 @@
         }
 
         &--register {
+            transform: translateX(-100%);
             width: 0vw;
             overflow: hidden;
         }

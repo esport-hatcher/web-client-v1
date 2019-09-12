@@ -18,6 +18,8 @@ interface IRegisterFormProps {
 }
 
 export class RegisterForm extends Component<IRegisterFormProps> {
+    isStageMore = (): boolean => this.props.stage === RegisterFormStages.more;
+
     renderForm = () => {
         const {
             onSubmit,
@@ -56,9 +58,32 @@ export class RegisterForm extends Component<IRegisterFormProps> {
     };
 
     render() {
+        const {
+            onSubmit,
+            errorMsg,
+            onChangeFields,
+            fields,
+            setStage,
+            stage,
+        } = this.props;
         return (
             <div className='auth-form'>
-                <div className='auth-form__container'>{this.renderForm()}</div>
+                <RegisterFormBasic
+                    setStage={setStage}
+                    errorMsg={errorMsg}
+                    onChangeFields={onChangeFields}
+                    fields={fields}
+                    stage={stage}
+                />
+
+                <RegisterFormMore
+                    onSubmit={onSubmit}
+                    errorMsg={errorMsg}
+                    onChangeFields={onChangeFields}
+                    fields={fields}
+                    stage={stage}
+                    setStage={setStage}
+                />
             </div>
         );
     }

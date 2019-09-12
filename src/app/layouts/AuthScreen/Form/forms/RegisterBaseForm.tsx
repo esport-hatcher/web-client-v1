@@ -41,6 +41,8 @@ export abstract class RegisterBaseForm<
         });
     };
 
+    isStageMore = (): boolean => this.props.stage === RegisterFormStages.more;
+
     displayErrorMsg = () => {
         const { errorMsg } = this.props;
 

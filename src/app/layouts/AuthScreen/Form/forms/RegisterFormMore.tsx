@@ -57,11 +57,17 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
          */
 
         return (
-            <React.Fragment>
+            <div
+                className={`auth-form__container auth-form__container__more ${
+                    this.isStageMore()
+                        ? 'auth-form__container__more--active'
+                        : ''
+                }`}
+            >
                 <div className='auth-form__container__title title title--big'>
                     Tell us more about yourself
                 </div>
-                <form className='auth-form__form' onSubmit={this.onSubmit}>
+                <form className='auth-form__basic' onSubmit={this.onSubmit}>
                     <SmartInput
                         value={this.props.fields.firstName.value}
                         type='text'
@@ -85,7 +91,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                     {this.displayErrorMsg()}
                     <RoundButton onClick={() => null} />
                 </form>
-            </React.Fragment>
+            </div>
         );
     }
 }

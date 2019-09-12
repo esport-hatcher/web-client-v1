@@ -64,12 +64,18 @@ export class RegisterFormBasic extends RegisterBaseForm<
         const compareString = getCompareStringFunction(value);
 
         return (
-            <React.Fragment>
+            <div
+                className={`auth-form__container auth-form__container__basic ${
+                    !this.isStageMore()
+                        ? 'auth-form__container__basic--active'
+                        : ''
+                }`}
+            >
                 <div className='auth-form__container__title title title--big'>
                     Register to <br />
                     Esport-Hatcher
                 </div>
-                <form className='auth-form__form' onSubmit={this.onSubmit}>
+                <form className='auth-form__basic' onSubmit={this.onSubmit}>
                     <SmartInput
                         value={this.props.fields.email.value}
                         type='email'
@@ -113,7 +119,7 @@ export class RegisterFormBasic extends RegisterBaseForm<
                     {this.displayErrorMsg()}
                     <RoundButton onClick={() => null} />
                 </form>
-            </React.Fragment>
+            </div>
         );
     }
 }
