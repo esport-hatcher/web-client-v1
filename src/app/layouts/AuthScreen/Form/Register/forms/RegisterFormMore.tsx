@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { SmartInput, RoundButton } from '@/components';
 import { RegisterBaseForm } from './RegisterBaseForm';
-import { IRegisterForm } from '../../../../actions/authentication';
 import {
     registerFormFill,
     registerFormSetStage,
     IRegisterProps,
     RegisterFormStages,
+    IRegisterForm,
 } from '@/actions';
 
 interface IRegisterFormMoreProps {
