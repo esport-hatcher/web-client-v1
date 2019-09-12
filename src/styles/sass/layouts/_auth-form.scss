@@ -18,12 +18,17 @@
 
         &__basic {
             transform: translateX(-100vh);
-            transition: transform $auth-screen-animation-duration ease-in,
-                width 0s ease-in $auth-screen-animation-duration;
+            opacity: 0;
+            transition: transform $auth-screen-animation-duration
+                    $auth-screen-animation-style,
+                opacity $auth-screen-animation-duration
+                    $auth-screen-animation-style,
+                width 0s $auth-screen-animation-duration;
             width: 0%;
             overflow: hidden;
 
             &--active {
+                opacity: 1;
                 width: 100%;
                 transform: translateX(0);
             }
@@ -33,10 +38,10 @@
             opacity: 0;
             transform: translateX(100vh);
             width: 0%;
-            transition: opacity $auth-screen-animation-duration
-                    $auth-screen-animation-style $auth-screen-animation-duration,
-                transform $auth-screen-animation-duration
-                    $auth-screen-animation-style $auth-screen-animation-duration;
+            transition: opacity $auth-screen-animation-duration ease-out
+                    $auth-screen-animation-duration,
+                transform $auth-screen-animation-duration ease-out
+                    $auth-screen-animation-duration;
 
             &--active {
                 width: 100%;

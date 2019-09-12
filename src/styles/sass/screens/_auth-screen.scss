@@ -21,8 +21,7 @@
         z-index: 10;
         transition: transform $auth-screen-animation-duration
                 $auth-screen-animation-style,
-            width 0s $auth-screen-animation-style
-                $auth-screen-animation-duration;
+            width 0s $auth-screen-animation-duration;
         width: $auth-screen-banner-width;
 
         &--login {
