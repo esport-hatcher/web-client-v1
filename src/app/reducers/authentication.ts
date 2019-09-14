@@ -30,6 +30,13 @@ export const authenticationReducer = (
                 token: undefined,
                 errorMsg: action.payload.message,
             };
+        case ActionTypes.logout:
+            return {
+                ...state,
+                user: undefined,
+                token: undefined,
+                errorMsg: undefined,
+            };
         default:
             return state;
     }

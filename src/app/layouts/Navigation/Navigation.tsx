@@ -70,6 +70,14 @@ export class NavBar extends Component {
                         path={routes.feed}
                         text='Feed'
                     />
+                    <NavigationItem
+                        active={currentItem.includes(routes.logout)}
+                        activeText={textDisplay}
+                        icon='exit'
+                        onClick={this.onItemClick}
+                        path={routes.logout}
+                        text='Logout'
+                    />
                     <button
                         className={`nav-bar__button-expand ${
                             expanded ? 'nav-bar__button-expand--expanded' : ''

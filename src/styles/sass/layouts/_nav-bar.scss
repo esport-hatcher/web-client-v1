@@ -39,6 +39,12 @@
             margin-bottom: $sidebar-item-spacing;
         }
 
+        &:last-of-type {
+            width: 100%;
+            position: absolute;
+            bottom: 2%;
+        }
+
         &:hover {
             background-color: $color-dark-four;
             transform: translateY(-1rem);

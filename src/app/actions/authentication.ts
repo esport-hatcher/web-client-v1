@@ -48,6 +48,10 @@ export interface ILoginErrorAction {
     payload: ILoginFailure;
 }
 
+export interface ILogoutAction {
+    type: ActionTypes.logout;
+}
+
 export const register = (registerProps: IRegisterForm) => async (
     dispatch: Dispatch
 ) => {
@@ -113,4 +117,10 @@ export const fetchUserSession = () => async (
             payload: data,
         });
     }
+};
+
+export const logout = (): ILogoutAction => {
+    return {
+        type: ActionTypes.logout,
+    };
 };

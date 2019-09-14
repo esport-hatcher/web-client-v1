@@ -10,17 +10,26 @@ interface INavigationItemP {
     text: string;
     active: boolean;
     activeText: boolean;
+    className?: string;
 }
 export class NavigationItem extends Component<INavigationItemP> {
     render() {
-        const { active, icon, onClick, path, text, activeText } = this.props;
+        const {
+            active,
+            icon,
+            onClick,
+            path,
+            text,
+            activeText,
+            className,
+        } = this.props;
 
         return (
             <Link
                 to={path}
                 className={`nav-bar__item ${
                     active ? 'nav-bar__item--active' : ''
-                }`}
+                } ${className}`}
                 onClick={onClick}
             >
                 <Icon className='nav-bar__item__icon' name={icon} />

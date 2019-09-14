@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '@/services/history';
 import { routes } from '@/config';
-import { AdminPannel, AuthPage, HomePage, SettingsPage } from '@/screens';
+import {
+    AdminPannel,
+    AuthPage,
+    HomePage,
+    SettingsPage,
+    Logout,
+} from '@/screens';
 
 import { Navigation } from '@/layouts';
 
@@ -43,6 +49,11 @@ export class _App extends Component {
                                 path={routes.settings}
                                 exact
                                 render={props => <SettingsPage />}
+                            />
+                            <Route
+                                path={routes.logout}
+                                exact
+                                render={props => <Logout />}
                             />
                         </Switch>
                     </div>
