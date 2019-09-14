@@ -3,6 +3,7 @@ import { register, login } from '@/actions/authentication';
 import { _AuthPage } from './AuthPage';
 import { IStoreState } from '@/reducers';
 import { registerFormFill, registerFormSetStage } from '@/actions';
+import { requireAnonyme } from '@/HOC';
 
 const mapStateToProps = ({
     authentication: { errorMsg },
@@ -15,12 +16,14 @@ const mapStateToProps = ({
     };
 };
 
-export const AuthPage = connect(
-    mapStateToProps,
-    {
-        register,
-        login,
-        registerFormFill,
-        setStage: registerFormSetStage,
-    }
-)(_AuthPage);
+export const AuthPage = requireAnonyme(
+    connect(
+        mapStateToProps,
+        {
+            register,
+            login,
+            registerFormFill,
+            setStage: registerFormSetStage,
+        }
+    )(_AuthPage)
+);
