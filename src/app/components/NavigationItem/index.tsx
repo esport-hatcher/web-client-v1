@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, IIcons } from '@/components';
+import { Icon, IconName } from '@/components';
 
 interface INavigationItemP {
     // tslint:disable-next-line: no-any
     onClick: (e: any) => void;
-    icon: keyof IIcons;
+    icon: IconName;
     path: string;
     text: string;
     active: boolean;

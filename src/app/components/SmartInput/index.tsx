@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { Icon, IconName } from '@/components';
 import { sleep } from '@/shared/utils';
 import api from '@/api';
 
-interface ISmartInputP {
+interface ISmartInputProps {
     placeholder: string;
     name: string;
     type: 'email' | 'text' | 'password';
     pattern?: string;
     required?: boolean;
-    icon?: string;
+    icon?: IconName;
     register?: boolean;
     value?: string;
     /**
@@ -26,9 +27,26 @@ interface ISmartInputP {
     onChangeStatus?: (field: string, value: boolean) => void;
 }
 
-export class SmartInput extends Component<ISmartInputP> {
-    state = { loading: false, validated: false, error: false, input: '' };
+interface ISmartInputState {
+    loading: boolean;
+    valid: boolean;
+    error: boolean;
+    input: string;
+}
 
+export class SmartInput extends Component<ISmartInputProps, ISmartInputState> {
+    icon: IconName;
+
+    constructor(props: ISmartInputProps) {
+        super(props);
+        this.icon = this.props.icon || this.defaultIcon();
+        this.state = {
+            loading: false,
+            valid: false,
+            error: false,
+            input: '',
+        };
+    }
     /**
      * Check if the input is unique in the database
      * TODO: Pass this function to props so that the component stays independent
@@ -45,14 +63,14 @@ export class SmartInput extends Component<ISmartInputP> {
                 });
                 this.setState({
                     loading: false,
-                    validated: true,
+                    valid: true,
                     error: false,
                 });
                 onChangeStatus(name, true);
             } catch {
                 this.setState({
                     loading: false,
-                    validated: false,
+                    valid: false,
                     error: true,
                 });
                 onChangeStatus(name, false);
@@ -87,11 +105,11 @@ export class SmartInput extends Component<ISmartInputP> {
                     await this.checkIfNotTaken();
                 } else {
                     /**
-                     * If validation is ok then set the state to validated
+                     * If validation is ok then set the state to valid
                      */
                     this.setState({
                         loading: false,
-                        validated: true,
+                        valid: true,
                         error: false,
                     });
                     onChangeStatus(name, true);
@@ -103,7 +121,7 @@ export class SmartInput extends Component<ISmartInputP> {
                 this.setState({
                     loading: false,
                     error: true,
-                    validated: false,
+                    valid: false,
                 });
                 onChangeStatus(name, false);
             }
@@ -116,7 +134,7 @@ export class SmartInput extends Component<ISmartInputP> {
             }
             this.setState({
                 loading: false,
-                validated: true,
+                valid: true,
                 error: false,
             });
         }
@@ -131,7 +149,7 @@ export class SmartInput extends Component<ISmartInputP> {
         onChange(event);
         this.setState({
             input: event.target.value,
-            validated: false,
+            valid: false,
             loading: false,
             error: false,
         });
@@ -140,65 +158,55 @@ export class SmartInput extends Component<ISmartInputP> {
     /**
      * Set a default icon by default for each type
      */
-    defaultIcon = () => {
+    defaultIcon = (): IconName => {
         const { type } = this.props;
 
         switch (type) {
             case 'password':
-                return 'fas fa-lock';
+                return 'lock';
             case 'email':
-                return 'fas fa-envelope';
+                return 'mail';
             default:
-                return 'fas fa-pen';
+                return 'pen';
         }
     };
 
     /**
-     * Return an icon depending on the state (default, error or validated)
+     * Return an icon depending on the state (default, error or valid)
      */
-    iconType = () => {
-        const { error, loading, validated } = this.state;
+    iconType = (): IconName => {
+        const { error, loading, valid } = this.state;
         const { onChangeStatus } = this.props;
-        let iconClass: string = '';
-        const defaultIcon = this.defaultIcon();
+
         if (error && onChangeStatus) {
-            iconClass = 'fas fa-times';
+            return 'error';
         }
         if (loading && onChangeStatus) {
-            iconClass = 'fas fa-spinner';
+            return 'sync';
         }
-        if (validated && onChangeStatus) {
-            iconClass = 'fas fa-check';
+        if (valid && onChangeStatus) {
+            return 'check';
         }
-        if ((!validated && !error && !loading) || !onChangeStatus) {
-            /**
-             * Use the icon passed in props in priority otherwise use the default icon related to the type (see defaultIcon above)
-             */
-            iconClass = this.props.icon || defaultIcon;
-        }
-        return iconClass;
+        return this.icon;
     };
 
     /**
-     * Return a class depending on the state (default, error or validated)
+     * Return a class depending on the state (default, error or valid)
      */
-    inputType = () => {
-        const { error, loading, validated } = this.state;
+    inputType = (): string => {
+        const { error, loading, valid } = this.state;
         const { onChangeStatus } = this.props;
-        let inputClass: string = '';
+
         if (error && onChangeStatus) {
-            inputClass = 'error';
+            return 'error';
         }
         if (loading && onChangeStatus) {
-            inputClass = 'loading';
+            return 'loading';
         }
-        if (validated && onChangeStatus) {
-            inputClass = 'success';
+        if (valid && onChangeStatus) {
+            return 'success';
         }
-        if ((!validated && !error && !loading) || !onChangeStatus) {
-            inputClass = '';
-        }
-        return `smart-input__input--${inputClass}`;
+        return '';
     };
 
     render() {
@@ -211,12 +219,12 @@ export class SmartInput extends Component<ISmartInputP> {
             value,
         } = this.props;
         const { input } = this.state;
-        const iconClass = this.iconType();
-        const inputClass = this.inputType();
+        const iconType = this.iconType();
+        const inputType = this.inputType();
         return (
             <div className='smart-input'>
                 <input
-                    className={`smart-input__input ${inputClass}`}
+                    className={`smart-input__input smart-input__input--${inputType}`}
                     type={type}
                     placeholder={placeholder}
                     name={name}
@@ -226,7 +234,7 @@ export class SmartInput extends Component<ISmartInputP> {
                     value={value || input}
                     onChange={this.onInputChange}
                 />
-                <i className={iconClass} />
+                <Icon className='smart-input__icon' name={iconType} />
             </div>
         );
     }

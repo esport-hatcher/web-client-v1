@@ -11,12 +11,16 @@ export interface IIcons {
     infinite: string;
     mail: string;
     pen: string;
+    lock: string;
     error: string;
     check: string;
+    sync: string;
 }
 
+export type IconName = keyof IIcons;
+
 interface IIconProps {
-    name: keyof IIcons;
+    name: IconName;
     className: string;
 }
 
