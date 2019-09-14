@@ -2,10 +2,16 @@ import { connect } from 'react-redux';
 import { register, login } from '@/actions/authentication';
 import { _AuthPage } from './AuthPage';
 import { IStoreState } from '@/reducers';
+import { registerFormFill, registerFormSetStage } from '@/actions';
 
-const mapStateToProps = ({ authentication: { errorMsg } }: IStoreState) => {
+const mapStateToProps = ({
+    authentication: { errorMsg },
+    registerForm: { stage, fields },
+}: IStoreState) => {
     return {
         errorMsg,
+        fields,
+        stage,
     };
 };
 
@@ -14,5 +20,7 @@ export const AuthPage = connect(
     {
         register,
         login,
+        registerFormFill,
+        setStage: registerFormSetStage,
     }
 )(_AuthPage);

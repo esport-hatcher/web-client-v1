@@ -11,9 +11,15 @@ $color-rosy-pink-two: #fa638e;
 $color-dark-medium: #1d2938;
 $color-dark-four: #0e1623;
 $color-white: #fff;
-$color-light-grey:  #748192;
+$color-light-grey: #748192;
 $color-green-light: rgb(30, 226, 30);
 
+/*
+AUTH SCREEN
+*/
+$auth-screen-banner-width: 40vw;
+$auth-screen-animation-duration: 0.4s;
+$auth-screen-animation-style: ease-in;
 
 /*
 HEADER
@@ -27,7 +33,7 @@ SIDEBAR
 $sidebar-size: 10rem;
 $sidebar-size-expanded: 22rem;
 $sidebar-expand-button-size: 3rem;
-$sidebar-animation-duration: .3s;
+$sidebar-animation-duration: 0.3s;
 $sidebar-item-spacing: 8rem;
 $sidebar-border: 1px solid $color-dark-four;
 $sidebar-item-padding: 3rem;
@@ -47,18 +53,18 @@ $admin-pannel-row-gap: 4rem;
 FILTER ITEM
 */
 $filter-item-spacing-name-count: 1rem;
-$filter-animation-duration: .5s;
+$filter-animation-duration: 0.5s;
 
 /*
 LABEL
 */
-$label-count-padding: .7rem;
+$label-count-padding: 0.7rem;
 $label-count-font-size: 1rem;
 
 /*
 SEARCH FIELD
 */
 $search-field-padding: 1rem;
-$search-field-animation-duration: .3s;
+$search-field-animation-duration: 0.3s;
 $search-field-width: 24rem;
 $search-field-icon-size: 3rem;

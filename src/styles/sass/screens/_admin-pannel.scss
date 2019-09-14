@@ -4,7 +4,6 @@
     grid-template-rows: repeat(2, min-content) 1fr;
     grid-template-columns: 1fr max-content;
     grid-row-gap: $admin-pannel-row-gap;
-    // align-items: center;
 
     &__search {
         grid-column: 1 / -1;

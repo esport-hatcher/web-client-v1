@@ -53,7 +53,7 @@ export class LoginForm extends Component<ILoginFormProps, ILoginFormState> {
                         Sign in to <br />
                         Esport-Hatcher
                     </div>
-                    <form className='auth-form__form' onSubmit={this.onSubmit}>
+                    <form className='auth-form__basic' onSubmit={this.onSubmit}>
                         <SmartInput
                             type='email'
                             placeholder='Email'
