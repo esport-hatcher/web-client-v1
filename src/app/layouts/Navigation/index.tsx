@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { NavBar } from './Navigation';
 import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
+import { IUser } from '@/actions';
 
 interface IRNavigationP {
-    auth?: string;
+    user?: IUser;
 }
 
 class RNavigation extends Component<IRNavigationP> {
     render() {
-        const { auth } = this.props;
+        const { user } = this.props;
 
-        if (auth) {
-            return <NavBar />;
+        if (user) {
+            return <NavBar admin={user.superAdmin} />;
         }
         return null;
     }
@@ -20,7 +21,7 @@ class RNavigation extends Component<IRNavigationP> {
 
 const mapStateToProps = (state: IStoreState) => {
     return {
-        auth: state.authentication.token,
+        user: state.authentication.user,
     };
 };
 

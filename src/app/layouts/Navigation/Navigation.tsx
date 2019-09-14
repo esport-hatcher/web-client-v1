@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { routes } from '@/config';
 import { NavigationItem, Icon } from '@/components';
 
-export class NavBar extends Component {
+interface INavBarProps {
+    admin: boolean;
+}
+export class NavBar extends Component<INavBarProps> {
     state = { expanded: false, textDisplay: false, currentItem: '' };
 
     componentDidMount() {
@@ -27,6 +30,7 @@ export class NavBar extends Component {
 
     render() {
         const { expanded, textDisplay, currentItem } = this.state;
+        const { admin } = this.props;
 
         return (
             <React.Fragment>
@@ -38,14 +42,16 @@ export class NavBar extends Component {
                 <nav
                     className={`nav-bar ${expanded ? 'nav-bar--expanded' : ''}`}
                 >
-                    <NavigationItem
-                        active={currentItem.includes(routes.adminPannel)}
-                        activeText={textDisplay}
-                        icon='infinite'
-                        onClick={this.onItemClick}
-                        path={routes.adminPannel}
-                        text='Admin Pannel'
-                    />
+                    {admin ? (
+                        <NavigationItem
+                            active={currentItem.includes(routes.adminPannel)}
+                            activeText={textDisplay}
+                            icon='infinite'
+                            onClick={this.onItemClick}
+                            path={routes.adminPannel}
+                            text='Admin Pannel'
+                        />
+                    ) : null}
                     <NavigationItem
                         active={currentItem.includes(routes.chat)}
                         activeText={textDisplay}
