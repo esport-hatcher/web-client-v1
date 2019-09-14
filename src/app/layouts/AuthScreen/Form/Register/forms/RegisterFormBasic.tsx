@@ -53,12 +53,12 @@ export class RegisterFormBasic extends RegisterBaseForm<
     };
 
     render() {
-        /**
-         * Curried function who returns a function checking if a string is between 5 & 20 characters
-         */
         const {
             password: { value },
         } = this.props.fields;
+        /**
+         * Curried function who returns a function checking if a string is between 5 & 20 characters
+         */
         const minMaxPwd = getMinMaxFunction(5, 20);
         const minMaxUserName = getMinMaxFunction(3, 20);
         const compareString = getCompareStringFunction(value);
