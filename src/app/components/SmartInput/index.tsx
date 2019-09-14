@@ -16,7 +16,6 @@ interface ISmartInputProps {
      * Function who is executed to see if an input is valid or not
      */
     customValidation?: (value: string) => boolean;
-    // tslint:disable-next-line: no-any
     /**
      * CallBack function to keep trace of every input value in the form component
      */
@@ -174,7 +173,7 @@ export class SmartInput extends Component<ISmartInputProps, ISmartInputState> {
     /**
      * Return an icon depending on the state (default, error or valid)
      */
-    iconType = (): IconName => {
+    iconName = (): IconName => {
         const { error, loading, valid } = this.state;
         const { onChangeStatus } = this.props;
 
@@ -193,7 +192,7 @@ export class SmartInput extends Component<ISmartInputProps, ISmartInputState> {
     /**
      * Return a class depending on the state (default, error or valid)
      */
-    inputType = (): string => {
+    inputStatus = (): string => {
         const { error, loading, valid } = this.state;
         const { onChangeStatus } = this.props;
 
@@ -219,12 +218,11 @@ export class SmartInput extends Component<ISmartInputProps, ISmartInputState> {
             value,
         } = this.props;
         const { input } = this.state;
-        const iconType = this.iconType();
-        const inputType = this.inputType();
+
         return (
             <div className='smart-input'>
                 <input
-                    className={`smart-input__input smart-input__input--${inputType}`}
+                    className={`smart-input__input smart-input__input--${this.inputStatus()}`}
                     type={type}
                     placeholder={placeholder}
                     name={name}
@@ -234,7 +232,7 @@ export class SmartInput extends Component<ISmartInputProps, ISmartInputState> {
                     value={value || input}
                     onChange={this.onInputChange}
                 />
-                <Icon className='smart-input__icon' name={iconType} />
+                <Icon className='smart-input__icon' name={this.iconName()} />
             </div>
         );
     }
