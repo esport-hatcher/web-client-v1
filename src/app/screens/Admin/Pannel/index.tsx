@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { AdminFilters } from '@/layouts';
 import { SearchField, HeaderPage } from '@/components';
+import { requireLogin } from '@/HOC';
 
-export class AdminPannel extends Component {
+class _AdminPannel extends Component {
     render() {
         return (
             <div className='admin-pannel'>
@@ -16,3 +17,5 @@ export class AdminPannel extends Component {
         );
     }
 }
+
+export const AdminPannel = requireLogin(_AdminPannel);
