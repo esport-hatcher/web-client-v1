@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import history from '@/services/history';
 import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
 import {
     registerFormFill,
@@ -33,11 +32,6 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
     }
 
     checkIt = () => {
-        if (!this.state.loginMode === false) {
-            history.push('/register');
-        } else {
-            history.push('/login');
-        }
         this.setState({ loginMode: !this.state.loginMode });
     };
 

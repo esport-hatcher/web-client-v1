@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import history from '@/services/history';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { routes } from '@/config';
 import {
     AdminPannel,
@@ -20,8 +19,8 @@ import '@styles/sass/main.scss';
 export class _App extends Component {
     render() {
         return (
-            <div className='container'>
-                <Router history={history}>
+            <BrowserRouter>
+                <div className='container'>
                     <Navigation />
                     <div className='container__content'>
                         <Switch>
@@ -33,32 +32,36 @@ export class _App extends Component {
                             <Route
                                 path={routes.login}
                                 exact
-                                render={props => <AuthPage isLogin={true} />}
+                                render={props => (
+                                    <AuthPage {...props} isLogin={true} />
+                                )}
                             />
                             <Route
                                 path={routes.register}
                                 exact
-                                render={props => <AuthPage isLogin={false} />}
+                                render={props => (
+                                    <AuthPage {...props} isLogin={false} />
+                                )}
                             />
                             <Route
                                 path={routes.adminPannel}
                                 exact
-                                render={props => <AdminPannel />}
+                                component={AdminPannel}
                             />
                             <Route
                                 path={routes.settings}
                                 exact
-                                render={props => <SettingsPage />}
+                                component={SettingsPage}
                             />
                             <Route
                                 path={routes.logout}
                                 exact
-                                render={props => <Logout />}
+                                component={Logout}
                             />
                         </Switch>
                     </div>
-                </Router>
-            </div>
+                </div>
+            </BrowserRouter>
         );
     }
 }

@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
+import { requireLogin } from '@/HOC';
+import { _HomePage } from './HomePage';
 
-export class HomePage extends Component {
-    render() {
-        return <div>HomePage</div>;
-    }
-}
+export const HomePage = requireLogin(_HomePage);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { logout } from '@/actions';
-import history from '@/services/history';
 
 interface ILogoutProps {
     logout: typeof logout;
@@ -10,9 +10,8 @@ export class _Logout extends Component<ILogoutProps> {
     componentDidMount() {
         const { logout } = this.props;
         logout();
-        history.push('/login');
     }
     render() {
-        return <div>Bye</div>;
+        return <Redirect to='/login' />;
     }
 }

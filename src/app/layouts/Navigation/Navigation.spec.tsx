@@ -1,17 +1,16 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import { Router, Link } from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { NavBar } from './Navigation';
-import history from '@/services/history';
 
 let wrapped: ReactWrapper;
 
 describe('<Navigation />', () => {
     beforeEach(() => {
         wrapped = mount(
-            <Router history={history}>
-                <NavBar />
-            </Router>
+            <BrowserRouter>
+                <NavBar admin={false} />
+            </BrowserRouter>
         );
     });
 
@@ -19,39 +18,39 @@ describe('<Navigation />', () => {
         expect(wrapped.find(Link).length).toBe(4);
     });
 
-    it('render an admin pannel item', () => {
+    it('render a chat item', () => {
         expect(
             wrapped
                 .find(Link)
                 .first()
                 .text()
-        ).toBe('Admin Pannel');
+        ).toBe('Chat');
     });
 
-    it('render a feed item', () => {
+    it('render a Logout item', () => {
         expect(
             wrapped
                 .find(Link)
                 .last()
                 .text()
-        ).toBe('Feed');
+        ).toBe('Logout');
     });
 
-    it('render a chat item', () => {
+    it('render a Settings item', () => {
         expect(
             wrapped
                 .find(Link)
                 .at(1)
                 .text()
-        ).toBe('Chat');
+        ).toBe('Settings');
     });
 
-    it('render a settings item', () => {
+    it('render a Feed item', () => {
         expect(
             wrapped
                 .find(Link)
                 .at(2)
                 .text()
-        ).toBe('Settings');
+        ).toBe('Feed');
     });
 });

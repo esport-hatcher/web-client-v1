@@ -1,20 +1,37 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
-import history from '@/services/history';
+import { routes } from '@/config';
 
 // tslint:disable-next-line: no-any
 export const requireAnonyme = (ChildComponent: any) => {
     // tslint:disable-next-line: no-any
     const ComposedComponent = (props: any) => {
-        useEffect(() => {
-            if (props.user) {
-                if (props.user.superAdmin) {
-                    return history.push('/admin/pannel');
-                }
-                return history.push('/chat');
+        if (props.user) {
+            if (props.user.superAdmin) {
+                return (
+                    <Redirect
+                        to={{
+                            pathname: props.location.state
+                                ? props.location.state.from.pathname
+                                : routes.adminPannel,
+                            state: { from: props.location },
+                        }}
+                    />
+                );
             }
-        }, [props.user]);
+            return (
+                <Redirect
+                    to={{
+                        pathname: props.location.state
+                            ? props.location.state.from.pathname
+                            : routes.home,
+                        state: { from: props.location },
+                    }}
+                />
+            );
+        }
         return <ChildComponent {...props} />;
     };
     return connect(mapStateToProps)(ComposedComponent);

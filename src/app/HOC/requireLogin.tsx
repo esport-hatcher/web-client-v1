@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
-import history from '@/services/history';
+import { Redirect } from 'react-router';
 
 // tslint:disable-next-line: no-any
 export const requireLogin = (ChildComponent: any) => {
     // tslint:disable-next-line: no-any
     const ComposedComponent = (props: any) => {
-        useEffect(() => {
-            if (!props.token) {
-                history.push('/login');
-            }
-        }, [props.token]);
+        if (!props.token) {
+            return (
+                <Redirect
+                    to={{ pathname: '/login', state: { from: props.location } }}
+                />
+            );
+        }
         return <ChildComponent {...props} />;
     };
     return connect(mapStateToProps)(ComposedComponent);

@@ -120,6 +120,7 @@ export const fetchUserSession = () => async (
 };
 
 export const logout = (): ILogoutAction => {
+    localStorage.removeItem('ehToken');
     return {
         type: ActionTypes.logout,
     };

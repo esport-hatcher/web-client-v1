@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 interface IAuthBannerP {
     onButtonClick: () => void;
@@ -27,6 +28,8 @@ export class AuthBanner extends Component<IAuthBannerP> {
 
     render() {
         const bodyText = this.getContent();
+        const { loginMode } = this.props;
+
         return (
             <div className='banner'>
                 <div className='banner__container'>
@@ -36,12 +39,13 @@ export class AuthBanner extends Component<IAuthBannerP> {
                     <div className='banner__container__sub-title title title--xs'>
                         {bodyText.subHeader}
                     </div>
-                    <button
+                    <Link
+                        to={loginMode ? '/register' : '/login'}
                         onClick={this.props.onButtonClick}
                         className='btn btn--outline btn--white'
                     >
                         {bodyText.button.toUpperCase()}
-                    </button>
+                    </Link>
                 </div>
             </div>
         );
