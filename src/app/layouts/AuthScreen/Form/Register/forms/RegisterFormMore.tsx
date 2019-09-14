@@ -1,6 +1,7 @@
 import React from 'react';
 import { SmartInput, RoundButton } from '@/components';
 import { RegisterBaseForm } from './RegisterBaseForm';
+import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormFill,
     registerFormSetStage,
@@ -52,10 +53,6 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
     };
 
     render() {
-        /**
-         * Curried function who returns a function checking if a string is between 5 & 20 characters
-         */
-
         return (
             <div
                 className={`auth-form__container auth-form__container__more ${
@@ -76,7 +73,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                         register={true}
                         onChange={this.onChangeField}
                         onChangeStatus={this.onChangeStatus}
-                        customValidation={() => true}
+                        customValidation={isNotEmpty}
                     />
                     <SmartInput
                         value={this.props.fields.lastName.value}
@@ -86,7 +83,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                         register={true}
                         onChange={this.onChangeField}
                         onChangeStatus={this.onChangeStatus}
-                        customValidation={() => true}
+                        customValidation={isNotEmpty}
                     />
                     {this.displayErrorMsg()}
                     <RoundButton onClick={() => null} />

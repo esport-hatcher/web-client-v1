@@ -35,12 +35,13 @@ export class SmartInput extends Component<ISmartInputP> {
      */
     checkIfNotTaken = async () => {
         const { onChangeStatus, name, value } = this.props;
+        const { input } = this.state;
 
         await sleep(1000);
         if (onChangeStatus) {
             try {
                 await api.post('/users/email', {
-                    email: value || this.state.input,
+                    email: value || input,
                 });
                 this.setState({
                     loading: false,
@@ -69,6 +70,7 @@ export class SmartInput extends Component<ISmartInputP> {
             register,
             onChangeStatus,
             name,
+            value,
         } = this.props;
         const { input } = this.state;
 
@@ -76,7 +78,7 @@ export class SmartInput extends Component<ISmartInputP> {
             /**
              * Validation check execution
              */
-            if (customValidation(input)) {
+            if (customValidation(value || input)) {
                 if (register && type === 'email') {
                     /**
                      * If the input is an email and the input is in mode "register" then we check it's unique in the database
@@ -208,6 +210,7 @@ export class SmartInput extends Component<ISmartInputP> {
             required,
             value,
         } = this.props;
+        const { input } = this.state;
         const iconClass = this.iconType();
         const inputClass = this.inputType();
         return (
@@ -220,7 +223,7 @@ export class SmartInput extends Component<ISmartInputP> {
                     pattern={pattern}
                     onBlur={this.validationCheck}
                     required={required}
-                    value={value || this.state.input}
+                    value={value || input}
                     onChange={this.onInputChange}
                 />
                 <i className={iconClass} />
