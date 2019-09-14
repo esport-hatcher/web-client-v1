@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// tslint:disable-next-line: match-default-export-name
-import sprites from '../../../assets/sprite.svg';
+import { Icon } from '@/components';
 
 export class SearchField extends Component {
     state = { focused: false };
@@ -12,13 +11,12 @@ export class SearchField extends Component {
 
         return (
             <form action='#' className='search-input'>
-                <svg
+                <Icon
                     className={`search-input__icon ${
                         focused ? 'search-input__icon--active' : ''
                     }`}
-                >
-                    <use xlinkHref={`${sprites}#icon-search`} />
-                </svg>
+                    name='search'
+                />
                 <input
                     className='search-input__input'
                     type='text'

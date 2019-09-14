@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// tslint:disable-next-line: match-default-export-name
-import sprites from '../../../assets/sprite.svg';
 import { routes } from '@/config';
-import { NavigationItem } from '@/components';
+import { NavigationItem, Icon } from '@/components';
 
 export class NavBar extends Component {
     state = { expanded: false, textDisplay: false, currentItem: '' };
@@ -78,9 +76,10 @@ export class NavBar extends Component {
                         }`}
                         onClick={this.expandNavBar}
                     >
-                        <svg className='nav-bar__button-expand__icon'>
-                            <use xlinkHref={`${sprites}#icon-chevron-right`} />
-                        </svg>
+                        <Icon
+                            className='nav-bar__button-expand__icon'
+                            name='chevron_right'
+                        />
                     </button>
                 </nav>
             </React.Fragment>
