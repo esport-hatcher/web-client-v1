@@ -14,9 +14,12 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const oldAuthentication = JSON.parse(localStorage.getItem('ehToken')!);
 // tslint:disable-next-line: no-any
 const initialState: any = {
-    authentication: { token: localStorage.getItem('ehToken') },
+    authentication: oldAuthentication
+        ? oldAuthentication
+        : { user: null, token: null },
 };
 
 export const store = createStore(

@@ -77,16 +77,20 @@ export class RegisterFormBasic extends RegisterBaseForm<
                 </div>
                 <form className='auth-form__basic' onSubmit={this.onSubmit}>
                     <SmartInput
+                        icon='mail'
                         value={this.props.fields.email.value}
                         type='email'
                         placeholder='Email'
                         name='email'
                         register={true}
+                        required={true}
                         onChange={this.onChangeField}
                         onChangeStatus={this.onChangeStatus}
                         customValidation={isEmail}
                     />
                     <SmartInput
+                        icon='pen'
+                        required={true}
                         value={this.props.fields.username.value}
                         type='text'
                         placeholder='Username'
@@ -97,6 +101,8 @@ export class RegisterFormBasic extends RegisterBaseForm<
                         customValidation={minMaxUserName}
                     />
                     <SmartInput
+                        icon='lock'
+                        required={true}
                         value={this.props.fields.password.value}
                         type='password'
                         placeholder='Password'
@@ -107,6 +113,8 @@ export class RegisterFormBasic extends RegisterBaseForm<
                         customValidation={minMaxPwd}
                     />
                     <SmartInput
+                        required={true}
+                        icon='lock'
                         value={this.props.fields.passwordConfirm.value}
                         name='passwordConfirm'
                         type='password'

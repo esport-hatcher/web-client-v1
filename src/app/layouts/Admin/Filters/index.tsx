@@ -1,44 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FilterItem } from '@/components';
 
-export class AdminFilters extends Component {
-    state = { currentKey: 'all' };
+enum FilterKeys {
+    all = 'all',
+    player = 'player',
+    staff = 'staff',
+    team = 'team',
+}
 
-    // tslint:disable-next-line: no-any
-    onItemClick = (e: any) => {
-        this.setState({ currentKey: e.currentTarget.getAttribute('data-key') });
+export const AdminFilters = (): JSX.Element => {
+    const [currentKey, setCurrentKey] = useState(FilterKeys.all);
+
+    const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const value = e.currentTarget.getAttribute('data-key') as FilterKeys;
+        setCurrentKey(value);
     };
 
-    render() {
-        const { currentKey } = this.state;
-
-        return (
-            <div className='admin-filters'>
-                <FilterItem
-                    name='all'
-                    count={95}
-                    active={currentKey === 'all' ? true : false}
-                    onClick={this.onItemClick}
-                />
-                <FilterItem
-                    name='player'
-                    count={18}
-                    active={currentKey === 'player' ? true : false}
-                    onClick={this.onItemClick}
-                />
-                <FilterItem
-                    name='staff'
-                    count={31}
-                    active={currentKey === 'staff' ? true : false}
-                    onClick={this.onItemClick}
-                />
-                <FilterItem
-                    name='team'
-                    count={22}
-                    active={currentKey === 'team' ? true : false}
-                    onClick={this.onItemClick}
-                />
-            </div>
-        );
-    }
-}
+    return (
+        <div className='admin-filters'>
+            <FilterItem
+                name={FilterKeys.all}
+                count={95}
+                active={currentKey === FilterKeys.all ? true : false}
+                onClick={onItemClick}
+            />
+            <FilterItem
+                name={FilterKeys.player}
+                count={18}
+                active={currentKey === FilterKeys.player ? true : false}
+                onClick={onItemClick}
+            />
+            <FilterItem
+                name={FilterKeys.staff}
+                count={31}
+                active={currentKey === FilterKeys.staff ? true : false}
+                onClick={onItemClick}
+            />
+            <FilterItem
+                name={FilterKeys.team}
+                count={22}
+                active={currentKey === FilterKeys.team ? true : false}
+                onClick={onItemClick}
+            />
+        </div>
+    );
+};

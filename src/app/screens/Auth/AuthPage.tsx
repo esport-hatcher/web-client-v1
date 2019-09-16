@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
+import { useToggler } from '@/hooks';
 import {
     registerFormFill,
     IRegisterForm,
@@ -19,34 +20,22 @@ interface IAuthPageProps {
     stage: RegisterFormStages;
 }
 
-interface IAuthPageState {
-    loginMode: boolean;
-}
+export const isStageMore = (stage: RegisterFormStages) =>
+    stage === RegisterFormStages.more;
 
-export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
-    constructor(props: IAuthPageProps) {
-        super(props);
-        this.state = {
-            loginMode: this.props.isLogin,
-        };
-    }
+export const _AuthPage = ({
+    isLogin,
+    errorMsg,
+    registerFormFill,
+    fields,
+    register,
+    login,
+    setStage,
+    stage,
+}: IAuthPageProps): JSX.Element => {
+    const [loginMode, setLoginMode] = useToggler(isLogin);
 
-    checkIt = () => {
-        this.setState({ loginMode: !this.state.loginMode });
-    };
-
-    renderForm = () => {
-        const { loginMode } = this.state;
-        const {
-            errorMsg,
-            login,
-            register,
-            registerFormFill,
-            fields,
-            stage,
-            setStage,
-        } = this.props;
-
+    const renderForm = (): JSX.Element => {
         if (loginMode) {
             return <LoginForm errorMsg={errorMsg} onLogin={login} />;
         }
@@ -62,37 +51,25 @@ export class _AuthPage extends Component<IAuthPageProps, IAuthPageState> {
         );
     };
 
-    isStageMore = (): boolean => this.props.stage === RegisterFormStages.more;
-
-    render() {
-        const { loginMode } = this.state;
-
-        return (
-            <div className='auth-screen'>
-                <div
-                    className={`auth-screen__banner ${
-                        loginMode ? 'auth-screen__banner--login' : ''
-                    } ${
-                        this.isStageMore()
-                            ? 'auth-screen__banner--register'
-                            : ''
-                    }`}
-                >
-                    <AuthBanner
-                        onButtonClick={this.checkIt}
-                        loginMode={this.state.loginMode}
-                    />
-                </div>
-                <div
-                    className={`auth-screen__form ${
-                        loginMode ? 'auth-screen__form--login' : ''
-                    } ${
-                        this.isStageMore() ? 'auth-screen__form--register' : ''
-                    }`}
-                >
-                    {this.renderForm()}
-                </div>
+    return (
+        <div className='auth-screen'>
+            <div
+                className={`auth-screen__banner ${
+                    loginMode ? 'auth-screen__banner--login' : ''
+                } ${isStageMore(stage) ? 'auth-screen__banner--register' : ''}`}
+            >
+                <AuthBanner
+                    onButtonClick={setLoginMode}
+                    loginMode={loginMode}
+                />
             </div>
-        );
-    }
-}
+            <div
+                className={`auth-screen__form ${
+                    loginMode ? 'auth-screen__form--login' : ''
+                } ${isStageMore(stage) ? 'auth-screen__form--register' : ''}`}
+            >
+                {renderForm()}
+            </div>
+        </div>
+    );
+};

@@ -25,9 +25,7 @@ interface IIconProps {
     className: string;
 }
 
-export const Icon = (props: IIconProps): JSX.Element => {
-    const { name, className } = props;
-
+export const Icon = ({ name, className }: IIconProps): JSX.Element => {
     return (
         <svg className={className}>
             <use xlinkHref={`${sprites}#icon-${name}`} />

@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-interface IHeaderP {
+interface IHeaderProps {
     title: string;
 }
 
-export class HeaderPage extends Component<IHeaderP> {
-    render() {
-        const { title } = this.props;
-
-        return (
-            <div className='header'>
-                <h1 className='header__title title title--xs'>{title}</h1>
-            </div>
-        );
-    }
-}
+export const HeaderPage = ({ title }: IHeaderProps): JSX.Element => {
+    return (
+        <div className='header'>
+            <h1 className='header__title title title--xs'>{title}</h1>
+        </div>
+    );
+};
