@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavBar } from './Navigation';
 import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
 import { IUser } from '@/actions';
 
-interface IRNavigationP {
+interface IRNavigationProps {
     user?: IUser;
 }
 
-class RNavigation extends Component<IRNavigationP> {
-    render() {
-        const { user } = this.props;
-
-        if (user) {
-            return <NavBar admin={user.superAdmin} />;
-        }
-        return null;
+export const RNavigation = ({
+    user,
+}: IRNavigationProps): JSX.Element | null => {
+    if (user) {
+        return <NavBar admin={user.superAdmin} />;
     }
-}
+    return null;
+};
 
 const mapStateToProps = (state: IStoreState) => {
     return {

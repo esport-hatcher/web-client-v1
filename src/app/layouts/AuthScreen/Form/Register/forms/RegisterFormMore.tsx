@@ -70,6 +70,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                         type='text'
                         placeholder='First name'
                         name='firstName'
+                        icon='pen'
                         register={true}
                         onChange={this.onChangeField}
                         onChangeStatus={this.onChangeStatus}
@@ -78,6 +79,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                     <SmartInput
                         value={this.props.fields.lastName.value}
                         type='text'
+                        icon='pen'
                         placeholder='Last name'
                         name='lastName'
                         register={true}

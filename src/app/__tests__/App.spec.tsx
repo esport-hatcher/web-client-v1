@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { _App } from '@/App';
+import { App } from '@/App';
 
 let wrapped: ShallowWrapper;
 
 beforeEach(() => {
-    wrapped = shallow(<_App />);
+    wrapped = shallow(<App />);
 });
 
 it('renders the App component', () => {

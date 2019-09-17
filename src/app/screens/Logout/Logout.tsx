@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { logout } from '@/actions';
 
@@ -6,12 +6,9 @@ interface ILogoutProps {
     logout: typeof logout;
 }
 
-export class _Logout extends Component<ILogoutProps> {
-    componentDidMount() {
-        const { logout } = this.props;
+export const _Logout = ({ logout }: ILogoutProps): JSX.Element => {
+    useEffect(() => {
         logout();
-    }
-    render() {
-        return <Redirect to='/login' />;
-    }
-}
+    });
+    return <Redirect to='/login' />;
+};

@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class _HomePage extends Component {
-    render() {
-        return <div>HomePage</div>;
-    }
-}
+export const _HomePage = (): JSX.Element => {
+    return <div>HomePage</div>;
+};

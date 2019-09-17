@@ -57,6 +57,7 @@ export const register = (registerProps: IRegisterForm) => async (
 ) => {
     try {
         const { data } = await api.post<ILoginSuccess>('/users', registerProps);
+        localStorage.setItem('ehToken', JSON.stringify(data));
         dispatch<ILoginSuccessAction>({
             type: ActionTypes.loginSuccess,
             payload: data,
@@ -77,7 +78,7 @@ export const login = (email: string, password: string) => async (
             email,
             password,
         });
-        localStorage.setItem('ehToken', data.token);
+        localStorage.setItem('ehToken', JSON.stringify(data));
         dispatch<ILoginSuccessAction>({
             type: ActionTypes.loginSuccess,
             payload: data,

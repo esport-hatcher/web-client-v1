@@ -1,40 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { SmartInput, RoundButton } from '@/components';
+import { useMultipleInputs } from '@/hooks';
 
 interface ILoginFormProps {
     onLogin: (email: string, password: string) => Promise<void>;
     errorMsg?: string;
 }
 
-interface ILoginFormState {
-    [key: string]: string;
-}
+export const LoginForm = ({
+    onLogin,
+    errorMsg,
+}: ILoginFormProps): JSX.Element => {
+    const [inputs, setInputs] = useMultipleInputs({
+        email: '',
+        password: '',
+    });
 
-export class LoginForm extends Component<ILoginFormProps, ILoginFormState> {
-    constructor(props: ILoginFormProps) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-        };
-    }
-
-    onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, password } = this.state;
-        const { onLogin } = this.props;
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        const { email, password } = inputs;
         e.preventDefault();
         await onLogin(email, password);
     };
 
-    onChangeField = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    displayErrorMsg = () => {
-        const { errorMsg } = this.props;
-
+    const displayErrorMsg = () => {
         if (errorMsg) {
             return (
                 <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
@@ -45,32 +33,34 @@ export class LoginForm extends Component<ILoginFormProps, ILoginFormState> {
         return null;
     };
 
-    render() {
-        return (
-            <div className='auth-form'>
-                <div className='auth-form__container'>
-                    <div className='auth-form__container__title title title--big'>
-                        Sign in to <br />
-                        Esport-Hatcher
-                    </div>
-                    <form className='auth-form__basic' onSubmit={this.onSubmit}>
-                        <SmartInput
-                            type='email'
-                            placeholder='Email'
-                            name='email'
-                            onChange={this.onChangeField}
-                        />
-                        <SmartInput
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            onChange={this.onChangeField}
-                        />
-                        {this.displayErrorMsg()}
-                        <RoundButton onClick={() => null} />
-                    </form>
+    return (
+        <div className='auth-form'>
+            <div className='auth-form__container'>
+                <div className='auth-form__container__title title title--big'>
+                    Sign in to <br />
+                    Esport-Hatcher
                 </div>
+                <form className='auth-form__basic' onSubmit={onSubmit}>
+                    <SmartInput
+                        type='email'
+                        placeholder='Email'
+                        name='email'
+                        icon='mail'
+                        value={inputs.email}
+                        onChange={setInputs}
+                    />
+                    <SmartInput
+                        type='password'
+                        placeholder='Password'
+                        name='password'
+                        icon='lock'
+                        value={inputs.password}
+                        onChange={setInputs}
+                    />
+                    {displayErrorMsg()}
+                    <RoundButton onClick={() => null} />
+                </form>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
