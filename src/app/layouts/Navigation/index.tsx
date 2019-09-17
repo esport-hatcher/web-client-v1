@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { Navigation } from './Navigation';
+import React from 'react';
+import { NavBar } from './Navigation';
 import { connect } from 'react-redux';
-import { IState } from 'src/typings/states/global';
+import { IStoreState } from '@/reducers';
+import { IUser } from '@/actions';
 
-interface IRNavigationP {
-    auth?: string;
-    expandGridSidebar: () => void;
+interface IRNavigationProps {
+    user?: IUser;
 }
 
-class RNavigation extends Component<IRNavigationP> {
-    render() {
-        const { auth, expandGridSidebar } = this.props;
-
-        if (auth) {
-            return <Navigation expandGridSidebar={expandGridSidebar} />;
-        }
-        return null;
+export const RNavigation = ({
+    user,
+}: IRNavigationProps): JSX.Element | null => {
+    if (user) {
+        return <NavBar admin={user.superAdmin} />;
     }
-}
+    return null;
+};
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: IStoreState) => {
     return {
-        auth: state.auth.token,
+        user: state.authentication.user,
     };
 };
-export default connect(mapStateToProps)(RNavigation);
+
+export const Navigation = connect(mapStateToProps)(RNavigation);

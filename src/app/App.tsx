@@ -1,61 +1,55 @@
-import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import history from '@/services/history';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { routes } from '@/config';
+import {
+    AdminPannel,
+    AuthPage,
+    HomePage,
+    SettingsPage,
+    Logout,
+} from '@/screens';
 
-import routes from '@/config/routes';
-import HomePage from '@/screens/Home';
-import AuthPage from '@/screens/Auth';
-import AdminPannel from '@/screens/Admin/Pannel';
-import Settings from '@/screens/Settings';
-import Navigation from '@/layouts/Navigation';
+import { Navigation } from '@/layouts';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
 
-export class App extends Component {
-    state = { sidebarExpanded: false };
-
-    expandSidebar = () =>
-        this.setState({ sidebarExpanded: !this.state.sidebarExpanded });
-
-    render() {
-        const { sidebarExpanded } = this.state;
-
-        return (
-            <div
-                className={`container ${
-                    sidebarExpanded ? 'container--expanded' : ''
-                }`}
-            >
-                <Router history={history}>
-                    <Navigation expandGridSidebar={this.expandSidebar} />
+export const App = (): JSX.Element => {
+    return (
+        <BrowserRouter>
+            <div className='container'>
+                <Navigation />
+                <div className='container__content'>
                     <Switch>
                         <Route path={routes.home} exact component={HomePage} />
                         <Route
                             path={routes.login}
                             exact
-                            render={props => <AuthPage isLogin={true} />}
+                            render={props => (
+                                <AuthPage {...props} isLogin={true} />
+                            )}
                         />
                         <Route
                             path={routes.register}
                             exact
-                            render={props => <AuthPage isLogin={false} />}
+                            render={props => (
+                                <AuthPage {...props} isLogin={false} />
+                            )}
                         />
                         <Route
                             path={routes.adminPannel}
                             exact
-                            render={props => <AdminPannel />}
+                            component={AdminPannel}
                         />
                         <Route
                             path={routes.settings}
                             exact
-                            render={props => <Settings />}
+                            component={SettingsPage}
                         />
+                        <Route path={routes.logout} exact component={Logout} />
                     </Switch>
-                </Router>
+                </div>
             </div>
-        );
-    }
-}
-
-export default App;
+        </BrowserRouter>
+    );
+};

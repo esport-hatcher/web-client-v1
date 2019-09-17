@@ -4,3 +4,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@mixin input-placeholder($color) {
+  &::-webkit-input-placeholder { color: $color; opacity: 1;}
+  &::-moz-placeholder { color: $color; opacity: 1;} /* Firefox 19+ */
+  &:-moz-placeholder { color: $color; opacity: 1;} /* Firefox 18- */
+  &:-ms-input-placeholder { color: $color; opacity: 1;}
+}
+
+@mixin calc($property, $expression...) { 
+  #{$property}: -moz-calc(#{$expression}); 
+  #{$property}: -o-calc(#{$expression}); 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+} 

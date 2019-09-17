@@ -1,11 +1,12 @@
 .auth-form {
-    width: 60vw;
+    width: 100%;
     height: 100vh;
     background-color: $color-dark;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &__container {
-        @include absCenter();
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -15,9 +16,42 @@
             margin-bottom: 4rem;
         }
 
+        &__basic {
+            transform: translateX(-100vh);
+            opacity: 0;
+            transition: transform $auth-screen-animation-duration
+                    $auth-screen-animation-style,
+                opacity $auth-screen-animation-duration
+                    $auth-screen-animation-style,
+                width 0s $auth-screen-animation-duration;
+            width: 0%;
+            overflow: hidden;
+
+            &--active {
+                opacity: 1;
+                width: 100%;
+                transform: translateX(0);
+            }
+        }
+
+        &__more {
+            opacity: 0;
+            transform: translateX(100vh);
+            width: 0%;
+            transition: opacity $auth-screen-animation-duration ease-out
+                    $auth-screen-animation-duration,
+                transform $auth-screen-animation-duration ease-out
+                    $auth-screen-animation-duration;
+
+            &--active {
+                width: 100%;
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
     }
 
-    &__form {
+    &__basic {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -38,5 +72,4 @@
             transform: translateX(-50%);
         }
     }
-
 }

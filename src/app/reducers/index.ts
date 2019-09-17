@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux';
-import authReducer from './auth';
+import { authenticationReducer, IAuthentication } from './authentication';
+import { registerFormReducer, IRegisterFormReducer } from './registerForm';
 
-export default combineReducers({
-    auth: authReducer,
+export interface IStoreState {
+    authentication: IAuthentication;
+    registerForm: IRegisterFormReducer;
+}
+
+export default combineReducers<IStoreState>({
+    authentication: authenticationReducer,
+    registerForm: registerFormReducer,
 });

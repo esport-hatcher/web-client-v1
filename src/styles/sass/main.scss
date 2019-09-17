@@ -12,13 +12,19 @@
 @import './base/icons';
 
 //      COMPONENTS
+@import './components/label';
 @import './components/smart-input';
 @import './components/btn';
+@import './components/filter-item';
+@import './components/search-field';
 
 //      LAYOUTS
 @import './layouts/banner';
 @import './layouts/auth-form';
 @import './layouts/nav-bar';
+@import './layouts/header';
+@import './layouts/admin-filters';
 
 //      SCREENS
-@import './screens/auth-screen';    
+@import './screens/auth-screen';
+@import './screens/admin-pannel';  

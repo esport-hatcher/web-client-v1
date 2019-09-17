@@ -1,64 +1,75 @@
-import React, { Component } from 'react';
-import history from '@/services/history';
-import AuthBanner from '@/layouts/AuthScreen/Banner';
-import AuthForm from '@/layouts/AuthScreen/Form';
+import React from 'react';
+import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
+import { useToggler } from '@/hooks';
+import {
+    registerFormFill,
+    IRegisterForm,
+    IRegisterProps,
+    RegisterFormStages,
+    registerFormSetStage,
+} from '@/actions';
 
-interface IAuthPageP {
+interface IAuthPageProps {
     isLogin: boolean;
-    register?: (
-        email: string,
-        username: string,
-        password: string
-    ) => Promise<void>;
-    login?: (email: string, password: string) => Promise<void>;
+    errorMsg?: string;
+    registerFormFill: typeof registerFormFill;
+    fields: IRegisterProps;
+    register: (registerProps: IRegisterForm) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
+    setStage: typeof registerFormSetStage;
+    stage: RegisterFormStages;
 }
 
-export class AuthPage extends Component<IAuthPageP> {
-    state = { loginMode: this.props.isLogin };
+export const isStageMore = (stage: RegisterFormStages) =>
+    stage === RegisterFormStages.more;
 
-    checkIt = () => {
-        if (!this.state.loginMode === false) {
-            history.push('/register');
-        } else {
-            history.push('/login');
+export const _AuthPage = ({
+    isLogin,
+    errorMsg,
+    registerFormFill,
+    fields,
+    register,
+    login,
+    setStage,
+    stage,
+}: IAuthPageProps): JSX.Element => {
+    const [loginMode, setLoginMode] = useToggler(isLogin);
+
+    const renderForm = (): JSX.Element => {
+        if (loginMode) {
+            return <LoginForm errorMsg={errorMsg} onLogin={login} />;
         }
-        this.setState({ loginMode: !this.state.loginMode });
-    };
-
-    renderForm = () => {
-        if (this.props.login && this.props.register) {
-            return (
-                <AuthForm
-                    loginMode={this.state.loginMode}
-                    onLogin={this.props.login}
-                    onRegister={this.props.register}
-                />
-            );
-        }
-        return null;
-    };
-
-    render() {
         return (
-            <div className='auth-screen'>
-                <input
-                    type='checkbox'
-                    name='slider'
-                    className='auth-screen__checkbox'
-                    checked={this.state.loginMode}
-                    // tslint:disable-next-line: no-empty
-                    onChange={() => {}}
-                />
-                <div className='auth-screen__banner'>
-                    <AuthBanner
-                        onButtonClick={this.checkIt}
-                        loginMode={this.state.loginMode}
-                    />
-                </div>
-                <div className='auth-screen__form'>{this.renderForm()}</div>
-            </div>
+            <RegisterForm
+                errorMsg={errorMsg}
+                setStage={setStage}
+                stage={stage}
+                onSubmit={register}
+                onChangeFields={registerFormFill}
+                fields={fields}
+            />
         );
-    }
-}
+    };
 
-export default AuthPage;
+    return (
+        <div className='auth-screen'>
+            <div
+                className={`auth-screen__banner ${
+                    loginMode ? 'auth-screen__banner--login' : ''
+                } ${isStageMore(stage) ? 'auth-screen__banner--register' : ''}`}
+            >
+                <AuthBanner
+                    onButtonClick={setLoginMode}
+                    loginMode={loginMode}
+                />
+            </div>
+            <div
+                className={`auth-screen__form ${
+                    loginMode ? 'auth-screen__form--login' : ''
+                } ${isStageMore(stage) ? 'auth-screen__form--register' : ''}`}
+            >
+                {renderForm()}
+            </div>
+        </div>
+    );
+};

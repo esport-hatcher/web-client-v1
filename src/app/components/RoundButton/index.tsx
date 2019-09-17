@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class RoundButton extends Component {
-    render() {
-        return (
-            <div>
-                <button className='btn btn--round'>
-                    <i className='fas fa-chevron-right' />
-                </button>
-            </div>
-        );
-    }
+interface IRoundButtonProps {
+    onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default RoundButton;
+export const RoundButton = ({ onClick }: IRoundButtonProps): JSX.Element => {
+    return (
+        <div>
+            <button className='btn btn--round' onClick={onClick}>
+                <i className='fas fa-chevron-right' />
+            </button>
+        </div>
+    );
+};

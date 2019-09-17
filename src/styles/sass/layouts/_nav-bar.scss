@@ -1,5 +1,6 @@
 .nav-bar {
     height: 100vh;
+    position: fixed;
     grid-column: 1 / 2;
     background-color: $color-dark;
     border: $sidebar-border;
@@ -8,7 +9,17 @@
     flex-direction: column;
     justify-content: center;
     z-index: 20;
-    transition: all $sidebar-animation-duration ease-out;
+    transition: width $sidebar-animation-duration ease-out;
+
+    &__placeholder {
+        width: $sidebar-size;
+        transition: width $sidebar-animation-duration ease-out;
+        grid-column: sidebar-start / sidebar-end;
+
+        &--expanded {
+            width: $sidebar-size-expanded;
+        }
+    }
 
     &--expanded {
         width: $sidebar-size-expanded;
@@ -19,17 +30,26 @@
         padding-left: $sidebar-item-padding;
         display: flex;
         align-items: center;
-        transition: all $sidebar-animation-duration;
-         text-decoration: none;
+        transition: background-color $sidebar-animation-duration,
+            transform $sidebar-animation-duration,
+            box-shadow $sidebar-animation-duration;
+        text-decoration: none;
+        outline: none;
 
         &:not(:last-of-type) {
             margin-bottom: $sidebar-item-spacing;
         }
 
+        &:last-of-type {
+            width: 100%;
+            position: absolute;
+            bottom: 2%;
+        }
+
         &:hover {
             background-color: $color-dark-four;
             transform: translateY(-1rem);
-            box-shadow: 0 1rem 2rem rgba($color-dark-four, .4);
+            box-shadow: 0 1rem 2rem rgba($color-dark-four, 0.4);
         }
 
         &:hover > &__icon {
@@ -48,10 +68,10 @@
         }
 
         &--active {
-              background-color: $color-dark-four;
+            background-color: $color-dark-four;
         }
 
-         &--active > &__icon {
+        &--active > &__icon {
             fill: $color-white;
         }
 
@@ -59,37 +79,33 @@
             color: $color-white;
             font-weight: 500;
         }
-     
+
         &__icon {
             height: 4rem;
             width: 4rem;
             fill: $color-light-grey;
             transition: all $sidebar-animation-duration;
-            
+
             &--active {
                 fill: $color-white;
             }
-         
         }
-
 
         &__text {
             display: none;
             font-weight: 300;
             outline: none;
-            color:  $color-light-grey;
+            color: $color-light-grey;
             font-size: 1.4rem;
-            margin-left: 2rem;        
-            text-transform: uppercase;  
-            transition: all $sidebar-animation-duration;   
-            &--display { 
+            margin-left: 2rem;
+            text-transform: uppercase;
+            transition: all $sidebar-animation-duration;
+            &--display {
                 display: inline-block;
                 animation: moveInLeft $sidebar-animation-duration ease-out;
             }
         }
     }
-
-
 
     &__button-expand {
         cursor: pointer;
@@ -99,18 +115,19 @@
         transform: translate(-15%, -50%);
         background-color: $color-dark;
         display: inline-block;
-        width:  $sidebar-expand-button-size;
-        height:  $sidebar-expand-button-size * 2;
+        width: $sidebar-expand-button-size;
+        height: $sidebar-expand-button-size * 2;
         border-left: none;
         border-color: $color-dark-four;
         border-width: 1px;
-        border-bottom-right-radius:  $sidebar-expand-button-size * 2;
-        border-top-right-radius:  $sidebar-expand-button-size * 2;
+        border-bottom-right-radius: $sidebar-expand-button-size * 2;
+        border-top-right-radius: $sidebar-expand-button-size * 2;
         color: $color-white;
         display: flex;
         justify-content: center;
         align-items: center;
         transition: all $sidebar-animation-duration ease-out;
+        outline: none;
 
         &__icon {
             height: 2.5rem;
@@ -126,6 +143,5 @@
                 transform: rotate(180deg);
             }
         }
-
     }
 }

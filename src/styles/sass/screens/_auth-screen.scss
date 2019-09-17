@@ -1,27 +1,38 @@
 .auth-screen {
-    display: flex;
-    flex-direction: row;
-    
+    display: grid;
+    grid-template-columns: min-content 1fr;
+
     &__checkbox {
-       display: none;
+        display: none;
     }
 
     &__form {
-        transition: all .6s ease-in-out;
+        transition: transform $auth-screen-animation-duration
+            $auth-screen-animation-style;
+        width: 100%;
+
+        &--login {
+            transform: translateX(-66%);
+        }
     }
 
     &__banner {
-        box-shadow: 1rem 1rem 2rem rgba($color-dark-four, .4);
+        box-shadow: 1rem 1rem 2rem rgba($color-dark-four, 0.4);
         z-index: 10;
-        transition: all .4s ease-in;
-    }
+        transition: transform $auth-screen-animation-duration
+                $auth-screen-animation-style,
+            width 0s $auth-screen-animation-duration;
+        width: $auth-screen-banner-width;
 
-    &__checkbox:checked + &__banner {
-        transform: translateX(150%);
-        box-shadow: -1rem 1rem 2rem rgba($color-dark-four, .4);
-    }
+        &--login {
+            box-shadow: -1rem 1rem 2rem rgba($color-dark-four, 0.4);
+            transform: translateX(150%);
+        }
 
-    &__checkbox:checked ~ &__form {
-        transform: translateX(-66.7%);
+        &--register {
+            transform: translateX(-100%);
+            width: 0vw;
+            overflow: hidden;
+        }
     }
 }

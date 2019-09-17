@@ -1,13 +1,4 @@
-import React, { Component } from 'react';
+import { requireAdmin, requireLogin } from '@/HOC';
+import { _AdminPannel } from './AdminPannel';
 
-export class AdminPannel extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                <div className='div'>test</div>
-            </React.Fragment>
-        );
-    }
-}
-
-export default AdminPannel;
+export const AdminPannel = requireLogin(requireAdmin(_AdminPannel));

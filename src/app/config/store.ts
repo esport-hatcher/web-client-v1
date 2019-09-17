@@ -14,15 +14,16 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const oldAuthentication = JSON.parse(localStorage.getItem('ehToken')!);
 // tslint:disable-next-line: no-any
 const initialState: any = {
-    auth: { token: localStorage.getItem('ehToken') },
+    authentication: oldAuthentication
+        ? oldAuthentication
+        : { user: null, token: null },
 };
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(thunk))
 );
-
-export default store;
