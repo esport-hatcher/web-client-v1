@@ -12,31 +12,25 @@ interface IProps {
     className?: string;
 }
 
-export const NavigationItem: React.FC<IProps> = ({
-    active,
-    icon,
-    onClick,
-    path,
-    text,
-    activeText,
-    className,
-}) => {
-    return (
-        <Link
-            to={path}
-            className={`nav-bar__item ${
-                active ? 'nav-bar__item--active' : ''
-            } ${className}`}
-            onClick={onClick}
-        >
-            <Icon className='nav-bar__item__icon' name={icon} />
-            <p
-                className={`nav-bar__item__text ${
-                    activeText ? 'nav-bar__item__text--display' : ''
-                }`}
+export const NavigationItem: React.FC<IProps> = React.memo(
+    ({ active, icon, onClick, path, text, activeText, className }) => {
+        return (
+            <Link
+                to={path}
+                className={`nav-bar__item ${
+                    active ? 'nav-bar__item--active' : ''
+                } ${className}`}
+                onClick={onClick}
             >
-                {text}
-            </p>
-        </Link>
-    );
-};
+                <Icon className='nav-bar__item__icon' name={icon} />
+                <p
+                    className={`nav-bar__item__text ${
+                        activeText ? 'nav-bar__item__text--display' : ''
+                    }`}
+                >
+                    {text}
+                </p>
+            </Link>
+        );
+    }
+);

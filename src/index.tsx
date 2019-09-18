@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { App } from '@/App';
-import { store } from '@/config';
+import { Root } from '@/config';
+
+const oldAuthentication = JSON.parse(localStorage.getItem('ehToken')!);
+// tslint:disable-next-line: no-any
+const initialState: any = {
+    authentication: oldAuthentication
+        ? oldAuthentication
+        : { user: null, token: null },
+};
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Root initialState={initialState}>
         <App />
-    </Provider>,
+    </Root>,
     document.querySelector('#root')
 );

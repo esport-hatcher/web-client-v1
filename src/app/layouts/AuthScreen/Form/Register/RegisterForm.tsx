@@ -17,32 +17,27 @@ interface IProps {
     fields: IRegisterProps;
 }
 
-export const RegisterForm: React.FC<IProps> = ({
-    errorMsg,
-    stage,
-    setStage,
-    onSubmit,
-    onChangeFields,
-    fields,
-}) => {
-    return (
-        <section className='auth-form'>
-            <RegisterFormBasic
-                setStage={setStage}
-                errorMsg={errorMsg}
-                onChangeFields={onChangeFields}
-                fields={fields}
-                stage={stage}
-            />
+export const RegisterForm: React.FC<IProps> = React.memo(
+    ({ errorMsg, stage, setStage, onSubmit, onChangeFields, fields }) => {
+        return (
+            <section className='auth-form'>
+                <RegisterFormBasic
+                    setStage={setStage}
+                    errorMsg={errorMsg}
+                    onChangeFields={onChangeFields}
+                    fields={fields}
+                    stage={stage}
+                />
 
-            <RegisterFormMore
-                onSubmit={onSubmit}
-                errorMsg={errorMsg}
-                onChangeFields={onChangeFields}
-                fields={fields}
-                stage={stage}
-                setStage={setStage}
-            />
-        </section>
-    );
-};
+                <RegisterFormMore
+                    onSubmit={onSubmit}
+                    errorMsg={errorMsg}
+                    onChangeFields={onChangeFields}
+                    fields={fields}
+                    stage={stage}
+                    setStage={setStage}
+                />
+            </section>
+        );
+    }
+);

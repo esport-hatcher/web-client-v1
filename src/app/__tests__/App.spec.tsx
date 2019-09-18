@@ -1,12 +1,23 @@
 import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 
 import { App } from '@/App';
+import { Root } from '@/config';
 
-let wrapped: ShallowWrapper;
+let wrapped: ReactWrapper;
+
+const initialState = {
+    authentication: {
+        token: 'blabla',
+    },
+};
 
 beforeEach(() => {
-    wrapped = shallow(<App />);
+    wrapped = mount(
+        <Root initialState={initialState}>
+            <App />
+        </Root>
+    );
 });
 
 it('renders the App component', () => {

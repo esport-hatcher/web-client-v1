@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from '@/components';
 
-export const SearchField: React.FC = () => {
+export const SearchField: React.FC = React.memo(() => {
     const [focused, setFocused] = useState(false);
 
     const toggleFocus = () => setFocused(!focused);
@@ -24,4 +24,4 @@ export const SearchField: React.FC = () => {
             />
         </form>
     );
-};
+});

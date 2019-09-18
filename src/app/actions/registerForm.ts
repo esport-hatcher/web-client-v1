@@ -1,4 +1,5 @@
-import { ActionTypes } from './types';
+import { ActionTypes, IGetState } from './types';
+import { Dispatch } from 'redux';
 
 type FormInput = {
     valid: boolean;
@@ -25,12 +26,12 @@ export interface IRegisterFormFillAction {
 }
 
 export const registerFormFill = (
-    data: IRegisterProps
-): IRegisterFormFillAction => {
-    return {
+    cb: (data: IRegisterProps) => IRegisterProps
+) => (dispatch: Dispatch, getState: IGetState) => {
+    return dispatch({
         type: ActionTypes.registerFormFill,
-        payload: data,
-    };
+        payload: cb(getState().registerForm.fields),
+    });
 };
 
 export interface IRegisterFormSetStageAction {

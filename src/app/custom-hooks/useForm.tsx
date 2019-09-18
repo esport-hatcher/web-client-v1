@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 interface IInputs {
     [key: string]: string;
@@ -9,11 +9,19 @@ export const useForm = <T extends IInputs>(
 ): [T, (e: React.ChangeEvent<HTMLInputElement>) => void] => {
     const [inputs, setInputs] = useState<T>(InitialValues);
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value,
-        });
-    };
+    const onChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.persist();
+            setInputs(
+                (_inputs: T): T => {
+                    return {
+                        ..._inputs,
+                        [e.target.name]: e.target.value,
+                    };
+                }
+            );
+        },
+        [setInputs]
+    );
     return [inputs, onChange];
 };

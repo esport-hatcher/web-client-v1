@@ -24,98 +24,100 @@ interface IProps {
     onChangeStatus?: (field: string, value: boolean) => void;
 }
 
-export const SmartInput: React.FC<IProps> = ({
-    placeholder,
-    name,
-    type,
-    pattern,
-    required,
-    icon,
-    register,
-    value,
-    customValidation,
-    onChange,
-    onChangeStatus,
-}) => {
-    const [inputStatus, setInputStatus] = useState(InputStatus.empty);
+export const SmartInput: React.FC<IProps> = React.memo(
+    ({
+        placeholder,
+        name,
+        type,
+        pattern,
+        required,
+        icon,
+        register,
+        value,
+        customValidation,
+        onChange,
+        onChangeStatus,
+    }) => {
+        const [inputStatus, setInputStatus] = useState(InputStatus.empty);
 
-    const _onChangeStatus = (value: boolean) => {
-        if (onChangeStatus) {
-            onChangeStatus(name, value);
-        }
-    };
+        const _onChangeStatus = (value: boolean) => {
+            if (onChangeStatus) {
+                onChangeStatus(name, value);
+            }
+        };
 
-    const checkIfNotTaken = async () => {
-        try {
-            await sleep(1000);
-            await api.post('/users/email', {
-                email: value,
-            });
-            setInputStatus(InputStatus.valid);
-            _onChangeStatus(true);
-        } catch {
-            setInputStatus(InputStatus.error);
-            _onChangeStatus(false);
-        }
-    };
-
-    const validationCheck = async () => {
-        if (customValidation) {
-            if (customValidation(value)) {
-                if (register && type === 'email') {
-                    setInputStatus(InputStatus.loading);
-                    await checkIfNotTaken();
-                } else {
-                    setInputStatus(InputStatus.valid);
-                    _onChangeStatus(true);
-                }
-            } else {
+        const checkIfNotTaken = async () => {
+            try {
+                await sleep(1000);
+                await api.post('/users/email', {
+                    email: value,
+                });
+                setInputStatus(InputStatus.valid);
+                _onChangeStatus(true);
+            } catch {
                 setInputStatus(InputStatus.error);
                 _onChangeStatus(false);
             }
-        }
-    };
+        };
 
-    const getIconStatus = (): IconName => {
-        switch (inputStatus) {
-            case InputStatus.error:
-                return 'error';
-            case InputStatus.valid:
-                return 'check';
-            case InputStatus.loading:
-                return 'sync';
-            default:
-                return icon;
-        }
-    };
+        const validationCheck = async () => {
+            if (customValidation) {
+                if (customValidation(value)) {
+                    if (register && type === 'email') {
+                        setInputStatus(InputStatus.loading);
+                        await checkIfNotTaken();
+                    } else {
+                        setInputStatus(InputStatus.valid);
+                        _onChangeStatus(true);
+                    }
+                } else {
+                    setInputStatus(InputStatus.error);
+                    _onChangeStatus(false);
+                }
+            }
+        };
 
-    const getInputStatus = (): string => {
-        switch (inputStatus) {
-            case InputStatus.error:
-                return 'error';
-            case InputStatus.valid:
-                return 'success';
-            case InputStatus.loading:
-                return 'loading';
-            default:
-                return '';
-        }
-    };
+        const getIconStatus = (): IconName => {
+            switch (inputStatus) {
+                case InputStatus.error:
+                    return 'error';
+                case InputStatus.valid:
+                    return 'check';
+                case InputStatus.loading:
+                    return 'sync';
+                default:
+                    return icon;
+            }
+        };
 
-    return (
-        <div className='smart-input'>
-            <input
-                className={`smart-input__input smart-input__input--${getInputStatus()}`}
-                type={type}
-                placeholder={placeholder}
-                name={name}
-                pattern={pattern}
-                onBlur={validationCheck}
-                required={required}
-                value={value}
-                onChange={onChange}
-            />
-            <Icon className='smart-input__icon' name={getIconStatus()} />
-        </div>
-    );
-};
+        const getInputStatus = (): string => {
+            switch (inputStatus) {
+                case InputStatus.error:
+                    return 'error';
+                case InputStatus.valid:
+                    return 'success';
+                case InputStatus.loading:
+                    return 'loading';
+                default:
+                    return '';
+            }
+        };
+
+        return (
+            <div className='smart-input'>
+                <input
+                    className={`smart-input__input smart-input__input--${getInputStatus()}`}
+                    type={type}
+                    placeholder={placeholder}
+                    name={name}
+                    pattern={pattern}
+                    onBlur={validationCheck}
+                    required={required}
+                    value={value}
+                    onChange={onChange}
+                />
+                <Icon className='smart-input__icon' name={getIconStatus()} />
+            </div>
+        );
+    }
+);

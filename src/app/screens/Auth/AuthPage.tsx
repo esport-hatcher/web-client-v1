@@ -2,7 +2,6 @@ import React from 'react';
 import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
 import { useToggler } from '@/custom-hooks';
 import {
-    registerFormFill,
     IRegisterForm,
     IRegisterProps,
     RegisterFormStages,
@@ -12,7 +11,8 @@ import {
 interface IProps {
     isLogin: boolean;
     errorMsg?: string;
-    registerFormFill: typeof registerFormFill;
+    // tslint:disable-next-line: no-any
+    registerFormFill: any;
     fields: IRegisterProps;
     register: (registerProps: IRegisterForm) => Promise<void>;
     login: (email: string, password: string) => Promise<void>;

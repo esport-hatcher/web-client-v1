@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { pick } from 'lodash';
 import { SmartInput, RoundButton } from '@/components';
-import { RegisterBaseForm } from './RegisterBaseForm';
 import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormFill,
@@ -9,6 +9,13 @@ import {
     RegisterFormStages,
     IRegisterForm,
 } from '@/actions';
+import {
+    checkIfError,
+    onChangeInput,
+    onChangeStatus,
+    displayErrorMsg,
+} from './RegisterBaseForm';
+import { isStageMore } from '@/screens/Auth/AuthPage';
 
 interface IProps {
     onSubmit: Function;
@@ -19,17 +26,14 @@ interface IProps {
     setStage: typeof registerFormSetStage;
 }
 
-export class RegisterFormMore extends RegisterBaseForm<IProps> {
-    checkIfError = () => {
-        const { firstName, lastName } = this.props.fields;
-        if (!firstName.valid || !lastName.valid) {
-            return false;
-        }
-        return true;
-    };
-
-    onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { onSubmit, fields } = this.props;
+export const RegisterFormMore: React.FC<IProps> = ({
+    onSubmit,
+    errorMsg,
+    fields,
+    onChangeFields,
+    stage,
+}) => {
+    const _onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const fieldsValue: IRegisterForm = {
             username: '',
             password: '',
@@ -47,50 +51,55 @@ export class RegisterFormMore extends RegisterBaseForm<IProps> {
             }
         }
 
-        if (this.checkIfError()) {
+        if (checkIfError(pick(fields, 'firstName', 'lastName'))) {
             onSubmit(fieldsValue);
         }
     };
 
-    render() {
-        return (
-            <section
-                className={`auth-form__container auth-form__container__more ${
-                    this.isStageMore()
-                        ? 'auth-form__container__more--active'
-                        : ''
-                }`}
-            >
-                <div className='auth-form__container__title title title--big'>
-                    Tell us more about yourself
-                </div>
-                <form className='auth-form__basic' onSubmit={this.onSubmit}>
-                    <SmartInput
-                        value={this.props.fields.firstName.value}
-                        type='text'
-                        placeholder='First name'
-                        name='firstName'
-                        icon='pen'
-                        register={true}
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={isNotEmpty}
-                    />
-                    <SmartInput
-                        value={this.props.fields.lastName.value}
-                        type='text'
-                        icon='pen'
-                        placeholder='Last name'
-                        name='lastName'
-                        register={true}
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={isNotEmpty}
-                    />
-                    {this.displayErrorMsg()}
-                    <RoundButton onClick={() => null} />
-                </form>
-            </section>
-        );
-    }
-}
+    const _onChangeInput = useCallback(onChangeInput(onChangeFields), [
+        onChangeFields,
+    ]);
+    const _onChangeStatus = useCallback(onChangeStatus(onChangeFields), [
+        onChangeFields,
+    ]);
+
+    const _isNotEmpty = useCallback(isNotEmpty, []);
+
+    return (
+        <section
+            className={`auth-form__container auth-form__container__more ${
+                isStageMore(stage) ? 'auth-form__container__more--active' : ''
+            }`}
+        >
+            <div className='auth-form__container__title title title--big'>
+                Tell us more about yourself
+            </div>
+            <form className='auth-form__basic' onSubmit={_onSubmit}>
+                <SmartInput
+                    value={fields.firstName.value}
+                    type='text'
+                    placeholder='First name'
+                    name='firstName'
+                    icon='pen'
+                    register={true}
+                    onChange={_onChangeInput}
+                    onChangeStatus={_onChangeStatus}
+                    customValidation={_isNotEmpty}
+                />
+                <SmartInput
+                    value={fields.lastName.value}
+                    type='text'
+                    icon='pen'
+                    placeholder='Last name'
+                    name='lastName'
+                    register={true}
+                    onChange={_onChangeInput}
+                    onChangeStatus={_onChangeStatus}
+                    customValidation={_isNotEmpty}
+                />
+                {displayErrorMsg(errorMsg)}
+                <RoundButton onClick={() => null} />
+            </form>
+        </section>
+    );
+};

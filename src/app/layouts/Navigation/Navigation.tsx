@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { routes } from '@/config';
 import { NavigationItem, Icon } from '@/components';
 
@@ -13,19 +13,22 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
 
     useEffect(() => {
         setCurrentItem(window.location.pathname);
-    }, [currentItem]);
+    }, []);
 
-    const expandNavBar = () => {
-        setExpanded(!expanded);
+    const expandNavBar = useCallback(() => {
+        setExpanded(expanded => !expanded);
         if (!textDisplay) {
             setTimeout(() => setTextDisplay(true), 300);
         } else {
             setTextDisplay(false);
         }
-    };
+    }, [textDisplay, setTextDisplay]);
 
-    const onItemClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-        setCurrentItem(e.currentTarget.getAttribute('href')!);
+    const onItemClick = useCallback(
+        (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
+            setCurrentItem(e.currentTarget.getAttribute('href')!),
+        [setCurrentItem]
+    );
 
     return (
         <React.Fragment>
