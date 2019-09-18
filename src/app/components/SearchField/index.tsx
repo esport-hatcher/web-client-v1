@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from '@/components';
 
-export const SearchField = (): JSX.Element => {
+export const SearchField: React.FC = () => {
     const [focused, setFocused] = useState(false);
 
     const toggleFocus = () => setFocused(!focused);

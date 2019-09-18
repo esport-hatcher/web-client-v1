@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
-import { useToggler } from '@/hooks';
+import { useToggler } from '@/custom-hooks';
 import {
     registerFormFill,
     IRegisterForm,
@@ -9,7 +9,7 @@ import {
     registerFormSetStage,
 } from '@/actions';
 
-interface IAuthPageProps {
+interface IProps {
     isLogin: boolean;
     errorMsg?: string;
     registerFormFill: typeof registerFormFill;
@@ -23,7 +23,7 @@ interface IAuthPageProps {
 export const isStageMore = (stage: RegisterFormStages) =>
     stage === RegisterFormStages.more;
 
-export const _AuthPage = ({
+export const _AuthPage: React.FC<IProps> = ({
     isLogin,
     errorMsg,
     registerFormFill,
@@ -32,7 +32,7 @@ export const _AuthPage = ({
     login,
     setStage,
     stage,
-}: IAuthPageProps): JSX.Element => {
+}) => {
     const [loginMode, setLoginMode] = useToggler(isLogin);
 
     const renderForm = (): JSX.Element => {
@@ -52,7 +52,7 @@ export const _AuthPage = ({
     };
 
     return (
-        <div className='auth-screen'>
+        <main className='auth-screen'>
             <div
                 className={`auth-screen__banner ${
                     loginMode ? 'auth-screen__banner--login' : ''
@@ -70,6 +70,6 @@ export const _AuthPage = ({
             >
                 {renderForm()}
             </div>
-        </div>
+        </main>
     );
 };

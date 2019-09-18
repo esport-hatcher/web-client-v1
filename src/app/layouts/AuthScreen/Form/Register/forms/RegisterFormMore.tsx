@@ -10,7 +10,7 @@ import {
     IRegisterForm,
 } from '@/actions';
 
-interface IRegisterFormMoreProps {
+interface IProps {
     onSubmit: Function;
     errorMsg?: string;
     onChangeFields: typeof registerFormFill;
@@ -19,7 +19,7 @@ interface IRegisterFormMoreProps {
     setStage: typeof registerFormSetStage;
 }
 
-export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
+export class RegisterFormMore extends RegisterBaseForm<IProps> {
     checkIfError = () => {
         const { firstName, lastName } = this.props.fields;
         if (!firstName.valid || !lastName.valid) {
@@ -54,7 +54,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
 
     render() {
         return (
-            <div
+            <section
                 className={`auth-form__container auth-form__container__more ${
                     this.isStageMore()
                         ? 'auth-form__container__more--active'
@@ -90,7 +90,7 @@ export class RegisterFormMore extends RegisterBaseForm<IRegisterFormMoreProps> {
                     {this.displayErrorMsg()}
                     <RoundButton onClick={() => null} />
                 </form>
-            </div>
+            </section>
         );
     }
 }

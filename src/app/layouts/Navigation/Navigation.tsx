@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { routes } from '@/config';
 import { NavigationItem, Icon } from '@/components';
 
-interface INavBarProps {
+interface IProps {
     admin: boolean;
 }
 
-export const NavBar = ({ admin }: INavBarProps): JSX.Element => {
+export const NavBar: React.FC<IProps> = ({ admin }) => {
     const [currentItem, setCurrentItem] = useState('');
     const [expanded, setExpanded] = useState(false);
     const [textDisplay, setTextDisplay] = useState(false);

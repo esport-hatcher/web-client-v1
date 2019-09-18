@@ -6,7 +6,7 @@ import {
     registerFormSetStage,
 } from '@/actions';
 
-interface IRegisterBaseFormProps {
+interface IProps {
     onChangeFields: typeof registerFormFill;
     fields: IRegisterProps;
     stage: RegisterFormStages;
@@ -14,9 +14,7 @@ interface IRegisterBaseFormProps {
     errorMsg?: string;
 }
 
-export abstract class RegisterBaseForm<
-    P extends IRegisterBaseFormProps
-> extends Component<P> {
+export abstract class RegisterBaseForm<P extends IProps> extends Component<P> {
     onChangeField = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { onChangeFields, fields } = this.props;
 

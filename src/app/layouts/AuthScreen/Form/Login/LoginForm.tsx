@@ -1,17 +1,14 @@
 import React from 'react';
 import { SmartInput, RoundButton } from '@/components';
-import { useMultipleInputs } from '@/hooks';
+import { useForm } from '@/custom-hooks';
 
-interface ILoginFormProps {
+interface IProps {
     onLogin: (email: string, password: string) => Promise<void>;
     errorMsg?: string;
 }
 
-export const LoginForm = ({
-    onLogin,
-    errorMsg,
-}: ILoginFormProps): JSX.Element => {
-    const [inputs, setInputs] = useMultipleInputs({
+export const LoginForm: React.FC<IProps> = ({ onLogin, errorMsg }) => {
+    const [inputs, setInputs] = useForm({
         email: '',
         password: '',
     });
@@ -34,7 +31,7 @@ export const LoginForm = ({
     };
 
     return (
-        <div className='auth-form'>
+        <section className='auth-form'>
             <div className='auth-form__container'>
                 <div className='auth-form__container__title title title--big'>
                     Sign in to <br />
@@ -61,6 +58,6 @@ export const LoginForm = ({
                     <RoundButton onClick={() => null} />
                 </form>
             </div>
-        </div>
+        </section>
     );
 };

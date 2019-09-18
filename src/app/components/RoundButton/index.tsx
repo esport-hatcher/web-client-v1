@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface IRoundButtonProps {
+interface IProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const RoundButton = ({ onClick }: IRoundButtonProps): JSX.Element => {
+export const RoundButton: React.FC<IProps> = ({ onClick }) => {
     return (
         <div>
             <button className='btn btn--round' onClick={onClick}>

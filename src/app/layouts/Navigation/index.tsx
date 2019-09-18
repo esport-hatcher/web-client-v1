@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import { IStoreState } from '@/reducers';
 import { IUser } from '@/actions';
 
-interface IRNavigationProps {
+interface IProps {
     user?: IUser;
 }
 
-export const RNavigation = ({
-    user,
-}: IRNavigationProps): JSX.Element | null => {
+export const RNavigation: React.FC<IProps> = ({ user }) => {
     if (user) {
         return <NavBar admin={user.superAdmin} />;
     }
