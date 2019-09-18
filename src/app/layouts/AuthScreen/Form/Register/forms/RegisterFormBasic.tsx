@@ -53,7 +53,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
     } = fields;
 
     /**
-     * Memoizing all verifications functions to avoid triggering react.memo
+     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
      */
     const _isEmail = useCallback(isEmail, []);
     const minMaxPwd = useCallback(getMinMaxFunction(5, 20), []);
