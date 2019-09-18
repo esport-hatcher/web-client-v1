@@ -1,3 +1,3 @@
 export * from './useInput';
-export * from './useMultipleInput';
+export * from './useForm';
 export * from './useToggler';

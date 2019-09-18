@@ -1,18 +1,18 @@
 import React from 'react';
 
-interface IFilterItemProps {
+interface IProps {
     name: string;
     count: number;
     active: boolean;
     onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-export const FilterItem = ({
+export const FilterItem: React.FC<IProps> = ({
     name,
     count,
     active,
     onClick,
-}: IFilterItemProps): JSX.Element => {
+}) => {
     return (
         <div
             data-key={name}

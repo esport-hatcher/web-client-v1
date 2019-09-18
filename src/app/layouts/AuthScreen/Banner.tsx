@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface IAuthBannerProps {
+interface IProps {
     onButtonClick: () => void;
     loginMode: boolean;
 }
 
-export const AuthBanner = ({
-    loginMode,
-    onButtonClick,
-}: IAuthBannerProps): JSX.Element => {
+export const AuthBanner: React.FC<IProps> = ({ loginMode, onButtonClick }) => {
     const getContent = () => {
         if (loginMode) {
             return {
@@ -30,7 +27,7 @@ export const AuthBanner = ({
     const bodyText = getContent();
 
     return (
-        <div className='banner'>
+        <section className='banner'>
             <div className='banner__container'>
                 <div className='banner__container__title title title--big'>
                     {bodyText.header}
@@ -46,6 +43,6 @@ export const AuthBanner = ({
                     {bodyText.button.toUpperCase()}
                 </Link>
             </div>
-        </div>
+        </section>
     );
 };

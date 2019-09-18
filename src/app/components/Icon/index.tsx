@@ -20,12 +20,12 @@ export interface IIcons {
 
 export type IconName = keyof IIcons;
 
-interface IIconProps {
+interface IProps {
     name: IconName;
     className: string;
 }
 
-export const Icon = ({ name, className }: IIconProps): JSX.Element => {
+export const Icon: React.FC<IProps> = ({ name, className }) => {
     return (
         <svg className={className}>
             <use xlinkHref={`${sprites}#icon-${name}`} />

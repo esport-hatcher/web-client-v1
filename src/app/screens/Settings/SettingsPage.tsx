@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const _SettingsPage = (): JSX.Element => {
-    return <div>Settings</div>;
+export const _SettingsPage: React.FC = () => {
+    return <main>Settings</main>;
 };

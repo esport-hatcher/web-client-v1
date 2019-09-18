@@ -10,7 +10,7 @@ enum InputStatus {
     empty,
 }
 
-interface ISmartInputProps {
+interface IProps {
     placeholder: string;
     name: string;
     type: 'email' | 'text' | 'password';
@@ -24,7 +24,7 @@ interface ISmartInputProps {
     onChangeStatus?: (field: string, value: boolean) => void;
 }
 
-export const SmartInput = ({
+export const SmartInput: React.FC<IProps> = ({
     placeholder,
     name,
     type,
@@ -36,7 +36,7 @@ export const SmartInput = ({
     customValidation,
     onChange,
     onChangeStatus,
-}: ISmartInputProps): JSX.Element => {
+}) => {
     const [inputStatus, setInputStatus] = useState(InputStatus.empty);
 
     const _onChangeStatus = (value: boolean) => {

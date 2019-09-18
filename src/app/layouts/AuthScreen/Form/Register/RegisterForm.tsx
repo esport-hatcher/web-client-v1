@@ -8,7 +8,7 @@ import {
     RegisterFormStages,
 } from '@/actions';
 
-interface IRegisterFormProps {
+interface IProps {
     errorMsg?: string;
     stage: RegisterFormStages;
     setStage: typeof registerFormSetStage;
@@ -17,16 +17,16 @@ interface IRegisterFormProps {
     fields: IRegisterProps;
 }
 
-export const RegisterForm = ({
+export const RegisterForm: React.FC<IProps> = ({
     errorMsg,
     stage,
     setStage,
     onSubmit,
     onChangeFields,
     fields,
-}: IRegisterFormProps): JSX.Element => {
+}) => {
     return (
-        <div className='auth-form'>
+        <section className='auth-form'>
             <RegisterFormBasic
                 setStage={setStage}
                 errorMsg={errorMsg}
@@ -43,6 +43,6 @@ export const RegisterForm = ({
                 stage={stage}
                 setStage={setStage}
             />
-        </div>
+        </section>
     );
 };

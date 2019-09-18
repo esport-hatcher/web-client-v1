@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, IconName } from '@/components';
 
-interface INavigationItemProps {
+interface IProps {
     onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     icon: IconName;
     path: string;
@@ -12,7 +12,7 @@ interface INavigationItemProps {
     className?: string;
 }
 
-export const NavigationItem = ({
+export const NavigationItem: React.FC<IProps> = ({
     active,
     icon,
     onClick,
@@ -20,7 +20,7 @@ export const NavigationItem = ({
     text,
     activeText,
     className,
-}: INavigationItemProps): JSX.Element => {
+}) => {
     return (
         <Link
             to={path}

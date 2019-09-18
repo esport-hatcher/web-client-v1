@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const _HomePage = (): JSX.Element => {
-    return <div>HomePage</div>;
+export const _HomePage: React.FC = () => {
+    return <main>HomePage</main>;
 };

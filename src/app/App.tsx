@@ -14,7 +14,7 @@ import { Navigation } from '@/layouts';
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
 
-export const App = (): JSX.Element => {
+export const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className='container'>

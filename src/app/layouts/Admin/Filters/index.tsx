@@ -8,7 +8,7 @@ enum FilterKeys {
     team = 'team',
 }
 
-export const AdminFilters = (): JSX.Element => {
+export const AdminFilters: React.FC = () => {
     const [currentKey, setCurrentKey] = useState(FilterKeys.all);
 
     const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -17,7 +17,7 @@ export const AdminFilters = (): JSX.Element => {
     };
 
     return (
-        <div className='admin-filters'>
+        <section className='admin-filters'>
             <FilterItem
                 name={FilterKeys.all}
                 count={95}
@@ -42,6 +42,6 @@ export const AdminFilters = (): JSX.Element => {
                 active={currentKey === FilterKeys.team ? true : false}
                 onClick={onItemClick}
             />
-        </div>
+        </section>
     );
 };

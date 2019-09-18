@@ -13,7 +13,7 @@ import {
     getCompareStringFunction,
 } from '@/shared/utils';
 
-interface IRegisterFormBasicProps {
+interface IProps {
     onChangeFields: typeof registerFormFill;
     setStage: typeof registerFormSetStage;
     fields: IRegisterProps;
@@ -21,9 +21,7 @@ interface IRegisterFormBasicProps {
     errorMsg?: string;
 }
 
-export class RegisterFormBasic extends RegisterBaseForm<
-    IRegisterFormBasicProps
-> {
+export class RegisterFormBasic extends RegisterBaseForm<IProps> {
     checkIfError = () => {
         const {
             email,
@@ -64,7 +62,7 @@ export class RegisterFormBasic extends RegisterBaseForm<
         const compareString = getCompareStringFunction(value);
 
         return (
-            <div
+            <section
                 className={`auth-form__container auth-form__container__basic ${
                     !this.isStageMore()
                         ? 'auth-form__container__basic--active'
@@ -127,7 +125,7 @@ export class RegisterFormBasic extends RegisterBaseForm<
                     {this.displayErrorMsg()}
                     <RoundButton onClick={() => null} />
                 </form>
-            </div>
+            </section>
         );
     }
 }
