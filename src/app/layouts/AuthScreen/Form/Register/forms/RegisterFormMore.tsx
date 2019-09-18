@@ -56,6 +56,9 @@ export const RegisterFormMore: React.FC<IProps> = ({
         }
     };
 
+    /**
+     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
+     */
     const _onChangeInput = useCallback(onChangeInput(onChangeFields), [
         onChangeFields,
     ]);
