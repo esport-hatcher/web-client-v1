@@ -76,7 +76,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={_isNotEmpty}
+                    customValidations={[_isNotEmpty]}
                 />
                 <SmartInput
                     value={fields.lastName.value}
@@ -87,7 +87,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={_isNotEmpty}
+                    customValidations={[_isNotEmpty]}
                 />
                 {displayErrorMsg(errorMsg)}
                 <RoundButton onClick={() => null} />

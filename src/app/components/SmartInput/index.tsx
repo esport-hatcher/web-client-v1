@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import api from '@/api';
 import { Icon, IconName } from '@/components';
 import { sleep } from '@/shared/utils';
-import { useCountRenders } from '@/custom-hooks';
 
 enum InputStatus {
     valid,
@@ -21,7 +20,7 @@ interface IProps {
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     register?: boolean;
-    customValidation?: (value: string) => boolean;
+    customValidations?: ((value: string) => boolean)[];
     onChangeStatus?: (field: string, value: boolean) => void;
 }
 
@@ -35,12 +34,11 @@ export const SmartInput: React.FC<IProps> = React.memo(
         icon,
         register,
         value,
-        customValidation,
+        customValidations,
         onChange,
         onChangeStatus,
     }) => {
         const [inputStatus, setInputStatus] = useState(InputStatus.empty);
-        useCountRenders();
 
         const _onChangeStatus = (value: boolean) => {
             if (onChangeStatus) {
@@ -62,9 +60,18 @@ export const SmartInput: React.FC<IProps> = React.memo(
             }
         };
 
+        const executeValidations = (): boolean => {
+            for (const customValidation of customValidations!) {
+                if (!customValidation(value)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
         const validationCheck = async () => {
-            if (customValidation) {
-                if (customValidation(value)) {
+            if (customValidations) {
+                if (executeValidations()) {
                     if (register && type === 'email') {
                         setInputStatus(InputStatus.loading);
                         await checkIfNotTaken();

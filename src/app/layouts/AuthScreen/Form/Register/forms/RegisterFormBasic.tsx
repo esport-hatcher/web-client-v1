@@ -80,7 +80,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     required={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={_isEmail}
+                    customValidations={[_isEmail]}
                 />
                 <SmartInput
                     icon='pen'
@@ -92,7 +92,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={minMaxUserName}
+                    customValidations={[minMaxUserName]}
                 />
                 <SmartInput
                     icon='lock'
@@ -104,7 +104,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={minMaxPwd}
+                    customValidations={[minMaxPwd]}
                 />
                 <SmartInput
                     required={true}
@@ -116,7 +116,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     placeholder='Confirm Password'
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
-                    customValidation={compareString}
+                    customValidations={[minMaxPwd, compareString]}
                 />
                 {displayErrorMsg(errorMsg)}
                 <RoundButton onClick={() => null} />
