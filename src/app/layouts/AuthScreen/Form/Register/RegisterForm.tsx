@@ -29,7 +29,6 @@ export const RegisterForm: React.FC<IProps> = React.memo(
                     fields={fields}
                     stage={stage}
                 />
-
                 <RegisterFormMore
                     errorMsg={errorMsg}
                     onChangeValue={onChangeValue}

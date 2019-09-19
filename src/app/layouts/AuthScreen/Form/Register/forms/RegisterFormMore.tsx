@@ -59,9 +59,9 @@ export const RegisterFormMore: React.FC<IProps> = ({
 
     return (
         <section
-            className={`auth-form__container auth-form__container__more ${
-                isStageMore(stage) ? 'auth-form__container__more--active' : ''
-            }`}
+            className={`auth-form__container auth-form__container__more ${isStageMore(
+                stage
+            ) && 'auth-form__container__more--active'}`}
         >
             <div className='auth-form__container__title title title--big'>
                 Tell us more about yourself
@@ -90,7 +90,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     customValidations={[_isNotEmpty]}
                 />
                 {displayErrorMsg(errorMsg)}
-                <RoundButton onClick={() => null} />
+                <RoundButton />
             </form>
         </section>
     );

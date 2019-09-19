@@ -17,16 +17,14 @@ export const NavigationItem: React.FC<IProps> = React.memo(
         return (
             <Link
                 to={path}
-                className={`nav-bar__item ${
-                    active ? 'nav-bar__item--active' : ''
-                } ${className}`}
+                className={`nav-bar__item ${active &&
+                    'nav-bar__item--active'} ${className}`}
                 onClick={onClick}
             >
                 <Icon className='nav-bar__item__icon' name={icon} />
                 <p
-                    className={`nav-bar__item__text ${
-                        activeText ? 'nav-bar__item__text--display' : ''
-                    }`}
+                    className={`nav-bar__item__text ${activeText &&
+                        'nav-bar__item__text--display'}`}
                 >
                     {text}
                 </p>

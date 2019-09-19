@@ -25,9 +25,9 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
     return (
         <main className='auth-screen'>
             <div
-                className={`auth-screen__banner ${
-                    loginMode ? 'auth-screen__banner--login' : ''
-                } ${isStageMore(stage) ? 'auth-screen__banner--register' : ''}`}
+                className={`auth-screen__banner ${loginMode &&
+                    'auth-screen__banner--login'} ${isStageMore(stage) &&
+                    'auth-screen__banner--register'}`}
             >
                 <AuthBanner
                     onButtonClick={toggleLoginMode}
@@ -35,9 +35,9 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
                 />
             </div>
             <div
-                className={`auth-screen__form ${
-                    loginMode ? 'auth-screen__form--login' : ''
-                } ${isStageMore(stage) ? 'auth-screen__form--register' : ''}`}
+                className={`auth-screen__form ${loginMode &&
+                    'auth-screen__form--login'} ${isStageMore(stage) &&
+                    'auth-screen__form--register'}`}
             >
                 {renderForm()}
             </div>

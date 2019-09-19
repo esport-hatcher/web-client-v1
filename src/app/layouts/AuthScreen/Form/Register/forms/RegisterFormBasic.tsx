@@ -61,9 +61,9 @@ export const RegisterFormBasic: React.FC<IProps> = ({
 
     return (
         <section
-            className={`auth-form__container auth-form__container__basic ${
-                !isStageMore(stage) ? 'auth-form__container__basic--active' : ''
-            }`}
+            className={`auth-form__container auth-form__container__basic ${!isStageMore(
+                stage
+            ) && 'auth-form__container__basic--active'}`}
         >
             <div className='auth-form__container__title title title--big'>
                 Register to <br />
@@ -119,7 +119,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     customValidations={[minMaxPwd, compareString]}
                 />
                 {displayErrorMsg(errorMsg)}
-                <RoundButton onClick={() => null} />
+                <RoundButton />
             </form>
         </section>
     );

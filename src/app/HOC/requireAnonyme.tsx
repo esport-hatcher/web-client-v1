@@ -1,15 +1,19 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { IStoreState } from '@/reducers';
+import { shallowEqual } from 'react-redux';
 import { routes } from '@/config';
+import { useSelector } from '@/custom-hooks';
 
-// tslint:disable-next-line: no-any
-export const requireAnonyme = (ChildComponent: any) => {
+export const requireAnonyme = <T extends {}>(ChildComponent: React.FC<T>) => {
     // tslint:disable-next-line: no-any
     const ComposedComponent = (props: any) => {
-        if (props.user) {
-            if (props.user.superAdmin) {
+        const user = useSelector(
+            state => state.authentication.user,
+            shallowEqual
+        );
+
+        if (user) {
+            if (user.superAdmin) {
                 return (
                     <Redirect
                         to={{
@@ -34,11 +38,5 @@ export const requireAnonyme = (ChildComponent: any) => {
         }
         return <ChildComponent {...props} />;
     };
-    return connect(mapStateToProps)(ComposedComponent);
-};
-
-const mapStateToProps = (state: IStoreState) => {
-    return {
-        user: state.authentication.user,
-    };
+    return ComposedComponent;
 };

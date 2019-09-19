@@ -9,9 +9,8 @@ export const SearchField: React.FC = React.memo(() => {
     return (
         <form action='#' className='search-input'>
             <Icon
-                className={`search-input__icon ${
-                    focused ? 'search-input__icon--active' : ''
-                }`}
+                className={`search-input__icon ${focused &&
+                    'search-input__icon--active'}`}
                 name='search'
             />
             <input

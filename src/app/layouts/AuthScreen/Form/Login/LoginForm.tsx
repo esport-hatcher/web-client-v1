@@ -57,7 +57,7 @@ export const LoginForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
                         onChange={setInputs}
                     />
                     {displayErrorMsg()}
-                    <RoundButton onClick={() => null} />
+                    <RoundButton />
                 </form>
             </div>
         </section>
