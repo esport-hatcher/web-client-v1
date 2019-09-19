@@ -11,7 +11,7 @@ export const isStageMore = (stage: RegisterFormStages) =>
     stage === RegisterFormStages.more;
 
 export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
-    const [loginMode, setLoginMode] = useToggler(isLogin);
+    const [loginMode, toogleLoginMode] = useToggler(isLogin);
     const errorMsg = useSelector(state => state.authentication.errorMsg);
     const stage = useSelector(state => state.registerForm.stage);
 
@@ -30,7 +30,7 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
                 } ${isStageMore(stage) ? 'auth-screen__banner--register' : ''}`}
             >
                 <AuthBanner
-                    onButtonClick={setLoginMode}
+                    onButtonClick={toogleLoginMode}
                     loginMode={loginMode}
                 />
             </div>
