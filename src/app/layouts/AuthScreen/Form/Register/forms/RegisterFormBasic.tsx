@@ -1,131 +1,126 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { pick } from 'lodash';
 import { SmartInput, RoundButton } from '@/components';
-import { RegisterBaseForm } from './RegisterBaseForm';
 import {
-    registerFormFill,
     registerFormSetStage,
     IRegisterProps,
     RegisterFormStages,
 } from '@/actions';
 import {
-    isEmail,
     getMinMaxFunction,
     getCompareStringFunction,
+    isEmail,
 } from '@/shared/utils';
+import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
+import {
+    RegisterOnChangeValue,
+    RegisterOnChangeStatus,
+} from '@/custom-hooks/useRegisterForm';
+import { isStageMore } from '@/screens/Auth/AuthPage';
 
 interface IProps {
-    onChangeFields: typeof registerFormFill;
     setStage: typeof registerFormSetStage;
+    onChangeValue: RegisterOnChangeValue;
+    onChangeStatus: RegisterOnChangeStatus;
     fields: IRegisterProps;
     stage: RegisterFormStages;
     errorMsg?: string;
 }
 
-export class RegisterFormBasic extends RegisterBaseForm<IProps> {
-    checkIfError = () => {
-        const {
-            email,
-            username,
-            password,
-            passwordConfirm,
-        } = this.props.fields;
-        if (
-            !email.valid ||
-            !username.valid ||
-            !password.valid ||
-            !passwordConfirm.valid
-        ) {
-            return false;
-        }
-        return true;
-    };
-
-    onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { setStage } = this.props;
-
+export const RegisterFormBasic: React.FC<IProps> = ({
+    errorMsg,
+    fields,
+    onChangeStatus,
+    onChangeValue,
+    setStage,
+    stage,
+}) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (this.checkIfError()) {
+        if (
+            checkIfError(
+                pick(fields, 'email', 'username', 'password', 'passwordConfirm')
+            )
+        ) {
             setStage(RegisterFormStages.more);
         }
     };
 
-    render() {
-        const {
-            password: { value },
-        } = this.props.fields;
-        /**
-         * Curried function who returns a function checking if a string is between 5 & 20 characters
-         */
-        const minMaxPwd = getMinMaxFunction(5, 20);
-        const minMaxUserName = getMinMaxFunction(3, 20);
-        const compareString = getCompareStringFunction(value);
+    const {
+        password: { value },
+    } = fields;
 
-        return (
-            <section
-                className={`auth-form__container auth-form__container__basic ${
-                    !this.isStageMore()
-                        ? 'auth-form__container__basic--active'
-                        : ''
-                }`}
-            >
-                <div className='auth-form__container__title title title--big'>
-                    Register to <br />
-                    Esport-Hatcher
-                </div>
-                <form className='auth-form__basic' onSubmit={this.onSubmit}>
-                    <SmartInput
-                        icon='mail'
-                        value={this.props.fields.email.value}
-                        type='email'
-                        placeholder='Email'
-                        name='email'
-                        register={true}
-                        required={true}
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={isEmail}
-                    />
-                    <SmartInput
-                        icon='pen'
-                        required={true}
-                        value={this.props.fields.username.value}
-                        type='text'
-                        placeholder='Username'
-                        name='username'
-                        register={true}
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={minMaxUserName}
-                    />
-                    <SmartInput
-                        icon='lock'
-                        required={true}
-                        value={this.props.fields.password.value}
-                        type='password'
-                        placeholder='Password'
-                        name='password'
-                        register={true}
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={minMaxPwd}
-                    />
-                    <SmartInput
-                        required={true}
-                        icon='lock'
-                        value={this.props.fields.passwordConfirm.value}
-                        name='passwordConfirm'
-                        type='password'
-                        register={true}
-                        placeholder='Confirm Password'
-                        onChange={this.onChangeField}
-                        onChangeStatus={this.onChangeStatus}
-                        customValidation={compareString}
-                    />
-                    {this.displayErrorMsg()}
-                    <RoundButton onClick={() => null} />
-                </form>
-            </section>
-        );
-    }
-}
+    /**
+     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
+     */
+    const _isEmail = useCallback(isEmail, []);
+    const minMaxPwd = useCallback(getMinMaxFunction(5, 20), []);
+    const minMaxUserName = useCallback(getMinMaxFunction(3, 20), []);
+    const compareString = useCallback(getCompareStringFunction(value), [value]);
+
+    return (
+        <section
+            className={`auth-form__container auth-form__container__basic ${!isStageMore(
+                stage
+            ) && 'auth-form__container__basic--active'}`}
+        >
+            <div className='auth-form__container__title title title--big'>
+                Register to <br />
+                Esport-Hatcher
+            </div>
+            <form className='auth-form__basic' onSubmit={onSubmit}>
+                <SmartInput
+                    icon='mail'
+                    value={fields.email.value}
+                    type='email'
+                    placeholder='Email'
+                    name='email'
+                    register={true}
+                    required={true}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    customValidations={[_isEmail]}
+                />
+                <SmartInput
+                    icon='pen'
+                    required={true}
+                    value={fields.username.value}
+                    type='text'
+                    placeholder='Username'
+                    name='username'
+                    register={true}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    customValidations={[minMaxUserName]}
+                />
+                <SmartInput
+                    icon='lock'
+                    required={true}
+                    value={fields.password.value}
+                    type='password'
+                    placeholder='Password'
+                    name='password'
+                    register={true}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    customValidations={[minMaxPwd]}
+                />
+                <SmartInput
+                    required={true}
+                    icon='lock'
+                    value={fields.passwordConfirm.value}
+                    name='passwordConfirm'
+                    type='password'
+                    register={true}
+                    placeholder='Confirm Password'
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    customValidations={[minMaxPwd, compareString]}
+                />
+                {displayErrorMsg(errorMsg)}
+                <RoundButton />
+            </form>
+        </section>
+    );
+};

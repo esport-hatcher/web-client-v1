@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { routes } from '@/config';
 import { NavigationItem, Icon } from '@/components';
 
@@ -13,19 +13,22 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
 
     useEffect(() => {
         setCurrentItem(window.location.pathname);
-    }, [currentItem]);
+    }, []);
 
-    const expandNavBar = () => {
-        setExpanded(!expanded);
+    const expandNavBar = useCallback(() => {
+        setExpanded(expanded => !expanded);
         if (!textDisplay) {
             setTimeout(() => setTextDisplay(true), 300);
         } else {
             setTextDisplay(false);
         }
-    };
+    }, [textDisplay, setTextDisplay]);
 
-    const onItemClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-        setCurrentItem(e.currentTarget.getAttribute('href')!);
+    const onItemClick = useCallback(
+        (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
+            setCurrentItem(e.currentTarget.getAttribute('href')!),
+        [setCurrentItem]
+    );
 
     return (
         <React.Fragment>
@@ -34,8 +37,8 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     expanded ? 'nav-bar__placeholder--expanded' : ''
                 }`}
             />
-            <nav className={`nav-bar ${expanded ? 'nav-bar--expanded' : ''}`}>
-                {admin ? (
+            <nav className={`nav-bar ${expanded && 'nav-bar--expanded'}`}>
+                {admin && (
                     <NavigationItem
                         active={currentItem.includes(routes.adminPannel)}
                         activeText={textDisplay}
@@ -44,7 +47,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                         path={routes.adminPannel}
                         text='Admin Pannel'
                     />
-                ) : null}
+                )}
                 <NavigationItem
                     active={currentItem.includes(routes.chat)}
                     activeText={textDisplay}
@@ -78,9 +81,8 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     text='Logout'
                 />
                 <button
-                    className={`nav-bar__button-expand ${
-                        expanded ? 'nav-bar__button-expand--expanded' : ''
-                    }`}
+                    className={`nav-bar__button-expand ${expanded &&
+                        'nav-bar__button-expand--expanded'}`}
                     onClick={expandNavBar}
                 >
                     <Icon

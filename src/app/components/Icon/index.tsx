@@ -25,10 +25,10 @@ interface IProps {
     className: string;
 }
 
-export const Icon: React.FC<IProps> = ({ name, className }) => {
+export const Icon: React.FC<IProps> = React.memo(({ name, className }) => {
     return (
         <svg className={className}>
             <use xlinkHref={`${sprites}#icon-${name}`} />
         </svg>
     );
-};
+});

@@ -1,8 +1,13 @@
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { logout } from '@/actions';
-import { _Logout } from './Logout';
 
-export const Logout = connect(
-    null,
-    { logout }
-)(_Logout);
+export const Logout = (): JSX.Element => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(logout());
+    });
+    return <Redirect to='/login' />;
+};

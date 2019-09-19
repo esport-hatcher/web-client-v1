@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FilterItem } from '@/components';
 
 enum FilterKeys {
@@ -8,13 +8,18 @@ enum FilterKeys {
     team = 'team',
 }
 
-export const AdminFilters: React.FC = () => {
+export const AdminFilters: React.FC = React.memo(() => {
     const [currentKey, setCurrentKey] = useState(FilterKeys.all);
 
-    const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const value = e.currentTarget.getAttribute('data-key') as FilterKeys;
-        setCurrentKey(value);
-    };
+    const onItemClick = useCallback(
+        (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            const value = e.currentTarget.getAttribute(
+                'data-key'
+            ) as FilterKeys;
+            setCurrentKey(value);
+        },
+        [setCurrentKey]
+    );
 
     return (
         <section className='admin-filters'>
@@ -44,4 +49,4 @@ export const AdminFilters: React.FC = () => {
             />
         </section>
     );
-};
+});

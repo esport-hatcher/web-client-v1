@@ -36,7 +36,7 @@
 
         &__more {
             opacity: 0;
-            transform: translateX(100vh);
+            transform: translateX(100%);
             width: 0%;
             transition: opacity $auth-screen-animation-duration ease-out
                     $auth-screen-animation-duration,

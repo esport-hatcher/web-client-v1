@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from '@/components';
 
-export const SearchField: React.FC = () => {
+export const SearchField: React.FC = React.memo(() => {
     const [focused, setFocused] = useState(false);
 
     const toggleFocus = () => setFocused(!focused);
@@ -9,9 +9,8 @@ export const SearchField: React.FC = () => {
     return (
         <form action='#' className='search-input'>
             <Icon
-                className={`search-input__icon ${
-                    focused ? 'search-input__icon--active' : ''
-                }`}
+                className={`search-input__icon ${focused &&
+                    'search-input__icon--active'}`}
                 name='search'
             />
             <input
@@ -24,4 +23,4 @@ export const SearchField: React.FC = () => {
             />
         </form>
     );
-};
+});

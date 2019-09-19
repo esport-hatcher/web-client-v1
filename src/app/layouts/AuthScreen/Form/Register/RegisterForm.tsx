@@ -1,48 +1,43 @@
 import React from 'react';
+import { shallowEqual } from 'react-redux';
+import { useSelector, useRegisterForm } from '@/custom-hooks';
+import { RegisterFormStages } from '@/actions';
 import { RegisterFormBasic } from './forms/RegisterFormBasic';
 import { RegisterFormMore } from './forms/RegisterFormMore';
-import {
-    registerFormFill,
-    registerFormSetStage,
-    IRegisterProps,
-    RegisterFormStages,
-} from '@/actions';
 
 interface IProps {
     errorMsg?: string;
     stage: RegisterFormStages;
-    setStage: typeof registerFormSetStage;
-    onSubmit: Function;
-    onChangeFields: typeof registerFormFill;
-    fields: IRegisterProps;
 }
 
-export const RegisterForm: React.FC<IProps> = ({
-    errorMsg,
-    stage,
-    setStage,
-    onSubmit,
-    onChangeFields,
-    fields,
-}) => {
-    return (
-        <section className='auth-form'>
-            <RegisterFormBasic
-                setStage={setStage}
-                errorMsg={errorMsg}
-                onChangeFields={onChangeFields}
-                fields={fields}
-                stage={stage}
-            />
+export const RegisterForm: React.FC<IProps> = React.memo(
+    ({ errorMsg, stage }) => {
+        const fields = useSelector(
+            state => state.registerForm.fields,
+            shallowEqual
+        );
 
-            <RegisterFormMore
-                onSubmit={onSubmit}
-                errorMsg={errorMsg}
-                onChangeFields={onChangeFields}
-                fields={fields}
-                stage={stage}
-                setStage={setStage}
-            />
-        </section>
-    );
-};
+        const { onChangeStatus, onChangeValue, setStage } = useRegisterForm();
+
+        return (
+            <section className='auth-form'>
+                <RegisterFormBasic
+                    setStage={setStage}
+                    errorMsg={errorMsg}
+                    onChangeValue={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    fields={fields}
+                    stage={stage}
+                />
+                <RegisterFormMore
+                    errorMsg={errorMsg}
+                    onChangeValue={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                    fields={fields}
+                    stage={stage}
+                    setStage={setStage}
+                />
+            </section>
+        );
+    }
+);

@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { IStoreState } from '@/reducers';
 import { Redirect } from 'react-router';
+import { useSelector } from '@/custom-hooks';
 
 // tslint:disable-next-line: no-any
 export const requireLogin = (ChildComponent: any) => {
     // tslint:disable-next-line: no-any
     const ComposedComponent = (props: any) => {
-        if (!props.token) {
+        const token = useSelector(state => state.authentication.token);
+        if (!token) {
             return (
                 <Redirect
                     to={{ pathname: '/login', state: { from: props.location } }}
@@ -16,11 +16,5 @@ export const requireLogin = (ChildComponent: any) => {
         }
         return <ChildComponent {...props} />;
     };
-    return connect(mapStateToProps)(ComposedComponent);
-};
-
-const mapStateToProps = (state: IStoreState) => {
-    return {
-        token: state.authentication.token,
-    };
+    return ComposedComponent;
 };

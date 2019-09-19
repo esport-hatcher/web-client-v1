@@ -1,6 +1,8 @@
+import React from 'react';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '@/reducers';
+import { Provider } from 'react-redux';
 
 declare global {
     // tslint:disable-next-line: interface-name
@@ -27,3 +29,13 @@ export const store = createStore(
     initialState,
     composeEnhancers(applyMiddleware(thunk))
 );
+
+export const Root = ({
+    children,
+}: {
+    // tslint:disable-next-line: no-any
+    children: any;
+    // tslint:disable-next-line: no-any
+}) => {
+    return <Provider store={store}>{children}</Provider>;
+};

@@ -1,24 +1,12 @@
 import React from 'react';
+import { shallowEqual } from 'react-redux';
+import { useSelector } from '@/custom-hooks';
 import { NavBar } from './Navigation';
-import { connect } from 'react-redux';
-import { IStoreState } from '@/reducers';
-import { IUser } from '@/actions';
 
-interface IProps {
-    user?: IUser;
-}
-
-export const RNavigation: React.FC<IProps> = ({ user }) => {
+export const Navigation: React.FC = () => {
+    const user = useSelector(state => state.authentication.user, shallowEqual);
     if (user) {
         return <NavBar admin={user.superAdmin} />;
     }
     return null;
 };
-
-const mapStateToProps = (state: IStoreState) => {
-    return {
-        user: state.authentication.user,
-    };
-};
-
-export const Navigation = connect(mapStateToProps)(RNavigation);

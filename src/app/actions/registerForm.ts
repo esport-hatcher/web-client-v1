@@ -1,4 +1,5 @@
 import { ActionTypes } from './types';
+import { store } from '@/config';
 
 type FormInput = {
     valid: boolean;
@@ -25,11 +26,11 @@ export interface IRegisterFormFillAction {
 }
 
 export const registerFormFill = (
-    data: IRegisterProps
-): IRegisterFormFillAction => {
+    cb: (data: IRegisterProps) => IRegisterProps
+) => {
     return {
         type: ActionTypes.registerFormFill,
-        payload: data,
+        payload: cb(store.getState().registerForm.fields),
     };
 };
 

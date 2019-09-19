@@ -1,13 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { IStoreState } from '@/reducers';
 import { Redirect } from 'react-router-dom';
+import { shallowEqual } from 'react-redux';
+import { useSelector } from '@/custom-hooks';
 
-// tslint:disable-next-line: no-any
-export const requireAdmin = (ChildComponent: any) => {
+export const requireAdmin = <T extends {}>(ChildComponent: React.FC<T>) => {
     // tslint:disable-next-line: no-any
     const ComposedComponent = (props: any) => {
-        if (!props.user || !props.user.superAdmin) {
+        const user = useSelector(
+            state => state.authentication.user,
+            shallowEqual
+        );
+        if (!user || !user.superAdmin) {
             return (
                 <Redirect
                     to={{ pathname: '/', state: { from: props.location } }}
@@ -16,11 +19,5 @@ export const requireAdmin = (ChildComponent: any) => {
         }
         return <ChildComponent {...props} />;
     };
-    return connect(mapStateToProps)(ComposedComponent);
-};
-
-const mapStateToProps = (state: IStoreState) => {
-    return {
-        user: state.authentication.user,
-    };
+    return ComposedComponent;
 };

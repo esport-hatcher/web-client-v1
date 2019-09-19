@@ -1,6 +1,7 @@
 .auth-screen {
     display: grid;
     grid-template-columns: min-content 1fr;
+    overflow: hidden;
 
     &__checkbox {
         display: none;
