@@ -16,19 +16,26 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const oldAuthentication = JSON.parse(localStorage.getItem('ehToken')!);
+// tslint:disable-next-line: no-any
+const initialState: any = {
+    authentication: oldAuthentication
+        ? oldAuthentication
+        : { user: null, token: null },
+};
+
+export const store = createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(thunk))
+);
+
 export const Root = ({
     children,
-    initialState,
 }: {
     // tslint:disable-next-line: no-any
     children: any;
     // tslint:disable-next-line: no-any
-    initialState: any;
 }) => {
-    const store = createStore(
-        rootReducer,
-        initialState,
-        composeEnhancers(applyMiddleware(thunk))
-    );
     return <Provider store={store}>{children}</Provider>;
 };

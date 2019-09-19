@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 interface IProps {
@@ -12,30 +12,32 @@ interface IBannerContent {
     button: string;
 }
 
+const getContent = (loginMode: boolean): IBannerContent => {
+    if (loginMode) {
+        return {
+            header: 'Hello, Friend !',
+            subHeader:
+                'Enter your personal infos and start your journey with us !',
+            button: 'Sign up',
+        };
+    }
+    return {
+        header: 'Welcome Back !',
+        subHeader:
+            'Enter your account credentials and start your journey with us !',
+        button: 'Sign in',
+    };
+};
+
 export const AuthBanner: React.FC<IProps> = React.memo(
     ({ loginMode, onButtonClick }) => {
-        const getContent = useCallback(() => {
-            if (loginMode) {
-                return {
-                    header: 'Hello, Friend !',
-                    subHeader:
-                        'Enter your personal infos and start your journey with us !',
-                    button: 'Sign up',
-                };
-            }
-            return {
-                header: 'Welcome Back !',
-                subHeader:
-                    'Enter your account credentials and start your journey with us !',
-                button: 'Sign in',
-            };
-        }, [loginMode]);
-
-        const [content, setContent] = useState<IBannerContent>(getContent);
+        const [content, setContent] = useState<IBannerContent>(() =>
+            getContent(loginMode)
+        );
 
         useEffect(() => {
-            setContent(getContent);
-        }, [loginMode, getContent]);
+            setContent(() => getContent(loginMode));
+        }, [loginMode]);
 
         return (
             <section className='banner'>

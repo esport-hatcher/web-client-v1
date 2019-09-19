@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import api from '@/api';
 import { Icon, IconName } from '@/components';
 import { sleep } from '@/shared/utils';
+import { useCountRenders } from '@/custom-hooks';
 
 enum InputStatus {
     valid,
@@ -39,6 +40,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
         onChangeStatus,
     }) => {
         const [inputStatus, setInputStatus] = useState(InputStatus.empty);
+        useCountRenders();
 
         const _onChangeStatus = (value: boolean) => {
             if (onChangeStatus) {

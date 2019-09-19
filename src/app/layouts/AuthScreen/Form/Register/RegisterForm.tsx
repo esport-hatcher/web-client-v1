@@ -1,38 +1,39 @@
 import React from 'react';
+import { shallowEqual } from 'react-redux';
+import { useSelector, useRegisterForm } from '@/custom-hooks';
+import { RegisterFormStages } from '@/actions';
 import { RegisterFormBasic } from './forms/RegisterFormBasic';
 import { RegisterFormMore } from './forms/RegisterFormMore';
-import {
-    registerFormFill,
-    registerFormSetStage,
-    IRegisterProps,
-    RegisterFormStages,
-} from '@/actions';
 
 interface IProps {
     errorMsg?: string;
     stage: RegisterFormStages;
-    setStage: typeof registerFormSetStage;
-    onSubmit: Function;
-    onChangeFields: typeof registerFormFill;
-    fields: IRegisterProps;
 }
 
 export const RegisterForm: React.FC<IProps> = React.memo(
-    ({ errorMsg, stage, setStage, onSubmit, onChangeFields, fields }) => {
+    ({ errorMsg, stage }) => {
+        const fields = useSelector(
+            state => state.registerForm.fields,
+            shallowEqual
+        );
+
+        const { onChangeStatus, onChangeValue, setStage } = useRegisterForm();
+
         return (
             <section className='auth-form'>
                 <RegisterFormBasic
                     setStage={setStage}
                     errorMsg={errorMsg}
-                    onChangeFields={onChangeFields}
+                    onChangeValue={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     fields={fields}
                     stage={stage}
                 />
 
                 <RegisterFormMore
-                    onSubmit={onSubmit}
                     errorMsg={errorMsg}
-                    onChangeFields={onChangeFields}
+                    onChangeValue={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     fields={fields}
                     stage={stage}
                     setStage={setStage}

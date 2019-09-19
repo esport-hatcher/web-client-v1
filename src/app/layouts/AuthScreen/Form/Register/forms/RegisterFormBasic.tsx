@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react';
-import { SmartInput, RoundButton } from '@/components';
 import { pick } from 'lodash';
-
+import { SmartInput, RoundButton } from '@/components';
 import {
-    registerFormFill,
     registerFormSetStage,
     IRegisterProps,
     RegisterFormStages,
@@ -13,17 +11,17 @@ import {
     getCompareStringFunction,
     isEmail,
 } from '@/shared/utils';
+import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import {
-    checkIfError,
-    isStageMore,
-    onChangeInput,
-    onChangeStatus,
-    displayErrorMsg,
-} from './RegisterBaseForm';
+    RegisterOnChangeValue,
+    RegisterOnChangeStatus,
+} from '@/custom-hooks/useRegisterForm';
+import { isStageMore } from '@/screens/Auth/AuthPage';
 
 interface IProps {
-    onChangeFields: typeof registerFormFill;
     setStage: typeof registerFormSetStage;
+    onChangeValue: RegisterOnChangeValue;
+    onChangeStatus: RegisterOnChangeStatus;
     fields: IRegisterProps;
     stage: RegisterFormStages;
     errorMsg?: string;
@@ -32,7 +30,8 @@ interface IProps {
 export const RegisterFormBasic: React.FC<IProps> = ({
     errorMsg,
     fields,
-    onChangeFields,
+    onChangeStatus,
+    onChangeValue,
     setStage,
     stage,
 }) => {
@@ -60,13 +59,6 @@ export const RegisterFormBasic: React.FC<IProps> = ({
     const minMaxUserName = useCallback(getMinMaxFunction(3, 20), []);
     const compareString = useCallback(getCompareStringFunction(value), [value]);
 
-    const _onChangeInput = useCallback(onChangeInput(onChangeFields), [
-        onChangeFields,
-    ]);
-    const _onChangeStatus = useCallback(onChangeStatus(onChangeFields), [
-        onChangeFields,
-    ]);
-
     return (
         <section
             className={`auth-form__container auth-form__container__basic ${
@@ -86,8 +78,8 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     name='email'
                     register={true}
                     required={true}
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={_isEmail}
                 />
                 <SmartInput
@@ -98,8 +90,8 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     placeholder='Username'
                     name='username'
                     register={true}
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={minMaxUserName}
                 />
                 <SmartInput
@@ -110,8 +102,8 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     placeholder='Password'
                     name='password'
                     register={true}
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={minMaxPwd}
                 />
                 <SmartInput
@@ -122,8 +114,8 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     type='password'
                     register={true}
                     placeholder='Confirm Password'
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={compareString}
                 />
                 {displayErrorMsg(errorMsg)}

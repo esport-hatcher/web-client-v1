@@ -1,38 +1,37 @@
 import React, { useCallback } from 'react';
 import { pick } from 'lodash';
+import { useDispatch } from 'react-redux';
 import { SmartInput, RoundButton } from '@/components';
 import { isNotEmpty } from '@/shared/utils';
 import {
-    registerFormFill,
     registerFormSetStage,
     IRegisterProps,
     RegisterFormStages,
     IRegisterForm,
+    register,
 } from '@/actions';
-import {
-    checkIfError,
-    onChangeInput,
-    onChangeStatus,
-    displayErrorMsg,
-} from './RegisterBaseForm';
+import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import { isStageMore } from '@/screens/Auth/AuthPage';
+import { RegisterOnChangeValue, RegisterOnChangeStatus } from '@/custom-hooks';
 
 interface IProps {
-    onSubmit: Function;
     errorMsg?: string;
-    onChangeFields: typeof registerFormFill;
+    onChangeValue: RegisterOnChangeValue;
+    onChangeStatus: RegisterOnChangeStatus;
     fields: IRegisterProps;
     stage: RegisterFormStages;
     setStage: typeof registerFormSetStage;
 }
 
 export const RegisterFormMore: React.FC<IProps> = ({
-    onSubmit,
     errorMsg,
     fields,
-    onChangeFields,
+    onChangeStatus,
+    onChangeValue,
     stage,
 }) => {
+    const dispatch = useDispatch();
+
     const _onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const fieldsValue: IRegisterForm = {
             username: '',
@@ -52,19 +51,9 @@ export const RegisterFormMore: React.FC<IProps> = ({
         }
 
         if (checkIfError(pick(fields, 'firstName', 'lastName'))) {
-            onSubmit(fieldsValue);
+            dispatch(register(fieldsValue));
         }
     };
-
-    /**
-     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
-     */
-    const _onChangeInput = useCallback(onChangeInput(onChangeFields), [
-        onChangeFields,
-    ]);
-    const _onChangeStatus = useCallback(onChangeStatus(onChangeFields), [
-        onChangeFields,
-    ]);
 
     const _isNotEmpty = useCallback(isNotEmpty, []);
 
@@ -85,8 +74,8 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     name='firstName'
                     icon='pen'
                     register={true}
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={_isNotEmpty}
                 />
                 <SmartInput
@@ -96,8 +85,8 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     placeholder='Last name'
                     name='lastName'
                     register={true}
-                    onChange={_onChangeInput}
-                    onChangeStatus={_onChangeStatus}
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
                     customValidation={_isNotEmpty}
                 />
                 {displayErrorMsg(errorMsg)}

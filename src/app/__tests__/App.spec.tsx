@@ -6,15 +6,9 @@ import { Root } from '@/config';
 
 let wrapped: ReactWrapper;
 
-const initialState = {
-    authentication: {
-        token: 'blabla',
-    },
-};
-
 beforeEach(() => {
     wrapped = mount(
-        <Root initialState={initialState}>
+        <Root>
             <App />
         </Root>
     );
