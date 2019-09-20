@@ -18,6 +18,9 @@ export interface IRegisterProps {
     email: FormInput;
     firstName: FormInput;
     lastName: FormInput;
+    city: FormInput;
+    country: FormInput;
+    phoneNumber: FormInput;
 }
 
 export interface IRegisterFormFillAction {

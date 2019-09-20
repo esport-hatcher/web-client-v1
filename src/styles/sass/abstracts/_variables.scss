@@ -13,18 +13,21 @@ $color-white: #fff;
 $color-light-grey: #748192;
 $color-green-light: rgb(30, 226, 30);
 
+$color-primary-gradient: linear-gradient(
+    122deg,
+    lighten($color-rosy-pink, 10%),
+    $color-rosy-pink
+);
+
 /*
 AUTH SCREEN
 */
 $auth-screen-banner-width: 40vw;
 $auth-screen-animation-duration: 0.4s;
 $auth-screen-animation-style: ease-in;
-
-/*
-REGISTER
-*/
-$register-screen-spacing-layouts: 6rem;
-$register-screen-spacing-form-inputs: 4rem;
+$auth-screen-spacing-layouts: 6rem;
+$auth-forms-spacing-inputs: 4rem;
+$auth-forms-button-padding: 1.2rem 4rem;
 
 /*
 HEADER

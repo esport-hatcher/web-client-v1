@@ -37,6 +37,18 @@ const INITIAL_STATE = {
             value: '',
             valid: false,
         },
+        city: {
+            value: '',
+            valid: false,
+        },
+        country: {
+            value: '',
+            valid: false,
+        },
+        phoneNumber: {
+            value: '',
+            valid: false,
+        },
     },
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '@/api';
 import { Icon, IconName } from '@/components';
 import { sleep } from '@/shared/utils';
@@ -19,7 +19,6 @@ interface IProps {
     icon: IconName;
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    register?: boolean;
     customValidations?: ((value: string) => boolean)[];
     onChangeStatus?: (field: string, value: boolean) => void;
 }
@@ -32,7 +31,6 @@ export const SmartInput: React.FC<IProps> = React.memo(
         pattern,
         required,
         icon,
-        register,
         value,
         customValidations,
         onChange,
@@ -45,6 +43,12 @@ export const SmartInput: React.FC<IProps> = React.memo(
                 onChangeStatus(name, value);
             }
         };
+
+        useEffect(() => {
+            if (!customValidations || customValidations.length === 0) {
+                _onChangeStatus(true);
+            }
+        }, []);
 
         const checkIfNotTaken = async () => {
             try {
@@ -72,7 +76,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
         const validationCheck = async () => {
             if (customValidations) {
                 if (executeValidations()) {
-                    if (register && type === 'email') {
+                    if (type === 'email') {
                         setInputStatus(InputStatus.loading);
                         await checkIfNotTaken();
                     } else {

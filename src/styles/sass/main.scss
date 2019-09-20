@@ -1,4 +1,3 @@
-
 //      ABSTRACTS
 @import './abstracts/functions';
 @import './abstracts/mixins';
@@ -20,11 +19,12 @@
 
 //      LAYOUTS
 @import './layouts/banner';
-@import './layouts/auth-form';
+@import './layouts/register-screen';
+@import './layouts/login-screen';
 @import './layouts/nav-bar';
 @import './layouts/header';
 @import './layouts/admin-filters';
 
 //      SCREENS
 @import './screens/auth-screen';
-@import './screens/admin-pannel';  
+@import './screens/admin-pannel';

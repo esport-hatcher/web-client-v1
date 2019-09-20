@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { pick } from 'lodash';
 import { useDispatch } from 'react-redux';
-import { SmartInput, RoundButton } from '@/components';
+import { SmartInput, IconButton } from '@/components';
 import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormSetStage,
@@ -13,6 +13,7 @@ import {
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import { isStageMore } from '@/screens/Auth/AuthPage';
 import { RegisterOnChangeValue, RegisterOnChangeStatus } from '@/custom-hooks';
+import { FAKE_LOADING_TIME } from '@/config';
 
 interface IProps {
     errorMsg?: string;
@@ -31,6 +32,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
     stage,
 }) => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const _onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const fieldsValue: IRegisterForm = {
@@ -51,7 +53,11 @@ export const RegisterFormMore: React.FC<IProps> = ({
         }
 
         if (checkIfError(pick(fields, 'firstName', 'lastName'))) {
-            dispatch(register(fieldsValue));
+            setLoading(true);
+            setTimeout(() => {
+                dispatch(register(fieldsValue));
+                setLoading(false);
+            }, FAKE_LOADING_TIME);
         }
     };
 
@@ -59,21 +65,20 @@ export const RegisterFormMore: React.FC<IProps> = ({
 
     return (
         <section
-            className={`auth-form__container auth-form__container__more ${isStageMore(
+            className={`register-screen__container register-screen__container__more ${isStageMore(
                 stage
-            ) && 'auth-form__container__more--active'}`}
+            ) && 'register-screen__container__more--active'}`}
         >
-            <div className='auth-form__container__title title title--big'>
+            <div className='register-screen__container__title title title--big'>
                 Tell us more about yourself
             </div>
-            <form className='auth-form__basic' onSubmit={_onSubmit}>
+            <form className='register-screen__more' onSubmit={_onSubmit}>
                 <SmartInput
                     value={fields.firstName.value}
                     type='text'
                     placeholder='First name'
                     name='firstName'
                     icon='pen'
-                    register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[_isNotEmpty]}
@@ -84,13 +89,45 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     icon='pen'
                     placeholder='Last name'
                     name='lastName'
-                    register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[_isNotEmpty]}
                 />
+                <SmartInput
+                    value={fields.city.value}
+                    type='text'
+                    icon='pen'
+                    placeholder='City'
+                    name='city'
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                />
+                <SmartInput
+                    value={fields.country.value}
+                    type='text'
+                    icon='pen'
+                    placeholder='Country'
+                    name='country'
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                />
+                <SmartInput
+                    value={fields.phoneNumber.value}
+                    type='text'
+                    icon='pen'
+                    placeholder='Phone number'
+                    name='phoneNumber'
+                    onChange={onChangeValue}
+                    onChangeStatus={onChangeStatus}
+                />
                 {displayErrorMsg(errorMsg)}
-                <RoundButton />
+                <IconButton
+                    className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
+                    icon='chevron_right'
+                    loading={loading}
+                >
+                    Register
+                </IconButton>
             </form>
         </section>
     );

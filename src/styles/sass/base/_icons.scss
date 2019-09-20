@@ -1,3 +1,13 @@
 i[class*='-spinner'] {
     animation: rotateRight 1.5s ease-in-out infinite running !important;
 }
+
+.icon {
+    &--rotate {
+        animation: rotateRight 1.5s ease-in-out infinite running !important;
+    }
+
+    &--rotate-abs-y {
+        animation: rotateRightAbsY 1.5s ease-in-out infinite running !important;
+    }
+}
