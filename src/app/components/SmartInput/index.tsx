@@ -115,6 +115,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
         return (
             <div className='smart-input'>
                 <input
+                    id={name}
                     className={`smart-input__input smart-input__input--${getInputStatus()}`}
                     type={type}
                     placeholder={placeholder}
@@ -126,6 +127,9 @@ export const SmartInput: React.FC<IProps> = React.memo(
                     onChange={onChange}
                 />
                 <Icon className='smart-input__icon' name={getIconStatus()} />
+                <label htmlFor={name} className='smart-input__label'>
+                    {placeholder}
+                </label>
             </div>
         );
     }

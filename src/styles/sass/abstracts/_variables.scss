@@ -1,5 +1,4 @@
 // COLORS
-
 $color-dark: #16212e;
 $color-dark-two: #222f42;
 $color-blue-light: #7965f1;
@@ -22,12 +21,18 @@ $auth-screen-animation-duration: 0.4s;
 $auth-screen-animation-style: ease-in;
 
 /*
+REGISTER
+*/
+$register-screen-spacing-layouts: 6rem;
+$register-screen-spacing-form-inputs: 4rem;
+
+/*
 HEADER
 */
 $header-padding-top-bottom: 4rem;
 $header-padding-sides: 12rem;
-/*
 
+/*
 SIDEBAR
 */
 $sidebar-size: 10rem;
@@ -68,3 +73,15 @@ $search-field-padding: 1rem;
 $search-field-animation-duration: 0.3s;
 $search-field-width: 24rem;
 $search-field-icon-size: 3rem;
+
+/* 
+SMART INPUT
+*/
+$smart-input-width: 30rem;
+$smart-input-height: 4rem;
+$smart-input-border-radius: 14px;
+$smart-input-animation-duration: 0.4s;
+$smart-input-animation-style: ease-in-out;
+$smart-input-padding-sides: 2rem;
+$smart-input-padding-top: 1rem;
+$smart-input-icon-size: 2rem;

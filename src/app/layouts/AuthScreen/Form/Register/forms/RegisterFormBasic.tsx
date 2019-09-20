@@ -119,7 +119,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     customValidations={[minMaxPwd, compareString]}
                 />
                 {displayErrorMsg(errorMsg)}
-                <RoundButton />
+                <RoundButton className='auth-form__basic__btn' />
             </form>
         </section>
     );

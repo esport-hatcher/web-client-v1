@@ -13,7 +13,7 @@
         text-align: center;
 
         & > *:not(:last-child) {
-            margin-bottom: 4rem;
+            margin-bottom: $register-screen-spacing-layouts;
         }
 
         &__basic {
@@ -52,24 +52,24 @@
     }
 
     &__basic {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        grid-template-columns: min-content;
+        grid-template-rows: repeat(4, min-content);
+        gap: $register-screen-spacing-form-inputs;
+        justify-content: center;
+        justify-items: center;
         position: relative;
-
-        & > *:not(:last-child) {
-            margin-bottom: 2rem;
-        }
-
-        & > *:last-child {
-            margin-top: 2rem;
-        }
 
         &__error-msg {
             position: absolute;
             top: 58%;
             left: 50%;
             transform: translateX(-50%);
+        }
+
+        &__btn {
+            margin-top: $register-screen-spacing-layouts -
+                $register-screen-spacing-form-inputs;
         }
     }
 }
