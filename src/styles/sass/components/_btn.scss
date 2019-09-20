@@ -39,24 +39,25 @@
         transform: translateY(0.1rem) scale(1);
         box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.8);
     }
+}
 
-    &--round {
-        width: 5rem;
-        height: 5rem;
-        border-radius: 100%;
-        background-image: linear-gradient(176deg, #4c617b, $color-dark);
-        border: none;
-        color: $color-white;
-        position: relative;
+.btn-round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-image: linear-gradient(176deg, #4c617b, $color-dark);
+    border: none;
+    color: $color-white;
+    position: relative;
+    transition: all 0.4s;
 
-        &__icon {
-            width: 3rem;
-            height: 3rem;
-            fill: $color-white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+    &__icon {
+        width: 3rem;
+        height: 3rem;
+        fill: $color-white;
     }
 }

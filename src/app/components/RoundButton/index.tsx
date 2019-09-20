@@ -9,8 +9,8 @@ interface IProps {
 export const RoundButton: React.FC<IProps> = React.memo(
     ({ onClick, className }) => {
         return (
-            <button className={`btn btn--round ${className}`} onClick={onClick}>
-                <Icon name='chevron_right' className='btn--round__icon' />
+            <button className={`btn-round ${className}`} onClick={onClick}>
+                <Icon name='chevron_right' className='btn-round__icon' />
             </button>
         );
     }

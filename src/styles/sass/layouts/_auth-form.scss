@@ -7,14 +7,21 @@
     align-items: center;
 
     &__container {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: max-content;
+        grid-template-rows: repeat(2, min-content);
+        gap: $register-screen-spacing-layouts;
         justify-content: center;
-        text-align: center;
+        align-content: center;
 
-        & > *:not(:last-child) {
-            margin-bottom: $register-screen-spacing-layouts;
+        &__title {
+            text-align: center;
         }
+
+        // & > *:not(:last-child) {
+        //     margin-bottom: $register-screen-spacing-layouts;
+        // }
 
         &__basic {
             transform: translateX(-100vh);
@@ -68,8 +75,18 @@
         }
 
         &__btn {
-            margin-top: $register-screen-spacing-layouts -
-                $register-screen-spacing-form-inputs;
+            position: absolute;
+            top: 50%;
+            right: -30%;
+            transform: translateY(-50%);
+
+            &:hover {
+                transform: translateY(-50%) scale(1.2);
+
+                & > svg {
+                    animation: bounce 1s infinite;
+                }
+            }
         }
     }
 }
