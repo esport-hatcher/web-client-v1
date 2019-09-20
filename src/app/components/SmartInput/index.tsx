@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import api from '@/api';
 import { Icon, IconName } from '@/components';
 import { sleep } from '@/shared/utils';
@@ -38,17 +38,20 @@ export const SmartInput: React.FC<IProps> = React.memo(
     }) => {
         const [inputStatus, setInputStatus] = useState(InputStatus.empty);
 
-        const _onChangeStatus = (value: boolean) => {
-            if (onChangeStatus) {
-                onChangeStatus(name, value);
-            }
-        };
+        const _onChangeStatus = useCallback(
+            (value: boolean) => {
+                if (onChangeStatus) {
+                    onChangeStatus(name, value);
+                }
+            },
+            [onChangeStatus, name]
+        );
 
         useEffect(() => {
             if (!customValidations || customValidations.length === 0) {
                 _onChangeStatus(true);
             }
-        }, []);
+        }, [customValidations, _onChangeStatus]);
 
         const checkIfNotTaken = async () => {
             try {
