@@ -61,22 +61,21 @@ export const RegisterFormBasic: React.FC<IProps> = ({
 
     return (
         <section
-            className={`auth-form__container auth-form__container__basic ${!isStageMore(
+            className={`register-screen__container register-screen__container__basic ${!isStageMore(
                 stage
-            ) && 'auth-form__container__basic--active'}`}
+            ) && 'register-screen__container__basic--active'}`}
         >
-            <div className='auth-form__container__title title title--big'>
+            <div className='register-screen__container__title title title--big'>
                 Register to <br />
                 Esport-Hatcher
             </div>
-            <form className='auth-form__basic' onSubmit={onSubmit}>
+            <form className='register-screen__basic' onSubmit={onSubmit}>
                 <SmartInput
                     icon='mail'
                     value={fields.email.value}
                     type='email'
                     placeholder='Email'
                     name='email'
-                    register={true}
                     required={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
@@ -89,7 +88,6 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     type='text'
                     placeholder='Username'
                     name='username'
-                    register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[minMaxUserName]}
@@ -101,7 +99,6 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     type='password'
                     placeholder='Password'
                     name='password'
-                    register={true}
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[minMaxPwd]}
@@ -112,14 +109,16 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     value={fields.passwordConfirm.value}
                     name='passwordConfirm'
                     type='password'
-                    register={true}
                     placeholder='Confirm Password'
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[minMaxPwd, compareString]}
                 />
                 {displayErrorMsg(errorMsg)}
-                <RoundButton />
+                <RoundButton
+                    icon='chevron_right'
+                    className='register-screen__basic__btn'
+                />
             </form>
         </section>
     );

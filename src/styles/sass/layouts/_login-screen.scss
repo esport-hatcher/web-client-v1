@@ -1,0 +1,45 @@
+.login-screen {
+    width: 100%;
+    height: 100vh;
+    background-color: $color-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__container {
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: max-content;
+        grid-template-rows: repeat(2, min-content);
+        gap: $auth-screen-spacing-layouts;
+        justify-content: center;
+        align-content: center;
+
+        &__title {
+            text-align: center;
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: min-content;
+        grid-auto-rows: min-content;
+        gap: $auth-forms-spacing-inputs;
+        justify-content: center;
+        justify-items: center;
+        position: relative;
+
+        &__error-msg {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &__btn {
+            padding: $auth-forms-button-padding;
+            width: 100%;
+            transition: all 0.4s;
+        }
+    }
+}

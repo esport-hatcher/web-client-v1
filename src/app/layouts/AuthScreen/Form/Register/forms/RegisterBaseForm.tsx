@@ -21,7 +21,7 @@ export const displayErrorMsg = (
 ): JSX.Element | null => {
     if (errorMsg) {
         return (
-            <p className='body-text body-text--medium body-text--error auth-form__form__error-msg'>
+            <p className='body-text body-text--medium body-text--error register-screen__form__error-msg'>
                 {errorMsg}
             </p>
         );

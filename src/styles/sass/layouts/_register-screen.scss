@@ -1,4 +1,4 @@
-.auth-form {
+.register-screen {
     width: 100%;
     height: 100vh;
     background-color: $color-dark;
@@ -7,13 +7,16 @@
     align-items: center;
 
     &__container {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: max-content;
+        grid-template-rows: repeat(2, min-content);
+        gap: $auth-screen-spacing-layouts;
         justify-content: center;
-        text-align: center;
+        align-content: center;
 
-        & > *:not(:last-child) {
-            margin-bottom: 4rem;
+        &__title {
+            text-align: center;
         }
 
         &__basic {
@@ -51,25 +54,57 @@
         }
     }
 
-    &__basic {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    &__basic,
+    &__more {
+        display: grid;
+        grid-template-columns: min-content;
+        grid-auto-rows: min-content;
+        gap: $auth-forms-spacing-inputs;
+        justify-content: center;
+        justify-items: center;
         position: relative;
-
-        & > *:not(:last-child) {
-            margin-bottom: 2rem;
-        }
-
-        & > *:last-child {
-            margin-top: 2rem;
-        }
 
         &__error-msg {
             position: absolute;
             top: 58%;
             left: 50%;
             transform: translateX(-50%);
+        }
+    }
+
+    &__basic {
+        &__btn {
+            width: 5rem;
+            height: 5rem;
+            color: $color-white;
+            position: absolute;
+            top: 50%;
+            right: -30%;
+            transform: translateY(-50%);
+            background-image: linear-gradient(176deg, #4c617b, $color-dark);
+            transition: all 0.4s;
+
+            & > svg {
+                width: 3rem;
+                height: 3rem;
+                fill: $color-white;
+            }
+
+            &:hover {
+                transform: translateY(-50%) scale(1.2);
+
+                & > svg {
+                    animation: bounce 1s infinite;
+                }
+            }
+        }
+    }
+
+    &__more {
+        &__btn {
+            padding: $auth-forms-button-padding;
+            width: 100%;
+            transition: all 0.4s;
         }
     }
 }

@@ -1,9 +1,19 @@
+%btn-effect {
+    &:hover {
+        transform: translateY(-0.5rem) scale(1.1);
+        box-shadow: 0 1rem 2rem $color-dark;
+    }
+
+    &:active {
+        transform: translateY(0.1rem) scale(1);
+        box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.8);
+    }
+}
+
 .btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32rem;
-    height: 6.8rem;
     text-align: center;
     font-family: inherit;
     letter-spacing: 0.4rem;
@@ -15,48 +25,77 @@
     outline: none;
     font-weight: 700;
 
-    &--outline {
-        border: 0.3rem solid $color-white;
-        border-radius: 3.5rem;
-        transition: all 0.3s;
-
-        &:hover {
-            background-color: white;
-            color: $color-dark-medium;
-        }
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     &--white {
+        background-color: $color-white;
+        color: $color-dark-medium;
+    }
+
+    &--primary {
+        background-color: $color-rosy-pink;
         color: $color-white;
     }
 
-    &:hover {
-        transform: translateY(-0.5rem) scale(1.1);
-        box-shadow: 0 1rem 2rem $color-dark;
+    &--primary-gradient {
+        background-image: $color-primary-gradient;
+        color: $color-white;
+
+        & > svg {
+            fill: $color-white;
+        }
     }
 
-    &:active {
-        transform: translateY(0.1rem) scale(1);
-        box-shadow: 0 0.5rem 1rem rgba($color-dark, 0.8);
+    &--outline {
+        border: 0.3rem solid;
+        border-radius: 3.5rem;
+        transition: all 0.3s;
+        background-color: transparent !important;
+
+        &.btn--white {
+            border-color: $color-white;
+            color: white;
+
+            &:hover {
+                background-color: $color-white !important;
+                color: $color-dark-medium !important;
+            }
+        }
+
+        &.btn--primary {
+            border-color: $color-rosy-pink;
+            color: $color-rosy-pink;
+
+            &:hover {
+                background-color: $color-rosy-pink !important;
+                color: $color-white !important;
+            }
+        }
     }
 
     &--round {
-        width: 5rem;
-        height: 5rem;
         border-radius: 100%;
-        background-image: linear-gradient(176deg, #4c617b, $color-dark);
         border: none;
-        color: $color-white;
+    }
+
+    &--icon-holder {
         position: relative;
 
         &__icon {
             width: 3rem;
             height: 3rem;
-            fill: $color-white;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 25%;
+            right: 10%;
         }
+    }
+
+    &--rounded-bottom {
+        border: none;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
     }
 }

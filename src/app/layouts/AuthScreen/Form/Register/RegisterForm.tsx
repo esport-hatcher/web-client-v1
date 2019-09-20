@@ -20,7 +20,7 @@ export const RegisterForm: React.FC<IProps> = React.memo(
         const { onChangeStatus, onChangeValue, setStage } = useRegisterForm();
 
         return (
-            <section className='auth-form'>
+            <section className='register-screen'>
                 <RegisterFormBasic
                     setStage={setStage}
                     errorMsg={errorMsg}

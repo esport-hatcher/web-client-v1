@@ -15,6 +15,12 @@
         &__sub-title {
             width: 35rem;
         }
+
+        &__button {
+            @extend %btn-effect;
+            width: 32rem;
+            height: 6.8rem;
+        }
     }
 
     &__container > *:not(:last-child) {
