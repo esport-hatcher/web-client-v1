@@ -100,7 +100,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
                 case InputStatus.valid:
                     return 'check';
                 case InputStatus.loading:
-                    return 'sync';
+                    return 'rotate_right';
                 default:
                     return icon;
             }

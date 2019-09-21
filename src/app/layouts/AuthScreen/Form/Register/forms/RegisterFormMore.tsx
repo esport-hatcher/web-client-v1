@@ -78,7 +78,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     type='text'
                     placeholder='First name'
                     name='firstName'
-                    icon='pen'
+                    icon='portrait'
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                     customValidations={[_isNotEmpty]}
@@ -86,7 +86,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.lastName.value}
                     type='text'
-                    icon='pen'
+                    icon='portrait'
                     placeholder='Last name'
                     name='lastName'
                     onChange={onChangeValue}
@@ -96,7 +96,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.city.value}
                     type='text'
-                    icon='pen'
+                    icon='pin'
                     placeholder='City'
                     name='city'
                     onChange={onChangeValue}
@@ -105,7 +105,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.country.value}
                     type='text'
-                    icon='pen'
+                    icon='pin'
                     placeholder='Country'
                     name='country'
                     onChange={onChangeValue}
@@ -114,7 +114,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.phoneNumber.value}
                     type='text'
-                    icon='pen'
+                    icon='phone'
                     placeholder='Phone number'
                     name='phoneNumber'
                     onChange={onChangeValue}

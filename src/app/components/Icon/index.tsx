@@ -3,6 +3,11 @@ import React from 'react';
 import sprites from '../../../assets/sprite.svg';
 
 export interface IIcons {
+    rotate_right: string;
+    mountain: string;
+    portrait: string;
+    pin: string;
+    smartphone: string;
     chevron_right: string;
     chat: string;
     settings: string;
@@ -15,6 +20,7 @@ export interface IIcons {
     error: string;
     check: string;
     sync: string;
+    phone: string;
     exit: string;
 }
 
