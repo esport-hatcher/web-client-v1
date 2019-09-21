@@ -101,9 +101,6 @@
     }
 
     &__more {
-       background-color: lighten($color-dark, 1);
-        border-radius: 50px;
-        padding: 8rem 4rem;
         &__btn {
             padding: $auth-forms-button-padding;
             width: 100%;
