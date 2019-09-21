@@ -5,9 +5,10 @@
     background-color: $color-dark;
     border: $sidebar-border;
     width: $sidebar-size;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    align-content: center;
+    grid-auto-rows: min-content;
+    gap: $sidebar-item-spacing;
     z-index: 20;
     transition: width $sidebar-animation-duration ease-out;
 
@@ -35,10 +36,6 @@
             box-shadow $sidebar-animation-duration;
         text-decoration: none;
         outline: none;
-
-        &:not(:last-of-type) {
-            margin-bottom: $sidebar-item-spacing;
-        }
 
         &:last-of-type {
             width: 100%;
