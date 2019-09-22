@@ -3,6 +3,7 @@ i[class*='-spinner'] {
 }
 
 .icon {
+    transition: fill $icon-animation-duration;
     // COLORS
     &--pink {
         fill: $color-rosy-pink;

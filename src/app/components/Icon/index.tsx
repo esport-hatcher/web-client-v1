@@ -35,7 +35,7 @@ interface IProps {
 export const Icon: React.FC<IProps> = React.memo(
     ({ name, className, onClick }) => {
         return (
-            <svg className={className} onClick={onClick}>
+            <svg className={`icon ${className}`} onClick={onClick}>
                 <use xlinkHref={`${sprites}#icon-${name}`} />
             </svg>
         );

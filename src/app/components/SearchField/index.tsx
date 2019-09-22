@@ -34,14 +34,18 @@ export const SearchField: React.FC<IProps> = React.memo(
             if (loading) {
                 return (
                     <Icon
-                        className='search-input__icon-status icon--rotate icon--green'
+                        className={`search-input__icon-status  icon--rotate ${
+                            focused ? 'icon--green' : 'icon--light-grey'
+                        }`}
                         name='rotate_right'
                     />
                 );
             }
             return (
                 <Icon
-                    className='search-input__icon-status icon--pink icon--button'
+                    className={`search-input__icon-status icon--button ${
+                        focused ? 'icon--pink' : 'icon--light-grey'
+                    }`}
                     name='error'
                     onClick={emptyInput}
                 />
