@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { shallowEqual } from 'react-redux';
 import { routes } from '@/config';
 import { useSelector } from '@/custom-hooks';
@@ -38,5 +38,5 @@ export const requireAnonyme = <T extends {}>(ChildComponent: React.FC<T>) => {
         }
         return <ChildComponent {...props} />;
     };
-    return ComposedComponent;
+    return withRouter(ComposedComponent);
 };
