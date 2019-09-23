@@ -22,6 +22,7 @@ export interface IIcons {
     sync: string;
     phone: string;
     exit: string;
+    cross: string;
 }
 
 export type IconName = keyof IIcons;

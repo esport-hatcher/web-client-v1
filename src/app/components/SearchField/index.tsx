@@ -46,7 +46,7 @@ export const SearchField: React.FC<IProps> = React.memo(
                     className={`search-input__icon-status icon--button ${
                         focused ? 'icon--pink' : 'icon--light-grey'
                     }`}
-                    name='error'
+                    name='cross'
                     onClick={emptyInput}
                 />
             );

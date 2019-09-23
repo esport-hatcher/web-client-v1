@@ -23,7 +23,7 @@ export const adminPannelReducer = (
         case ActionTypes.adminPannelFetchUsersSuccess:
             return {
                 ...state,
-                users: action.payload.length > 0 ? action.payload : [],
+                users: action.payload || [],
                 loading: false,
             };
         default:
