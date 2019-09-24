@@ -8,8 +8,8 @@
 
     &__input {
         width: 100%;
-        padding: $search-field-padding $search-field-padding * 2;
-        padding-left: $search-field-icon-size + $search-field-padding * 2;
+        padding: $search-field-padding $search-field-icon-size +
+            $search-field-padding * 2;
         background-color: inherit;
         border-radius: 10rem;
         color: $color-light-grey;
@@ -46,5 +46,11 @@
             fill: $color-white;
             top: -50%;
         }
+    }
+
+    &__icon-status {
+        width: $search-field-icon-size / 1.2;
+        height: $search-field-icon-size / 1.2;
+        margin-left: -($search-field-padding * 2) * 2;
     }
 }

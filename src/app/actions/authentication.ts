@@ -5,6 +5,8 @@ import { ActionTypes, IGetState } from './types';
 export interface IUser {
     id: number;
     username: string;
+    firstName: string;
+    lastName: string;
     email: string;
     avatarUrl: string;
     hashtag: string;

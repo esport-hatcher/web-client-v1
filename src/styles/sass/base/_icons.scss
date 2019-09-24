@@ -3,11 +3,31 @@ i[class*='-spinner'] {
 }
 
 .icon {
+    transition: fill $icon-animation-duration;
+    // COLORS
+    &--pink {
+        fill: $color-rosy-pink;
+    }
+
+    &--green {
+        fill: $color-green-light;
+    }
+
+    &--light-grey {
+        fill: $color-light-grey;
+    }
+
+    // ANIMATIONS
     &--rotate {
         animation: rotateRight 1.5s ease-in-out infinite running !important;
     }
 
     &--rotate-abs-y {
         animation: rotateRightAbsY 1.5s ease-in-out infinite running !important;
+    }
+
+    // DIVERS
+    &--button {
+        cursor: pointer;
     }
 }

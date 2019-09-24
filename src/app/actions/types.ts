@@ -8,6 +8,10 @@ import {
     IRegisterFormSetStageAction,
 } from './registerForm';
 import { IStoreState } from '@/reducers';
+import {
+    IAdminPannelFetchUsersSuccessAction,
+    IAdminPannelSetLoadingAction,
+} from './adminPannel';
 
 export enum ActionTypes {
     loginSuccess,
@@ -15,6 +19,8 @@ export enum ActionTypes {
     logout,
     registerFormFill,
     registerFormSetStage,
+    adminPannelFetchUsersSuccess,
+    adminPannelSetLoading,
 }
 
 export type Action =
@@ -22,6 +28,8 @@ export type Action =
     | ILoginSuccessAction
     | IRegisterFormFillAction
     | IRegisterFormSetStageAction
-    | ILogoutAction;
+    | ILogoutAction
+    | IAdminPannelFetchUsersSuccessAction
+    | IAdminPannelSetLoadingAction;
 
 export type IGetState = () => IStoreState;

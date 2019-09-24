@@ -1,0 +1,26 @@
+.user-confirmed-info {
+    display: flex;
+    position: relative;
+    background-color: $color-dark-two;
+    align-items: center;
+    border-radius: 6px;
+    padding: 1rem 2rem;
+    width: 100%;
+
+    &__content {
+        white-space: nowrap;
+        display: inline;
+        overflow: scroll;
+        margin-left: 2rem;
+    }
+
+    &__icon {
+        width: 2rem;
+        height: 2rem;
+        fill: $color-rosy-pink;
+
+        &--completed {
+            fill: $color-green-light;
+        }
+    }
+}

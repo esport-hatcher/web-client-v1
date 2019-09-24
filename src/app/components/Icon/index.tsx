@@ -22,6 +22,7 @@ export interface IIcons {
     sync: string;
     phone: string;
     exit: string;
+    cross: string;
 }
 
 export type IconName = keyof IIcons;
@@ -29,12 +30,15 @@ export type IconName = keyof IIcons;
 interface IProps {
     name: IconName;
     className: string;
+    onClick?: () => void;
 }
 
-export const Icon: React.FC<IProps> = React.memo(({ name, className }) => {
-    return (
-        <svg className={className}>
-            <use xlinkHref={`${sprites}#icon-${name}`} />
-        </svg>
-    );
-});
+export const Icon: React.FC<IProps> = React.memo(
+    ({ name, className, onClick }) => {
+        return (
+            <svg className={`icon ${className}`} onClick={onClick}>
+                <use xlinkHref={`${sprites}#icon-${name}`} />
+            </svg>
+        );
+    }
+);

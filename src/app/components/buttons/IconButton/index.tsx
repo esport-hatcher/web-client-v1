@@ -1,5 +1,5 @@
 import React from 'react';
-import { IIcons, Icon } from '../Icon';
+import { IIcons, Icon } from '../../Icon';
 
 interface IProps {
     icon: keyof IIcons;

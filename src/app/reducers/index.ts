@@ -2,15 +2,18 @@ import { combineReducers } from 'redux';
 import { authenticationReducer, IAuthentication } from './authentication';
 import { registerFormReducer, IRegisterFormReducer } from './registerForm';
 import { ActionTypes } from '@/actions';
+import { adminPannelReducer, IAdminPannelReducer } from './adminPannel';
 
 export interface IStoreState {
     authentication: IAuthentication;
     registerForm: IRegisterFormReducer;
+    adminPannel: IAdminPannelReducer;
 }
 
 export const appReducer = combineReducers<IStoreState>({
     authentication: authenticationReducer,
     registerForm: registerFormReducer,
+    adminPannel: adminPannelReducer,
 });
 
 // tslint:disable-next-line: no-any
