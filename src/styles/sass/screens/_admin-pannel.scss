@@ -13,6 +13,17 @@
 
     &__grid {
         grid-column: 1 / -1;
-        padding: 0 $admin-pannel-padding-content-sides;
+        display: grid;
+        position: relative;
+        padding: 4rem $admin-pannel-padding-content-sides;
+        align-content: start;
+        justify-content: start;
+        grid-template-columns: repeat(auto-fit, 32rem);
+        grid-auto-rows: min-content;
+        gap: 4rem;
+
+        &__error-msg {
+            @include absCenter();
+        }
     }
 }

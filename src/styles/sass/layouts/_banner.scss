@@ -18,8 +18,9 @@
 
         &__button {
             @extend %btn-effect;
-            width: 32rem;
-            height: 6.8rem;
+            font-size: 1.6rem;
+            width: 100%;
+            padding: 2rem 0;
         }
     }
 
