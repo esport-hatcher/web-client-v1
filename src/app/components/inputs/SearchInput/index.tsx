@@ -8,7 +8,7 @@ interface IProps {
     loading?: boolean;
 }
 
-export const SearchField: React.FC<IProps> = React.memo(
+export const SearchInput: React.FC<IProps> = React.memo(
     ({ onSearch, initialValue, loading }) => {
         const [focused, setFocused] = useToggler(false);
         const [value, setValue] = useState(initialValue || '');

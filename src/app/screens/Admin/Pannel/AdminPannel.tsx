@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { AdminFilters, AdminUsersList } from '@/layouts';
-import { SearchField, HeaderPage } from '@/components';
+import { SearchInput, HeaderPage } from '@/components';
 import { parse, stringify } from 'query-string';
 import { useDispatch } from 'react-redux';
 import { adminPannelFetchUsers, ActionTypes } from '@/actions';
@@ -71,7 +71,7 @@ export const _AdminPannel: React.FC<IProps> = ({
                 initialValue={filters.superAdmin}
             />
             <div className='admin-pannel__search'>
-                <SearchField
+                <SearchInput
                     onSearch={onSearch}
                     initialValue={filters.username}
                     loading={loading}
