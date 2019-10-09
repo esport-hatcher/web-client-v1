@@ -1,29 +1,32 @@
 .admin-pannel {
     display: grid;
     height: 100%;
-    grid-template-rows: repeat(2, min-content) 1fr;
+    grid-template-rows: min-content 1fr;
     grid-template-columns: 1fr max-content;
     grid-row-gap: $admin-pannel-row-gap;
 
-    &__search {
-        grid-column: 1 / -1;
-        position: relative;
-        padding: 0 $admin-pannel-padding-content-sides;
-    }
-
-    &__grid {
+    &__content {
         grid-column: 1 / -1;
         display: grid;
-        position: relative;
-        padding: 4rem $admin-pannel-padding-content-sides;
-        align-content: start;
-        justify-content: start;
-        grid-template-columns: repeat(auto-fit, 32rem);
-        grid-auto-rows: min-content;
-        gap: 4rem;
+        grid-template-rows: min-content 1fr;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        row-gap: $admin-pannel-row-gap;
 
-        &__error-msg {
-            @include absCenter();
+        &__search {
+            position: relative;
+        }
+
+        &__grid {
+            display: grid;
+            position: relative;
+            grid-template-columns: repeat(auto-fit, minmax(min-content, 32rem));
+            grid-auto-rows: min-content;
+            gap: 4rem;
+
+            &__error-msg {
+                @include absCenter();
+            }
         }
     }
 }
