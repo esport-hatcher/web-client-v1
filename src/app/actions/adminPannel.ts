@@ -1,11 +1,8 @@
-import { ActionTypes, IGetState } from './types';
-import { IUser } from './authentication';
 import { Dispatch } from 'redux';
+import { ActionTypes, IGetState, CountQuery } from './types';
+import { IUser } from './authentication';
 import api from '@/api';
-
-export const testAction = () => {
-    return 'blabl';
-};
+import { IAdminPannelFiltersCount } from '@/reducers/adminPannel';
 
 export interface IAdminPannelFetchUsersSuccessAction {
     type: ActionTypes.adminPannelFetchUsersSuccess;
@@ -14,6 +11,11 @@ export interface IAdminPannelFetchUsersSuccessAction {
 
 export interface IAdminPannelSetLoadingAction {
     type: ActionTypes.adminPannelSetLoading;
+}
+
+export interface IAdminPannelCountFiltersAction {
+    type: ActionTypes.adminPannelCountFilters;
+    payload: IAdminPannelFiltersCount;
 }
 
 export const adminPannelFetchUsers = (filters?: string) => async (
@@ -28,5 +30,37 @@ export const adminPannelFetchUsers = (filters?: string) => async (
     dispatch<IAdminPannelFetchUsersSuccessAction>({
         type: ActionTypes.adminPannelFetchUsersSuccess,
         payload: data,
+    });
+};
+
+export const adminpannelCountFilters = () => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    const all = await api.get<CountQuery>('/users?count=true', {
+        headers: {
+            Authorization: `Bearer ${getState().authentication.token}`,
+        },
+    });
+    const admins = await api.get<CountQuery>('/users?count=true&superAdmin=1', {
+        headers: {
+            Authorization: `Bearer ${getState().authentication.token}`,
+        },
+    });
+    const players = await api.get<CountQuery>(
+        '/users?count=true&superAdmin=0',
+        {
+            headers: {
+                Authorization: `Bearer ${getState().authentication.token}`,
+            },
+        }
+    );
+    dispatch<IAdminPannelCountFiltersAction>({
+        type: ActionTypes.adminPannelCountFilters,
+        payload: {
+            all: all.data.records,
+            admins: admins.data.records,
+            players: players.data.records,
+        },
     });
 };

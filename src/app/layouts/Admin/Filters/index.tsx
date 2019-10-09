@@ -1,5 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useDispatch, shallowEqual } from 'react-redux';
 import { FilterItem } from '@/components';
+import { adminpannelCountFilters } from '@/actions';
+import { useSelector } from '@/custom-hooks';
 
 enum FilterKeys {
     all = 'all',
@@ -39,6 +42,16 @@ export const AdminFilters: React.FC<IProps> = React.memo(
         const [currentKey, setCurrentKey] = useState(
             extractParentValue(initialValue)
         );
+        const dispatch = useDispatch();
+
+        useEffect(() => {
+            dispatch(adminpannelCountFilters());
+        }, [dispatch]);
+
+        const filters = useSelector(
+            state => state.adminPannel.filters,
+            shallowEqual
+        );
 
         const onItemClick = useCallback(
             (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -55,19 +68,19 @@ export const AdminFilters: React.FC<IProps> = React.memo(
             <section className='admin-filters'>
                 <FilterItem
                     name={FilterKeys.all}
-                    count={95}
+                    count={filters.all}
                     active={currentKey === FilterKeys.all ? true : false}
                     onClick={onItemClick}
                 />
                 <FilterItem
                     name={FilterKeys.admin}
-                    count={31}
+                    count={filters.admins}
                     active={currentKey === FilterKeys.admin ? true : false}
                     onClick={onItemClick}
                 />
                 <FilterItem
                     name={FilterKeys.player}
-                    count={18}
+                    count={filters.players}
                     active={currentKey === FilterKeys.player ? true : false}
                     onClick={onItemClick}
                 />

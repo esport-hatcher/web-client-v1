@@ -11,7 +11,10 @@ import { IStoreState } from '@/reducers';
 import {
     IAdminPannelFetchUsersSuccessAction,
     IAdminPannelSetLoadingAction,
+    IAdminPannelCountFiltersAction,
 } from './adminPannel';
+
+export type CountQuery = { records: number };
 
 export enum ActionTypes {
     loginSuccess,
@@ -21,6 +24,7 @@ export enum ActionTypes {
     registerFormSetStage,
     adminPannelFetchUsersSuccess,
     adminPannelSetLoading,
+    adminPannelCountFilters,
 }
 
 export type Action =
@@ -30,6 +34,7 @@ export type Action =
     | IRegisterFormSetStageAction
     | ILogoutAction
     | IAdminPannelFetchUsersSuccessAction
-    | IAdminPannelSetLoadingAction;
+    | IAdminPannelSetLoadingAction
+    | IAdminPannelCountFiltersAction;
 
 export type IGetState = () => IStoreState;
