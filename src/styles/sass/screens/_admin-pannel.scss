@@ -7,26 +7,22 @@
 
     &__content {
         grid-column: 1 / -1;
+        padding: $admin-pannel-padding-content-sides / 4
+            $admin-pannel-padding-content-sides;
         display: grid;
-        grid-template-rows: min-content 1fr;
-        grid-template-columns: 1fr;
+        position: relative;
+        grid-template-columns: repeat(auto-fit, minmax(min-content, 32rem));
+        grid-auto-rows: min-content;
+        gap: 4rem;
         justify-content: center;
-        row-gap: $admin-pannel-row-gap;
 
-        &__search {
-            position: relative;
+        &__error-msg {
+            @include absCenter();
         }
 
-        &__grid {
-            display: grid;
+        &__search {
+            grid-column: 1 / -1;
             position: relative;
-            grid-template-columns: repeat(auto-fit, minmax(min-content, 32rem));
-            grid-auto-rows: min-content;
-            gap: 4rem;
-
-            &__error-msg {
-                @include absCenter();
-            }
         }
     }
 }

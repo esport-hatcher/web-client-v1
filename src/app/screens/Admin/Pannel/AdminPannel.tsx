@@ -78,9 +78,7 @@ export const _AdminPannel: React.FC<IProps> = ({
                         loading={loading}
                     />
                 </div>
-                <div className='admin-pannel__content__grid'>
-                    <AdminUsersList users={users} />
-                </div>
+                <AdminUsersList users={users} />
             </div>
         </main>
     );
