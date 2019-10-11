@@ -70,14 +70,14 @@ export const _AdminPannel: React.FC<IProps> = ({
                 onFilter={onFilter}
                 initialValue={filters.superAdmin}
             />
-            <div className='admin-pannel__search'>
-                <SearchInput
-                    onSearch={onSearch}
-                    initialValue={filters.username}
-                    loading={loading}
-                />
-            </div>
-            <div className='admin-pannel__grid'>
+            <div className='admin-pannel__content'>
+                <div className='admin-pannel__content__search'>
+                    <SearchInput
+                        onSearch={onSearch}
+                        initialValue={filters.username}
+                        loading={loading}
+                    />
+                </div>
                 <AdminUsersList users={users} />
             </div>
         </main>
