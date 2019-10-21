@@ -1,18 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { routes } from '@/config';
-import {
-    AdminPannel,
-    AuthPage,
-    HomePage,
-    SettingsPage,
-    Logout,
-} from '@/screens';
+import { AdminPannel, AuthPage, HomePage, Logout } from '@/screens';
 
 import { Navigation } from '@/layouts';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
+import { userProfile } from './screens/Settings/Profile';
 
 export const App: React.FC = () => {
     return (
@@ -42,9 +37,9 @@ export const App: React.FC = () => {
                             component={AdminPannel}
                         />
                         <Route
-                            path={routes.settings}
+                            path={routes.settingsProfile}
                             exact
-                            component={SettingsPage}
+                            component={userProfile}
                         />
                         <Route path={routes.logout} exact component={Logout} />
                     </Switch>
