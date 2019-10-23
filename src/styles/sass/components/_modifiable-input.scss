@@ -1,0 +1,57 @@
+.modifiable-input {
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: max-content 1fr;
+    row-gap: 0.2rem;
+    column-gap: 0.8rem;
+
+    &__label {
+        grid-column: 1 / -1;
+    }
+
+    &__value {
+        padding: $smart-input-padding-top 1.4rem;
+    }
+
+    &__input {
+        background-color: $color-dark-medium;
+        border-radius: $smart-input-border-radius;
+        min-width: $smart-input-width;
+        padding: $smart-input-padding-top 1.4rem;
+        border: 1px solid rgba($color-white, 0);
+    }
+
+    &__button {
+        cursor: pointer;
+        border: 1px solid $color-rosy-pink;
+        padding: 0.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        background-color: transparent;
+        align-self: center;
+        transition: all 0.4s;
+
+        &--hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &:hover {
+            background-color: $color-rosy-pink;
+            border: 1px transparent solid;
+        }
+
+        &__icon {
+            width: 1rem;
+            height: 1rem;
+            fill: $color-rosy-pink;
+            transition: all 0.4s;
+        }
+
+        &:hover > &__icon {
+            fill: $color-white;
+        }
+    }
+}

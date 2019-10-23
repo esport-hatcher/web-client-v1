@@ -18,7 +18,8 @@
 @import './components/search-field';
 @import './components/user-avatar';
 @import './components/admin-user-card';
-@import './components//user-confirmed-info';
+@import './components/user-confirmed-info';
+@import './components/modifiable-input';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -31,3 +32,4 @@
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-pannel';
+@import './screens/settings-profile';

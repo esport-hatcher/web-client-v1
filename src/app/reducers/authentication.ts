@@ -37,6 +37,11 @@ export const authenticationReducer = (
                 token: undefined,
                 errorMsg: undefined,
             };
+        case ActionTypes.patchUser:
+            return {
+                ...state,
+                user: action.payload,
+            };
         default:
             return state;
     }
