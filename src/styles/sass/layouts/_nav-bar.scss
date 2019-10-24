@@ -5,9 +5,10 @@
     background-color: $color-dark;
     border: $sidebar-border;
     width: $sidebar-size;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    align-content: center;
+    grid-auto-rows: min-content;
+    gap: $sidebar-item-spacing;
     z-index: 20;
     transition: width $sidebar-animation-duration ease-out;
 
@@ -36,10 +37,6 @@
         text-decoration: none;
         outline: none;
 
-        &:not(:last-of-type) {
-            margin-bottom: $sidebar-item-spacing;
-        }
-
         &:last-of-type {
             width: 100%;
             position: absolute;
@@ -58,7 +55,7 @@
 
         &:hover > &__text {
             color: $color-white;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         &:active {
@@ -77,7 +74,7 @@
 
         &--active > &__text {
             color: $color-white;
-            font-weight: 500;
+            font-weight: 700;
         }
 
         &__icon {
@@ -93,7 +90,7 @@
 
         &__text {
             display: none;
-            font-weight: 300;
+            font-weight: 500;
             outline: none;
             color: $color-light-grey;
             font-size: 1.4rem;
@@ -101,7 +98,8 @@
             text-transform: uppercase;
             transition: all $sidebar-animation-duration;
             &--display {
-                display: inline-block;
+                // display: inline-block;
+                display: inline;
                 animation: moveInLeft $sidebar-animation-duration ease-out;
             }
         }

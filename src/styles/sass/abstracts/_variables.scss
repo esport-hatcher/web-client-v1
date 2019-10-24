@@ -55,7 +55,7 @@ $admin-filters-spacing: 4rem;
 ADMIN PANNEL
 */
 $admin-pannel-padding-content-sides: 8rem;
-$admin-pannel-row-gap: 4rem;
+$admin-pannel-gap: 6rem;
 
 /*
 FILTER ITEM
@@ -75,7 +75,7 @@ SEARCH FIELD
 $search-field-padding: 1rem;
 $search-field-animation-duration: 0.3s;
 $search-field-width: 24rem;
-$search-field-icon-size: 3rem;
+$search-field-icon-size: 2.5rem;
 
 /* 
 SMART INPUT
@@ -88,3 +88,8 @@ $smart-input-animation-style: ease-in-out;
 $smart-input-padding-sides: 2rem;
 $smart-input-padding-top: 1rem;
 $smart-input-icon-size: 2rem;
+
+/*
+ICONS
+*/
+$icon-animation-duration: 0.4s;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import { useSelector } from '@/custom-hooks';
 
 // tslint:disable-next-line: no-any
@@ -16,5 +16,5 @@ export const requireLogin = (ChildComponent: any) => {
         }
         return <ChildComponent {...props} />;
     };
-    return ComposedComponent;
+    return withRouter(ComposedComponent);
 };

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Icon } from '@/components';
-import { IIcons } from '../Icon';
+import { Icon, IIcons } from '@/components';
 
 interface IProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

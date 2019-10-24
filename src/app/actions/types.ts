@@ -8,6 +8,13 @@ import {
     IRegisterFormSetStageAction,
 } from './registerForm';
 import { IStoreState } from '@/reducers';
+import {
+    IAdminPannelFetchUsersSuccessAction,
+    IAdminPannelSetLoadingAction,
+    IAdminPannelCountFiltersAction,
+} from './adminPannel';
+
+export type CountQuery = { records: number };
 
 export enum ActionTypes {
     loginSuccess,
@@ -15,6 +22,9 @@ export enum ActionTypes {
     logout,
     registerFormFill,
     registerFormSetStage,
+    adminPannelFetchUsersSuccess,
+    adminPannelSetLoading,
+    adminPannelCountFilters,
 }
 
 export type Action =
@@ -22,6 +32,9 @@ export type Action =
     | ILoginSuccessAction
     | IRegisterFormFillAction
     | IRegisterFormSetStageAction
-    | ILogoutAction;
+    | ILogoutAction
+    | IAdminPannelFetchUsersSuccessAction
+    | IAdminPannelSetLoadingAction
+    | IAdminPannelCountFiltersAction;
 
 export type IGetState = () => IStoreState;

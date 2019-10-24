@@ -67,6 +67,7 @@
             <path d="M0 0h24v24H0z" fill="none"/>
             <path d="M21 3.01H3c-1.1 0-2 .9-2 2V9h2V4.99h18v14.03H3V15H1v4.01c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98v-14c0-1.11-.9-2-2-2zM11 16l4-4-4-4v3H1v2h10v3z"/>
         </symbol>
+<<<<<<< HEAD
         <symbol id="icon-cross" viewBox="0 0 350 350">
             <title>cross</title>       
            <path d="M310.199,18.71C297.735,6.242,282.65,0.007,264.951,0.007H63.954c-17.703,0-32.79,6.235-45.253,18.704
@@ -84,5 +85,43 @@
 			c0-2.664-0.852-4.857-2.563-6.567C251.536,147.048,249.345,146.189,246.683,146.189z"/>
         </symbol>
 
+=======
+        <symbol id="icon-rotate_right" viewBox="0 0 24 24">
+            <title>rotate-right</title>
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M15.55 5.55L11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42l1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"/>
+        </symbol>
+        <symbol id="icon-portrait" viewBox="0 0 24 24">
+            <title>portrait</title>
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 12.25c1.24 0 2.25-1.01 2.25-2.25S13.24 7.75 12 7.75 9.75 8.76 9.75 10s1.01 2.25 2.25 2.25zm4.5 4c0-1.5-3-2.25-4.5-2.25s-4.5.75-4.5 2.25V17h9v-.75zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+        </symbol>
+        <symbol id="icon-smartphone" viewBox="0 0 24 24">
+            <title>smartphone</title>
+            <path d="M31 2H15c-2.76 0-5 2.24-5 5v34c0 2.76 2.24 5 5 5h16c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5zm-8 42c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm9-8H14V8h18v28z"/>
+            <path d="M0 0h48v48H0z" fill="none"/>
+        </symbol>
+         <symbol id="icon-pin" viewBox="0 0 24 24">
+            <title>map pin</title>
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </symbol>
+         <symbol id="icon-mountain" viewBox="0 0 24 24">
+            <title>mountain</title>
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
+        </symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24">
+            <title>phone</title>
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </symbol>
+        <symbol id="icon-cross" viewBox="0 0 24 24">
+            <title>cross</title>
+            <svg enable-background="new 0 0 100 100" id="Layer_1" version="1.1" viewBox="0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <polygon points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 "/>
+            </svg>
+        </symbol>
+>>>>>>> 65814de648b17e79ede9de4359ff29c649031280
     </defs>
 </svg>

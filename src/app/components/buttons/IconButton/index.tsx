@@ -1,5 +1,5 @@
 import React from 'react';
-import { IIcons, Icon } from '../Icon';
+import { IIcons, Icon } from '../../Icon';
 
 interface IProps {
     icon: keyof IIcons;
@@ -21,7 +21,7 @@ export const IconButton: React.FC<IProps> = ({
         >
             <p className='btn--icon-holder__text'>{children}</p>
             <Icon
-                name={loading ? 'sync' : icon}
+                name={loading ? 'rotate_right' : icon}
                 className={`btn--icon-holder__icon ${loading &&
                     'icon--rotate'}`}
             />

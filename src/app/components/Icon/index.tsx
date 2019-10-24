@@ -3,6 +3,11 @@ import React from 'react';
 import sprites from '../../../assets/sprite.svg';
 
 export interface IIcons {
+    rotate_right: string;
+    mountain: string;
+    portrait: string;
+    pin: string;
+    smartphone: string;
     chevron_right: string;
     chat: string;
     settings: string;
@@ -15,6 +20,7 @@ export interface IIcons {
     error: string;
     check: string;
     sync: string;
+    phone: string;
     exit: string;
     cross: string;
 }
@@ -24,12 +30,15 @@ export type IconName = keyof IIcons;
 interface IProps {
     name: IconName;
     className: string;
+    onClick?: () => void;
 }
 
-export const Icon: React.FC<IProps> = React.memo(({ name, className }) => {
-    return (
-        <svg className={className}>
-            <use xlinkHref={`${sprites}#icon-${name}`} />
-        </svg>
-    );
-});
+export const Icon: React.FC<IProps> = React.memo(
+    ({ name, className, onClick }) => {
+        return (
+            <svg className={`icon ${className}`} onClick={onClick}>
+                <use xlinkHref={`${sprites}#icon-${name}`} />
+            </svg>
+        );
+    }
+);
