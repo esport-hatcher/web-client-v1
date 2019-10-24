@@ -16,6 +16,7 @@ export interface IIcons {
     check: string;
     sync: string;
     exit: string;
+    cross: string;
 }
 
 export type IconName = keyof IIcons;

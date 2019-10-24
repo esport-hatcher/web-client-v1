@@ -16,6 +16,8 @@
 @import './components/btn';
 @import './components/filter-item';
 @import './components/search-field';
+@import './components/smart_select';
+@import './components/_simple_imput';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -24,7 +26,10 @@
 @import './layouts/nav-bar';
 @import './layouts/header';
 @import './layouts/admin-filters';
+@import './layouts/create-team-form';
 
-//      SCREENS
+
+//      SCREENS 
 @import './screens/auth-screen';
 @import './screens/admin-pannel';
+@import './screens/team-management-screen';

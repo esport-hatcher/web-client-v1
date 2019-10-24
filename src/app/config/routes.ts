@@ -7,4 +7,6 @@ export enum routes {
     settings = '/settings',
     feed = '/feed',
     logout = '/logout',
+    teams = '/teams',
+    team = '/team/:id',
 }

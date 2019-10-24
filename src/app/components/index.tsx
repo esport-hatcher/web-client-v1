@@ -6,3 +6,5 @@ export * from './SearchField';
 export * from './SmartInput';
 export * from './Icon';
 export * from './IconButton';
+export * from './SimpleImput';
+export * from './SmartSelect';

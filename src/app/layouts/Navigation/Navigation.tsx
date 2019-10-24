@@ -57,6 +57,14 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     text='Chat'
                 />
                 <NavigationItem
+                    active={currentItem.includes(routes.teams)}
+                    activeText={textDisplay}
+                    icon='settings'
+                    onClick={onItemClick}
+                    path={routes.teams}
+                    text='Teams management'
+                />
+                <NavigationItem
                     active={currentItem.includes(routes.settings)}
                     activeText={textDisplay}
                     icon='settings'
