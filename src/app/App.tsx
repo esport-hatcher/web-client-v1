@@ -7,7 +7,7 @@ import { Navigation } from '@/layouts';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
-import { userProfile } from './screens/Settings/Profile';
+import { SettingsProfile } from './screens/Settings/Profile';
 
 export const App: React.FC = () => {
     return (
@@ -39,7 +39,7 @@ export const App: React.FC = () => {
                         <Route
                             path={routes.settingsProfile}
                             exact
-                            component={userProfile}
+                            component={SettingsProfile}
                         />
                         <Route path={routes.logout} exact component={Logout} />
                     </Switch>

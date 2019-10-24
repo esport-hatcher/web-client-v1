@@ -1,1 +1,1 @@
-export * from './ProfileForm';
+export * from './Profile';
