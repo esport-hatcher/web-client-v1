@@ -1,0 +1,71 @@
+.settings-profile {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    align-content: center;
+    height: 100%;
+
+    &__avatar {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.8rem;
+
+        &__img {
+            width: 14rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        &:hover figcaption {
+            transform: translate(-50%, -100%);
+            visibility: visible;
+        }
+
+        &:hover img {
+            filter: blur(3px) brightness(80%);
+            transform: scale(1);
+        }
+
+        &__button {
+            transition: all 0.4s;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            visibility: hidden;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            padding: 1rem 0;
+            background-color: $color-rosy-pink;
+            text-align: center;
+            color: $color-white;
+            cursor: pointer;
+        }
+    }
+
+    &__box {
+        border: 1px solid $color-dark-four;
+        padding: 4rem;
+        border-radius: 2.4rem;
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        justify-self: center;
+        align-self: center;
+        row-gap: 1.2rem;
+        column-gap: 4rem;
+
+        &__title {
+            grid-column: 1 / -1;
+        }
+
+        &__divider {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-auto-rows: min-content;
+        row-gap: 2rem;
+    }
+}

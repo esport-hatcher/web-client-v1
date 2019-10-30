@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import {
     registerFormFill,
-    IRegisterProps,
+    IUserProps,
     registerFormSetStage,
     RegisterFormStages,
 } from '@/actions';
@@ -27,7 +27,7 @@ export const useRegisterForm = (): {
                     return {
                         ...state,
                         [event.target.name]: {
-                            ...state[event.target.name as keyof IRegisterProps],
+                            ...state[event.target.name as keyof IUserProps],
                             value: event.target.value,
                         },
                     };
@@ -44,7 +44,7 @@ export const useRegisterForm = (): {
                     return {
                         ...state,
                         [field]: {
-                            ...state[field as keyof IRegisterProps],
+                            ...state[field as keyof IUserProps],
                             valid,
                         },
                     };

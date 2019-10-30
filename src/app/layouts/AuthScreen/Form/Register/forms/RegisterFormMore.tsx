@@ -5,7 +5,7 @@ import { SmartInput, IconButton } from '@/components';
 import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormSetStage,
-    IRegisterProps,
+    IUserProps,
     RegisterFormStages,
     IRegisterForm,
     register,
@@ -19,7 +19,7 @@ interface IProps {
     errorMsg?: string;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
-    fields: IRegisterProps;
+    fields: IUserProps;
     stage: RegisterFormStages;
     setStage: typeof registerFormSetStage;
 }
@@ -48,7 +48,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
         for (const key in fields) {
             if (key !== 'passwordConfirm') {
                 fieldsValue[key as keyof IRegisterForm] =
-                    fields[key as keyof IRegisterProps].value;
+                    fields[key as keyof IUserProps].value;
             }
         }
 

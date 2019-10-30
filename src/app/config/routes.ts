@@ -4,7 +4,8 @@ export enum routes {
     register = '/register',
     adminPannel = '/admin/pannel',
     chat = '/chat',
-    settings = '/settings',
     feed = '/feed',
     logout = '/logout',
+    settings = '/settings',
+    settingsProfile = '/settings/profile',
 }

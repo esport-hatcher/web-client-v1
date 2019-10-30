@@ -11,7 +11,7 @@ export enum RegisterFormStages {
     more,
 }
 
-export interface IRegisterProps {
+export interface IUserProps {
     username: FormInput;
     password: FormInput;
     passwordConfirm: FormInput;
@@ -25,12 +25,10 @@ export interface IRegisterProps {
 
 export interface IRegisterFormFillAction {
     type: ActionTypes.registerFormFill;
-    payload: IRegisterProps;
+    payload: IUserProps;
 }
 
-export const registerFormFill = (
-    cb: (data: IRegisterProps) => IRegisterProps
-) => {
+export const registerFormFill = (cb: (data: IUserProps) => IUserProps) => {
     return {
         type: ActionTypes.registerFormFill,
         payload: cb(store.getState().registerForm.fields),

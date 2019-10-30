@@ -15,7 +15,7 @@ export const FilterItem: React.FC<IProps> = React.memo(
                 className={`filter-item ${active && 'filter-item--active'}`}
                 onClick={onClick}
             >
-                <p className='filter-item__name label-filter'>{name}</p>
+                <p className='filter-item__name label label--md'>{name}</p>
                 <span className='filter-item__count label-count'>{count}</span>
             </div>
         );
