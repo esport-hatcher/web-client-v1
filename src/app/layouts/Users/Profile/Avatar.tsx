@@ -11,6 +11,7 @@ export const SettingsProfileAvatar: React.FC<IProps> = React.memo(
                 <img
                     src={avatarUrl}
                     className='settings-profile__avatar__img'
+                    alt={avatarUrl}
                 />
                 <figcaption className='settings-profile__avatar__button important-info important-info--sm'>
                     Change
