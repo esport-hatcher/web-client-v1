@@ -1,4 +1,4 @@
 export * from './AuthScreen';
 export * from './Admin';
 export * from './Navigation';
-export * from './Users';
+export * from './Settings';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IUser } from '@/actions';
-import { UserAvatar, UserConfirmedInfo } from '@/components/users';
+import { UserConfirmedInfo, UserAvatar } from '@/components';
 
 interface IProps {
     user: IUser;
@@ -18,7 +18,8 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 </p>
             </div>
             <UserAvatar
-                src={user.avatarUrl}
+                avatarUrl={user.avatarUrl}
+                changable={false}
                 className='admin-user-card__avatar'
             />
             <p className='admin-user-card__username placeholder placeholder--sm'>

@@ -1,5 +1,39 @@
 .user-avatar {
-    height: 100%;
     overflow: hidden;
-    object-fit: cover;
+    border-radius: 1.8rem;
+    position: relative;
+
+    &__img {
+        object-fit: cover;
+        cursor: pointer;
+        height: 100%;
+        transition: all 0.4s;
+        backface-visibility: hidden;
+        overflow: hidden;
+    }
+
+    &:hover figcaption {
+        transform: translate(-50%, -100%);
+        visibility: visible;
+    }
+
+    &:hover img {
+        filter: blur(3px) brightness(80%);
+        transform: scale(1);
+    }
+
+    &__button {
+        transition: all 0.4s;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        visibility: hidden;
+        transform: translate(-50%, 100%);
+        width: 100%;
+        padding: 1rem 0;
+        background-color: $color-rosy-pink;
+        text-align: center;
+        color: $color-white;
+        cursor: pointer;
+    }
 }

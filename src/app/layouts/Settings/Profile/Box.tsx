@@ -1,6 +1,6 @@
 import React from 'react';
 import { SettingsProfileForm } from './Form';
-import { SettingsProfileAvatar } from './Avatar';
+import { UserAvatar } from '@/components';
 import { IUser } from '@/actions';
 
 interface IProps {
@@ -16,7 +16,11 @@ export const SettingsProfileBox: React.FC<IProps> = React.memo(({ user }) => {
             <hr className='divider settings-profile__box__divider' />
             <SettingsProfileForm user={user} />
             <div className='m-t-sm'>
-                <SettingsProfileAvatar avatarUrl={user.avatarUrl} />
+                <UserAvatar
+                    changable={true}
+                    className='settings-profile__avatar'
+                    avatarUrl={user.avatarUrl}
+                />
             </div>
         </div>
     );
