@@ -37,7 +37,6 @@ export const ModifiableInput: React.FC<IProps> = ({
                 <input
                     className='modifiable-input__input important-info important-info--md'
                     name={name}
-                    id={name}
                     value={inputValue}
                     onChange={onInputValueChange}
                     autoFocus
@@ -58,18 +57,15 @@ export const ModifiableInput: React.FC<IProps> = ({
             onMouseEnter={onChangeDisplayButton}
             onMouseLeave={onChangeDisplayButton}
         >
-            <label
-                className='modifiable-input__label label label-sm'
-                htmlFor={name}
-            >
+            <label className='modifiable-input__label label label-sm'>
                 {label}
             </label>
             <button
-                className={`modifiable-input__button ${!displayButton &&
-                    'modifiable-input__button--hidden'}`}
+                className={`modifiable-input__btn ${!displayButton &&
+                    'modifiable-input__btn--hidden'}`}
                 onClick={onChangeInputMode}
             >
-                <Icon name='pen' className='modifiable-input__button__icon' />
+                <Icon name='pen' className='modifiable-input__btn__icon' />
             </button>
             {displayContent()}
         </div>

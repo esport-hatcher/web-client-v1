@@ -16,8 +16,7 @@
     &__input {
         background-color: $color-dark-medium;
         border-radius: $smart-input-border-radius;
-        width: 100%;
-        padding: $smart-input-padding-top 1.4rem;
+        padding: $smart-input-padding-top + 0.1rem 1.4rem;
         border: 1px solid rgba($color-white, 0);
     }
 
