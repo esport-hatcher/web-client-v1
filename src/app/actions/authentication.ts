@@ -59,6 +59,11 @@ export interface IPatchUserAction {
     payload: IUser;
 }
 
+export interface IDeleteUserAction {
+    type: ActionTypes.deleteUser;
+    payload: IUser;
+}
+
 export const register = (registerProps: IRegisterForm) => async (
     dispatch: Dispatch
 ) => {
@@ -144,6 +149,30 @@ export const patchUser = (patchData: IFieldData) => async (
             dispatch<IPatchUserAction>({
                 type: ActionTypes.patchUser,
                 payload: data,
+            });
+        }
+    } catch (err) {
+        // tslint:disable-next-line: no-console
+        console.log(err);
+    }
+};
+
+export const deleteUser = (user: IUser) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+
+        if (token) {
+            await api.delete<IUser>(`/users/${user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            dispatch<IDeleteUserAction>({
+                type: ActionTypes.deleteUser,
+                payload: user,
             });
         }
     } catch (err) {

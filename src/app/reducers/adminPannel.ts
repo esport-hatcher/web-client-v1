@@ -42,6 +42,23 @@ export const adminPannelReducer = (
                 ...state,
                 filters: action.payload,
             };
+        case ActionTypes.deleteUser:
+            return {
+                ...state,
+                users: state.users.filter(
+                    user => user.id !== action.payload.id
+                ),
+                filters: {
+                    ...state.filters,
+                    all: state.filters.all - 1,
+                    admins: action.payload.superAdmin
+                        ? state.filters.admins - 1
+                        : state.filters.admins,
+                    players: !action.payload.superAdmin
+                        ? state.filters.players - 1
+                        : state.filters.players,
+                },
+            };
         default:
             return state;
     }
