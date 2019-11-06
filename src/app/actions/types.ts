@@ -3,6 +3,7 @@ import {
     ILoginSuccessAction,
     ILogoutAction,
     IPatchUserAction,
+    IDeleteUserAction,
 } from './authentication';
 import {
     IRegisterFormFillAction,
@@ -24,6 +25,7 @@ export enum ActionTypes {
     loginError,
     logout,
     patchUser,
+    deleteUser,
     registerFormFill,
     registerFormSetStage,
     adminPannelFetchUsersSuccess,
@@ -40,6 +42,7 @@ export type Action =
     | IAdminPannelFetchUsersSuccessAction
     | IAdminPannelSetLoadingAction
     | IAdminPannelCountFiltersAction
-    | IPatchUserAction;
+    | IPatchUserAction
+    | IDeleteUserAction;
 
 export type IGetState = () => IStoreState;
