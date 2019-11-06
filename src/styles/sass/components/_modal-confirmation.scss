@@ -25,10 +25,10 @@
         display: grid;
         row-gap: 2rem;
         border-radius: 2rem;
-        min-width: 48rem;
+        min-width: 30%;
         background-color: $color-dark-medium;
         padding: 2rem 4rem;
-        animation: fadeIn 0.4s ease-out;
+        animation: fadeIn 0.3s ease-in-out;
 
         &__action-buttons {
             display: grid;
