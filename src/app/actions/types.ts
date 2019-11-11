@@ -14,6 +14,13 @@ import {
     IAdminPannelCountFiltersAction,
 } from './adminPannel';
 
+import {
+    ITeamsSuccessAction,
+    ITeamsFailure,
+    ITeamsErrorAction,
+    ITeamsSuccess,
+} from './teamsInfomation';
+
 export type CountQuery = { records: number };
 
 export enum ActionTypes {
@@ -25,6 +32,8 @@ export enum ActionTypes {
     adminPannelFetchUsersSuccess,
     adminPannelSetLoading,
     adminPannelCountFilters,
+    teamsSuccess,
+    teamsError,
 }
 
 export type Action =
