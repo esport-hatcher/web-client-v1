@@ -15,6 +15,7 @@ import { Navigation } from '@/layouts';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
+import { SettingsProfile } from './screens/Settings/Profile';
 
 export const App: React.FC = () => {
     return (
@@ -46,9 +47,9 @@ export const App: React.FC = () => {
                             component={AdminPannel}
                         />
                         <Route
-                            path={routes.settings}
+                            path={routes.settingsProfile}
                             exact
-                            component={SettingsPage}
+                            component={SettingsProfile}
                         />
                         <Route path={routes.logout} exact component={Logout} />
                     </Switch>

@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
+import { ActionTypes } from '@/actions';
 import { authenticationReducer, IAuthentication } from './authentication';
 import { registerFormReducer, IRegisterFormReducer } from './registerForm';
-import { ActionTypes } from '@/actions';
 import { adminPannelReducer, IAdminPannelReducer } from './adminPannel';
-
 export interface IStoreState {
     authentication: IAuthentication;
     registerForm: IRegisterFormReducer;

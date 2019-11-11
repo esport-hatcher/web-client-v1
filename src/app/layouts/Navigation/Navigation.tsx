@@ -69,7 +69,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     activeText={textDisplay}
                     icon='settings'
                     onClick={onItemClick}
-                    path={routes.settings}
+                    path={routes.settingsProfile}
                     text='Settings'
                 />
                 <NavigationItem

@@ -2,6 +2,8 @@ import {
     ILoginErrorAction,
     ILoginSuccessAction,
     ILogoutAction,
+    IPatchUserAction,
+    IDeleteUserAction,
 } from './authentication';
 import {
     IRegisterFormFillAction,
@@ -23,10 +25,14 @@ import {
 
 export type CountQuery = { records: number };
 
+export type IFieldData = { [key: string]: string };
+
 export enum ActionTypes {
     loginSuccess,
     loginError,
     logout,
+    patchUser,
+    deleteUser,
     registerFormFill,
     registerFormSetStage,
     adminPannelFetchUsersSuccess,
@@ -44,6 +50,8 @@ export type Action =
     | ILogoutAction
     | IAdminPannelFetchUsersSuccessAction
     | IAdminPannelSetLoadingAction
-    | IAdminPannelCountFiltersAction;
+    | IAdminPannelCountFiltersAction
+    | IPatchUserAction
+    | IDeleteUserAction;
 
 export type IGetState = () => IStoreState;

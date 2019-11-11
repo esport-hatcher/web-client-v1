@@ -1,13 +1,8 @@
-import {
-    Action,
-    ActionTypes,
-    IRegisterProps,
-    RegisterFormStages,
-} from '@/actions';
+import { Action, ActionTypes, IUserProps, RegisterFormStages } from '@/actions';
 
 export interface IRegisterFormReducer {
     stage: RegisterFormStages;
-    fields: IRegisterProps;
+    fields: IUserProps;
 }
 
 const INITIAL_STATE = {

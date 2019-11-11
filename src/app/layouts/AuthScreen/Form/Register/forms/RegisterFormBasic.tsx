@@ -3,7 +3,7 @@ import { pick } from 'lodash';
 import { SmartInput, RoundButton } from '@/components';
 import {
     registerFormSetStage,
-    IRegisterProps,
+    IUserProps,
     RegisterFormStages,
 } from '@/actions';
 import {
@@ -22,7 +22,7 @@ interface IProps {
     setStage: typeof registerFormSetStage;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
-    fields: IRegisterProps;
+    fields: IUserProps;
     stage: RegisterFormStages;
     errorMsg?: string;
 }

@@ -35,7 +35,6 @@
             transform $sidebar-animation-duration,
             box-shadow $sidebar-animation-duration;
         text-decoration: none;
-        outline: none;
 
         &:last-of-type {
             width: 100%;
@@ -91,7 +90,6 @@
         &__text {
             display: none;
             font-weight: 500;
-            outline: none;
             color: $color-light-grey;
             font-size: 1.4rem;
             margin-left: 2rem;
@@ -125,7 +123,6 @@
         justify-content: center;
         align-items: center;
         transition: all $sidebar-animation-duration ease-out;
-        outline: none;
 
         &__icon {
             height: 2.5rem;

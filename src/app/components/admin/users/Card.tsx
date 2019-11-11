@@ -1,14 +1,35 @@
-import React from 'react';
-import { IUser } from '@/actions';
-import { UserAvatar, UserConfirmedInfo } from '@/components/users';
+import React, { useCallback } from 'react';
+import { IUser, deleteUser } from '@/actions';
+import { UserConfirmedInfo, UserAvatar } from '@/components';
+import { useToggler } from '@/custom-hooks';
+import { ModalConfirmation } from '@/components/modals';
+import { useDispatch } from 'react-redux';
 
 interface IProps {
     user: IUser;
 }
 
 export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
+    const [showModal, toggleModal] = useToggler(false);
+    const dispatch = useDispatch();
+
+    const onConfirmModal = useCallback(() => dispatch(deleteUser(user)), [
+        dispatch,
+        user,
+    ]);
+
     return (
         <div className='admin-user-card'>
+            {showModal && (
+                <ModalConfirmation
+                    title={`Confirm ${user.username} deletion ?`}
+                    message={`All data related to ${
+                        user.username
+                    }'s account will be erased.`}
+                    onClose={toggleModal}
+                    onConfirm={onConfirmModal}
+                />
+            )}
             <div className='admin-user-card__names'>
                 <p className='admin-user-card__names__firstname important-info important-info--big'>
                     {user.firstName}
@@ -18,7 +39,8 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 </p>
             </div>
             <UserAvatar
-                src={user.avatarUrl}
+                avatarUrl={user.avatarUrl}
+                changable={false}
                 className='admin-user-card__avatar'
             />
             <p className='admin-user-card__username placeholder placeholder--sm'>
@@ -35,7 +57,10 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 content={user.phoneNumber}
             />
             <div className='admin-user-card__action-buttons'>
-                <button className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary'>
+                <button
+                    className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary'
+                    onClick={toggleModal}
+                >
                     Delete
                 </button>
                 <button className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--2 btn btn--secondary'>

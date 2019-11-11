@@ -1,0 +1,36 @@
+.settings-profile {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    align-content: center;
+    height: 100%;
+
+    &__avatar {
+        height: 13rem;
+    }
+
+    &__box {
+        border: 1px solid $color-dark-four;
+        padding: 4rem;
+        border-radius: 2.4rem;
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        justify-self: center;
+        align-self: center;
+        row-gap: 1.2rem;
+        column-gap: 4rem;
+
+        &__title {
+            grid-column: 1 / -1;
+        }
+
+        &__divider {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-auto-rows: min-content;
+        row-gap: 2rem;
+    }
+}

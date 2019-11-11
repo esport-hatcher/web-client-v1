@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import api from '@/api';
-import { ActionTypes, IGetState } from './types';
+import { ActionTypes, IGetState, IFieldData } from './types';
 
 export interface IUser {
     id: number;
@@ -52,6 +52,16 @@ export interface ILoginErrorAction {
 
 export interface ILogoutAction {
     type: ActionTypes.logout;
+}
+
+export interface IPatchUserAction {
+    type: ActionTypes.patchUser;
+    payload: IUser;
+}
+
+export interface IDeleteUserAction {
+    type: ActionTypes.deleteUser;
+    payload: IUser;
 }
 
 export const register = (registerProps: IRegisterForm) => async (
@@ -119,6 +129,55 @@ export const fetchUserSession = () => async (
             type: ActionTypes.loginError,
             payload: data,
         });
+    }
+};
+
+export const patchUser = (patchData: IFieldData) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+        const id = getState().authentication.user!.id;
+
+        if (token && id) {
+            const { data } = await api.patch<IUser>(`/users/${id}`, patchData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            dispatch<IPatchUserAction>({
+                type: ActionTypes.patchUser,
+                payload: data,
+            });
+        }
+    } catch (err) {
+        // tslint:disable-next-line: no-console
+        console.log(err);
+    }
+};
+
+export const deleteUser = (user: IUser) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+
+        if (token) {
+            await api.delete<IUser>(`/users/${user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            dispatch<IDeleteUserAction>({
+                type: ActionTypes.deleteUser,
+                payload: user,
+            });
+        }
+    } catch (err) {
+        // tslint:disable-next-line: no-console
+        console.log(err);
     }
 };
 
