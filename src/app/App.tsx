@@ -5,7 +5,6 @@ import {
     AdminPannel,
     AuthPage,
     HomePage,
-    SettingsPage,
     Logout,
     TeamPage,
     EditTeamPage,

@@ -13,9 +13,9 @@ export interface ITeams {
     updatedAt: string;
 }
 
-export interface ITeamsSuccessAction {
-    type: ActionTypes.teamsSuccess;
-    payload: ITeamsSuccess;
+export interface ITeamsFetchsAction {
+    type: ActionTypes.fetchteamSucess;
+    payload: ITeams[];
 }
 
 export interface ITeamsFailure {
@@ -23,12 +23,12 @@ export interface ITeamsFailure {
 }
 
 export interface ITeamsErrorAction {
-    type: ActionTypes.teamsError;
+    type: ActionTypes.fetchTeamError;
     payload: ITeamsFailure;
 }
 
 export interface ITeamsSuccess {
-    teams: ITeams;
+    teams: ITeams[];
 }
 
 export const fetchTeams = () => async (
@@ -39,21 +39,19 @@ export const fetchTeams = () => async (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.get<ITeams>(`users/${myId.id}/teams`, {
+            const { data } = await api.get<ITeams[]>(`users/${myId.id}/teams`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            dispatch<ITeamsSuccessAction>({
-                type: ActionTypes.teamsSuccess,
-                payload: {
-                    teams: data,
-                },
+            dispatch<ITeamsFetchsAction>({
+                type: ActionTypes.fetchteamSucess,
+                payload: data,
             });
         }
     } catch ({ response: { data } }) {
         dispatch<ITeamsErrorAction>({
-            type: ActionTypes.teamsError,
+            type: ActionTypes.fetchTeamError,
             payload: data,
         });
     }

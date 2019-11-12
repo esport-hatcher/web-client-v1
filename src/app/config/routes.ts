@@ -8,6 +8,5 @@ export enum routes {
     logout = '/logout',
     teams = '/teams',
     team = '/team/:id',
-    settings = '/settings',
     settingsProfile = '/settings/profile',
 }

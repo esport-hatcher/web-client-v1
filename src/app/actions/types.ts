@@ -16,12 +16,7 @@ import {
     IAdminPannelCountFiltersAction,
 } from './adminPannel';
 
-import {
-    ITeamsSuccessAction,
-    ITeamsFailure,
-    ITeamsErrorAction,
-    ITeamsSuccess,
-} from './teamsInfomation';
+import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
 
 export type CountQuery = { records: number };
 
@@ -38,8 +33,8 @@ export enum ActionTypes {
     adminPannelFetchUsersSuccess,
     adminPannelSetLoading,
     adminPannelCountFilters,
-    teamsSuccess,
-    teamsError,
+    fetchteamSucess,
+    fetchTeamError,
 }
 
 export type Action =
@@ -52,6 +47,8 @@ export type Action =
     | IAdminPannelSetLoadingAction
     | IAdminPannelCountFiltersAction
     | IPatchUserAction
-    | IDeleteUserAction;
+    | IDeleteUserAction
+    | ITeamsFetchsAction
+    | ITeamsErrorAction;
 
 export type IGetState = () => IStoreState;
