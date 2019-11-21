@@ -18,7 +18,8 @@ import {
 
 export type CountQuery = { records: number };
 
-export type IFieldData = { [key: string]: string };
+// tslint:disable-next-line: no-any
+export type IFieldData = { [key: string]: any };
 
 export enum ActionTypes {
     loginSuccess,
