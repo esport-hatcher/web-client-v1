@@ -12,6 +12,11 @@
             <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
         </symbol>
+        <symbol id="icon-chevron_left" viewBox="0 0 24 24">
+            <title>chevron left</title>
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </symbol>
         <symbol id="icon-chat" viewBox="0 0 24 24">
             <title>chat</title>
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>

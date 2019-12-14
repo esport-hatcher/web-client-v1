@@ -9,6 +9,7 @@ export interface IIcons {
     pin: string;
     smartphone: string;
     chevron_right: string;
+    chevron_left: string;
     chat: string;
     settings: string;
     trends: string;
