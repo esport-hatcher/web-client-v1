@@ -70,6 +70,15 @@
         }
     }
 
+    &--secondary-gradient {
+        color: $color-white;
+        background-image: linear-gradient(176deg, #4c617b, $color-dark);
+
+        & > svg {
+            fill: $color-white;
+        }
+    }
+
     &--outline {
         border: 0.3rem solid;
         border-radius: 3.5rem;

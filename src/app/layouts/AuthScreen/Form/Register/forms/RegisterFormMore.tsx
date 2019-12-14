@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { pick } from 'lodash';
 import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton } from '@/components';
+import { SmartInput, IconButton, RoundButton } from '@/components';
 import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormSetStage,
@@ -30,6 +30,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
     onChangeStatus,
     onChangeValue,
     stage,
+    setStage,
 }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -63,6 +64,10 @@ export const RegisterFormMore: React.FC<IProps> = ({
 
     const _isNotEmpty = useCallback(isNotEmpty, []);
 
+    const onGoBack = useCallback(() => {
+        setStage(RegisterFormStages.basic);
+    }, [setStage]);
+
     return (
         <section
             className={`register-screen__container register-screen__container__more ${isStageMore(
@@ -72,7 +77,13 @@ export const RegisterFormMore: React.FC<IProps> = ({
             <div className='register-screen__container__title title title--big'>
                 Tell us more about yourself
             </div>
+
             <form className='register-screen__more' onSubmit={_onSubmit}>
+                <RoundButton
+                    onClick={onGoBack}
+                    icon='chevron_left'
+                    className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
+                />
                 <SmartInput
                     value={fields.firstName.value}
                     type='text'
