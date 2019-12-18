@@ -75,12 +75,10 @@
     &__basic {
         &__btn {
             padding: 1.2rem;
-            color: $color-white;
             position: absolute;
             top: 50%;
             right: -30%;
             transform: translateY(-50%);
-            background-image: linear-gradient(176deg, #4c617b, $color-dark);
             transition: all 0.4s;
 
             & > svg {
@@ -88,22 +86,36 @@
                 height: 3rem;
                 fill: $color-white;
             }
+        }
+    }
+
+    &__more {
+        position: relative;
+        &__btn {
+            padding: $auth-forms-button-padding;
+            width: 100%;
+            font-size: 1.4rem;
+        }
+
+        &__btn-back {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            padding: 1.2rem;
+
+            & > svg {
+                width: 3rem;
+                height: 3rem;
+            }
 
             &:hover {
-                transform: translateY(-50%) scale(1.2);
+                transform: translate(-50%, -50%) scale(1.2);
 
                 & > svg {
                     animation: bounce 1s infinite;
                 }
             }
-        }
-    }
-
-    &__more {
-        &__btn {
-            padding: $auth-forms-button-padding;
-            width: 100%;
-            font-size: 1.4rem;
         }
     }
 }

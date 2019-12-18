@@ -117,7 +117,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                 {displayErrorMsg(errorMsg)}
                 <RoundButton
                     icon='chevron_right'
-                    className='register-screen__basic__btn'
+                    className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
             </form>
         </section>
