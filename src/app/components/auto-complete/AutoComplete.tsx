@@ -13,7 +13,6 @@ export const AutoComplete: React.FC<IProps> = ({ items }) => {
     const [matchings, setMatchings] = useState<string[]>([]);
 
     useEffect(() => {
-        // tslint:disable-next-line: no-console
         const reg = new RegExp('^' + country.toLowerCase() + '.*');
         setMatchings(items.filter(item => item.toLowerCase().match(reg)));
     }, [country, items]);
