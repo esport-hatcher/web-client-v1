@@ -10,7 +10,7 @@ interface IProps {
 export const AutoComplete: React.FC<IProps> = ({ items, onSelect }) => {
     const [country, onChange] = useInput();
     const [matchings, setMatchings] = useState<string[]>([]);
-    const [focus, setFocus, setFocusSpecific] = useToggler(false);
+    const [focus, , setFocusSpecific] = useToggler(false);
 
     useEffect(() => {
         if (country.length > 0) {
@@ -27,7 +27,7 @@ export const AutoComplete: React.FC<IProps> = ({ items, onSelect }) => {
     }, [setFocusSpecific]);
 
     const toggleListOff = useCallback(() => {
-        setTimeout(() => setFocusSpecific(false), 400);
+        setTimeout(() => setFocusSpecific(false), 200);
     }, [setFocusSpecific]);
 
     const onItemSelect = useCallback(
@@ -41,7 +41,7 @@ export const AutoComplete: React.FC<IProps> = ({ items, onSelect }) => {
             onSelect(itemValue);
             setFocusSpecific(false);
         },
-        [onSelect, onChange, setFocus]
+        [onSelect, onChange, setFocusSpecific]
     );
 
     const displayItems = () => {
