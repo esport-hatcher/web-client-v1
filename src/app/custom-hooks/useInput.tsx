@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+export interface IInputEvent {
+    target: {
+        value: string;
+    };
+}
 
 export const useInput = (
     initialValue: string = ''
-): [string, (e: React.ChangeEvent<HTMLInputElement>) => void] => {
+): [string, (e: IInputEvent) => void] => {
     const [input, setInput] = useState(initialValue);
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: IInputEvent) => {
         setInput(e.target.value);
     };
 
