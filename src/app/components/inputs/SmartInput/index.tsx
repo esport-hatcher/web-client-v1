@@ -18,14 +18,20 @@ interface IProps {
     required?: boolean;
     icon: IconName;
     value: string;
+    className?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     customValidations?: ((value: string) => boolean)[];
     onChangeStatus?: (field: string, value: boolean) => void;
+    onFocus?: ((event: React.FocusEvent<HTMLInputElement>) => void) | undefined;
+    onLoseFocus?:
+        | ((event: React.FocusEvent<HTMLInputElement>) => void)
+        | undefined;
 }
 
 export const SmartInput: React.FC<IProps> = React.memo(
     ({
         placeholder,
+        className,
         name,
         type,
         pattern,
@@ -34,6 +40,8 @@ export const SmartInput: React.FC<IProps> = React.memo(
         value,
         customValidations,
         onChange,
+        onFocus,
+        onLoseFocus,
         onChangeStatus,
     }) => {
         const [inputStatus, setInputStatus] = useState(InputStatus.empty);
@@ -123,7 +131,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
             <div className='smart-input'>
                 <input
                     id={name}
-                    className={`smart-input__input smart-input__input--${getInputStatus()}`}
+                    className={`smart-input__input smart-input__input--${getInputStatus()} ${className}`}
                     type={type}
                     placeholder={placeholder}
                     name={name}
@@ -132,6 +140,8 @@ export const SmartInput: React.FC<IProps> = React.memo(
                     required={required}
                     value={value}
                     onChange={onChange}
+                    onFocus={onFocus}
+                    onBlurCapture={onLoseFocus}
                 />
                 <Icon className='smart-input__icon' name={getIconStatus()} />
                 <label htmlFor={name} className='smart-input__label'>
