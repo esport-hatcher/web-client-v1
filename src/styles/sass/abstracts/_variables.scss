@@ -1,5 +1,4 @@
 // COLORS
-
 $color-dark: #16212e;
 $color-dark-two: #222f42;
 $color-blue-light: #7965f1;
@@ -11,5 +10,93 @@ $color-rosy-pink-two: #fa638e;
 $color-dark-medium: #1d2938;
 $color-dark-four: #0e1623;
 $color-white: #fff;
-$color-light-grey:  #748192;
+$color-light-grey: #748192;
 $color-green-light: rgb(30, 226, 30);
+
+$color-primary-gradient: linear-gradient(
+    122deg,
+    lighten($color-rosy-pink, 10%),
+    $color-rosy-pink
+);
+
+/*
+GENERAL
+*/
+$border-slight-dark: 1px solid rgba($color-dark-four, 0.4);
+$border-slight-light: 1px solid rgba($color-white, 0.4);
+$border-focus: 1px solid $color-white;
+
+/*
+AUTH SCREEN
+*/
+$auth-screen-banner-width: 40vw;
+$auth-screen-animation-duration: 0.4s;
+$auth-screen-animation-style: ease-in;
+$auth-screen-spacing-layouts: 6rem;
+$auth-forms-spacing-inputs: 4rem;
+$auth-forms-button-padding: 1.2rem 4rem;
+
+/*
+HEADER
+*/
+$header-padding-top-bottom: 4rem;
+$header-padding-sides: 12rem;
+
+/*
+SIDEBAR
+*/
+$sidebar-size: 10rem;
+$sidebar-size-expanded: 22rem;
+$sidebar-expand-button-size: 3rem;
+$sidebar-animation-duration: 0.3s;
+$sidebar-item-spacing: 8rem;
+$sidebar-border: 1px solid $color-dark-four;
+$sidebar-item-padding: 3rem;
+
+/*
+ADMIN FILTERS
+*/
+$admin-filters-spacing: 4rem;
+
+/*
+ADMIN PANNEL
+*/
+$admin-pannel-padding-content-sides: 8rem;
+$admin-pannel-gap: 6rem;
+
+/*
+FILTER ITEM
+*/
+$filter-item-spacing-name-count: 1rem;
+$filter-animation-duration: 0.5s;
+
+/*
+LABEL
+*/
+$label-count-padding: 0.7rem;
+$label-count-font-size: 1rem;
+
+/*
+SEARCH FIELD
+*/
+$search-field-padding: 1rem;
+$search-field-animation-duration: 0.3s;
+$search-field-width: 24rem;
+$search-field-icon-size: 2.5rem;
+
+/* 
+SMART INPUT
+*/
+$smart-input-width: 30rem;
+$smart-input-height: 4rem;
+$smart-input-border-radius: 14px;
+$smart-input-animation-duration: 0.4s;
+$smart-input-animation-style: ease-in-out;
+$smart-input-padding-sides: 2rem;
+$smart-input-padding-top: 1rem;
+$smart-input-icon-size: 2rem;
+
+/*
+ICONS
+*/
+$icon-animation-duration: 0.4s;

@@ -1,6 +1,6 @@
 .banner {
-    width: 40vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
     background: $color-dark-medium url('../../assets/bg-auth-screen.png');
     background-size: cover;
@@ -15,10 +15,16 @@
         &__sub-title {
             width: 35rem;
         }
+
+        &__button {
+            @extend %btn-effect;
+            font-size: 1.6rem;
+            width: 100%;
+            padding: 2rem 0;
+        }
     }
 
     &__container > *:not(:last-child) {
         margin-bottom: 5rem;
     }
-
 }

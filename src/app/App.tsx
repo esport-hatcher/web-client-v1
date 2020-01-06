@@ -1,35 +1,50 @@
-import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import history from '@/services/history';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { routes } from '@/config';
+import { AdminPannel, AuthPage, HomePage, Logout } from '@/screens';
 
-import HomePage from '@/screens/Home';
-import AuthPage from '@/screens/Auth';
+import { Navigation } from '@/layouts';
 
 // tslint:disable-next-line: no-import-side-effect
 import '@styles/sass/main.scss';
+import { SettingsProfile } from './screens/Settings/Profile';
 
-export class App extends Component {
-    render() {
-        return (
-            <div>
-                <Router history={history}>
+export const App: React.FC = () => {
+    return (
+        <BrowserRouter>
+            <div className='container'>
+                <Navigation />
+                <div className='container__content'>
                     <Switch>
-                        <Route path='/' exact component={HomePage} />
+                        <Route path={routes.home} exact component={HomePage} />
                         <Route
-                            path='/login'
+                            path={routes.login}
                             exact
-                            render={props => <AuthPage isLogin={true} />}
+                            render={props => (
+                                <AuthPage {...props} isLogin={true} />
+                            )}
                         />
                         <Route
-                            path='/register'
+                            path={routes.register}
                             exact
-                            render={props => <AuthPage isLogin={false} />}
+                            render={props => (
+                                <AuthPage {...props} isLogin={false} />
+                            )}
                         />
+                        <Route
+                            path={routes.adminPannel}
+                            exact
+                            component={AdminPannel}
+                        />
+                        <Route
+                            path={routes.settingsProfile}
+                            exact
+                            component={SettingsProfile}
+                        />
+                        <Route path={routes.logout} exact component={Logout} />
                     </Switch>
-                </Router>
+                </div>
             </div>
-        );
-    }
-}
-
-export default App;
+        </BrowserRouter>
+    );
+};

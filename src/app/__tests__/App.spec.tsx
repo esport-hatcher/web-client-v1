@@ -1,14 +1,19 @@
 import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 
-import App from '@/App';
+import { App } from '@/App';
+import { Root } from '@/config';
 
-let wrapped: ShallowWrapper;
+let wrapped: ReactWrapper;
 
 beforeEach(() => {
-    wrapped = shallow(<App />);
+    wrapped = mount(
+        <Root>
+            <App />
+        </Root>
+    );
 });
 
 it('renders the App component', () => {
-    expect(wrapped.html()).toContain('HomePage');
+    expect(wrapped.find('.container').length).toEqual(1);
 });

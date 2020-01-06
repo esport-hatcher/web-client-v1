@@ -1,4 +1,3 @@
-
 //      ABSTRACTS
 @import './abstracts/functions';
 @import './abstracts/mixins';
@@ -12,12 +11,26 @@
 @import './base/icons';
 
 //      COMPONENTS
+@import './components/label';
 @import './components/smart-input';
 @import './components/btn';
+@import './components/filter-item';
+@import './components/search-field';
+@import './components/user-avatar';
+@import './components/admin-user-card';
+@import './components/user-confirmed-info';
+@import './components/modifiable-input';
+@import './components/modal-confirmation';
+@import './components/auto-complete';
 
 //      LAYOUTS
 @import './layouts/banner';
-@import './layouts/auth-form';
-
+@import './layouts/register-screen';
+@import './layouts/login-screen';
+@import './layouts/nav-bar';
+@import './layouts/header';
+@import './layouts/admin-filters';
 //      SCREENS
-@import './screens/auth-screen';    
+@import './screens/auth-screen';
+@import './screens/admin-pannel';
+@import './screens/settings-profile';

@@ -1,4 +1,49 @@
-export const LOGIN_ERROR_MAIL = 'LOGIN_ERROR_MAIL';
-export const LOGIN_ERROR_CREDENTIALS = 'LOGIN_ERROR_CREDENTIALS';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const SERVER_ERROR = 'SERVER_ERROR';
+import {
+    ILoginErrorAction,
+    ILoginSuccessAction,
+    ILogoutAction,
+    IPatchUserAction,
+    IDeleteUserAction,
+} from './authentication';
+import {
+    IRegisterFormFillAction,
+    IRegisterFormSetStageAction,
+} from './registerForm';
+import { IStoreState } from '@/reducers';
+import {
+    IAdminPannelFetchUsersSuccessAction,
+    IAdminPannelSetLoadingAction,
+    IAdminPannelCountFiltersAction,
+} from './adminPannel';
+
+export type CountQuery = { records: number };
+
+// tslint:disable-next-line: no-any
+export type IFieldData = { [key: string]: any };
+
+export enum ActionTypes {
+    loginSuccess,
+    loginError,
+    logout,
+    patchUser,
+    deleteUser,
+    registerFormFill,
+    registerFormSetStage,
+    adminPannelFetchUsersSuccess,
+    adminPannelSetLoading,
+    adminPannelCountFilters,
+}
+
+export type Action =
+    | ILoginErrorAction
+    | ILoginSuccessAction
+    | IRegisterFormFillAction
+    | IRegisterFormSetStageAction
+    | ILogoutAction
+    | IAdminPannelFetchUsersSuccessAction
+    | IAdminPannelSetLoadingAction
+    | IAdminPannelCountFiltersAction
+    | IPatchUserAction
+    | IDeleteUserAction;
+
+export type IGetState = () => IStoreState;

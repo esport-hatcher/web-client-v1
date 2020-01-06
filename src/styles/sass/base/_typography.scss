@@ -1,12 +1,38 @@
-.placeholder-medium {
-    font-size: 1.6rem;
-    letter-spacing: 0.28rem;
+.placeholder {
+    text-transform: uppercase;
     color: $color-light-grey;
+    opacity: 1;
+
+    &--sm {
+        font-size: 1.2rem;
+        letter-spacing: 0.16rem;
+    }
+
+    &--md {
+        font-size: 1.6rem;
+
+        letter-spacing: 0.28rem;
+    }
+}
+
+.label {
+    letter-spacing: 0.2rem;
+    color: $color-light-grey;
+    text-transform: uppercase;
+    font-weight: 400;
+
+    &--sm {
+        font-size: 1.2rem;
+    }
+
+    &--md {
+        font-size: 1.6rem;
+    }
 }
 
 .body-text {
     color: $color-white;
-    
+
     &--big {
         font-size: 1.6rem;
         letter-spacing: 0.28rem;
@@ -14,7 +40,7 @@
 
     &--medium {
         font-size: 1.2rem;
-        letter-spacing: 0.20rem;
+        letter-spacing: 0.2rem;
     }
 
     &--error {
@@ -24,7 +50,7 @@
 
 .title {
     font-size: 3rem;
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
     color: $color-white;
     font-weight: bold;
 
@@ -34,5 +60,42 @@
 
     &--xs {
         font-size: 2rem;
+    }
+}
+
+.important-info {
+    color: inherit;
+
+    &--sm {
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+    }
+
+    &--md {
+        font-size: 1.6rem;
+        font-weight: 400;
+        letter-spacing: normal;
+    }
+
+    &--big {
+        font-size: 2.4rem;
+        font-weight: 700;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 1.5px;
+        font-family: inherit;
+    }
+}
+
+.error-msg {
+    color: $color-rosy-pink;
+
+    &--big {
+        font-size: 2.4rem;
+        font-weight: 700;
+        font-style: normal;
+        letter-spacing: 1.5px;
     }
 }

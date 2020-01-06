@@ -1,67 +1,86 @@
 .smart-input {
     position: relative;
-    overflow: hidden;
 
-
-    i {
+    &__icon {
         top: 50%;
-        left: 2rem;
+        left: $smart-input-padding-sides;
         transform: translateY(-50%);
-        transition: all .3s;
-        color: $color-light-grey;
+        transition: transform $smart-input-animation-duration
+                $smart-input-animation-style,
+            opacity $smart-input-animation-duration $smart-input-animation-style;
+        fill: $color-light-grey;
         position: absolute;
-        font-size: 20px;
+        width: $smart-input-icon-size;
+        height: $smart-input-icon-size;
     }
 
-    &__input { 
-    background-color: $color-dark-medium;
-    border-radius: 14px;
-    outline: none;
-    border: none;
-    height: 4rem;
-    width: 30rem;
-    padding: 1rem 2rem;
-    padding-left: 6rem;
-    font-size: 1.2rem;
-    letter-spacing: 0.20rem;
-    color: $color-white;
-    transition: all .3s;
-    border: 1px solid rgba($color-white, 0);
+    &__label {
+        position: absolute;
+        color: white;
+        left: 0;
+        top: -70%;
+        letter-spacing: 0.2rem;
+        font-size: 1.2rem;
+        transition: all 0.4s ease-in-out;
+    }
 
-    &--error {
-        border-color: $color-rosy-pink;
+    &__input:placeholder-shown ~ &__label {
+        transform: translate(2rem, 4rem);
+        opacity: 0;
+        visibility: hidden;
+    }
 
-        & + i {
-            color: $color-rosy-pink !important;
+    &__input {
+        background-color: $color-dark-medium;
+        border-radius: $smart-input-border-radius;
+        border: none;
+        height: $smart-input-height;
+        min-width: $smart-input-width;
+        padding: $smart-input-padding-top $smart-input-padding-sides;
+        padding-left: 3 * $smart-input-padding-sides;
+        font-size: 1.2rem;
+        letter-spacing: 0.2rem;
+        color: $color-white;
+        transition: border-color $smart-input-animation-duration
+                $smart-input-animation-style,
+            padding-left $smart-input-animation-duration
+                $smart-input-animation-style,
+            border $smart-input-animation-duration $smart-input-animation-style;
+        border: 1px solid rgba($color-white, 0);
+
+        &--error {
+            border-color: $color-rosy-pink;
+
+            & ~ svg {
+                fill: $color-rosy-pink !important;
+            }
         }
-    }
 
-    &--success {
-        border-color: $color-green-light;
+        &--success {
+            border-color: $color-green-light;
 
-        & + i {
-            color: $color-green-light;
+            & ~ svg {
+                fill: $color-green-light;
+            }
         }
-    }
 
-    &:focus + i {
-        top: -2rem !important;
-        left: 2rem !important;
-    }
+        &--loading {
+            & ~ svg {
+                top: 1rem;
+                animation: rotateRight 1.5s ease-in-out infinite running !important;
+            }
+        }
 
-    &:valid + i[class*='spinner'] {
-        position: absolute ;
-        top: 1rem;
-    }
+        &:focus + svg {
+            transform: translateY(-4rem);
+            opacity: 0;
+        }
 
-    &:focus {
-        padding-left: 2rem;
-        border: 1px solid $color-white;
-    }
+        &:focus {
+            padding-left: 2rem;
+            border: 1px solid $color-white;
+        }
 
-    &::placeholder {
-        @extend .placeholder-medium;
+        @include input-placeholder($color-light-grey);
     }
 }
-}
-

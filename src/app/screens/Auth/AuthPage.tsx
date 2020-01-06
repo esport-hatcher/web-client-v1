@@ -1,64 +1,46 @@
-import React, { Component } from 'react';
-import history from '@/services/history';
-import AuthBanner from '@/layouts/AuthScreen/Banner';
-import AuthForm from '@/layouts/AuthScreen/Form';
+import React from 'react';
+import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
+import { useToggler, useSelector } from '@/custom-hooks';
+import { RegisterFormStages } from '@/actions';
 
-interface IAuthPageP {
+interface IProps {
     isLogin: boolean;
-    register?: (
-        email: string,
-        username: string,
-        password: string
-    ) => Promise<void>;
-    login?: (email: string, password: string) => Promise<void>;
 }
 
-export class AuthPage extends Component<IAuthPageP> {
-    state = { loginMode: this.props.isLogin };
+export const isStageMore = (stage: RegisterFormStages) =>
+    stage === RegisterFormStages.more;
 
-    checkIt = () => {
-        if (!this.state.loginMode === false) {
-            history.push('/register');
-        } else {
-            history.push('/login');
+export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
+    const [loginMode, toggleLoginMode] = useToggler(isLogin);
+    const errorMsg = useSelector(state => state.authentication.errorMsg);
+    const stage = useSelector(state => state.registerForm.stage);
+
+    const renderForm = (): JSX.Element => {
+        if (loginMode) {
+            return <LoginForm errorMsg={errorMsg} />;
         }
-        this.setState({ loginMode: !this.state.loginMode });
+        return <RegisterForm stage={stage} errorMsg={errorMsg} />;
     };
 
-    renderForm = () => {
-        if (this.props.login && this.props.register) {
-            return (
-                <AuthForm
-                    loginMode={this.state.loginMode}
-                    onLogin={this.props.login}
-                    onRegister={this.props.register}
+    return (
+        <main className='auth-screen'>
+            <div
+                className={`auth-screen__banner ${loginMode &&
+                    'auth-screen__banner--login'} ${isStageMore(stage) &&
+                    'auth-screen__banner--register'}`}
+            >
+                <AuthBanner
+                    onButtonClick={toggleLoginMode}
+                    loginMode={loginMode}
                 />
-            );
-        }
-        return null;
-    };
-
-    render() {
-        return (
-            <div className='auth-screen'>
-                <input
-                    type='checkbox'
-                    name='slider'
-                    className='auth-screen__checkbox'
-                    checked={this.state.loginMode}
-                    // tslint:disable-next-line: no-empty
-                    onChange={() => {}}
-                />
-                <div className='auth-screen__banner'>
-                    <AuthBanner
-                        onButtonClick={this.checkIt}
-                        loginMode={this.state.loginMode}
-                    />
-                </div>
-                <div className='auth-screen__form'>{this.renderForm()}</div>
             </div>
-        );
-    }
-}
-
-export default AuthPage;
+            <div
+                className={`auth-screen__form ${loginMode &&
+                    'auth-screen__form--login'} ${isStageMore(stage) &&
+                    'auth-screen__form--register'}`}
+            >
+                {renderForm()}
+            </div>
+        </main>
+    );
+};

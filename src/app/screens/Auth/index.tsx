@@ -1,11 +1,4 @@
-import { connect } from 'react-redux';
-import { register, login } from '@/actions/auth';
-import AuthPage from './AuthPage';
+import { _AuthPage } from './AuthPage';
+import { requireAnonyme } from '@/HOC';
 
-export default connect(
-    null,
-    {
-        register,
-        login,
-    }
-)(AuthPage);
+export const AuthPage = requireAnonyme(_AuthPage);
