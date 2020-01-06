@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 export const _HomePage: React.FC = () => {
-    return <main>HomePage</main>;
+    return <main>Home</main>;
 };

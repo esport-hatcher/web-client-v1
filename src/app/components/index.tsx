@@ -6,3 +6,4 @@ export * from './navigation';
 export * from './various';
 export * from './users';
 export * from './modals';
+export * from './auto-complete';
