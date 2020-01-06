@@ -1,5 +1,6 @@
 .auto-complete {
     display: inline-block;
+    position: relative;
 
     &__input {
         &:focus {
@@ -8,6 +9,11 @@
     }
 
     &__list {
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        top: 100%;
+        left: 0%;
         padding-top: 1.2rem;
         animation: fadeIn $smart-input-animation-duration / 2 ease-in;
         list-style: none;
