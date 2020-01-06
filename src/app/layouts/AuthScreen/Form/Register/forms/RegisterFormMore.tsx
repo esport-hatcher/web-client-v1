@@ -1,7 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { pick } from 'lodash';
 import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton, RoundButton } from '@/components';
+import {
+    SmartInput,
+    IconButton,
+    RoundButton,
+    AutoComplete,
+} from '@/components';
 import { isNotEmpty } from '@/shared/utils';
 import {
     registerFormSetStage,
@@ -68,6 +73,13 @@ export const RegisterFormMore: React.FC<IProps> = ({
         setStage(RegisterFormStages.basic);
     }, [setStage]);
 
+    const setCountry = useCallback(
+        (country: string) => {
+            onChangeValue({ target: { name: 'country', value: country } });
+        },
+        [onChangeValue]
+    );
+
     return (
         <section
             className={`register-screen__container register-screen__container__more ${isStageMore(
@@ -113,14 +125,10 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                 />
-                <SmartInput
-                    value={fields.country.value}
-                    type='text'
+                <AutoComplete
+                    items={['Angola', 'Andorre', 'Angleterre', 'Arabie']}
+                    onSelect={setCountry}
                     icon='pin'
-                    placeholder='Country'
-                    name='country'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
                 />
                 <SmartInput
                     value={fields.phoneNumber.value}
