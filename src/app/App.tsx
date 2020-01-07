@@ -1,7 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { routes } from '@/config';
-import { AdminPannel, AuthPage, HomePage, Logout } from '@/screens';
+import {
+    AdminPannel,
+    AuthPage,
+    HomePage,
+    Logout,
+    TeamPage,
+    EditTeamPage,
+} from '@/screens';
 
 import { Navigation } from '@/layouts';
 
@@ -16,7 +23,9 @@ export const App: React.FC = () => {
                 <Navigation />
                 <div className='container__content'>
                     <Switch>
+                        <Route path={routes.team} component={EditTeamPage} />
                         <Route path={routes.home} exact component={HomePage} />
+                        <Route path={routes.teams} exact component={TeamPage} />
                         <Route
                             path={routes.login}
                             exact

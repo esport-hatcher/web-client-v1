@@ -1,0 +1,20 @@
+.create-team-form {
+    &-label {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 16px;
+        color: #fff;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    &-input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed #83A4C5;
+        width: 275px;
+        outline: none;
+        color: #fff;
+        padding: 0px 0px 0px 0px;
+        font-style: italic;
+    }
+}

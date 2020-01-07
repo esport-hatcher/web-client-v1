@@ -3,16 +3,19 @@ import { ActionTypes } from '@/actions';
 import { authenticationReducer, IAuthentication } from './authentication';
 import { registerFormReducer, IRegisterFormReducer } from './registerForm';
 import { adminPannelReducer, IAdminPannelReducer } from './adminPannel';
+import { fetchTeamsReducer, IFetchTeam } from './teams';
 export interface IStoreState {
     authentication: IAuthentication;
     registerForm: IRegisterFormReducer;
     adminPannel: IAdminPannelReducer;
+    teams: IFetchTeam;
 }
 
 export const appReducer = combineReducers<IStoreState>({
     authentication: authenticationReducer,
     registerForm: registerFormReducer,
     adminPannel: adminPannelReducer,
+    teams: fetchTeamsReducer,
 });
 
 // tslint:disable-next-line: no-any

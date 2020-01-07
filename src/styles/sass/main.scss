@@ -16,8 +16,11 @@
 @import './components/btn';
 @import './components/filter-item';
 @import './components/search-field';
+@import './components/smart_select';
+@import './components/_simple_imput';
 @import './components/user-avatar';
 @import './components/admin-user-card';
+@import './components//user-confirmed-info';
 @import './components/user-confirmed-info';
 @import './components/modifiable-input';
 @import './components/modal-confirmation';
@@ -30,6 +33,13 @@
 @import './layouts/nav-bar';
 @import './layouts/header';
 @import './layouts/admin-filters';
+@import './layouts/create-team-form';
+
+
+//      SCREENS 
+@import './screens/auth-screen';
+@import './screens/admin-pannel';
+@import './screens/team-management-screen';
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-pannel';

@@ -24,6 +24,9 @@ export interface IIcons {
     phone: string;
     exit: string;
     cross: string;
+    teams: string;
+    clipboard: string;
+    bell: string;
 }
 
 export type IconName = keyof IIcons;

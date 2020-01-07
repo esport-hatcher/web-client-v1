@@ -16,6 +16,8 @@ import {
     IAdminPannelCountFiltersAction,
 } from './adminPannel';
 
+import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
+
 export type CountQuery = { records: number };
 
 // tslint:disable-next-line: no-any
@@ -32,6 +34,8 @@ export enum ActionTypes {
     adminPannelFetchUsersSuccess,
     adminPannelSetLoading,
     adminPannelCountFilters,
+    fetchteamSucess,
+    fetchTeamError,
 }
 
 export type Action =
@@ -44,6 +48,8 @@ export type Action =
     | IAdminPannelSetLoadingAction
     | IAdminPannelCountFiltersAction
     | IPatchUserAction
-    | IDeleteUserAction;
+    | IDeleteUserAction
+    | ITeamsFetchsAction
+    | ITeamsErrorAction;
 
 export type IGetState = () => IStoreState;

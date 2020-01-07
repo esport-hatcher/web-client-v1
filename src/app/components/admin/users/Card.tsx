@@ -23,7 +23,9 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
             {showModal && (
                 <ModalConfirmation
                     title={`Confirm ${user.username} deletion ?`}
-                    message={`All data related to ${user.username}'s account will be erased.`}
+                    message={`All data related to ${
+                        user.username
+                    }'s account will be erased.`}
                     onClose={toggleModal}
                     onConfirm={onConfirmModal}
                 />

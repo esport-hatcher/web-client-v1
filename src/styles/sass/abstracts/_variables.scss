@@ -1,6 +1,7 @@
 // COLORS
 $color-dark: #16212e;
 $color-dark-two: #222f42;
+$color-dark-three: #1d2938;
 $color-blue-light: #7965f1;
 $color-pinkish: #d55a8d;
 $color-rosy-pink: #f6696b;
@@ -13,11 +14,9 @@ $color-white: #fff;
 $color-light-grey: #748192;
 $color-green-light: rgb(30, 226, 30);
 
-$color-primary-gradient: linear-gradient(
-    122deg,
+$color-primary-gradient: linear-gradient(122deg,
     lighten($color-rosy-pink, 10%),
-    $color-rosy-pink
-);
+    $color-rosy-pink);
 
 /*
 GENERAL
