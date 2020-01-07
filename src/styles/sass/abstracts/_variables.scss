@@ -19,6 +19,13 @@ $color-primary-gradient: linear-gradient(122deg,
     $color-rosy-pink);
 
 /*
+GENERAL
+*/
+$border-slight-dark: 1px solid rgba($color-dark-four, 0.4);
+$border-slight-light: 1px solid rgba($color-white, 0.4);
+$border-focus: 1px solid $color-white;
+
+/*
 AUTH SCREEN
 */
 $auth-screen-banner-width: 40vw;

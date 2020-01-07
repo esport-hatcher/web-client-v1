@@ -7,9 +7,14 @@ import {
     RegisterFormStages,
 } from '@/actions';
 
-export type RegisterOnChangeValue = (
-    event: React.ChangeEvent<HTMLInputElement>
-) => void;
+export interface IInputEvent {
+    target: {
+        name: string;
+        value: string;
+    };
+}
+
+export type RegisterOnChangeValue = (event: IInputEvent) => void;
 
 export type RegisterOnChangeStatus = (field: string, valid: boolean) => void;
 
@@ -21,7 +26,7 @@ export const useRegisterForm = (): {
     const dispatch = useDispatch();
 
     const onChangeValue = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
+        (event: IInputEvent) => {
             dispatch(
                 registerFormFill(state => {
                     return {

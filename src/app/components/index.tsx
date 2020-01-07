@@ -9,3 +9,4 @@ export * from './various';
 export * from './users';
 export * from './modals';
 export * from './teams';
+export * from './auto-complete';

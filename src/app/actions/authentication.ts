@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import api from '@/api';
 import { ActionTypes, IGetState, IFieldData } from './types';
+import { uploadFile, updateLocalUser, S3_LINK } from '@/shared';
 
 export interface IUser {
     id: number;
@@ -141,11 +142,30 @@ export const patchUser = (patchData: IFieldData) => async (
         const id = getState().authentication.user!.id;
 
         if (token && id) {
-            const { data } = await api.patch<IUser>(`/users/${id}`, patchData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            if (patchData.avatarUrl) {
+                await uploadFile({
+                    file: patchData.avatarUrl,
+                    name: 'profile-image',
+                    token,
+                });
+            }
+            const { data } = await api.patch<IUser>(
+                `/users/${id}`,
+                patchData.avatarUrl
+                    ? {
+                          ...patchData,
+                          avatarUrl: `${S3_LINK}/${id}/profile-image.${
+                              patchData.avatarUrl.type.match(/image\/(.+)/)[1]
+                          }`,
+                      }
+                    : patchData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            updateLocalUser(data);
             dispatch<IPatchUserAction>({
                 type: ActionTypes.patchUser,
                 payload: data,
