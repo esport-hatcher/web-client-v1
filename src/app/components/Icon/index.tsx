@@ -27,6 +27,7 @@ export interface IIcons {
     teams: string;
     clipboard: string;
     bell: string;
+    add: string;
 }
 
 export type IconName = keyof IIcons;
