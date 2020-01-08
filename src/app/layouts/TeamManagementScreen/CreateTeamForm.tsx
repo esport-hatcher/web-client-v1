@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SimpleImput, IconButton } from '@/components';
+import { SimpleImput } from '@/components';
 import api from '@/api';
 
 export const CreateTeamForm: React.FC = React.memo(() => {
@@ -7,6 +7,9 @@ export const CreateTeamForm: React.FC = React.memo(() => {
     const [valueRegion, setValueRegion] = useState('');
     const [valueGame, setValueGame] = useState('');
 
+    /**
+     * TODO: NO API CALL IN COMPONENT
+     */
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const info = localStorage.getItem('ehToken');
@@ -15,7 +18,7 @@ export const CreateTeamForm: React.FC = React.memo(() => {
         }
         const obj = JSON.parse(info);
         try {
-            const { data } = await api.post('/teams', {
+            await api.post('/teams', {
                 body: { name: valueName, game: valueGame, region: valueRegion },
                 headers: {
                     Authorization: `Bearer ${obj.token}`,
