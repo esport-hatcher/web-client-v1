@@ -2,12 +2,15 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { AdminFilters, AdminUsersList } from '@/layouts';
 import { SearchInput, HeaderPage } from '@/components';
 import { parse, stringify } from 'query-string';
-import { useDispatch } from 'react-redux';
-import { adminPannelFetchUsers, ActionTypes } from '@/actions';
+import { useDispatch, shallowEqual } from 'react-redux';
+import {
+    adminPannelFetchUsers,
+    adminPannelFetchNextPage,
+    ActionTypes,
+} from '@/actions';
 import { useSelector } from '@/custom-hooks';
 
 interface IProps {
-    // tslint:disable-next-line: no-any
     history: {
         push: (path: string) => void;
     };
@@ -30,8 +33,32 @@ export const _AdminPannel: React.FC<IProps> = ({
     ) as IAdminPannelFilters;
     const [filters, setFilters] = useState<IAdminPannelFilters>(initialFilters);
     const dispatch = useDispatch();
-    const users = useSelector(state => state.adminPannel.users);
-    const loading = useSelector(state => state.adminPannel.loading);
+    const { users, loading, pages } = useSelector(
+        state => state.adminPannel,
+        shallowEqual
+    );
+    const [currentPage, setPage] = useState<number>(1);
+
+    useEffect(() => {
+        if (currentPage > 1 && currentPage <= pages) {
+            dispatch(
+                adminPannelFetchNextPage(
+                    stringify({ ...filters, page: currentPage })
+                )
+            );
+        }
+    }, [currentPage, dispatch, pages, filters]);
+
+    const onBottomPage = useCallback(() => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            setPage(page => page + 1);
+        }
+    }, [setPage]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', onBottomPage);
+        return () => window.removeEventListener('scroll', onBottomPage, true);
+    }, [onBottomPage]);
 
     useEffect(() => {
         push(`/admin/pannel?${stringify(filters)}`);

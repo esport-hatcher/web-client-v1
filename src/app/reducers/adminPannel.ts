@@ -1,3 +1,4 @@
+import { unionBy } from 'lodash';
 import { IUser, Action, ActionTypes } from '@/actions';
 
 export interface IAdminPannelFiltersCount {
@@ -8,6 +9,7 @@ export interface IAdminPannelFiltersCount {
 export interface IAdminPannelReducer {
     filters: IAdminPannelFiltersCount;
     users: IUser[];
+    pages: number;
     loading: boolean;
 }
 
@@ -17,6 +19,7 @@ const INITIAL_STATE: IAdminPannelReducer = {
         admins: 0,
         players: 0,
     },
+    pages: 1,
     users: [],
     loading: false,
 };
@@ -31,10 +34,17 @@ export const adminPannelReducer = (
                 ...state,
                 loading: true,
             };
+        case ActionTypes.adminPannelFetchNextPageSuccess:
+            return {
+                ...state,
+                users: unionBy(state.users, action.payload, 'id'),
+                loading: false,
+            };
         case ActionTypes.adminPannelFetchUsersSuccess:
             return {
                 ...state,
-                users: action.payload || [],
+                users: action.payload.users || [],
+                pages: action.payload.pages,
                 loading: false,
             };
         case ActionTypes.adminPannelCountFilters:
