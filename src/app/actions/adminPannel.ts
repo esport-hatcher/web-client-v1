@@ -6,6 +6,11 @@ import { IAdminPannelFiltersCount } from '@/reducers/adminPannel';
 
 export interface IAdminPannelFetchUsersSuccessAction {
     type: ActionTypes.adminPannelFetchUsersSuccess;
+    payload: { users: IUser[]; pages: number };
+}
+
+export interface IAdminPannelFetchNextPageSuccessAction {
+    type: ActionTypes.adminPannelFetchNextPageSuccess;
     payload: IUser[];
 }
 
@@ -22,13 +27,37 @@ export const adminPannelFetchUsers = (filters?: string) => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {
+    const {
+        data: { records },
+    } = await api.get<{ records: number }>(`/users?${filters}&count=true`, {
+        headers: {
+            Authorization: `Bearer ${getState().authentication.token}`,
+        },
+    });
     const { data } = await api.get<IUser[]>(`/users?${filters}`, {
         headers: {
             Authorization: `Bearer ${getState().authentication.token}`,
         },
     });
+
     dispatch<IAdminPannelFetchUsersSuccessAction>({
         type: ActionTypes.adminPannelFetchUsersSuccess,
+        payload: { users: data, pages: Math.floor(records / 50) + 1 },
+    });
+};
+
+export const adminPannelFetchNextPage = (filters?: string) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    const { data } = await api.get<IUser[]>(`/users?${filters}`, {
+        headers: {
+            Authorization: `Bearer ${getState().authentication.token}`,
+        },
+    });
+
+    dispatch<IAdminPannelFetchNextPageSuccessAction>({
+        type: ActionTypes.adminPannelFetchNextPageSuccess,
         payload: data,
     });
 };

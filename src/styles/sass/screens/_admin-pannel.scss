@@ -6,6 +6,7 @@
     grid-row-gap: $admin-pannel-gap;
 
     &__content {
+        overflow-y: scroll;
         grid-column: 1 / -1;
         padding-bottom: $admin-pannel-gap;
         display: grid;
