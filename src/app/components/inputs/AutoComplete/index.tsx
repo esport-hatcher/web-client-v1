@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useInput, useToggler } from '@/custom-hooks';
 import { SmartInput } from '@/components';
-import { IIcons } from '../Icon';
+import { IIcons } from '../../Icon';
 
 interface IProps {
     items: string[];
