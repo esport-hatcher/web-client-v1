@@ -7,7 +7,7 @@
     width: $sidebar-size;
     display: grid;
     align-content: center;
-    grid-auto-rows: min-content;
+    grid-auto-rows: max-content;
     gap: $sidebar-item-spacing;
     z-index: 20;
     transition: width $sidebar-animation-duration ease-out;
