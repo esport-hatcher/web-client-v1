@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { AdminFilters, AdminUsersList } from '@/layouts';
-import { SearchInput, HeaderPage } from '@/components';
 import { parse, stringify } from 'query-string';
+import { AdminFilters, AdminUsersList } from 'app/layouts';
+import { SearchInput, HeaderPage } from 'app/components';
 import { useDispatch, shallowEqual } from 'react-redux';
 import {
     adminPannelFetchUsers,
     adminPannelFetchNextPage,
     ActionTypes,
-} from '@/actions';
-import { useSelector } from '@/custom-hooks';
+} from 'app/actions';
+import { useSelector } from 'app/custom-hooks';
 
 interface IProps {
     history: {

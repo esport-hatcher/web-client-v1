@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import { IUser, deleteUser } from '@/actions';
-import { UserConfirmedInfo, UserAvatar } from '@/components';
-import { useToggler } from '@/custom-hooks';
-import { ModalConfirmation } from '@/components/modals';
+import { IUser, deleteUser } from 'app/actions';
+import { UserConfirmedInfo, UserAvatar } from 'app/components';
+import { useToggler } from 'app/custom-hooks';
+import { ModalConfirmation } from 'app/components/modals';
 import { useDispatch } from 'react-redux';
 
 interface IProps {
@@ -23,9 +23,7 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
             {showModal && (
                 <ModalConfirmation
                     title={`Confirm ${user.username} deletion ?`}
-                    message={`All data related to ${
-                        user.username
-                    }'s account will be erased.`}
+                    message={`All data related to ${user.username}'s account will be erased.`}
                     onClose={toggleModal}
                     onConfirm={onConfirmModal}
                 />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SimpleImput } from '@/components';
-import api from '@/api';
+import { SimpleImput } from 'app/components';
+import api from 'app/api';
 
 export const CreateTeamForm: React.FC = React.memo(() => {
     const [valueName, setValueName] = useState('');

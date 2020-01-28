@@ -1,4 +1,4 @@
-import { IUser } from '@/actions';
+import { IUser } from 'app/actions';
 
 export const updateLocalUser = (user: IUser) => {
     const userInfo = JSON.parse(localStorage.getItem('ehToken')!);

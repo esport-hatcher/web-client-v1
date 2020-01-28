@@ -2,9 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,7 +19,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "sourceMap": true,
+    "rootDir": "src",
+    "baseUrl": "./src"
   },
   "include": [
     "src/**/*.ts",
@@ -25,8 +30,9 @@
     "typings"
   ],
   "exclude": [
-    "src/node_modules",
-    "src/styles/**/*"
-  ],
-  "extends": "./tsconfig.paths.json"
+    "node_modules",
+    "src/styles/**/*",
+    "build",
+    "scripts"
+  ]
 }

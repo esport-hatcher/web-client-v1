@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import api from '@/api';
+import api from 'app/api';
 import { ActionTypes, IGetState, IFieldData } from './types';
-import { uploadFile, updateLocalUser, S3_LINK } from '@/shared';
+import { uploadFile, updateLocalUser, S3_LINK } from 'app/shared';
 
 export interface IUser {
     id: number;

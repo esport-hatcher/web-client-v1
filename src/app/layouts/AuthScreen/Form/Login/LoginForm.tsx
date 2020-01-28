@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton } from '@/components';
-import { useForm } from '@/custom-hooks';
-import { login } from '@/actions';
-import { FAKE_LOADING_TIME } from '@/config';
+import { SmartInput, IconButton } from 'app/components';
+import { useForm } from 'app/custom-hooks';
+import { login } from 'app/actions';
+import { FAKE_LOADING_TIME } from 'app/config';
 
 interface IProps {
     errorMsg?: string;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icon } from '@/components';
+import { Icon } from 'app/components';
 import { Link } from 'react-router-dom';
-import { ITeams } from '@/actions';
+import { ITeams } from 'app/actions';
 
 interface IProps {
     item: ITeams;

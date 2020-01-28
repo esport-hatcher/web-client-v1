@@ -1,5 +1,5 @@
 import { unionBy } from 'lodash';
-import { IUser, Action, ActionTypes } from '@/actions';
+import { IUser, Action, ActionTypes } from 'app/actions';
 
 export interface IAdminPannelFiltersCount {
     all: number;

@@ -6,19 +6,22 @@ import {
     IconButton,
     RoundButton,
     AutoComplete,
-} from '@/components';
-import { isNotEmpty } from '@/shared/utils';
+} from 'app/components';
+import { isNotEmpty } from 'app/shared/utils';
 import {
-    registerFormSetStage,
     IUserProps,
     RegisterFormStages,
     IRegisterForm,
     register,
-} from '@/actions';
+} from 'app/actions';
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import { isStageMore } from '@/screens/Auth/AuthPage';
-import { RegisterOnChangeValue, RegisterOnChangeStatus } from '@/custom-hooks';
-import { FAKE_LOADING_TIME } from '@/config';
+import { isStageMore } from 'app/screens/Auth/AuthPage';
+import {
+    RegisterOnChangeValue,
+    RegisterOnChangeStatus,
+    RegisterSetStage,
+} from 'app/custom-hooks';
+import { FAKE_LOADING_TIME } from 'app/config';
 
 interface IProps {
     errorMsg?: string;
@@ -26,7 +29,7 @@ interface IProps {
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;
     stage: RegisterFormStages;
-    setStage: typeof registerFormSetStage;
+    setStage: RegisterSetStage;
 }
 
 export const RegisterFormMore: React.FC<IProps> = ({

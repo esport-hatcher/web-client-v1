@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallowEqual } from 'react-redux';
-import { useSelector, useRegisterForm } from '@/custom-hooks';
-import { RegisterFormStages } from '@/actions';
+import { useSelector, useRegisterForm } from 'app/custom-hooks';
+import { RegisterFormStages } from 'app/actions';
 import { RegisterFormBasic } from './forms/RegisterFormBasic';
 import { RegisterFormMore } from './forms/RegisterFormMore';
 
