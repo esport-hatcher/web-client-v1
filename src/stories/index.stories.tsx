@@ -9,17 +9,7 @@ export default { title: 'AutoComplete' };
 export const basic = () => (
     <StoryWrapper>
         <AutoComplete
-            items={['Andorre', 'Angleterre', 'Algérie', 'Andalousie', 'France']}
-            // tslint:disable-next-line: no-console
-            onSelect={(selected: string) => console.log(selected)}
-            icon='pin'
-        />
-    </StoryWrapper>
-);
-
-export const second = () => (
-    <StoryWrapper>
-        <AutoComplete
+            label='Country'
             items={['Andorre', 'Angleterre', 'Algérie', 'Andalousie', 'France']}
             // tslint:disable-next-line: no-console
             onSelect={(selected: string) => console.log(selected)}

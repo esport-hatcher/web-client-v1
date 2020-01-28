@@ -4,13 +4,14 @@ import { SmartInput } from 'app/components';
 import { IIcons } from '../../Icon';
 
 interface IProps {
+    label: string;
     items: string[];
     icon: keyof IIcons;
     onSelect: (selected: string) => void;
 }
 
 export const AutoComplete: React.FC<IProps> = React.memo(
-    ({ items, onSelect, icon }) => {
+    ({ items, onSelect, icon, label }) => {
         const [country, onChange] = useInput();
         const [matchings, setMatchings] = useState<string[]>([]);
         const [listDisplayable, , setListDisplayable] = useToggler(false);
@@ -88,7 +89,7 @@ export const AutoComplete: React.FC<IProps> = React.memo(
                     icon={icon}
                     name='auto-complete'
                     onChange={onChange}
-                    placeholder='Country'
+                    placeholder={label}
                     type='text'
                     className={
                         isListDisplayable() ? 'auto-complete__input' : ''

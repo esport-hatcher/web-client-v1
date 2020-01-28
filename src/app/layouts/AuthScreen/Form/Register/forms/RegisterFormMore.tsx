@@ -129,6 +129,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     onChangeStatus={onChangeStatus}
                 />
                 <AutoComplete
+                    label='Country'
                     items={['Angola', 'Andorre', 'Angleterre', 'Arabie']}
                     onSelect={setCountry}
                     icon='pin'
