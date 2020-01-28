@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '@/api';
+import api from 'app/api';
 // tslint:disable-next-line: match-default-export-name
 import AsyncSelect from 'react-select/async';
 

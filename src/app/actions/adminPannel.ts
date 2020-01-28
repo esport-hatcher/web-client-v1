@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { ActionTypes, IGetState, CountQuery } from './types';
 import { IUser } from './authentication';
-import api from '@/api';
-import { IAdminPannelFiltersCount } from '@/reducers/adminPannel';
+import api from 'app/api';
+import { IAdminPannelFiltersCount } from 'app/reducers/adminPannel';
 
 export interface IAdminPannelFetchUsersSuccessAction {
     type: ActionTypes.adminPannelFetchUsersSuccess;

@@ -1,4 +1,4 @@
-import api from '@/api';
+import api from 'app/api';
 import Axios from 'axios';
 
 export const S3_LINK = 'https://esport-hatcher.s3.eu-west-3.amazonaws.com';

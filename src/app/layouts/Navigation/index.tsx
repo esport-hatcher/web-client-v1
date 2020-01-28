@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallowEqual } from 'react-redux';
-import { useSelector } from '@/custom-hooks';
+import { useSelector } from 'app/custom-hooks';
 import { NavBar } from './Navigation';
 
 export const Navigation: React.FC = () => {

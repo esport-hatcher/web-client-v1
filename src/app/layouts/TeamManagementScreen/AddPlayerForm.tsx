@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SmartSelect } from '@/components';
+import { SmartSelect } from 'app/components';
 
 export const AddPlayerForm: React.FC = React.memo(() => {
     const [, setPlayerSelected] = useState('');

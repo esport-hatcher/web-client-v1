@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import api from '@/api';
-import { Icon, IconName } from '@/components';
-import { sleep } from '@/shared/utils';
+import api from 'app/api';
+import { Icon, IconName } from 'app/components';
+import { sleep } from 'app/shared/utils';
 
 enum InputStatus {
     valid,

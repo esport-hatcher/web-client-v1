@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useInput, useToggler } from '@/custom-hooks';
-import { SmartInput } from '@/components';
+import { useInput, useToggler } from 'app/custom-hooks';
+import { SmartInput } from 'app/components';
 import { IIcons } from '../../Icon';
 
 interface IProps {

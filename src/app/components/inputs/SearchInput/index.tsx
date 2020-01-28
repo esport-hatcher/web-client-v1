@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { Icon } from '@/components';
-import { useToggler } from '@/custom-hooks';
+import { Icon } from 'app/components';
+import { useToggler } from 'app/custom-hooks';
 
 interface IProps {
     onSearch: (value: string) => void;

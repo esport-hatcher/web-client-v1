@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { routes } from '@/config';
-import { NavigationItem, Icon } from '@/components';
+import { routes } from 'app/config';
+import { NavigationItem, Icon } from 'app/components';
 
 interface IProps {
     admin: boolean;

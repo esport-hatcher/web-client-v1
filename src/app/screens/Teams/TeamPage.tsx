@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { CreateTeamForm, AddPlayerForm, ModalForm } from '@/layouts';
-import { Icon, TeamCard } from '@/components';
-import { useSelector, useToggler } from '@/custom-hooks';
 import { useDispatch } from 'react-redux';
-import { fetchTeams } from '@/actions';
+import { CreateTeamForm, AddPlayerForm, ModalForm } from 'app/layouts';
+import { Icon, TeamCard } from 'app/components';
+import { useSelector, useToggler } from 'app/custom-hooks';
+import { fetchTeams } from 'app/actions';
 
 export const _TeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();

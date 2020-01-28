@@ -9,7 +9,7 @@ import {
     IRegisterFormFillAction,
     IRegisterFormSetStageAction,
 } from './registerForm';
-import { IStoreState } from '@/reducers';
+import { IStoreState } from 'app/reducers';
 import {
     IAdminPannelFetchUsersSuccessAction,
     IAdminPannelSetLoadingAction,

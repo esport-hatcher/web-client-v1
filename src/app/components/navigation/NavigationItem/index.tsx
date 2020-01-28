@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, IconName } from '@/components';
+import { Icon, IconName } from 'app/components';
 
 interface IProps {
     onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;

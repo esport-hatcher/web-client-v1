@@ -1,25 +1,22 @@
 import React, { useCallback } from 'react';
 import { pick } from 'lodash';
-import { SmartInput, RoundButton } from '@/components';
-import {
-    registerFormSetStage,
-    IUserProps,
-    RegisterFormStages,
-} from '@/actions';
+import { SmartInput, RoundButton } from 'app/components';
+import { IUserProps, RegisterFormStages } from 'app/actions';
 import {
     getMinMaxFunction,
     getCompareStringFunction,
     isEmail,
-} from '@/shared/utils';
+} from 'app/shared/utils';
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import {
     RegisterOnChangeValue,
     RegisterOnChangeStatus,
-} from '@/custom-hooks/useRegisterForm';
-import { isStageMore } from '@/screens/Auth/AuthPage';
+    RegisterSetStage,
+} from 'app/custom-hooks/useRegisterForm';
+import { isStageMore } from 'app/screens/Auth/AuthPage';
 
 interface IProps {
-    setStage: typeof registerFormSetStage;
+    setStage: RegisterSetStage;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;

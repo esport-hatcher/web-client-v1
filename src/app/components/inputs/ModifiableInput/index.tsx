@@ -1,6 +1,6 @@
 import React from 'react';
-import { Icon } from '@/components/Icon';
-import { useToggler, useInput } from '@/custom-hooks';
+import { Icon } from 'app/components';
+import { useToggler, useInput } from 'app/custom-hooks';
 
 interface IProps {
     name: string;
