@@ -1,6 +1,6 @@
 import React from 'react';
 // tslint:disable-next-line: match-default-export-name
-import sprites from '../../../assets/sprite.svg';
+import sprites from 'assets/sprite.svg';
 
 export interface IIcons {
     rotate_right: string;
@@ -10,6 +10,7 @@ export interface IIcons {
     smartphone: string;
     chevron_right: string;
     chevron_left: string;
+    chevron_bottom: string;
     chat: string;
     settings: string;
     trends: string;
