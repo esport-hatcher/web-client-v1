@@ -31,16 +31,12 @@
     }
 
     &__input {
-        background-color: $color-dark-medium;
-        border-radius: $smart-input-border-radius;
-        border: none;
+        @extend %basic-shape;
         height: $smart-input-height;
         min-width: $smart-input-width;
-        padding: $smart-input-padding-top $smart-input-padding-sides;
         padding-left: 3 * $smart-input-padding-sides;
         font-size: 1.2rem;
         letter-spacing: 0.2rem;
-        color: $color-white;
         transition: border-color $smart-input-animation-duration
                 $smart-input-animation-style,
             padding-left $smart-input-animation-duration

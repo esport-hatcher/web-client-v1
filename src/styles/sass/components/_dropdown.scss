@@ -1,0 +1,73 @@
+.dropdown {
+    @extend %basic-shape;
+    position: relative;
+    letter-spacing: 1px;
+
+    &--active {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &__value {
+            font-weight: 700;
+
+            margin-right: auto;
+        }
+
+        &__icon {
+            width: 2.4rem;
+            height: 2.4rem;
+            fill: $color-white;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            &--rotated {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__list {
+        @extend %basic-shape;
+        padding: 0;
+        border: none;
+        top: 100%;
+        left: 0;
+        position: absolute;
+        width: max-content;
+        visibility: hidden;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+
+        &--active {
+            visibility: visible;
+        }
+
+        &__item {
+            border-top: 1px solid $color-white;
+            cursor: pointer;
+            padding: 1.2rem 4rem;
+            color: rgba($color-white, 0.7);
+            transition: background-color 0.3s ease-in-out,
+                color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+
+            &:last-of-type {
+                border-bottom-left-radius: $smart-input-border-radius;
+                border-bottom-right-radius: $smart-input-border-radius;
+            }
+
+            &:hover {
+                color: $color-white;
+                background-color: $color-dark-two;
+                text-shadow: 0 0 0.65px #fff, 0 0 0.65px #fff;
+            }
+        }
+    }
+}
