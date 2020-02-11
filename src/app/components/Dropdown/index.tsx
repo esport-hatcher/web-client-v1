@@ -16,6 +16,7 @@ export const Dropdown: React.FC<IProps> = React.memo(({ items, onSelect }) => {
     useEffect(() => {
         const width = listRef.current ? listRef.current.offsetWidth : 0;
         setWidth(width);
+        // eslint-disable-next-line
     }, [listRef.current]);
 
     const onItemSelect = (
