@@ -3,15 +3,6 @@ import { Dropdown } from 'app/components';
 // tslint:disable-next-line: no-import-side-effect
 import 'styles/sass/main.scss';
 import { StoryWrapper } from 'app/shared/StoryWrapper';
-
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faChevronDown,
-    faChevronCircleDown,
-} from '@fortawesome/free-solid-svg-icons';
-
-library.add(faChevronDown, faChevronCircleDown);
-
 export default { title: 'Dropdown' };
 
 export const countries = () => (
