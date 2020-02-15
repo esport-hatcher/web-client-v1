@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'app/components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useToggler, useInput } from 'app/custom-hooks';
 
 interface IProps {
@@ -65,7 +65,10 @@ export const ModifiableInput: React.FC<IProps> = ({
                     'modifiable-input__btn--hidden'}`}
                 onClick={onChangeInputMode}
             >
-                <Icon name='pen' className='modifiable-input__btn__icon' />
+                <FontAwesomeIcon
+                    icon='pen'
+                    className='modifiable-input__btn__icon'
+                />
             </button>
             {displayContent()}
         </div>

@@ -68,7 +68,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
             </div>
             <form className='register-screen__basic' onSubmit={onSubmit}>
                 <SmartInput
-                    icon='mail'
+                    icon='envelope'
                     value={fields.email.value}
                     type='email'
                     placeholder='Email'
@@ -113,7 +113,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                 />
                 {displayErrorMsg(errorMsg)}
                 <RoundButton
-                    icon='chevron_right'
+                    icon='chevron-right'
                     className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
             </form>

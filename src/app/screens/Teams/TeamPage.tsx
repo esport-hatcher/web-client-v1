@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CreateTeamForm, AddPlayerForm, ModalForm } from 'app/layouts';
-import { Icon, TeamCard } from 'app/components';
+import { TeamCard } from 'app/components';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { fetchTeams } from 'app/actions';
 
@@ -22,9 +23,9 @@ export const _TeamPage: React.FC = React.memo(() => {
                     return <TeamCard item={item} />;
                 })}
             <div className='select-team__modal--button' onClick={onShow}>
-                <Icon
+                <FontAwesomeIcon
                     className='select-team__modal--button__icon'
-                    name='cross'
+                    icon='plus-circle'
                 />
             </div>
             <ModalForm show={show} handleClose={onShow}>

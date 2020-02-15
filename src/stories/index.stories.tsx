@@ -13,7 +13,7 @@ export const basic = () => (
             items={['Andorre', 'Angleterre', 'Algérie', 'Andalousie', 'France']}
             // tslint:disable-next-line: no-console
             onSelect={(selected: string) => console.log(selected)}
-            icon='pin'
+            icon='map-pin'
         />
     </StoryWrapper>
 );

@@ -32,9 +32,7 @@
     }
 
     &__icon {
-        height: $search-field-icon-size;
-        width: $search-field-icon-size;
-        fill: $color-light-grey;
+        font-size: 1.6rem;
         transition: all $search-field-animation-duration;
         position: absolute;
         left: $search-field-padding;
@@ -42,14 +40,12 @@
         transform: translateY(-50%);
 
         &--active {
-            fill: $color-white;
             top: -50%;
         }
     }
 
     &__icon-status {
-        width: $search-field-icon-size / 2;
-        height: $search-field-icon-size / 2;
+        font-size: 1.4rem;
         margin-left: -($search-field-padding * 2) * 2;
     }
 }

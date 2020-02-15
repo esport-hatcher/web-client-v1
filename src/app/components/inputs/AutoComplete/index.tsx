@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useInput, useToggler } from 'app/custom-hooks';
 import { SmartInput } from 'app/components';
-import { IIcons } from '../../Icon';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface IProps {
     label: string;
     items: string[];
-    icon: keyof IIcons;
+    icon: IconProp;
     onSelect: (selected: string) => void;
 }
 

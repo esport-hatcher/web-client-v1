@@ -3,18 +3,22 @@ i[class*='-spinner'] {
 }
 
 .icon {
-    transition: fill $icon-animation-duration;
+    transition: color $icon-animation-duration;
     // COLORS
     &--pink {
-        fill: $color-rosy-pink;
+        color: $color-rosy-pink;
     }
 
     &--green {
-        fill: $color-green-light;
+        color: $color-green-light;
     }
 
     &--light-grey {
-        fill: $color-light-grey;
+        color: $color-light-grey;
+    }
+
+    &--white {
+        color: $color-white;
     }
 
     // ANIMATIONS

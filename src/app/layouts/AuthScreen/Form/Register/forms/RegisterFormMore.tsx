@@ -96,7 +96,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
             <form className='register-screen__more' onSubmit={_onSubmit}>
                 <RoundButton
                     onClick={onGoBack}
-                    icon='chevron_left'
+                    icon='chevron-left'
                     className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
                 />
                 <SmartInput
@@ -122,7 +122,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.city.value}
                     type='text'
-                    icon='pin'
+                    icon='map-pin'
                     placeholder='City'
                     name='city'
                     onChange={onChangeValue}
@@ -132,7 +132,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     label='Country'
                     items={['Angola', 'Andorre', 'Angleterre', 'Arabie']}
                     onSelect={setCountry}
-                    icon='pin'
+                    icon='map-pin'
                 />
                 <SmartInput
                     value={fields.phoneNumber.value}
@@ -146,7 +146,8 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 {displayErrorMsg(errorMsg)}
                 <IconButton
                     className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
-                    icon='chevron_right'
+                    icon={loading ? 'spinner' : 'sign-in-alt'}
+                    rotation={loading ? 90 : undefined}
                     loading={loading}
                 >
                     Register
