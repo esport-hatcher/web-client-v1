@@ -15,12 +15,11 @@
     }
 
     &__icon {
-        width: 2rem;
-        height: 2rem;
-        fill: $color-rosy-pink;
+        font-size: 1.8rem;
+        color: $color-rosy-pink;
 
         &--completed {
-            fill: $color-green-light;
+            color: $color-green-light;
         }
     }
 }

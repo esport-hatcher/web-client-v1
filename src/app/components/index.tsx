@@ -1,5 +1,4 @@
 export * from './admin';
-export * from './Icon';
 export * from './SmartSelect';
 export * from './buttons';
 export * from './inputs';

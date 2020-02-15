@@ -1,10 +1,11 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'react-router-dom';
-import { Icon, IconName } from 'app/components';
 
 interface IProps {
     onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-    icon: IconName;
+    icon: IconProp;
     path: string;
     text: string;
     active: boolean;
@@ -21,7 +22,7 @@ export const NavigationItem: React.FC<IProps> = React.memo(
                     'nav-bar__item--active'} ${className}`}
                 onClick={onClick}
             >
-                <Icon className='nav-bar__item__icon' name={icon} />
+                <FontAwesomeIcon className='nav-bar__item__icon' icon={icon} />
                 <p
                     className={`nav-bar__item__text ${activeText &&
                         'nav-bar__item__text--display'}`}
