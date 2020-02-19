@@ -9,7 +9,7 @@ interface IProps {
     noEmpty?: boolean;
 }
 
-export const _SettingsProfile: React.FC<IProps> = React.memo(() => {
+const _SettingsProfile: React.FC<IProps> = React.memo(() => {
     const user = useSelector(state => state.authentication.user, shallowEqual);
 
     if (user) {

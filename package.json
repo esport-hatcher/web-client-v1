@@ -41,6 +41,7 @@
         "awesome-typescript-loader": "^5.2.1",
         "prettier": "^1.17.0",
         "react-docgen-typescript-loader": "^3.6.0",
+        "source-map-explorer": "^2.3.0",
         "tslint": "^5.16.0",
         "tslint-config-prettier": "^1.18.0",
         "tslint-plugin-prettier": "^2.0.1",
@@ -53,6 +54,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
         "launch-tests": "react-scripts test --env=jsdom",
         "launch-tests-ci": "CI=true react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
