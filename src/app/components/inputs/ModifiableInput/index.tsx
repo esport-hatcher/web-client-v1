@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useToggler, useInput } from 'app/custom-hooks';
 
@@ -15,9 +15,9 @@ export const ModifiableInput: React.FC<IProps> = ({
     label,
     onChange,
 }) => {
-    const [inputMode, onChangeInputMode] = useToggler(false);
-    const [displayButton, onChangeDisplayButton] = useToggler(false);
-    const [inputValue, onInputValueChange] = useInput(value);
+    const [inputMode, setInputMode] = useToggler(false);
+    const [displayButton, , setDisplayButton] = useToggler(false);
+    const [inputValue, setInputValue] = useInput(value);
 
     const displayValue = () => {
         if (value === inputValue) {
@@ -28,8 +28,16 @@ export const ModifiableInput: React.FC<IProps> = ({
 
     const onLoseFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         onChange(e);
-        onChangeInputMode();
+        setInputMode();
     };
+
+    const onMouseLeave = useCallback(() => {
+        setDisplayButton(false);
+    }, [setDisplayButton]);
+
+    const onMouseEnter = useCallback(() => {
+        setDisplayButton(true);
+    }, [setDisplayButton]);
 
     const displayContent = () => {
         if (inputMode) {
@@ -38,7 +46,7 @@ export const ModifiableInput: React.FC<IProps> = ({
                     className='modifiable-input__input important-info important-info--md'
                     name={name}
                     value={inputValue}
-                    onChange={onInputValueChange}
+                    onChange={setInputValue}
                     autoFocus
                     onBlur={onLoseFocus}
                 />
@@ -54,8 +62,8 @@ export const ModifiableInput: React.FC<IProps> = ({
     return (
         <div
             className='modifiable-input'
-            onMouseEnter={onChangeDisplayButton}
-            onMouseLeave={onChangeDisplayButton}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
         >
             <label className='modifiable-input__label label label-sm'>
                 {label}
@@ -63,7 +71,7 @@ export const ModifiableInput: React.FC<IProps> = ({
             <button
                 className={`modifiable-input__btn ${!displayButton &&
                     'modifiable-input__btn--hidden'}`}
-                onClick={onChangeInputMode}
+                onClick={setInputMode}
             >
                 <FontAwesomeIcon
                     icon='pen'
