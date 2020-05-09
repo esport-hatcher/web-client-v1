@@ -4,7 +4,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'react-router-dom';
 
 interface IProps {
-    onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
     icon: IconProp;
     path: string;
     text: string;
