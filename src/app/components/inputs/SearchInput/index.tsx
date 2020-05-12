@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { Icon } from '@/components';
-import { useToggler } from '@/custom-hooks';
+import { useToggler } from 'app/custom-hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IProps {
     onSearch: (value: string) => void;
@@ -33,20 +33,21 @@ export const SearchInput: React.FC<IProps> = React.memo(
         const getIcon = () => {
             if (loading) {
                 return (
-                    <Icon
+                    <FontAwesomeIcon
                         className={`search-input__icon-status  icon--rotate ${
                             focused ? 'icon--green' : 'icon--light-grey'
                         }`}
-                        name='rotate_right'
+                        icon='spinner'
+                        rotation={90}
                     />
                 );
             }
             return (
-                <Icon
+                <FontAwesomeIcon
                     className={`search-input__icon-status icon--button ${
                         focused ? 'icon--pink' : 'icon--light-grey'
                     }`}
-                    name='cross'
+                    icon='times'
                     onClick={emptyInput}
                 />
             );
@@ -54,10 +55,10 @@ export const SearchInput: React.FC<IProps> = React.memo(
 
         return (
             <form action='#' className='search-input'>
-                <Icon
-                    className={`search-input__icon ${focused &&
-                        'search-input__icon--active'}`}
-                    name='search'
+                <FontAwesomeIcon
+                    className={`search-input__icon icon--light-grey ${focused &&
+                        'search-input__icon--active icon--white'}`}
+                    icon='search'
                 />
                 <input
                     className='search-input__input'

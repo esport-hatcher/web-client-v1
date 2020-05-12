@@ -9,12 +9,15 @@ import {
     IRegisterFormFillAction,
     IRegisterFormSetStageAction,
 } from './registerForm';
-import { IStoreState } from '@/reducers';
+import { IStoreState } from 'app/reducers';
 import {
     IAdminPannelFetchUsersSuccessAction,
     IAdminPannelSetLoadingAction,
     IAdminPannelCountFiltersAction,
+    IAdminPannelFetchNextPageSuccessAction,
 } from './adminPannel';
+
+import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
 
 export type CountQuery = { records: number };
 
@@ -29,9 +32,13 @@ export enum ActionTypes {
     deleteUser,
     registerFormFill,
     registerFormSetStage,
+    adminPannelFetchNextPageSuccess,
     adminPannelFetchUsersSuccess,
+
     adminPannelSetLoading,
     adminPannelCountFilters,
+    fetchteamSucess,
+    fetchTeamError,
 }
 
 export type Action =
@@ -41,9 +48,12 @@ export type Action =
     | IRegisterFormSetStageAction
     | ILogoutAction
     | IAdminPannelFetchUsersSuccessAction
+    | IAdminPannelFetchNextPageSuccessAction
     | IAdminPannelSetLoadingAction
     | IAdminPannelCountFiltersAction
     | IPatchUserAction
-    | IDeleteUserAction;
+    | IDeleteUserAction
+    | ITeamsFetchsAction
+    | ITeamsErrorAction;
 
 export type IGetState = () => IStoreState;

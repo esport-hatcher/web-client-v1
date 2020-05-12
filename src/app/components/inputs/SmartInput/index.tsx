@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import api from '@/api';
-import { Icon, IconName } from '@/components';
-import { sleep } from '@/shared/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import api from 'app/api';
+import { sleep } from 'app/shared/utils';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 enum InputStatus {
     valid,
@@ -16,7 +17,7 @@ interface IProps {
     type: 'email' | 'text' | 'password';
     pattern?: string;
     required?: boolean;
-    icon: IconName;
+    icon: IconProp;
     value: string;
     className?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -101,14 +102,14 @@ export const SmartInput: React.FC<IProps> = React.memo(
             }
         };
 
-        const getIconStatus = (): IconName => {
+        const getIconStatus = (): IconProp => {
             switch (inputStatus) {
                 case InputStatus.error:
-                    return 'error';
+                    return 'times';
                 case InputStatus.valid:
                     return 'check';
                 case InputStatus.loading:
-                    return 'rotate_right';
+                    return 'spinner';
                 default:
                     return icon;
             }
@@ -143,7 +144,10 @@ export const SmartInput: React.FC<IProps> = React.memo(
                     onFocus={onFocus}
                     onBlurCapture={onLoseFocus}
                 />
-                <Icon className='smart-input__icon' name={getIconStatus()} />
+                <FontAwesomeIcon
+                    className='smart-input__icon'
+                    icon={getIconStatus()}
+                />
                 <label htmlFor={name} className='smart-input__label'>
                     {placeholder}
                 </label>

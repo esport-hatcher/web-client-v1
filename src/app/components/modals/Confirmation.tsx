@@ -1,5 +1,5 @@
 import React from 'react';
-import { IModal } from '@/components';
+import { IModal } from 'app/components';
 
 interface IProps extends IModal {
     noEmpty?: boolean;
@@ -16,7 +16,7 @@ export const ModalConfirmation: React.FC<IProps> = React.memo(
                 <div
                     className='modal-confirmation__background'
                     onClick={onClose}
-                ></div>
+                />
                 <div className='modal-confirmation__content'>
                     <p className='title title--xs'>{title}</p>
                     <hr className='divider' />

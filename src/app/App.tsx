@@ -1,13 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { routes } from '@/config';
-import { AdminPannel, AuthPage, HomePage, Logout } from '@/screens';
-
-import { Navigation } from '@/layouts';
-
+import { routes } from 'app/config';
+import {
+    AdminPannel,
+    AuthPage,
+    HomePage,
+    Logout,
+    TeamPage,
+    EditTeamPage,
+} from 'app/screens';
 // tslint:disable-next-line: no-import-side-effect
-import '@styles/sass/main.scss';
-import { SettingsProfile } from './screens/Settings/Profile';
+import 'styles/sass/main.scss';
+
+import { Navigation } from 'app/layouts';
+import { SettingsProfile } from 'app/screens/Settings/Profile';
 
 export const App: React.FC = () => {
     return (
@@ -16,7 +22,9 @@ export const App: React.FC = () => {
                 <Navigation />
                 <div className='container__content'>
                     <Switch>
+                        <Route path={routes.team} component={EditTeamPage} />
                         <Route path={routes.home} exact component={HomePage} />
+                        <Route path={routes.teams} exact component={TeamPage} />
                         <Route
                             path={routes.login}
                             exact

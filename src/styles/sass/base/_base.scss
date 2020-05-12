@@ -20,7 +20,6 @@ body {
 .container {
     display: grid;
     grid-template-columns: [sidebar-start] min-content [sidebar-end full-start] 1fr [full-end];
-    transition: grid-template-columns $sidebar-animation-duration ease-out;
     grid-template-rows: minmax(100vh, min-content);
 
     &__content {

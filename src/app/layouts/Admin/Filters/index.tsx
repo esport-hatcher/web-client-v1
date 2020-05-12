@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, shallowEqual } from 'react-redux';
-import { FilterItem } from '@/components';
-import { adminpannelCountFilters } from '@/actions';
-import { useSelector } from '@/custom-hooks';
+import { FilterItem } from 'app/components';
+import { adminpannelCountFilters } from 'app/actions';
+import { useSelector } from 'app/custom-hooks';
 
 enum FilterKeys {
     all = 'all',

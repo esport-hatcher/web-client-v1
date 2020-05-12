@@ -6,19 +6,22 @@ import {
     IconButton,
     RoundButton,
     AutoComplete,
-} from '@/components';
-import { isNotEmpty } from '@/shared/utils';
+} from 'app/components';
+import { isNotEmpty } from 'app/shared/utils';
 import {
-    registerFormSetStage,
     IUserProps,
     RegisterFormStages,
     IRegisterForm,
     register,
-} from '@/actions';
+} from 'app/actions';
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import { isStageMore } from '@/screens/Auth/AuthPage';
-import { RegisterOnChangeValue, RegisterOnChangeStatus } from '@/custom-hooks';
-import { FAKE_LOADING_TIME } from '@/config';
+import { isStageMore } from 'app/screens/Auth/AuthPage';
+import {
+    RegisterOnChangeValue,
+    RegisterOnChangeStatus,
+    RegisterSetStage,
+} from 'app/custom-hooks';
+import { FAKE_LOADING_TIME } from 'app/config';
 
 interface IProps {
     errorMsg?: string;
@@ -26,7 +29,7 @@ interface IProps {
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;
     stage: RegisterFormStages;
-    setStage: typeof registerFormSetStage;
+    setStage: RegisterSetStage;
 }
 
 export const RegisterFormMore: React.FC<IProps> = ({
@@ -93,7 +96,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
             <form className='register-screen__more' onSubmit={_onSubmit}>
                 <RoundButton
                     onClick={onGoBack}
-                    icon='chevron_left'
+                    icon='chevron-left'
                     className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
                 />
                 <SmartInput
@@ -119,16 +122,17 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 <SmartInput
                     value={fields.city.value}
                     type='text'
-                    icon='pin'
+                    icon='map-pin'
                     placeholder='City'
                     name='city'
                     onChange={onChangeValue}
                     onChangeStatus={onChangeStatus}
                 />
                 <AutoComplete
+                    label='Country'
                     items={['Angola', 'Andorre', 'Angleterre', 'Arabie']}
                     onSelect={setCountry}
-                    icon='pin'
+                    icon='map-pin'
                 />
                 <SmartInput
                     value={fields.phoneNumber.value}
@@ -142,7 +146,8 @@ export const RegisterFormMore: React.FC<IProps> = ({
                 {displayErrorMsg(errorMsg)}
                 <IconButton
                     className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
-                    icon='chevron_right'
+                    icon={loading ? 'spinner' : 'sign-in-alt'}
+                    rotation={loading ? 90 : undefined}
                     loading={loading}
                 >
                     Register

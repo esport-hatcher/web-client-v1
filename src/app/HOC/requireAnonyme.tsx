@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { shallowEqual } from 'react-redux';
-import { routes } from '@/config';
-import { useSelector } from '@/custom-hooks';
+import { routes } from 'app/config';
+import { useSelector } from 'app/custom-hooks';
 
 export const requireAnonyme = <T extends {}>(ChildComponent: React.FC<T>) => {
     // tslint:disable-next-line: no-any

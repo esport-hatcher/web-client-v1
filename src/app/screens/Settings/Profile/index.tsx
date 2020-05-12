@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallowEqual } from 'react-redux';
-import { requireLogin } from '@/HOC';
-import { useSelector } from '@/custom-hooks';
-import { HeaderPage } from '@/components';
-import { SettingsProfileBox } from '@/layouts';
+import { requireLogin } from 'app/HOC';
+import { useSelector } from 'app/custom-hooks';
+import { HeaderPage } from 'app/components';
+import { SettingsProfileBox } from 'app/layouts';
 
 interface IProps {
     noEmpty?: boolean;

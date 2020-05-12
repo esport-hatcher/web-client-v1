@@ -16,8 +16,7 @@ const getContent = (loginMode: boolean): IBannerContent => {
     if (loginMode) {
         return {
             header: 'Hello, Friend !',
-            subHeader:
-                'Enter your personal infos and start your journey with us !',
+            subHeader: 'Create an account and join the adventure !',
             button: 'Sign up',
         };
     }

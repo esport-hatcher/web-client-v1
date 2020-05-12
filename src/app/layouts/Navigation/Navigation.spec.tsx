@@ -15,7 +15,7 @@ describe('<Navigation />', () => {
     });
 
     it('render 4 items', () => {
-        expect(wrapped.find(Link).length).toBe(4);
+        expect(wrapped.find(Link).length).toBe(5);
     });
 
     it('render a chat item', () => {
@@ -40,7 +40,7 @@ describe('<Navigation />', () => {
         expect(
             wrapped
                 .find(Link)
-                .at(1)
+                .at(2)
                 .text()
         ).toBe('Settings');
     });
@@ -49,7 +49,7 @@ describe('<Navigation />', () => {
         expect(
             wrapped
                 .find(Link)
-                .at(2)
+                .at(3)
                 .text()
         ).toBe('Feed');
     });

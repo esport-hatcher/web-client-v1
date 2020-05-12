@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { SettingsProfileForm } from './Form';
-import { UserAvatar } from '@/components';
-import { IUser, patchUser } from '@/actions';
+import { UserAvatar } from 'app/components';
+import { IUser, patchUser } from 'app/actions';
 
 interface IProps {
     user: IUser;

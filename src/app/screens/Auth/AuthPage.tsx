@@ -1,7 +1,7 @@
 import React from 'react';
-import { AuthBanner, RegisterForm, LoginForm } from '@/layouts';
-import { useToggler, useSelector } from '@/custom-hooks';
-import { RegisterFormStages } from '@/actions';
+import { AuthBanner, RegisterForm, LoginForm } from 'app/layouts';
+import { useToggler, useSelector } from 'app/custom-hooks';
+import { RegisterFormStages } from 'app/actions';
 
 interface IProps {
     isLogin: boolean;
@@ -19,14 +19,14 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
         if (loginMode) {
             return <LoginForm errorMsg={errorMsg} />;
         }
-        return <RegisterForm stage={stage} errorMsg={errorMsg} />;
+        return <RegisterForm stage={stage!} errorMsg={errorMsg} />;
     };
 
     return (
         <main className='auth-screen'>
             <div
                 className={`auth-screen__banner ${loginMode &&
-                    'auth-screen__banner--login'} ${isStageMore(stage) &&
+                    'auth-screen__banner--login'} ${isStageMore(stage!) &&
                     'auth-screen__banner--register'}`}
             >
                 <AuthBanner
@@ -36,7 +36,7 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
             </div>
             <div
                 className={`auth-screen__form ${loginMode &&
-                    'auth-screen__form--login'} ${isStageMore(stage) &&
+                    'auth-screen__form--login'} ${isStageMore(stage!) &&
                     'auth-screen__form--register'}`}
             >
                 {renderForm()}

@@ -6,15 +6,35 @@
 }
 
 @mixin input-placeholder($color) {
-  &::-webkit-input-placeholder { color: $color; opacity: 1;}
-  &::-moz-placeholder { color: $color; opacity: 1;} /* Firefox 19+ */
-  &:-moz-placeholder { color: $color; opacity: 1;} /* Firefox 18- */
-  &:-ms-input-placeholder { color: $color; opacity: 1;}
+    &::-webkit-input-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    } /* Firefox 19+ */
+    &:-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    } /* Firefox 18- */
+    &:-ms-input-placeholder {
+        color: $color;
+        opacity: 1;
+    }
 }
 
-@mixin calc($property, $expression...) { 
-  #{$property}: -moz-calc(#{$expression}); 
-  #{$property}: -o-calc(#{$expression}); 
-  #{$property}: -webkit-calc(#{$expression}); 
-  #{$property}: calc(#{$expression}); 
-} 
+@mixin calc($property, $expression...) {
+    #{$property}: -moz-calc(#{$expression});
+    #{$property}: -o-calc(#{$expression});
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}: calc(#{$expression});
+}
+
+%basic-shape {
+    background-color: $color-dark-medium;
+    border-radius: $smart-input-border-radius;
+    border: none;
+    color: $color-white;
+    padding: $smart-input-padding-top $smart-input-padding-sides;
+}

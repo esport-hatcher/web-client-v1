@@ -6,6 +6,7 @@ export enum routes {
     chat = '/chat',
     feed = '/feed',
     logout = '/logout',
-    settings = '/settings',
+    teams = '/teams',
+    team = '/team/:id',
     settingsProfile = '/settings/profile',
 }

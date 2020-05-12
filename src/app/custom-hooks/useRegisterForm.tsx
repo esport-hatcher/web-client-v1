@@ -5,7 +5,7 @@ import {
     IUserProps,
     registerFormSetStage,
     RegisterFormStages,
-} from '@/actions';
+} from 'app/actions';
 
 export interface IInputEvent {
     target: {
@@ -18,10 +18,12 @@ export type RegisterOnChangeValue = (event: IInputEvent) => void;
 
 export type RegisterOnChangeStatus = (field: string, valid: boolean) => void;
 
+export type RegisterSetStage = (stage: RegisterFormStages) => void;
+
 export const useRegisterForm = (): {
     onChangeStatus: RegisterOnChangeStatus;
     onChangeValue: RegisterOnChangeValue;
-    setStage: typeof registerFormSetStage;
+    setStage: RegisterSetStage;
 } => {
     const dispatch = useDispatch();
 

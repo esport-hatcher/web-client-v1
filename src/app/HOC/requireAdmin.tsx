@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { shallowEqual } from 'react-redux';
-import { useSelector } from '@/custom-hooks';
+import { useSelector } from 'app/custom-hooks';
 
 export const requireAdmin = <T extends {}>(ChildComponent: React.FC<T>) => {
     // tslint:disable-next-line: no-any
