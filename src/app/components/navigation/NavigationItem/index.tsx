@@ -4,7 +4,9 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Link } from 'react-router-dom';
 
 interface IProps {
-    onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    // TODO: PUT RIGHT TYPE
+    // tslint:disable-next-line: no-any
+    onClick: any;
     icon: IconProp;
     path: string;
     text: string;
