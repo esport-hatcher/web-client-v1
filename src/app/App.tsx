@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
-import { routes } from 'app/config';
+import { routes, SCREEN_TRANSITION_MS } from 'app/config';
 import {
     AdminPannel,
     AuthPage,
@@ -23,57 +23,59 @@ export const App: React.FC = () => {
         <div className='container'>
             <Navigation />
             <div className='container__content'>
-                <TransitionGroup>
+                <TransitionGroup component={null}>
                     <CSSTransition
-                        timeout={500}
+                        timeout={SCREEN_TRANSITION_MS}
                         classNames='router-transition'
                         key={location.key}
                     >
-                        <Switch location={location}>
-                            <Route
-                                path={routes.team}
-                                component={EditTeamPage}
-                            />
-                            <Route
-                                path={routes.home}
-                                exact
-                                component={HomePage}
-                            />
-                            <Route
-                                path={routes.teams}
-                                exact
-                                component={TeamPage}
-                            />
-                            <Route
-                                path={routes.login}
-                                exact
-                                render={props => (
-                                    <AuthPage {...props} isLogin={true} />
-                                )}
-                            />
-                            <Route
-                                path={routes.register}
-                                exact
-                                render={props => (
-                                    <AuthPage {...props} isLogin={false} />
-                                )}
-                            />
-                            <Route
-                                path={routes.adminPannel}
-                                exact
-                                component={AdminPannel}
-                            />
-                            <Route
-                                path={routes.settingsProfile}
-                                exact
-                                component={SettingsProfile}
-                            />
-                            <Route
-                                path={routes.logout}
-                                exact
-                                component={Logout}
-                            />
-                        </Switch>
+                        <div className='router-transition__container'>
+                            <Switch location={location}>
+                                <Route
+                                    path={routes.team}
+                                    component={EditTeamPage}
+                                />
+                                <Route
+                                    path={routes.home}
+                                    exact
+                                    component={HomePage}
+                                />
+                                <Route
+                                    path={routes.teams}
+                                    exact
+                                    component={TeamPage}
+                                />
+                                <Route
+                                    path={routes.login}
+                                    exact
+                                    render={props => (
+                                        <AuthPage {...props} isLogin={true} />
+                                    )}
+                                />
+                                <Route
+                                    path={routes.register}
+                                    exact
+                                    render={props => (
+                                        <AuthPage {...props} isLogin={false} />
+                                    )}
+                                />
+                                <Route
+                                    path={routes.adminPannel}
+                                    exact
+                                    component={AdminPannel}
+                                />
+                                <Route
+                                    path={routes.settingsProfile}
+                                    exact
+                                    component={SettingsProfile}
+                                />
+                                <Route
+                                    path={routes.logout}
+                                    exact
+                                    component={Logout}
+                                />
+                            </Switch>
+                        </div>
                     </CSSTransition>
                 </TransitionGroup>
             </div>

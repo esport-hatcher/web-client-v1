@@ -91,3 +91,32 @@
         transform: scale(1);
     }
 }
+
+/* react-transition-group animations */
+
+.router-transition {
+    &__container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    &-enter {
+        opacity: 0;
+        // transform: translateY(-100%);
+        &-active {
+            opacity: 1;
+            // transform: translateY(0%);
+            transition: opacity $page-transition-ms ease-in;
+        }
+    }
+
+    &-exit {
+        opacity: 1;
+        &-active {
+            opacity: 0;
+            // transform: translateY(100%);
+            transition: opacity $page-transition-ms ease-in;
+        }
+    }
+}
