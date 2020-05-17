@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { CreateTeamForm, AddPlayerForm, ModalForm } from '@/layouts';
-import { Icon, TeamCard } from '@/components';
+import { Icon, TeamCard, Plus } from '@/components';
 import { useSelector, useToggler } from '@/custom-hooks';
 import { useDispatch } from 'react-redux';
 import { fetchTeams } from '@/actions';
@@ -30,12 +30,12 @@ export const _TeamPage: React.FC = React.memo(() => {
             <ModalForm show={show} handleClose={onShow}>
                 <div className='col-1'>
                     <h1>Create your team</h1>
-                    <CreateTeamForm />
+                    <CreateTeamForm change={onShow} />
                 </div>
-                <div className='col-2'>
+                {/* <div className='col-2'>
                     <h1>Select your player</h1>
                     <AddPlayerForm />
-                </div>
+            </div>*/}
             </ModalForm>
         </main>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import Member from './Member';
 
+//export const Cards: React.FC = React.memo(() => {
 class Cards extends React.Component {
     state = {
         users: [

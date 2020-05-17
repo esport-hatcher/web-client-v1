@@ -1,6 +1,6 @@
 import React from 'react';
 // ts-ignore
-import ReactModal from 'react-modal';
+//import ReactModal from 'react-modal';
 
 interface IProps {
     handleCloseModal: () => void;

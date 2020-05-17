@@ -1,0 +1,36 @@
+
+.card {
+    margin-top: 3px;
+    height: 125px;
+    width: 500px;
+    background-color: #1d2938;
+    box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+    display: flex;
+    position: relative;
+  }
+  
+  .search {
+    color: white;
+    top: 30%;
+    margin: 0;
+    position: absolute;
+    left: 20px;
+  }
+  
+  .search-container {
+    width: inherit;
+  }
+  
+  .input-field {
+    position: absolute;
+    top: 37%;
+    right: 9%;
+  }
+  
+  .input {
+    width: 189px;
+    height: 29px;
+    border-radius: 35px;
+    border: solid 3px #748192;
+    background-color: #1d2938;
+  }

@@ -25,6 +25,10 @@
 @import './components/modifiable-input';
 @import './components/modal-confirmation';
 @import './components/auto-complete';
+@import './components/description';
+@import './components/team-user-card';
+@import './components/search-field-team-user';
+@import './components/plus';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -40,6 +44,7 @@
 @import './screens/auth-screen';
 @import './screens/admin-pannel';
 @import './screens/team-management-screen';
+@import './screens/edit-team-screen';
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-pannel';

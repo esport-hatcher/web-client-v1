@@ -3,7 +3,7 @@ import Modal from '../tm_modal/Modal';
 // ts-ignore
 import ReactModal from 'react-modal';
 
-class Plus extends React.Component<{}, { showModal: boolean }> {
+export class Plus extends React.Component<{}, { showModal: boolean }> {
     state = {
         showModal: false,
     };
@@ -38,7 +38,7 @@ class Plus extends React.Component<{}, { showModal: boolean }> {
                     <div className='vertical'></div>
                 </div>
                 <ReactModal
-                    isOpen={this.state.showModal}
+                    isOpen={true}
                     contentLabel={'Minimal'}
                     style={{
                         overlay: {},
@@ -49,11 +49,14 @@ class Plus extends React.Component<{}, { showModal: boolean }> {
                 >
                     <Modal handleCloseModal={this.handleCloseModal} />
 
-                    {/* <button onClick={this.handleCloseModal}> close modal</button> */}
+                    {
+                        <button onClick={this.handleCloseModal}>
+                            {' '}
+                            close modal
+                        </button>
+                    }
                 </ReactModal>
             </div>
         );
     }
 }
-
-export default Plus;
