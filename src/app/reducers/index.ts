@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ActionTypes } from '@/actions';
+import { ActionTypes } from 'app/actions';
 import { authenticationReducer, IAuthentication } from './authentication';
 import { registerFormReducer, IRegisterFormReducer } from './registerForm';
 import { adminPannelReducer, IAdminPannelReducer } from './adminPannel';

@@ -9,11 +9,12 @@ import {
     IRegisterFormFillAction,
     IRegisterFormSetStageAction,
 } from './registerForm';
-import { IStoreState } from '@/reducers';
+import { IStoreState } from 'app/reducers';
 import {
     IAdminPannelFetchUsersSuccessAction,
     IAdminPannelSetLoadingAction,
     IAdminPannelCountFiltersAction,
+    IAdminPannelFetchNextPageSuccessAction,
 } from './adminPannel';
 
 import {
@@ -37,7 +38,9 @@ export enum ActionTypes {
     deleteUser,
     registerFormFill,
     registerFormSetStage,
+    adminPannelFetchNextPageSuccess,
     adminPannelFetchUsersSuccess,
+
     adminPannelSetLoading,
     adminPannelCountFilters,
     fetchteamSucess,
@@ -54,6 +57,7 @@ export type Action =
     | IRegisterFormSetStageAction
     | ILogoutAction
     | IAdminPannelFetchUsersSuccessAction
+    | IAdminPannelFetchNextPageSuccessAction
     | IAdminPannelSetLoadingAction
     | IAdminPannelCountFiltersAction
     | IPatchUserAction

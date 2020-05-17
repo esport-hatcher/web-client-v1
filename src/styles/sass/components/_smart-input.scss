@@ -8,10 +8,9 @@
         transition: transform $smart-input-animation-duration
                 $smart-input-animation-style,
             opacity $smart-input-animation-duration $smart-input-animation-style;
-        fill: $color-light-grey;
+        color: $color-light-grey;
         position: absolute;
-        width: $smart-input-icon-size;
-        height: $smart-input-icon-size;
+        font-size: 1.8rem;
     }
 
     &__label {
@@ -31,16 +30,12 @@
     }
 
     &__input {
-        background-color: $color-dark-medium;
-        border-radius: $smart-input-border-radius;
-        border: none;
+        @extend %basic-shape;
         height: $smart-input-height;
         min-width: $smart-input-width;
-        padding: $smart-input-padding-top $smart-input-padding-sides;
         padding-left: 3 * $smart-input-padding-sides;
         font-size: 1.2rem;
         letter-spacing: 0.2rem;
-        color: $color-white;
         transition: border-color $smart-input-animation-duration
                 $smart-input-animation-style,
             padding-left $smart-input-animation-duration
@@ -52,7 +47,7 @@
             border-color: $color-rosy-pink;
 
             & ~ svg {
-                fill: $color-rosy-pink !important;
+                color: $color-rosy-pink !important;
             }
         }
 
@@ -60,7 +55,7 @@
             border-color: $color-green-light;
 
             & ~ svg {
-                fill: $color-green-light;
+                color: $color-green-light;
             }
         }
 

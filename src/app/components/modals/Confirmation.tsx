@@ -1,5 +1,5 @@
 import React from 'react';
-import { IModal } from '@/components';
+import { IModal } from 'app/components';
 
 interface IProps extends IModal {
     noEmpty?: boolean;

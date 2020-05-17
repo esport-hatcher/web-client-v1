@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '@/components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IProps {
     confirmed: boolean;
@@ -11,9 +11,9 @@ export const UserConfirmedInfo: React.FC<IProps> = React.memo(
     ({ confirmed, content, className }) => {
         return (
             <div className={`user-confirmed-info ${className}`}>
-                <Icon
+                <FontAwesomeIcon
                     className='user-confirmed-info__icon'
-                    name={confirmed ? 'check' : 'error'}
+                    icon={confirmed ? 'check' : 'times'}
                 />
                 <p className='user-confirmed-info__content important-info important-info--sm'>
                     {content}

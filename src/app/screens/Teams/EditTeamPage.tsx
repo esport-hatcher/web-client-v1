@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useToggler } from '@/custom-hooks';
+import { useSelector, useToggler } from 'app/custom-hooks';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { fetchTeamUser } from '@/actions';
-import { TeamUserCard, Description, SearchField } from '@/components';
+import { fetchTeamUser } from 'app/actions';
+import { TeamUserCard, Description, SearchField } from 'app/components';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();

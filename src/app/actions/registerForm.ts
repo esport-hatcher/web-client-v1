@@ -1,5 +1,5 @@
 import { ActionTypes } from './types';
-import { store } from '@/config';
+import { store } from 'app/config';
 
 type FormInput = {
     valid: boolean;

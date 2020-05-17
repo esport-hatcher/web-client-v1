@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SimpleImput, IconButton } from '@/components';
-import { createTeam } from '@/actions';
+import { SimpleImput, IconButton } from 'app/components';
+import { createTeam } from 'app/actions';
 
 interface IProps {
     change: Function;

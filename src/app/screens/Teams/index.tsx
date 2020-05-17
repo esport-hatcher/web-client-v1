@@ -1,4 +1,4 @@
-import { requireLogin } from '@/HOC';
+import { requireLogin } from 'app/HOC';
 import { _TeamPage } from './TeamPage';
 import { _EditTeamPage } from './EditTeamPage';
 

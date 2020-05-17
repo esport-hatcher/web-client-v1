@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUser } from '@/actions';
+import { IUser } from 'app/actions';
 import { useDispatch } from 'react-redux';
 
 interface IProps {

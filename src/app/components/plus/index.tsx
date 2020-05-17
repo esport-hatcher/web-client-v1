@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../tm_modal/Modal';
 // ts-ignore
-import ReactModal from 'react-modal';
+/*import ReactModal from 'react-modal';
 
 export class Plus extends React.Component<{}, { showModal: boolean }> {
     state = {
@@ -59,4 +59,4 @@ export class Plus extends React.Component<{}, { showModal: boolean }> {
             </div>
         );
     }
-}
+}*/

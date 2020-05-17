@@ -1,4 +1,4 @@
-import { Action, IUser, ActionTypes } from '@/actions';
+import { Action, IUser, ActionTypes } from 'app/actions';
 
 const INITIAL_STATE = {
     user: undefined,

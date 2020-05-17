@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useInput, useToggler } from '@/custom-hooks';
-import { SmartInput } from '@/components';
-import { IIcons } from '../Icon';
+import { useInput, useToggler } from 'app/custom-hooks';
+import { SmartInput } from 'app/components';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface IProps {
+    label: string;
     items: string[];
-    icon: keyof IIcons;
+    icon: IconProp;
     onSelect: (selected: string) => void;
 }
 
 export const AutoComplete: React.FC<IProps> = React.memo(
-    ({ items, onSelect, icon }) => {
+    ({ items, onSelect, icon, label }) => {
         const [country, onChange] = useInput();
         const [matchings, setMatchings] = useState<string[]>([]);
         const [listDisplayable, , setListDisplayable] = useToggler(false);
@@ -88,7 +89,7 @@ export const AutoComplete: React.FC<IProps> = React.memo(
                     icon={icon}
                     name='auto-complete'
                     onChange={onChange}
-                    placeholder='Country'
+                    placeholder={label}
                     type='text'
                     className={
                         isListDisplayable() ? 'auto-complete__input' : ''

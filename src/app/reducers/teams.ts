@@ -1,4 +1,4 @@
-import { ITeams, Action, ActionTypes, IUser } from '@/actions';
+import { ITeams, Action, ActionTypes, IUser } from 'app/actions';
 
 export interface IFetchTeam {
     team: ITeams[];

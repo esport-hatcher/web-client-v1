@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { patchUser, IUser } from '@/actions';
-import { ModifiableInput } from '@/components';
+import { patchUser, IUser } from 'app/actions';
+import { ModifiableInput } from 'app/components';
 
 interface IProps {
     user: IUser;

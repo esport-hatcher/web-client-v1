@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import api from '@/api';
+import api from 'app/api';
 import { ActionTypes, IGetState } from './types';
 import { IUser } from './authentication';
 

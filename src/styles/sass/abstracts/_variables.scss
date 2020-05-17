@@ -14,9 +14,11 @@ $color-white: #fff;
 $color-light-grey: #748192;
 $color-green-light: rgb(30, 226, 30);
 
-$color-primary-gradient: linear-gradient(122deg,
+$color-primary-gradient: linear-gradient(
+    122deg,
     lighten($color-rosy-pink, 10%),
-    $color-rosy-pink);
+    $color-rosy-pink
+);
 
 /*
 GENERAL
@@ -48,7 +50,7 @@ $sidebar-size: 10rem;
 $sidebar-size-expanded: 22rem;
 $sidebar-expand-button-size: 3rem;
 $sidebar-animation-duration: 0.3s;
-$sidebar-item-spacing: 8rem;
+$sidebar-item-spacing: 1.2rem;
 $sidebar-border: 1px solid $color-dark-four;
 $sidebar-item-padding: 3rem;
 

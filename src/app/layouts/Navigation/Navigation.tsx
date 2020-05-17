@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { routes } from '@/config';
-import { NavigationItem, Icon } from '@/components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { routes } from 'app/config';
+import { NavigationItem } from 'app/components';
 
 interface IProps {
     admin: boolean;
@@ -42,7 +43,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     <NavigationItem
                         active={currentItem.includes(routes.adminPannel)}
                         activeText={textDisplay}
-                        icon='infinite'
+                        icon='tools'
                         onClick={onItemClick}
                         path={routes.adminPannel}
                         text='Admin Pannel'
@@ -51,7 +52,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routes.chat)}
                     activeText={textDisplay}
-                    icon='chat'
+                    icon='envelope'
                     onClick={onItemClick}
                     path={routes.chat}
                     text='Chat'
@@ -59,7 +60,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routes.teams)}
                     activeText={textDisplay}
-                    icon='teams'
+                    icon='users'
                     onClick={onItemClick}
                     path={routes.teams}
                     text='Teams management'
@@ -67,7 +68,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routes.settingsProfile)}
                     activeText={textDisplay}
-                    icon='settings'
+                    icon='cog'
                     onClick={onItemClick}
                     path={routes.settingsProfile}
                     text='Settings'
@@ -75,7 +76,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routes.feed)}
                     activeText={textDisplay}
-                    icon='trends'
+                    icon='poll'
                     onClick={onItemClick}
                     path={routes.feed}
                     text='Feed'
@@ -83,7 +84,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routes.logout)}
                     activeText={textDisplay}
-                    icon='exit'
+                    icon='sign-out-alt'
                     onClick={onItemClick}
                     path={routes.logout}
                     text='Logout'
@@ -93,9 +94,9 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                         'nav-bar__button-expand--expanded'}`}
                     onClick={expandNavBar}
                 >
-                    <Icon
+                    <FontAwesomeIcon
                         className='nav-bar__button-expand__icon'
-                        name='chevron_right'
+                        icon='chevron-right'
                     />
                 </button>
             </nav>

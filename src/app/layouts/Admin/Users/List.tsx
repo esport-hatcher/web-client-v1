@@ -1,6 +1,6 @@
 import React from 'react';
-import { IUser } from '@/actions';
-import { AdminUserCard } from '@/components';
+import { IUser } from 'app/actions';
+import { AdminUserCard } from 'app/components';
 
 interface IProps {
     users: IUser[];

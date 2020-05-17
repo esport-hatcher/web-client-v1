@@ -1,25 +1,22 @@
 import React, { useCallback } from 'react';
 import { pick } from 'lodash';
-import { SmartInput, RoundButton } from '@/components';
-import {
-    registerFormSetStage,
-    IUserProps,
-    RegisterFormStages,
-} from '@/actions';
+import { SmartInput, RoundButton } from 'app/components';
+import { IUserProps, RegisterFormStages } from 'app/actions';
 import {
     getMinMaxFunction,
     getCompareStringFunction,
     isEmail,
-} from '@/shared/utils';
+} from 'app/shared/utils';
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import {
     RegisterOnChangeValue,
     RegisterOnChangeStatus,
-} from '@/custom-hooks/useRegisterForm';
-import { isStageMore } from '@/screens/Auth/AuthPage';
+    RegisterSetStage,
+} from 'app/custom-hooks/useRegisterForm';
+import { isStageMore } from 'app/screens/Auth/AuthPage';
 
 interface IProps {
-    setStage: typeof registerFormSetStage;
+    setStage: RegisterSetStage;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;
@@ -71,7 +68,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
             </div>
             <form className='register-screen__basic' onSubmit={onSubmit}>
                 <SmartInput
-                    icon='mail'
+                    icon='envelope'
                     value={fields.email.value}
                     type='email'
                     placeholder='Email'
@@ -116,7 +113,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                 />
                 {displayErrorMsg(errorMsg)}
                 <RoundButton
-                    icon='chevron_right'
+                    icon='chevron-right'
                     className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
             </form>

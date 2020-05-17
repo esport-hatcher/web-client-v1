@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { rootReducer } from '@/reducers';
 import { Provider } from 'react-redux';
+import { rootReducer } from 'app/reducers';
 
 declare global {
     // tslint:disable-next-line: interface-name
