@@ -20,7 +20,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     });
 
     if (!teamSelected) {
-        return <main></main>;
+        return null;
     }
 
     useEffect(() => {

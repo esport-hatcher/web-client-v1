@@ -79,8 +79,7 @@ export const fetchTeams = () => async (
         });
     }
 };
-// tslint:disable-next-line: no-any
-export const fetchTeamUser = (teamId: any) => async (
+export const fetchTeamUser = (teamId: number) => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {
