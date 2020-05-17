@@ -2,6 +2,8 @@ import React from 'react';
 import { AuthBanner, RegisterForm, LoginForm } from 'app/layouts';
 import { useToggler, useSelector } from 'app/custom-hooks';
 import { RegisterFormStages } from 'app/actions';
+import { useLocation } from 'react-router-dom';
+import { routes } from 'app/config';
 
 interface IProps {
     isLogin: boolean;
@@ -10,8 +12,9 @@ interface IProps {
 export const isStageMore = (stage: RegisterFormStages) =>
     stage === RegisterFormStages.more;
 
-export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
-    const [loginMode, toggleLoginMode] = useToggler(isLogin);
+export const _AuthPage: React.FC<IProps> = React.memo(() => {
+    const { pathname } = useLocation();
+    const [loginMode, toggleLoginMode] = useToggler(pathname === routes.login);
     const errorMsg = useSelector(state => state.authentication.errorMsg);
     const stage = useSelector(state => state.registerForm.stage);
 
@@ -43,4 +46,4 @@ export const _AuthPage: React.FC<IProps> = ({ isLogin }) => {
             </div>
         </main>
     );
-};
+});
