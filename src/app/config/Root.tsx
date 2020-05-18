@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { rootReducer } from 'app/reducers';
 
@@ -37,5 +38,9 @@ export const Root = ({
     children: any;
     // tslint:disable-next-line: no-any
 }) => {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+        <Provider store={store}>
+            <BrowserRouter>{children}</BrowserRouter>
+        </Provider>
+    );
 };
