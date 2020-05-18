@@ -108,8 +108,8 @@
         &-active {
             opacity: 1;
             transform: scale(1);
-            transition: opacity $page-transition-ms ease-in,
-                transform $page-transition-ms ease-in;
+            transition: opacity $page-transition-ms ease-out,
+                transform $page-transition-ms ease-out;
         }
     }
 
@@ -119,8 +119,8 @@
         &-active {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity $page-transition-ms ease-out,
-                transform $page-transition-ms ease-out;
+            transition: opacity $page-transition-ms ease-in,
+                transform $page-transition-ms ease-in;
         }
     }
 }
