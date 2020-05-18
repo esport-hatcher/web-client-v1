@@ -1,58 +1,33 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { routes } from 'app/config';
-import {
-    AdminPannel,
-    AuthPage,
-    HomePage,
-    Logout,
-    TeamPage,
-    EditTeamPage,
-} from 'app/screens';
+import { Route } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import { Navigation } from 'app/layouts';
+import { routes, SCREEN_TRANSITION_MS } from 'app/config';
 // tslint:disable-next-line: no-import-side-effect
 import 'styles/sass/main.scss';
 
-import { Navigation } from 'app/layouts';
-import { SettingsProfile } from 'app/screens/Settings/Profile';
-
 export const App: React.FC = () => {
     return (
-        <BrowserRouter>
-            <div className='container'>
-                <Navigation />
-                <div className='container__content'>
-                    <Switch>
-                        <Route path={routes.team} component={EditTeamPage} />
-                        <Route path={routes.home} exact component={HomePage} />
-                        <Route path={routes.teams} exact component={TeamPage} />
-                        <Route
-                            path={routes.login}
-                            exact
-                            render={props => (
-                                <AuthPage {...props} isLogin={true} />
-                            )}
-                        />
-                        <Route
-                            path={routes.register}
-                            exact
-                            render={props => (
-                                <AuthPage {...props} isLogin={false} />
-                            )}
-                        />
-                        <Route
-                            path={routes.adminPannel}
-                            exact
-                            component={AdminPannel}
-                        />
-                        <Route
-                            path={routes.settingsProfile}
-                            exact
-                            component={SettingsProfile}
-                        />
-                        <Route path={routes.logout} exact component={Logout} />
-                    </Switch>
-                </div>
+        <div className='container'>
+            <Navigation />
+            <div className='container__content'>
+                {routes.map(({ path, Component }) => (
+                    <Route key={path} exact path={path}>
+                        {({ match }) => (
+                            <CSSTransition
+                                in={match != null}
+                                timeout={SCREEN_TRANSITION_MS}
+                                classNames='router-transition'
+                                unmountOnExit
+                            >
+                                <div className='router-transition__container'>
+                                    <Component />
+                                </div>
+                            </CSSTransition>
+                        )}
+                    </Route>
+                ))}
             </div>
-        </BrowserRouter>
+        </div>
     );
 };
