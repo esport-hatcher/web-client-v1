@@ -61,7 +61,8 @@ export const _AdminPannel: React.FC<IProps> = ({
     }, [onBottomPage]);
 
     useEffect(() => {
-        push(`/admin/pannel?${stringify(filters)}`);
+        /** TODO: FIX URL PARAMETERS */
+        // push(`/admin/pannel?${stringify(filters)}`);
         dispatch({ type: ActionTypes.adminPannelSetLoading });
         dispatch(adminPannelFetchUsers(stringify(filters)));
     }, [filters, push, dispatch]);

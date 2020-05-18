@@ -24,5 +24,6 @@ body {
 
     &__content {
         grid-column: full-start / full-end;
+        position: relative;
     }
 }
