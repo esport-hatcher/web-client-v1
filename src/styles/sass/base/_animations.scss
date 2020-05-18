@@ -103,20 +103,24 @@
 
     &-enter {
         opacity: 0;
-        // transform: translateY(-100%);
+        transform: scale(1.1);
+
         &-active {
             opacity: 1;
-            // transform: translateY(0%);
-            transition: opacity $page-transition-ms ease-in;
+            transform: scale(1);
+            transition: opacity $page-transition-ms ease-in,
+                transform $page-transition-ms ease-in;
         }
     }
 
     &-exit {
         opacity: 1;
+        transform: scale(1);
         &-active {
             opacity: 0;
-            // transform: translateY(100%);
-            transition: opacity $page-transition-ms ease-in;
+            transform: scale(0.9);
+            transition: opacity $page-transition-ms ease-out,
+                transform $page-transition-ms ease-out;
         }
     }
 }
