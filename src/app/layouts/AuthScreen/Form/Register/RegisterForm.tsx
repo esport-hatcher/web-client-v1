@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { shallowEqual } from 'react-redux';
-import { useSelector, useRegisterForm, useToggler } from 'app/custom-hooks';
-import { RegisterFormBasic } from './forms/RegisterFormBasic';
-import { RegisterFormMore } from './forms/RegisterFormMore';
 import { CSSTransition } from 'react-transition-group';
+import { useSelector, useRegisterForm } from 'app/custom-hooks';
 import { REGISTER_FORM_TRANSITION_MS } from 'app/config';
+import { RegisterFormBasic, RegisterFormMore } from './forms';
 
 export enum RegisterStage {
     basic,
