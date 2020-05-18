@@ -6,11 +6,6 @@ type FormInput = {
     value: string;
 };
 
-export enum RegisterFormStages {
-    basic,
-    more,
-}
-
 export interface IUserProps {
     username: FormInput;
     password: FormInput;
@@ -32,17 +27,5 @@ export const registerFormFill = (cb: (data: IUserProps) => IUserProps) => {
     return {
         type: ActionTypes.registerFormFill,
         payload: cb(store.getState().registerForm.fields),
-    };
-};
-
-export interface IRegisterFormSetStageAction {
-    type: ActionTypes.registerFormSetStage;
-    payload: RegisterFormStages;
-}
-
-export const registerFormSetStage = (stage: RegisterFormStages) => {
-    return {
-        type: ActionTypes.registerFormSetStage,
-        payload: stage,
     };
 };

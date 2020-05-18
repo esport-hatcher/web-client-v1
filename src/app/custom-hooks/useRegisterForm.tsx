@@ -1,11 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import {
-    registerFormFill,
-    IUserProps,
-    registerFormSetStage,
-    RegisterFormStages,
-} from 'app/actions';
+import { registerFormFill, IUserProps } from 'app/actions';
 
 export interface IInputEvent {
     target: {
@@ -18,12 +13,9 @@ export type RegisterOnChangeValue = (event: IInputEvent) => void;
 
 export type RegisterOnChangeStatus = (field: string, valid: boolean) => void;
 
-export type RegisterSetStage = (stage: RegisterFormStages) => void;
-
 export const useRegisterForm = (): {
     onChangeStatus: RegisterOnChangeStatus;
     onChangeValue: RegisterOnChangeValue;
-    setStage: RegisterSetStage;
 } => {
     const dispatch = useDispatch();
 
@@ -61,14 +53,8 @@ export const useRegisterForm = (): {
         [dispatch]
     );
 
-    const setStage = useCallback(
-        (stage: RegisterFormStages) => dispatch(registerFormSetStage(stage)),
-        [dispatch]
-    );
-
     return {
         onChangeStatus,
         onChangeValue,
-        setStage,
     };
 };
