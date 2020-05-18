@@ -2,19 +2,22 @@ import React from 'react';
 import { AuthBanner, RegisterForm, LoginForm } from 'app/layouts';
 import { useToggler, useSelector } from 'app/custom-hooks';
 import { RegisterFormStages } from 'app/actions';
-import { useLocation } from 'react-router-dom';
-import { routes } from 'app/config';
+import { routesPath } from 'app/config';
 
 interface IProps {
     isLogin: boolean;
+    // tslint:disable-next-line: no-any
+    location: any;
 }
 
 export const isStageMore = (stage: RegisterFormStages) =>
     stage === RegisterFormStages.more;
 
-export const _AuthPage: React.FC<IProps> = React.memo(() => {
-    const { pathname } = useLocation();
-    const [loginMode, toggleLoginMode] = useToggler(pathname === routes.login);
+export const _AuthPage: React.FC<IProps> = React.memo(({ location }) => {
+    const { pathname } = location;
+    const [loginMode, toggleLoginMode] = useToggler(
+        pathname === routesPath.login
+    );
     const errorMsg = useSelector(state => state.authentication.errorMsg);
     const stage = useSelector(state => state.registerForm.stage);
 

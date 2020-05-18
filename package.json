@@ -24,7 +24,8 @@
         "react-transition-group": "^4.4.1",
         "redux": "^4.0.4",
         "redux-thunk": "^2.3.0",
-        "ts-loader": "^6.2.1"
+        "ts-loader": "^6.2.1",
+        "uuid": "^8.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.4.3",
@@ -42,6 +43,7 @@
         "@types/react-router-dom": "^5.1.4",
         "@types/react-select": "3.0.0",
         "@types/react-transition-group": "^4.2.4",
+        "@types/uuid": "^7.0.3",
         "awesome-typescript-loader": "^5.2.1",
         "prettier": "^1.17.0",
         "react-docgen-typescript-loader": "^3.6.0",
