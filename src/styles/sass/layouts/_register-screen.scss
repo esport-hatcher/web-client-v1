@@ -1,3 +1,5 @@
+$REGISTER_FORM_TRANSITION_MS: 500ms;
+
 .register-screen {
     width: 100%;
     height: 100vh;
@@ -5,8 +7,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     &__container {
+        width: 100%;
+        height: 100%;
         display: grid;
         padding: 2rem;
         grid-template-columns: max-content;
@@ -14,42 +19,49 @@
         gap: $auth-screen-spacing-layouts;
         justify-content: center;
         align-content: center;
+        position: absolute;
 
         &__title {
             text-align: center;
         }
 
-        &__basic {
-            transform: translateX(-100vh);
-            opacity: 0;
-            transition: transform $auth-screen-animation-duration
-                    $auth-screen-animation-style,
-                opacity $auth-screen-animation-duration
-                    $auth-screen-animation-style,
-                width 0s $auth-screen-animation-duration;
-            width: 0%;
-            overflow: hidden;
+        &--basic {
+            &-enter {
+                transform: translateX(-100%);
+                &-active {
+                    transform: translateX(0);
+                    transition: transform $REGISTER_FORM_TRANSITION_MS
+                        $auth-screen-animation-style;
+                }
+            }
 
-            &--active {
-                opacity: 1;
-                width: 100%;
+            &-exit {
                 transform: translateX(0);
+                &-active {
+                    transform: translateX(-100%);
+                    transition: transform $REGISTER_FORM_TRANSITION_MS
+                        $auth-screen-animation-style;
+                }
             }
         }
 
-        &__more {
-            opacity: 0;
-            transform: translateX(100%);
-            width: 0%;
-            transition: opacity $auth-screen-animation-duration ease-out
-                    $auth-screen-animation-duration,
-                transform $auth-screen-animation-duration ease-out
-                    $auth-screen-animation-duration;
+        &--more {
+            &-enter {
+                transform: translateX(100%);
+                &-active {
+                    transform: translateX(0);
+                    transition: transform $REGISTER_FORM_TRANSITION_MS
+                        $auth-screen-animation-style;
+                }
+            }
 
-            &--active {
-                width: 100%;
-                opacity: 1;
+            &-exit {
                 transform: translateX(0);
+                &-active {
+                    transform: translateX(100%);
+                    transition: transform $REGISTER_FORM_TRANSITION_MS
+                        $auth-screen-animation-style;
+                }
             }
         }
     }

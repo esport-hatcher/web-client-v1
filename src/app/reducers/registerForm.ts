@@ -1,17 +1,10 @@
-import {
-    Action,
-    ActionTypes,
-    IUserProps,
-    RegisterFormStages,
-} from 'app/actions';
+import { Action, ActionTypes, IUserProps } from 'app/actions';
 
 export interface IRegisterFormReducer {
-    stage?: RegisterFormStages;
     fields: IUserProps;
 }
 
 const INITIAL_STATE = {
-    stage: undefined,
     fields: {
         username: {
             value: '',
@@ -61,11 +54,6 @@ export const registerFormReducer = (
             return {
                 ...state,
                 fields: { ...state.fields, ...action.payload },
-            };
-        case ActionTypes.registerFormSetStage:
-            return {
-                ...state,
-                stage: action.payload,
             };
         default:
             return state;
