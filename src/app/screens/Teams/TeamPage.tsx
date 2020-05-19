@@ -33,10 +33,6 @@ export const _TeamPage: React.FC = React.memo(() => {
                     <h1>Create your team</h1>
                     <CreateTeamForm change={onShow} />
                 </div>
-                {/* <div className='col-2'>
-                    <h1>Select your player</h1>
-                    <AddPlayerForm />
-            </div>*/}
             </ModalForm>
         </main>
     );

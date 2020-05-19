@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SimpleImput, IconButton } from 'app/components';
+import { SimpleImput } from 'app/components';
 import { createTeam } from 'app/actions';
 
 interface IProps {

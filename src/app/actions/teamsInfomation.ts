@@ -132,3 +132,29 @@ export const createTeam = (
         //console.log('nope', err);
     }
 };
+
+export const invitePlayer = (
+    playerId: NumberConstructor,
+    teamId: string
+) => async (dispatch: Dispatch, getState: IGetState) => {
+    try {
+        const token = getState().authentication.token;
+        const myId = getState().authentication.user;
+        if (token && myId) {
+            const { data } = await api.post<ICreateTeam[]>(
+                `teams/${teamId}/users/${playerId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            dispatch({
+                type: ActionTypes.createTeam,
+                payload: data,
+            });
+        }
+    } catch (err) {
+        //console.log('nope', err);
+    }
+};
