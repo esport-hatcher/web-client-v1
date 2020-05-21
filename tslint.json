@@ -16,7 +16,7 @@
         "no-any": true,
         "no-empty": true,
         "no-duplicate-super": true,
-        "no-empty-interface": true,
+        "no-empty-interface": false,
         "no-floating-promises": true,
         "no-invalid-this": true,
         "no-parameter-reassignment": true,

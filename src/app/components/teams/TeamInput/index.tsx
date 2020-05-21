@@ -6,7 +6,7 @@ interface IProps {
     textLabel: string;
 }
 
-export const SimpleImput: React.FC<IProps> = ({
+export const TeamInput: React.FC<IProps> = ({
     setTeamForm,
     valueForm,
     textLabel,

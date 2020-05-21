@@ -1,78 +1,79 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useDispatch, shallowEqual } from 'react-redux';
+import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 import { SmartInput, IconButton } from 'app/components';
-import { useForm } from 'app/custom-hooks';
+import { ReduxFormValues } from '../Register';
 import { login } from 'app/actions';
-import { FAKE_LOADING_TIME, SCREEN_TRANSITION_MS } from 'app/config';
+import { useSelector } from 'app/custom-hooks';
 
-interface IProps {
-    errorMsg?: string;
-}
+interface IProps {}
 
-export const LoginForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
-    const dispatch = useDispatch();
-    const [inputs, setInputs] = useForm({
-        email: '',
-        password: '',
-    });
-    const [loading, setLoading] = useState(false);
+const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
+    ({ handleSubmit }) => {
+        const [loading, setLoading] = useState(false);
+        const errorMsg = useSelector(
+            state => state.authentication.errorMsg,
+            shallowEqual
+        );
+        const dispatch = useDispatch();
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, password } = inputs;
-        e.preventDefault();
-        setLoading(true);
-        setTimeout(() => {
-            dispatch(login(email, password));
-            setLoading(false);
-        }, FAKE_LOADING_TIME + SCREEN_TRANSITION_MS);
-    };
+        const onSubmit = useCallback(
+            async (formValues: ReduxFormValues) => {
+                setLoading(true);
+                // tslint:disable-next-line: await-promise
+                await dispatch(login(formValues));
+                setLoading(false);
+            },
+            [dispatch, setLoading]
+        );
 
-    const displayErrorMsg = () => {
-        if (errorMsg) {
-            return (
-                <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
-                    {errorMsg}
-                </p>
-            );
-        }
-        return null;
-    };
-
-    return (
-        <section className='login-screen'>
-            <div className='login-screen__container'>
-                <div className='login-screen__container__title title title--big'>
-                    Sign in to <br />
-                    Esport-Hatcher
-                </div>
-                <form className='login-screen__form' onSubmit={onSubmit}>
-                    <SmartInput
-                        type='email'
-                        placeholder='Email'
-                        name='email'
-                        icon='envelope'
-                        value={inputs.email}
-                        onChange={setInputs}
-                    />
-                    <SmartInput
-                        type='password'
-                        placeholder='Password'
-                        name='password'
-                        icon='lock'
-                        value={inputs.password}
-                        onChange={setInputs}
-                    />
-                    {displayErrorMsg()}
-                    <IconButton
-                        className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
-                        icon={loading ? 'spinner' : 'sign-in-alt'}
-                        rotation={loading ? 90 : undefined}
-                        loading={loading}
+        return (
+            <section className='login-screen'>
+                <div className='login-screen__container'>
+                    <div className='login-screen__container__title title title--big'>
+                        Sign in to <br />
+                        Esport-Hatcher
+                    </div>
+                    <form
+                        className='login-screen__form'
+                        onSubmit={handleSubmit(onSubmit)}
                     >
-                        Login
-                    </IconButton>
-                </form>
-            </div>
-        </section>
-    );
-});
+                        <Field
+                            component={SmartInput}
+                            type='email'
+                            placeholder='Email'
+                            name='email'
+                            icon='envelope'
+                            noValidation
+                        />
+                        <Field
+                            component={SmartInput}
+                            type='password'
+                            placeholder='Password'
+                            name='password'
+                            icon='lock'
+                            noValidation
+                        />
+                        {errorMsg && errorMsg.login && (
+                            <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
+                                {errorMsg.login}
+                            </p>
+                        )}
+                        <IconButton
+                            className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
+                            icon={loading ? 'spinner' : 'sign-in-alt'}
+                            rotation={loading ? 90 : undefined}
+                            loading={loading}
+                        >
+                            Login
+                        </IconButton>
+                    </form>
+                </div>
+            </section>
+        );
+    }
+);
+
+export const LoginForm = reduxForm<{}, IProps>({
+    form: 'login',
+})(_LoginForm);

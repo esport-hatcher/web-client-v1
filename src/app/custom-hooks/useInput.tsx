@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { IInputEvent } from './useRegisterForm';
+
+export interface IInputEvent {
+    target: {
+        value: string;
+    };
+}
 
 export const useInput = (
     initialValue: string = ''

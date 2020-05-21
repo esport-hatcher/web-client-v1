@@ -23,6 +23,7 @@ import {
     faPortrait,
     faPhone,
     faSignInAlt,
+    faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -48,5 +49,6 @@ library.add(
     faMapPin,
     faPortrait,
     faPhone,
-    faSignInAlt
+    faSignInAlt,
+    faExclamationCircle
 );
