@@ -1,111 +1,61 @@
-import React, { useCallback } from 'react';
-import { pick } from 'lodash';
+import React from 'react';
+import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 import { SmartInput, RoundButton } from 'app/components';
-import { IUserProps } from 'app/actions';
 import {
-    getMinMaxFunction,
-    getCompareStringFunction,
+    required,
     isEmail,
-} from 'app/shared/utils';
-import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import {
-    RegisterOnChangeValue,
-    RegisterOnChangeStatus,
-} from 'app/custom-hooks/useRegisterForm';
-import { RegisterStage } from '../RegisterForm';
+    matchesPassword,
+    isMin3Max20,
+    isMin5Max20,
+    isEmailAvailable,
+} from 'app/shared';
 
-interface IProps {
-    onChangeValue: RegisterOnChangeValue;
-    onChangeStatus: RegisterOnChangeStatus;
-    fields: IUserProps;
-    goTo: Function;
-    errorMsg?: string;
-}
+interface IProps {}
 
-export const RegisterFormBasic: React.FC<IProps> = ({
-    errorMsg,
-    fields,
-    goTo,
-    onChangeStatus,
-    onChangeValue,
+const _RegisterFormBasic: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
+    handleSubmit,
 }) => {
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (
-            checkIfError(
-                pick(fields, 'email', 'username', 'password', 'passwordConfirm')
-            )
-        ) {
-            goTo(RegisterStage.more);
-        }
-    };
-
-    const {
-        password: { value },
-    } = fields;
-
-    /**
-     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
-     */
-    const _isEmail = useCallback(isEmail, []);
-    const minMaxPwd = useCallback(getMinMaxFunction(5, 20), []);
-    const minMaxUserName = useCallback(getMinMaxFunction(3, 20), []);
-    const compareString = useCallback(getCompareStringFunction(value), [value]);
-
     return (
         <div className='register-screen__container'>
             <div className='register-screen__container__title title title--big'>
                 Register to <br />
                 Esport-Hatcher
             </div>
-            <form className='register-screen__basic' onSubmit={onSubmit}>
-                <SmartInput
+            <form className='register-screen__basic' onSubmit={handleSubmit}>
+                <Field
                     icon='envelope'
-                    value={fields.email.value}
                     type='email'
                     placeholder='Email'
                     name='email'
-                    required={true}
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[_isEmail]}
+                    component={SmartInput}
+                    validate={[required, isEmail]}
                 />
-                <SmartInput
+                <Field
                     icon='pen'
-                    required={true}
-                    value={fields.username.value}
                     type='text'
                     placeholder='Username'
+                    component={SmartInput}
                     name='username'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxUserName]}
+                    validate={[required, isMin3Max20]}
                 />
-                <SmartInput
+                <Field
                     icon='lock'
-                    required={true}
-                    value={fields.password.value}
                     type='password'
                     placeholder='Password'
+                    component={SmartInput}
+                    validate={[required, isMin5Max20]}
                     name='password'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxPwd]}
                 />
-                <SmartInput
-                    required={true}
+                <Field
                     icon='lock'
-                    value={fields.passwordConfirm.value}
                     name='passwordConfirm'
                     type='password'
+                    component={SmartInput}
                     placeholder='Confirm Password'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxPwd, compareString]}
+                    validate={[required, matchesPassword]}
                 />
-                {displayErrorMsg(errorMsg)}
                 <RoundButton
+                    type='submit'
                     icon='chevron-right'
                     className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
@@ -113,3 +63,11 @@ export const RegisterFormBasic: React.FC<IProps> = ({
         </div>
     );
 };
+
+export const RegisterFormBasic = reduxForm<{}, IProps>({
+    form: 'register',
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+    asyncValidate: isEmailAvailable,
+    asyncBlurFields: ['email'],
+})(_RegisterFormBasic);

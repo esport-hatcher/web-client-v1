@@ -1,7 +1,8 @@
 import { Dispatch } from 'redux';
 import api from 'app/api';
-import { ActionTypes, IGetState, IFieldData } from './types';
+import { ActionTypes, IGetState, IFieldData, AppThunk } from './types';
 import { uploadFile, updateLocalUser, S3_LINK } from 'app/shared';
+import { ReduxFormValues } from 'app/layouts';
 
 export interface IUser {
     id: number;
@@ -27,34 +28,43 @@ export interface IRegisterForm {
     lastName: string;
 }
 
-export interface ILoginSuccess {
+interface IAuthSuccess {
     token: string;
     user: IUser;
 }
 
-export interface ILoginFailure {
+interface IAuthFailure {
     message: string;
 }
-/**
- * Action dispatched for a successful login or register
- */
+
+/** LOGIN ACTIONS */
 export interface ILoginSuccessAction {
     type: ActionTypes.loginSuccess;
-    payload: ILoginSuccess;
+    payload: IAuthSuccess;
 }
 
-/**
- * Action dispatched for an error during login or register
- */
 export interface ILoginErrorAction {
     type: ActionTypes.loginError;
-    payload: ILoginFailure;
+    payload: IAuthFailure;
 }
 
+/** REGISTER ACTIONS */
+export interface IRegisterSuccessAction {
+    type: ActionTypes.registerSuccess;
+    payload: IAuthSuccess;
+}
+
+export interface IRegisterErrorAction {
+    type: ActionTypes.registerError;
+    payload: IAuthFailure;
+}
+
+/** LOGOUT ACTIONS */
 export interface ILogoutAction {
     type: ActionTypes.logout;
 }
 
+/** USER ACTIONS */
 export interface IPatchUserAction {
     type: ActionTypes.patchUser;
     payload: IUser;
@@ -65,14 +75,17 @@ export interface IDeleteUserAction {
     payload: IUser;
 }
 
-export const register = (registerProps: IRegisterForm) => async (
-    dispatch: Dispatch
-) => {
+export const register = (
+    registerFormValues: ReduxFormValues
+): AppThunk => async dispatch => {
     try {
-        const { data } = await api.post<ILoginSuccess>('/users', registerProps);
+        const { data } = await api.post<IAuthSuccess>(
+            '/users',
+            registerFormValues
+        );
         localStorage.setItem('ehToken', JSON.stringify(data));
-        dispatch<ILoginSuccessAction>({
-            type: ActionTypes.loginSuccess,
+        dispatch<IRegisterSuccessAction>({
+            type: ActionTypes.registerSuccess,
             payload: data,
         });
     } catch ({ response: { data } }) {
@@ -83,14 +96,14 @@ export const register = (registerProps: IRegisterForm) => async (
     }
 };
 
-export const login = (email: string, password: string) => async (
+export const login = (loginFormValues: ReduxFormValues): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        const { data } = await api.post<ILoginSuccess>('/users/token', {
-            email,
-            password,
-        });
+        const { data } = await api.post<IAuthSuccess>(
+            '/users/token',
+            loginFormValues
+        );
         localStorage.setItem('ehToken', JSON.stringify(data));
         dispatch<ILoginSuccessAction>({
             type: ActionTypes.loginSuccess,

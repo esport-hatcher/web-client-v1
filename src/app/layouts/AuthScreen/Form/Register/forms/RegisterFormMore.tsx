@@ -1,137 +1,103 @@
 import React, { useCallback, useState } from 'react';
-import { pick } from 'lodash';
+import capitalize from 'capitalize';
+import { InjectedFormProps, reduxForm, Field, reset } from 'redux-form';
 import { useDispatch } from 'react-redux';
-import {
-    SmartInput,
-    IconButton,
-    RoundButton,
-    AutoComplete,
-} from 'app/components';
-import { isNotEmpty } from 'app/shared/utils';
-import { IUserProps, IRegisterForm, register } from 'app/actions';
-import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import {
-    RegisterOnChangeValue,
-    RegisterOnChangeStatus,
-} from 'app/custom-hooks';
-import { FAKE_LOADING_TIME } from 'app/config';
+import { SmartInput, IconButton, RoundButton } from 'app/components';
+import { normalizePhone, required } from 'app/shared';
+
+import { register } from 'app/actions';
 import { RegisterStage } from '../RegisterForm';
 
+export type ReduxFormValues = { [key: string]: string };
+
 interface IProps {
-    errorMsg?: string;
-    onChangeValue: RegisterOnChangeValue;
-    onChangeStatus: RegisterOnChangeStatus;
-    fields: IUserProps;
     goTo: Function;
 }
 
-export const RegisterFormMore: React.FC<IProps> = ({
-    errorMsg,
-    fields,
-    onChangeStatus,
-    onChangeValue,
+const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
     goTo,
+    handleSubmit,
 }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-
-    const _onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const fieldsValue: IRegisterForm = {
-            username: '',
-            password: '',
-            email: '',
-            firstName: '',
-            lastName: '',
-        };
-
-        e.preventDefault();
-
-        for (const key in fields) {
-            if (key !== 'passwordConfirm') {
-                fieldsValue[key as keyof IRegisterForm] =
-                    fields[key as keyof IUserProps].value;
-            }
-        }
-
-        if (checkIfError(pick(fields, 'firstName', 'lastName'))) {
-            setLoading(true);
-            setTimeout(() => {
-                dispatch(register(fieldsValue));
-                setLoading(false);
-            }, FAKE_LOADING_TIME);
-        }
-    };
-
-    const _isNotEmpty = useCallback(isNotEmpty, []);
 
     const onGoBack = useCallback(() => {
         goTo(RegisterStage.basic);
     }, [goTo]);
 
-    const setCountry = useCallback(
-        (country: string) => {
-            onChangeValue({ target: { name: 'country', value: country } });
+    const onSubmit = useCallback(
+        async (formValues: ReduxFormValues) => {
+            setLoading(true);
+            // tslint:disable-next-line: await-promise
+            await dispatch(register(formValues));
+            setLoading(false);
+            dispatch(reset('register'));
         },
-        [onChangeValue]
+        [dispatch, setLoading]
     );
 
     return (
         <div className='register-screen__container'>
             <div className='register-screen__container__title title title--big'>
-                Tell us more about yourself
+                Tell us more about you
             </div>
 
-            <form className='register-screen__more' onSubmit={_onSubmit}>
+            <form
+                className='register-screen__more'
+                onSubmit={handleSubmit(onSubmit)}
+            >
                 <RoundButton
+                    type='button'
                     onClick={onGoBack}
                     icon='chevron-left'
                     className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
                 />
-                <SmartInput
-                    value={fields.firstName.value}
+                <Field
+                    component={SmartInput}
                     type='text'
                     placeholder='First name'
                     name='firstName'
                     icon='portrait'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[_isNotEmpty]}
+                    normalize={capitalize}
+                    validate={[required]}
                 />
-                <SmartInput
-                    value={fields.lastName.value}
+                <Field
+                    component={SmartInput}
                     type='text'
                     icon='portrait'
                     placeholder='Last name'
                     name='lastName'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[_isNotEmpty]}
+                    normalize={capitalize}
+                    validate={[required]}
                 />
-                <SmartInput
-                    value={fields.city.value}
+                <Field
+                    component={SmartInput}
                     type='text'
                     icon='map-pin'
                     placeholder='City'
                     name='city'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
+                    normalize={capitalize}
+                    validate={[required]}
                 />
-                <AutoComplete
-                    label='Country'
-                    items={['Angola', 'Andorre', 'Angleterre', 'Arabie']}
-                    onSelect={setCountry}
+                <Field
+                    component={SmartInput}
+                    type='text'
                     icon='map-pin'
+                    placeholder='Country'
+                    name='country'
+                    normalize={capitalize}
+                    validate={[required]}
                 />
-                <SmartInput
-                    value={fields.phoneNumber.value}
+
+                <Field
+                    component={SmartInput}
                     type='text'
                     icon='phone'
                     placeholder='Phone number'
                     name='phoneNumber'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
+                    normalize={normalizePhone}
+                    validate={[required]}
                 />
-                {displayErrorMsg(errorMsg)}
                 <IconButton
                     className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
                     icon={loading ? 'spinner' : 'sign-in-alt'}
@@ -144,3 +110,9 @@ export const RegisterFormMore: React.FC<IProps> = ({
         </div>
     );
 };
+
+export const RegisterFormMore = reduxForm<{}, IProps>({
+    form: 'register',
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+})(_RegisterFormMore);

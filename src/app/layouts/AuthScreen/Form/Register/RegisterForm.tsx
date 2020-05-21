@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { shallowEqual } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { useSelector, useRegisterForm } from 'app/custom-hooks';
 import { REGISTER_FORM_TRANSITION_MS } from 'app/config';
 import { RegisterFormBasic, RegisterFormMore } from './forms';
 
@@ -11,18 +9,10 @@ export enum RegisterStage {
     transition,
 }
 
-interface IProps {
-    errorMsg?: string;
-}
+interface IProps {}
 
-export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
+export const RegisterForm: React.FC<IProps> = React.memo(() => {
     const [stage, setStage] = useState<RegisterStage>(RegisterStage.basic);
-    const fields = useSelector(
-        state => state.registerForm.fields,
-        shallowEqual
-    );
-
-    const { onChangeStatus, onChangeValue } = useRegisterForm();
 
     const goTo = useCallback(
         (stage: RegisterStage) => {
@@ -31,6 +21,10 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
         },
         [setStage]
     );
+
+    const basicSubmit = React.useCallback(() => {
+        goTo(RegisterStage.more);
+    }, [goTo]);
 
     return (
         <section className='register-screen'>
@@ -41,13 +35,7 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
                 classNames='register-screen__container--basic'
                 timeout={REGISTER_FORM_TRANSITION_MS}
             >
-                <RegisterFormBasic
-                    goTo={goTo}
-                    errorMsg={errorMsg}
-                    onChangeValue={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    fields={fields}
-                />
+                <RegisterFormBasic onSubmit={basicSubmit} />
             </CSSTransition>
             <CSSTransition
                 in={stage === RegisterStage.more}
@@ -56,13 +44,7 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
                 classNames='register-screen__container--more'
                 timeout={REGISTER_FORM_TRANSITION_MS}
             >
-                <RegisterFormMore
-                    goTo={goTo}
-                    errorMsg={errorMsg}
-                    onChangeValue={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    fields={fields}
-                />
+                <RegisterFormMore goTo={goTo} />
             </CSSTransition>
         </section>
     );

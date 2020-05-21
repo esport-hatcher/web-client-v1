@@ -1,10 +1,13 @@
-export * from './admin';
+/** SHARED */
+export * from './Buttons';
+export * from './Inputs';
+export * from './Dropdowns';
 export * from './SmartSelect';
-export * from './buttons';
-export * from './inputs';
-export * from './navigation';
+export * from './Modals';
 export * from './various';
+
+/** LAYOUTS */
+export * from './admin';
+export * from './navigation';
 export * from './users';
-export * from './modals';
 export * from './teams';
-export * from './Dropdown';

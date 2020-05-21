@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
-import { IUser, deleteUser } from 'app/actions';
-import { UserConfirmedInfo, UserAvatar } from 'app/components';
-import { useToggler } from 'app/custom-hooks';
-import { ModalConfirmation } from 'app/components/modals';
 import { useDispatch } from 'react-redux';
+import { IUser, deleteUser } from 'app/actions';
+import {
+    UserConfirmedInfo,
+    UserAvatar,
+    ModalConfirmation,
+} from 'app/components';
+import { useToggler } from 'app/custom-hooks';
 
 interface IProps {
     user: IUser;

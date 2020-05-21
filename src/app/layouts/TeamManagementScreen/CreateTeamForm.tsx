@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SimpleImput } from 'app/components';
+import { TeamInput } from 'app/components';
 import api from 'app/api';
 
 export const CreateTeamForm: React.FC = React.memo(() => {
@@ -31,17 +31,17 @@ export const CreateTeamForm: React.FC = React.memo(() => {
     };
     return (
         <form className='create-team-form-container' onSubmit={onSubmit}>
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueName}
                 valueForm={valueName}
                 textLabel={'Name of the Team'}
             />
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueRegion}
                 valueForm={valueRegion}
                 textLabel={'Region'}
             />
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueGame}
                 valueForm={valueGame}
                 textLabel={'Choose a Game'}
