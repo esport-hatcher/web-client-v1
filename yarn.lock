@@ -1890,6 +1890,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/capitalize@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/capitalize/-/capitalize-1.0.2.tgz#c99f06f36a223db2d2f3f4b58b595683e6165897"
+  integrity sha512-SoQzU+noqIX0x9sJLr0KL4HUsLlqj2wRhqx6Ui4L2lecBe+qhnbU8s/LWK5YJ7ogoS9FtPkV3q4vz0gZX4oT1Q==
+
 "@types/cheerio@*":
   version "0.22.16"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.16.tgz#c748a97b8a6f781b04bbda4a552e11b35bcc77e4"
@@ -3716,6 +3721,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000939, caniuse-lite@^1.0.30000989, can
   version "1.0.30001025"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001025.tgz#30336a8aca7f98618eb3cf38e35184e13d4e5fe6"
   integrity sha512-SKyFdHYfXUZf5V85+PJgLYyit27q4wgvZuf8QTOk1osbypcROihMBlx9GRar2/pIcKH2r4OehdlBr9x6PXetAQ==
+
+capitalize@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/capitalize/-/capitalize-2.0.3.tgz#ccfeb1046d2a054eb30f34af907a70c3e90f3b73"
+  integrity sha512-Qc5ksT1/zEJBbFYD05h99hCNEW0cgyD0zzE5WvkgisNnppJ+16zfaSk34evF0j6pGW8hejkRUeygJ5uN5k22SQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -11250,6 +11260,14 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
+react-tooltip@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-4.2.6.tgz#a3d5f0d1b0c597c0852ba09c5e2af0019b7cfc70"
+  integrity sha512-KX/zCsPFCI8RuulzBX86U+Ur7FvgGNRBdb7dUu0ndo8Urinn48nANq9wfq4ABlehweQjPzLl7XdNAtLKza+I3w==
+  dependencies:
+    prop-types "^15.7.2"
+    uuid "^7.0.3"
+
 react-transition-group@^2.2.1:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
@@ -13410,6 +13428,11 @@ uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 uuid@^8.0.0:
   version "8.0.0"

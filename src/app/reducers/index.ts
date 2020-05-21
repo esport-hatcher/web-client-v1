@@ -1,28 +1,20 @@
-import { combineReducers } from 'redux';
-import { reducer as formReducer, FormReducer, FormStateMap } from 'redux-form';
+import { combineReducers, Action } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import { ActionTypes } from 'app/actions';
-import { authenticationReducer, IAuthentication } from './authentication';
-import { registerFormReducer, IRegisterFormReducer } from './registerForm';
-import { adminPannelReducer, IAdminPannelReducer } from './adminPannel';
-import { fetchTeamsReducer, IFetchTeam } from './teams';
-export interface IStoreState {
-    authentication: IAuthentication;
-    registerForm: IRegisterFormReducer;
-    adminPannel: IAdminPannelReducer;
-    teams: IFetchTeam;
-    form: FormStateMap;
-}
+import { authenticationReducer } from './authentication';
+import { adminPannelReducer } from './adminPannel';
+import { fetchTeamsReducer } from './teams';
 
-export const appReducer = combineReducers<IStoreState>({
+export const appReducer = combineReducers({
     authentication: authenticationReducer,
-    registerForm: registerFormReducer,
     adminPannel: adminPannelReducer,
     teams: fetchTeamsReducer,
     form: formReducer,
 });
 
-// tslint:disable-next-line: no-any
-export const rootReducer = (state: any, action: any) => {
+export type RootState = ReturnType<typeof appReducer>;
+
+export const rootReducer = (state: RootState | undefined, action: Action) => {
     if (action.type === ActionTypes.logout) {
         // tslint:disable-next-line: no-parameter-reassignment
         state = undefined;
