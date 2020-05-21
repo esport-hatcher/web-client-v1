@@ -1,9 +1,9 @@
 /** SHARED */
-export * from './_Buttons';
-export * from './_Inputs';
-export * from './_Dropdowns';
+export * from './Buttons';
+export * from './Inputs';
+export * from './Dropdowns';
 export * from './SmartSelect';
-export * from './_Modals';
+export * from './Modals';
 export * from './various';
 
 /** LAYOUTS */
