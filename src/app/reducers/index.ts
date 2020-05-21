@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer, FormReducer, FormStateMap } from 'redux-form';
 import { ActionTypes } from 'app/actions';
 import { authenticationReducer, IAuthentication } from './authentication';
 import { registerFormReducer, IRegisterFormReducer } from './registerForm';
@@ -9,6 +10,7 @@ export interface IStoreState {
     registerForm: IRegisterFormReducer;
     adminPannel: IAdminPannelReducer;
     teams: IFetchTeam;
+    form: FormStateMap;
 }
 
 export const appReducer = combineReducers<IStoreState>({
@@ -16,6 +18,7 @@ export const appReducer = combineReducers<IStoreState>({
     registerForm: registerFormReducer,
     adminPannel: adminPannelReducer,
     teams: fetchTeamsReducer,
+    form: formReducer,
 });
 
 // tslint:disable-next-line: no-any
