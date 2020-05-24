@@ -64,7 +64,8 @@ export const SmartInput: React.FC<IProps & WrappedFieldProps> = React.memo(
                     placeholder={placeholder}
                     name={name}
                     pattern={pattern}
-                    {...input}
+                    // tslint:disable-next-line: no-any
+                    {...(input as any)}
                 />
                 <FontAwesomeIcon
                     className='smart-input__icon'
