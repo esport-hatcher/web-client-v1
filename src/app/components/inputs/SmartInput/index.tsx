@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from 'app/api';
+import { v4 } from 'uuid';
 import { sleep } from 'app/shared/utils';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -46,6 +47,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
         onChangeStatus,
     }) => {
         const [inputStatus, setInputStatus] = useState(InputStatus.empty);
+        const inputId = v4();
 
         const _onChangeStatus = useCallback(
             (value: boolean) => {
@@ -131,7 +133,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
         return (
             <div className='smart-input'>
                 <input
-                    id={name}
+                    id={name + inputId}
                     className={`smart-input__input smart-input__input--${getInputStatus()} ${className}`}
                     type={type}
                     placeholder={placeholder}
@@ -148,7 +150,7 @@ export const SmartInput: React.FC<IProps> = React.memo(
                     className='smart-input__icon'
                     icon={getIconStatus()}
                 />
-                <label htmlFor={name} className='smart-input__label'>
+                <label htmlFor={name + inputId} className='smart-input__label'>
                     {placeholder}
                 </label>
             </div>

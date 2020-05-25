@@ -8,28 +8,21 @@ import {
     AutoComplete,
 } from 'app/components';
 import { isNotEmpty } from 'app/shared/utils';
-import {
-    IUserProps,
-    RegisterFormStages,
-    IRegisterForm,
-    register,
-} from 'app/actions';
+import { IUserProps, IRegisterForm, register } from 'app/actions';
 import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import { isStageMore } from 'app/screens/Auth/AuthPage';
 import {
     RegisterOnChangeValue,
     RegisterOnChangeStatus,
-    RegisterSetStage,
 } from 'app/custom-hooks';
 import { FAKE_LOADING_TIME } from 'app/config';
+import { RegisterStage } from '../RegisterForm';
 
 interface IProps {
     errorMsg?: string;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;
-    stage: RegisterFormStages;
-    setStage: RegisterSetStage;
+    goTo: Function;
 }
 
 export const RegisterFormMore: React.FC<IProps> = ({
@@ -37,8 +30,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
     fields,
     onChangeStatus,
     onChangeValue,
-    stage,
-    setStage,
+    goTo,
 }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -73,8 +65,8 @@ export const RegisterFormMore: React.FC<IProps> = ({
     const _isNotEmpty = useCallback(isNotEmpty, []);
 
     const onGoBack = useCallback(() => {
-        setStage(RegisterFormStages.basic);
-    }, [setStage]);
+        goTo(RegisterStage.basic);
+    }, [goTo]);
 
     const setCountry = useCallback(
         (country: string) => {
@@ -84,11 +76,7 @@ export const RegisterFormMore: React.FC<IProps> = ({
     );
 
     return (
-        <section
-            className={`register-screen__container register-screen__container__more ${isStageMore(
-                stage
-            ) && 'register-screen__container__more--active'}`}
-        >
+        <div className='register-screen__container'>
             <div className='register-screen__container__title title title--big'>
                 Tell us more about yourself
             </div>
@@ -153,6 +141,6 @@ export const RegisterFormMore: React.FC<IProps> = ({
                     Register
                 </IconButton>
             </form>
-        </section>
+        </div>
     );
 };

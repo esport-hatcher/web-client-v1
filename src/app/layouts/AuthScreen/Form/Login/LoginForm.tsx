@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { SmartInput, IconButton } from 'app/components';
 import { useForm } from 'app/custom-hooks';
 import { login } from 'app/actions';
-import { FAKE_LOADING_TIME } from 'app/config';
+import { FAKE_LOADING_TIME, SCREEN_TRANSITION_MS } from 'app/config';
 
 interface IProps {
     errorMsg?: string;
@@ -24,7 +24,7 @@ export const LoginForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
         setTimeout(() => {
             dispatch(login(email, password));
             setLoading(false);
-        }, FAKE_LOADING_TIME);
+        }, FAKE_LOADING_TIME + SCREEN_TRANSITION_MS);
     };
 
     const displayErrorMsg = () => {

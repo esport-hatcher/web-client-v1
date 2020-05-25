@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { pick } from 'lodash';
 import { SmartInput, RoundButton } from 'app/components';
-import { IUserProps, RegisterFormStages } from 'app/actions';
+import { IUserProps } from 'app/actions';
 import {
     getMinMaxFunction,
     getCompareStringFunction,
@@ -11,26 +11,23 @@ import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
 import {
     RegisterOnChangeValue,
     RegisterOnChangeStatus,
-    RegisterSetStage,
 } from 'app/custom-hooks/useRegisterForm';
-import { isStageMore } from 'app/screens/Auth/AuthPage';
+import { RegisterStage } from '../RegisterForm';
 
 interface IProps {
-    setStage: RegisterSetStage;
     onChangeValue: RegisterOnChangeValue;
     onChangeStatus: RegisterOnChangeStatus;
     fields: IUserProps;
-    stage: RegisterFormStages;
+    goTo: Function;
     errorMsg?: string;
 }
 
 export const RegisterFormBasic: React.FC<IProps> = ({
     errorMsg,
     fields,
+    goTo,
     onChangeStatus,
     onChangeValue,
-    setStage,
-    stage,
 }) => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -40,7 +37,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                 pick(fields, 'email', 'username', 'password', 'passwordConfirm')
             )
         ) {
-            setStage(RegisterFormStages.more);
+            goTo(RegisterStage.more);
         }
     };
 
@@ -57,11 +54,7 @@ export const RegisterFormBasic: React.FC<IProps> = ({
     const compareString = useCallback(getCompareStringFunction(value), [value]);
 
     return (
-        <section
-            className={`register-screen__container register-screen__container__basic ${!isStageMore(
-                stage
-            ) && 'register-screen__container__basic--active'}`}
-        >
+        <div className='register-screen__container'>
             <div className='register-screen__container__title title title--big'>
                 Register to <br />
                 Esport-Hatcher
@@ -117,6 +110,6 @@ export const RegisterFormBasic: React.FC<IProps> = ({
                     className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
             </form>
-        </section>
+        </div>
     );
 };

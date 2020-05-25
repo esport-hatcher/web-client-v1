@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { shallowEqual } from 'react-redux';
 import { useSelector } from 'app/custom-hooks';
+import { routesPath } from 'app/config';
 
 export const requireAdmin = <T extends {}>(ChildComponent: React.FC<T>) => {
     // tslint:disable-next-line: no-any
@@ -10,10 +11,14 @@ export const requireAdmin = <T extends {}>(ChildComponent: React.FC<T>) => {
             state => state.authentication.user,
             shallowEqual
         );
+
         if (!user || !user.superAdmin) {
             return (
                 <Redirect
-                    to={{ pathname: '/', state: { from: props.location } }}
+                    to={{
+                        pathname: routesPath.home,
+                        state: { from: props.location },
+                    }}
                 />
             );
         }

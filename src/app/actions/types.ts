@@ -5,10 +5,7 @@ import {
     IPatchUserAction,
     IDeleteUserAction,
 } from './authentication';
-import {
-    IRegisterFormFillAction,
-    IRegisterFormSetStageAction,
-} from './registerForm';
+import { IRegisterFormFillAction } from './registerForm';
 import { IStoreState } from 'app/reducers';
 import {
     IAdminPannelFetchUsersSuccessAction,
@@ -37,7 +34,6 @@ export enum ActionTypes {
     patchUser,
     deleteUser,
     registerFormFill,
-    registerFormSetStage,
     adminPannelFetchNextPageSuccess,
     adminPannelFetchUsersSuccess,
 
@@ -54,7 +50,6 @@ export type Action =
     | ILoginErrorAction
     | ILoginSuccessAction
     | IRegisterFormFillAction
-    | IRegisterFormSetStageAction
     | ILogoutAction
     | IAdminPannelFetchUsersSuccessAction
     | IAdminPannelFetchNextPageSuccessAction

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { routes } from 'app/config';
+import { routesPath } from 'app/config';
 import { NavigationItem } from 'app/components';
 
 interface IProps {
@@ -41,52 +41,52 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
             <nav className={`nav-bar ${expanded && 'nav-bar--expanded'}`}>
                 {admin && (
                     <NavigationItem
-                        active={currentItem.includes(routes.adminPannel)}
+                        active={currentItem.includes(routesPath.adminPannel)}
                         activeText={textDisplay}
                         icon='tools'
                         onClick={onItemClick}
-                        path={routes.adminPannel}
+                        path={routesPath.adminPannel}
                         text='Admin Pannel'
                     />
                 )}
                 <NavigationItem
-                    active={currentItem.includes(routes.chat)}
+                    active={currentItem.includes(routesPath.chat)}
                     activeText={textDisplay}
                     icon='envelope'
                     onClick={onItemClick}
-                    path={routes.chat}
+                    path={routesPath.chat}
                     text='Chat'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routes.teams)}
+                    active={currentItem.includes(routesPath.teams)}
                     activeText={textDisplay}
                     icon='users'
                     onClick={onItemClick}
-                    path={routes.teams}
+                    path={routesPath.teams}
                     text='Teams management'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routes.settingsProfile)}
+                    active={currentItem.includes(routesPath.settingsProfile)}
                     activeText={textDisplay}
                     icon='cog'
                     onClick={onItemClick}
-                    path={routes.settingsProfile}
+                    path={routesPath.settingsProfile}
                     text='Settings'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routes.feed)}
+                    active={currentItem.includes(routesPath.feed)}
                     activeText={textDisplay}
                     icon='poll'
                     onClick={onItemClick}
-                    path={routes.feed}
+                    path={routesPath.feed}
                     text='Feed'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routes.logout)}
+                    active={currentItem.includes(routesPath.logout)}
                     activeText={textDisplay}
                     icon='sign-out-alt'
                     onClick={onItemClick}
-                    path={routes.logout}
+                    path={routesPath.logout}
                     text='Logout'
                 />
                 <button
