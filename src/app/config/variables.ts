@@ -3,3 +3,4 @@ export const SCREEN_TRANSITION_MS = 500;
 
 /* REGISTER */
 export const REGISTER_FORM_TRANSITION_MS = 500;
+export const LOCAL_TOKEN_NAME = 'eh_state';

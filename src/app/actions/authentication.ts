@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import api from 'app/api';
 import { ActionTypes, IGetState, IFieldData, AppThunk } from './types';
-import { uploadFile, updateLocalUser, S3_LINK } from 'app/shared';
+import { uploadFile, S3_LINK, serializeState } from 'app/shared';
 import { ReduxFormValues } from 'app/layouts';
 
 export interface IUser {
@@ -178,7 +178,7 @@ export const patchUser = (patchData: IFieldData) => async (
                     },
                 }
             );
-            updateLocalUser(data);
+            serializeState(getState());
             dispatch<IPatchUserAction>({
                 type: ActionTypes.patchUser,
                 payload: data,
