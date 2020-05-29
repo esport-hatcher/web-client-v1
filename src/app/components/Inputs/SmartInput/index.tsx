@@ -2,8 +2,14 @@ import React from 'react';
 import { v4 as uuid } from 'uuid';
 import ReactTooltip from 'react-tooltip';
 import { WrappedFieldProps } from 'redux-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconType } from 'react-icons/lib';
+import {
+    AiOutlineCheck,
+    AiOutlineExclamationCircle,
+    AiOutlineRight,
+    AiOutlineLoading,
+} from 'react-icons/ai';
+import cx from 'classnames';
 
 interface IProps {
     placeholder: string;
@@ -11,7 +17,7 @@ interface IProps {
     type: 'email' | 'text' | 'password';
     pattern?: string;
     className?: string;
-    icon: IconProp;
+    Icon?: IconType;
     noValidation?: boolean;
 }
 
@@ -24,36 +30,41 @@ export const SmartInput: React.FC<IProps & WrappedFieldProps> = React.memo(
         pattern,
         input,
         meta,
-        icon,
+        Icon = AiOutlineRight,
         noValidation = false,
     }) => {
         const inputId = uuid();
+        const error = meta.touched && meta.invalid;
+        const loading = meta.asyncValidating;
+        const valid = meta.valid && !noValidation;
 
-        const getIconStatus = (): IconProp => {
-            if (meta.asyncValidating) {
-                return 'spinner';
+        const getIconStatus = (): IconType => {
+            if (loading) {
+                return AiOutlineLoading;
             }
-            if (meta.touched && meta.invalid) {
-                return 'exclamation-circle';
+            if (error) {
+                return AiOutlineExclamationCircle;
             }
-            if (meta.touched && meta.valid && !noValidation) {
-                return 'check';
+            if (valid) {
+                return AiOutlineCheck;
             }
-            return icon;
+            return Icon;
         };
 
         const getInputStatus = (): string => {
-            if (meta.asyncValidating) {
+            if (loading) {
                 return 'loading';
             }
-            if (meta.touched && meta.invalid) {
+            if (error) {
                 return 'error';
             }
-            if (meta.touched && meta.valid && !noValidation) {
+            if (valid) {
                 return 'success';
             }
             return '';
         };
+
+        const InputIcon = getIconStatus();
 
         return (
             <div className='smart-input'>
@@ -67,9 +78,10 @@ export const SmartInput: React.FC<IProps & WrappedFieldProps> = React.memo(
                     // tslint:disable-next-line: no-any
                     {...(input as any)}
                 />
-                <FontAwesomeIcon
-                    className='smart-input__icon'
-                    icon={getIconStatus()}
+                <InputIcon
+                    className={cx('smart-input__icon', {
+                        'smart-input__icon--off': meta.active,
+                    })}
                     data-tip
                     data-for={`error-${inputId}`}
                 />

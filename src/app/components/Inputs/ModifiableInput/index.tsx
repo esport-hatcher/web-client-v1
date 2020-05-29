@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useToggler, useInput } from 'app/custom-hooks';
+import { BsPencil } from 'react-icons/bs';
 
 interface IProps {
     name: string;
@@ -73,10 +73,7 @@ export const ModifiableInput: React.FC<IProps> = ({
                     'modifiable-input__btn--hidden'}`}
                 onClick={setInputMode}
             >
-                <FontAwesomeIcon
-                    icon='pen'
-                    className='modifiable-input__btn__icon'
-                />
+                <BsPencil className='modifiable-input__btn__icon' />
             </button>
             {displayContent()}
         </div>

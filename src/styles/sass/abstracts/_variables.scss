@@ -79,24 +79,26 @@ LABEL
 $label-count-padding: 0.7rem;
 $label-count-font-size: 1rem;
 
+/** input */
+
+$base-input-padding-sides: 1.8rem;
+$base-input-padding-top: 1rem;
+$base-input-max-width: 50rem;
+$base-input-border-radius: 14px;
+
 /*
 SEARCH FIELD
 */
-$search-field-padding: 1rem;
-$search-field-animation-duration: 0.3s;
-$search-field-width: 24rem;
-$search-field-icon-size: 2.5rem;
+$search-input-padding: 1rem;
+$search-input-animation-duration: 0.3s;
+$search-input-width: 24rem;
+$search-input-icon-size: 2rem;
 
 /* 
 SMART INPUT
 */
-$smart-input-width: 30rem;
-$smart-input-height: 4rem;
-$smart-input-border-radius: 14px;
 $smart-input-animation-duration: 0.4s;
 $smart-input-animation-style: ease-in-out;
-$smart-input-padding-sides: 1.8rem;
-$smart-input-padding-top: 1rem;
 $smart-input-icon-size: 2rem;
 
 /*

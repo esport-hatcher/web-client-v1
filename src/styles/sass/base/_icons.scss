@@ -4,6 +4,10 @@ i[class*='-spinner'] {
 
 .icon {
     transition: color $icon-animation-duration;
+    vertical-align: center;
+    width: 2.4rem;
+    height: 2.4rem;
+
     // COLORS
     &--pink {
         color: $color-rosy-pink;

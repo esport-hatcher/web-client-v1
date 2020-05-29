@@ -1,34 +1,32 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconType } from 'react-icons/lib';
 
 interface IProps {
-    icon: IconProp;
+    Icon: IconType;
     className: string;
-    rotation?: 90 | 180 | 270 | undefined;
-    loading?: boolean;
+    type: 'submit' | 'button';
+    loading: boolean;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const IconButton: React.FC<IProps> = ({
     children,
-    icon,
+    Icon,
     className,
-    rotation,
-    loading,
+    type = 'button',
+    loading = false,
+    onClick,
 }) => {
     return (
         <button
+            type={type}
+            onClick={onClick}
             className={`btn btn--icon-holder ${className} ${loading &&
                 'btn--disabled'}`}
             disabled={loading}
         >
             <p className='btn--icon-holder__text'>{children}</p>
-            <FontAwesomeIcon
-                icon={icon}
-                rotation={rotation}
-                className={`btn--icon-holder__icon ${loading &&
-                    'icon--rotate'}`}
-            />
+            <Icon className='btn--icon-holder__icon' />
         </button>
     );
 };

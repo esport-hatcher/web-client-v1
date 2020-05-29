@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FiChevronRight } from 'react-icons/fi';
+import {
+    AiOutlineTool,
+    AiOutlineMail,
+    AiOutlineUser,
+    AiOutlineSetting,
+    AiOutlineFire,
+    AiOutlineLogout,
+} from 'react-icons/ai';
 import { routesPath } from 'app/config';
 import { NavigationItem } from 'app/components';
 
@@ -43,7 +51,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     <NavigationItem
                         active={currentItem.includes(routesPath.adminPannel)}
                         activeText={textDisplay}
-                        icon='tools'
+                        Icon={AiOutlineTool}
                         onClick={onItemClick}
                         path={routesPath.adminPannel}
                         text='Admin Pannel'
@@ -52,7 +60,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routesPath.chat)}
                     activeText={textDisplay}
-                    icon='envelope'
+                    Icon={AiOutlineMail}
                     onClick={onItemClick}
                     path={routesPath.chat}
                     text='Chat'
@@ -60,7 +68,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routesPath.teams)}
                     activeText={textDisplay}
-                    icon='users'
+                    Icon={AiOutlineUser}
                     onClick={onItemClick}
                     path={routesPath.teams}
                     text='Teams management'
@@ -68,7 +76,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routesPath.settingsProfile)}
                     activeText={textDisplay}
-                    icon='cog'
+                    Icon={AiOutlineSetting}
                     onClick={onItemClick}
                     path={routesPath.settingsProfile}
                     text='Settings'
@@ -76,7 +84,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routesPath.feed)}
                     activeText={textDisplay}
-                    icon='poll'
+                    Icon={AiOutlineFire}
                     onClick={onItemClick}
                     path={routesPath.feed}
                     text='Feed'
@@ -84,7 +92,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                 <NavigationItem
                     active={currentItem.includes(routesPath.logout)}
                     activeText={textDisplay}
-                    icon='sign-out-alt'
+                    Icon={AiOutlineLogout}
                     onClick={onItemClick}
                     path={routesPath.logout}
                     text='Logout'
@@ -94,10 +102,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                         'nav-bar__button-expand--expanded'}`}
                     onClick={expandNavBar}
                 >
-                    <FontAwesomeIcon
-                        className='nav-bar__button-expand__icon'
-                        icon='chevron-right'
-                    />
+                    <FiChevronRight className='nav-bar__button-expand__icon' />
                 </button>
             </nav>
         </React.Fragment>

@@ -7,6 +7,7 @@ import { normalizePhone, required } from 'app/shared';
 
 import { register } from 'app/actions';
 import { RegisterStage } from '../RegisterForm';
+import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
 
 export type ReduxFormValues = { [key: string]: string };
 
@@ -49,7 +50,7 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
                 <RoundButton
                     type='button'
                     onClick={onGoBack}
-                    icon='chevron-left'
+                    Icon={AiOutlineLeft}
                     className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
                 />
                 <Field
@@ -57,7 +58,6 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
                     type='text'
                     placeholder='First name'
                     name='firstName'
-                    icon='portrait'
                     normalize={capitalize}
                     validate={[required]}
                 />
@@ -100,9 +100,9 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
                 />
                 <IconButton
                     className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
-                    icon={loading ? 'spinner' : 'sign-in-alt'}
-                    rotation={loading ? 90 : undefined}
+                    Icon={AiOutlineLogin}
                     loading={loading}
+                    type='submit'
                 >
                     Register
                 </IconButton>

@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, shallowEqual } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { FiMail, FiLock } from 'react-icons/fi';
 import { SmartInput, IconButton } from 'app/components';
 import { ReduxFormValues } from '../Register';
 import { login } from 'app/actions';
@@ -43,7 +45,7 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             type='email'
                             placeholder='Email'
                             name='email'
-                            icon='envelope'
+                            Icon={FiMail}
                             noValidation
                         />
                         <Field
@@ -51,7 +53,7 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             type='password'
                             placeholder='Password'
                             name='password'
-                            icon='lock'
+                            Icon={FiLock}
                             noValidation
                         />
                         {errorMsg && errorMsg.login && (
@@ -61,9 +63,9 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                         )}
                         <IconButton
                             className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
-                            icon={loading ? 'spinner' : 'sign-in-alt'}
-                            rotation={loading ? 90 : undefined}
+                            Icon={AiOutlineLogin}
                             loading={loading}
+                            type='submit'
                         >
                             Login
                         </IconButton>

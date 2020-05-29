@@ -9,6 +9,8 @@ import {
     isMin5Max20,
     isEmailAvailable,
 } from 'app/shared';
+import { AiOutlineRight } from 'react-icons/ai';
+import { FiMail, FiLock } from 'react-icons/fi';
 
 interface IProps {}
 
@@ -23,15 +25,14 @@ const _RegisterFormBasic: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
             </div>
             <form className='register-screen__basic' onSubmit={handleSubmit}>
                 <Field
-                    icon='envelope'
                     type='email'
                     placeholder='Email'
                     name='email'
+                    Icon={FiMail}
                     component={SmartInput}
                     validate={[required, isEmail]}
                 />
                 <Field
-                    icon='pen'
                     type='text'
                     placeholder='Username'
                     component={SmartInput}
@@ -39,24 +40,24 @@ const _RegisterFormBasic: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
                     validate={[required, isMin3Max20]}
                 />
                 <Field
-                    icon='lock'
                     type='password'
                     placeholder='Password'
                     component={SmartInput}
                     validate={[required, isMin5Max20]}
+                    Icon={FiLock}
                     name='password'
                 />
                 <Field
-                    icon='lock'
                     name='passwordConfirm'
                     type='password'
                     component={SmartInput}
                     placeholder='Confirm Password'
+                    Icon={FiLock}
                     validate={[required, matchesPassword]}
                 />
                 <RoundButton
                     type='submit'
-                    icon='chevron-right'
+                    Icon={AiOutlineRight}
                     className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
                 />
             </form>
