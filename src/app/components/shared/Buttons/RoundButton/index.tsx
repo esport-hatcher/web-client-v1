@@ -1,22 +1,24 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconType } from 'react-icons/lib';
+
 interface IProps {
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-    icon: IconProp;
+    Icon: IconType;
     className: string;
     type: 'submit' | 'button';
+    loading?: Boolean;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const RoundButton: React.FC<IProps> = React.memo(
-    ({ onClick, icon, className, type }) => {
+    ({ onClick, Icon, className, type = 'button', loading = false }) => {
+        // TODO: return spinner when loading set to true
         return (
             <button
                 type={type}
                 className={`btn btn--round ${className}`}
                 onClick={onClick}
             >
-                <FontAwesomeIcon icon={icon} className='btn-round__icon' />
+                <Icon className='btn-round__icon' />
             </button>
         );
     }

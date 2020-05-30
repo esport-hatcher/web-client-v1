@@ -109,11 +109,13 @@ export const login = (loginFormValues: ReduxFormValues): AppThunk => async (
             type: ActionTypes.loginSuccess,
             payload: data,
         });
+        return Promise.resolve();
     } catch ({ response: { data } }) {
         dispatch<ILoginErrorAction>({
             type: ActionTypes.loginError,
             payload: data,
         });
+        return Promise.reject(data);
     }
 };
 

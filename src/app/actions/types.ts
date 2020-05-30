@@ -59,6 +59,8 @@ export type Action =
 export type IGetState = () => RootState;
 
 export type AppDispatch = typeof store.dispatch;
+export type AsyncDispatch = (action: Function) => Promise<void>;
+
 export type AppThunk = ThunkAction<
     Promise<void>,
     RootState,

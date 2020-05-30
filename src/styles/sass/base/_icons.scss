@@ -1,9 +1,9 @@
-i[class*='-spinner'] {
-    animation: rotateRight 1.5s ease-in-out infinite running !important;
-}
-
 .icon {
     transition: color $icon-animation-duration;
+    vertical-align: center;
+    width: 2.4rem;
+    height: 2.4rem;
+
     // COLORS
     &--pink {
         color: $color-rosy-pink;
@@ -22,12 +22,8 @@ i[class*='-spinner'] {
     }
 
     // ANIMATIONS
-    &--rotate {
-        animation: rotateRight 1.5s ease-in-out infinite running !important;
-    }
-
-    &--rotate-abs-y {
-        animation: rotateRightAbsY 1.5s ease-in-out infinite running !important;
+    &--spinner {
+        animation: 1s ease-out infinite running rotateRight;
     }
 
     // DIVERS

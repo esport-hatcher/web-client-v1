@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FiChevronDown } from 'react-icons/fi';
 import { useToggler } from 'app/custom-hooks';
 
 interface IProps {
@@ -50,12 +50,7 @@ export const Dropdown: React.FC<IProps> = React.memo(({ items, onSelect }) => {
         >
             <div className='dropdown__header'>
                 <div className='dropdown__header__value'>{value}</div>
-                <FontAwesomeIcon
-                    icon='chevron-down'
-                    className={`dropdown__header__icon ${listToggled &&
-                        'dropdown__header__icon--rotated'}`}
-                    onClick={toggleList}
-                />
+                <FiChevronDown onClick={toggleList} />
             </div>
             <ul
                 className={`dropdown__list ${listToggled &&

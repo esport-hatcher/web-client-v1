@@ -1,5 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { IconType } from 'react-icons/lib';
 
 interface IProps {
     confirmed: boolean;
@@ -9,12 +10,14 @@ interface IProps {
 
 export const UserConfirmedInfo: React.FC<IProps> = React.memo(
     ({ confirmed, content, className }) => {
+        const getIconStatus = (): IconType =>
+            confirmed ? AiOutlineCheck : AiOutlineClose;
+
+        const IconStatus = getIconStatus();
+
         return (
             <div className={`user-confirmed-info ${className}`}>
-                <FontAwesomeIcon
-                    className='user-confirmed-info__icon'
-                    icon={confirmed ? 'check' : 'times'}
-                />
+                <IconStatus className='user-confirmed-info__icon' />
                 <p className='user-confirmed-info__content important-info important-info--sm'>
                     {content}
                 </p>

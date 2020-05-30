@@ -15,7 +15,9 @@
     }
 
     &__icon {
-        font-size: 1.8rem;
+        // font-size: 1.8rem;
+        height: 1.8rem;
+        width: 1.8rem;
         color: $color-rosy-pink;
 
         &--completed {
