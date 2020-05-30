@@ -1,36 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IconType } from 'react-icons/lib';
+import cx from 'classnames';
 
 interface IProps {
-    // TODO: PUT RIGHT TYPE
-    // tslint:disable-next-line: no-any
     Icon: IconType;
     path: string;
     text: string;
-    active: boolean;
     activeText: boolean;
     className?: string;
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 export const NavigationItem: React.FC<IProps> = React.memo(
-    ({ active, Icon, onClick, path, text, activeText, className }) => {
+    ({ Icon, path, text, activeText, className }) => {
         return (
-            <Link
+            <NavLink
                 to={path}
-                className={`nav-bar__item ${active &&
-                    'nav-bar__item--active'} ${className}`}
-                onClick={onClick}
+                activeClassName='nav-bar__item--active'
+                className={`nav-bar__item ${className}`}
             >
                 <Icon className='nav-bar__item__icon' />
                 <p
-                    className={`nav-bar__item__text ${activeText &&
-                        'nav-bar__item__text--display'}`}
+                    className={cx('nav-bar__item__text', {
+                        'nav-bar__item__text--display': activeText,
+                    })}
                 >
                     {text}
                 </p>
-            </Link>
+            </NavLink>
         );
     }
 );

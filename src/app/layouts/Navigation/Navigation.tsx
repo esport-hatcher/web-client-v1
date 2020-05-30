@@ -16,13 +16,8 @@ interface IProps {
 }
 
 export const NavBar: React.FC<IProps> = ({ admin }) => {
-    const [currentItem, setCurrentItem] = useState('');
     const [expanded, setExpanded] = useState(false);
     const [textDisplay, setTextDisplay] = useState(false);
-
-    useEffect(() => {
-        setCurrentItem(window.location.pathname);
-    }, []);
 
     const expandNavBar = useCallback(() => {
         setExpanded(expanded => !expanded);
@@ -33,11 +28,11 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
         }
     }, [textDisplay, setTextDisplay]);
 
-    const onItemClick = useCallback(
-        (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-            setCurrentItem(e.currentTarget.getAttribute('href')!),
-        [setCurrentItem]
-    );
+    // const onItemClick = useCallback(
+    //     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
+    //         setCurrentItem(e.currentTarget.getAttribute('href')!),
+    //     [setCurrentItem]
+    // );
 
     return (
         <React.Fragment>
@@ -49,51 +44,51 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
             <nav className={`nav-bar ${expanded && 'nav-bar--expanded'}`}>
                 {admin && (
                     <NavigationItem
-                        active={currentItem.includes(routesPath.adminPannel)}
+                        // active={currentItem.includes(routesPath.adminPannel)}
                         activeText={textDisplay}
                         Icon={AiOutlineTool}
-                        onClick={onItemClick}
+                        // onClick={onItemClick}
                         path={routesPath.adminPannel}
                         text='Admin Pannel'
                     />
                 )}
                 <NavigationItem
-                    active={currentItem.includes(routesPath.chat)}
+                    // active={currentItem.includes(routesPath.chat)}
                     activeText={textDisplay}
                     Icon={AiOutlineMail}
-                    onClick={onItemClick}
+                    // onClick={onItemClick}
                     path={routesPath.chat}
                     text='Chat'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.teams)}
+                    // active={currentItem.includes(routesPath.teams)}
                     activeText={textDisplay}
                     Icon={AiOutlineUser}
-                    onClick={onItemClick}
+                    // onClick={onItemClick}
                     path={routesPath.teams}
                     text='Teams management'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.settingsProfile)}
-                    activeText={textDisplay}
-                    Icon={AiOutlineSetting}
-                    onClick={onItemClick}
-                    path={routesPath.settingsProfile}
-                    text='Settings'
-                />
-                <NavigationItem
-                    active={currentItem.includes(routesPath.feed)}
+                    // active={currentItem.includes(routesPath.feed)}
                     activeText={textDisplay}
                     Icon={AiOutlineFire}
-                    onClick={onItemClick}
+                    // onClick={onItemClick}
                     path={routesPath.feed}
                     text='Feed'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.logout)}
+                    // active={currentItem.includes(routesPath.settingsProfile)}
+                    activeText={textDisplay}
+                    Icon={AiOutlineSetting}
+                    // onClick={onItemClick}
+                    path={routesPath.settingsProfile}
+                    text='Settings'
+                />
+                <NavigationItem
+                    // active={currentItem.includes(routesPath.logout)}
                     activeText={textDisplay}
                     Icon={AiOutlineLogout}
-                    onClick={onItemClick}
+                    // onClick={onItemClick}
                     path={routesPath.logout}
                     text='Logout'
                 />

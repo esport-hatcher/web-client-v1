@@ -5,26 +5,28 @@ import { AiOutlineLogin } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { SmartInput, IconButton } from 'app/components';
 import { ReduxFormValues } from '../Register';
-import { login } from 'app/actions';
+import { login, AsyncDispatch } from 'app/actions';
 import { useSelector } from 'app/custom-hooks';
 
 interface IProps {}
 
 const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
     ({ handleSubmit }) => {
-        const [loading, setLoading] = useState(false);
+        const [isLoading, setLoading] = useState(false);
         const errorMsg = useSelector(
             state => state.authentication.errorMsg,
             shallowEqual
         );
-        const dispatch = useDispatch();
+        const dispatch = useDispatch() as AsyncDispatch;
 
         const onSubmit = useCallback(
             async (formValues: ReduxFormValues) => {
-                setLoading(true);
-                // tslint:disable-next-line: await-promise
-                await dispatch(login(formValues));
-                setLoading(false);
+                try {
+                    setLoading(true);
+                    await dispatch(login(formValues));
+                } catch {
+                    setLoading(false);
+                }
             },
             [dispatch, setLoading]
         );
@@ -64,7 +66,7 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                         <IconButton
                             className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
                             Icon={AiOutlineLogin}
-                            loading={loading}
+                            loading={isLoading}
                             type='submit'
                         >
                             Login
