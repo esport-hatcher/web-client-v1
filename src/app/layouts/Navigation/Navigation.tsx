@@ -8,6 +8,7 @@ import {
     AiOutlineFire,
     AiOutlineLogout,
 } from 'react-icons/ai';
+import cx from 'classnames';
 import { routesPath } from 'app/config';
 import { NavigationItem } from 'app/components';
 
@@ -15,7 +16,7 @@ interface IProps {
     admin: boolean;
 }
 
-export const NavBar: React.FC<IProps> = ({ admin }) => {
+export const NavBar: React.FC<IProps> = React.memo(({ admin }) => {
     const [expanded, setExpanded] = useState(false);
     const [textDisplay, setTextDisplay] = useState(false);
 
@@ -28,12 +29,6 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
         }
     }, [textDisplay, setTextDisplay]);
 
-    // const onItemClick = useCallback(
-    //     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-    //         setCurrentItem(e.currentTarget.getAttribute('href')!),
-    //     [setCurrentItem]
-    // );
-
     return (
         <React.Fragment>
             <div
@@ -41,7 +36,7 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     expanded ? 'nav-bar__placeholder--expanded' : ''
                 }`}
             />
-            <nav className={`nav-bar ${expanded && 'nav-bar--expanded'}`}>
+            <nav className={cx('nav-bar', { 'nav-bar--expanded': expanded })}>
                 {admin && (
                     <NavigationItem
                         // active={currentItem.includes(routesPath.adminPannel)}
@@ -93,8 +88,9 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
                     text='Logout'
                 />
                 <button
-                    className={`nav-bar__button-expand ${expanded &&
-                        'nav-bar__button-expand--expanded'}`}
+                    className={cx('nav-bar__button-expand', {
+                        'nav-bar__button-expand--expanded': expanded,
+                    })}
                     onClick={expandNavBar}
                 >
                     <FiChevronRight className='nav-bar__button-expand__icon' />
@@ -102,4 +98,4 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
             </nav>
         </React.Fragment>
     );
-};
+});

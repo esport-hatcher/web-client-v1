@@ -36,21 +36,21 @@ describe('<Navigation />', () => {
         ).toBe('Logout');
     });
 
-    it('render a Settings item', () => {
+    it('render a Feed item', () => {
         expect(
             wrapped
                 .find(Link)
                 .at(2)
                 .text()
-        ).toBe('Settings');
+        ).toBe('Feed');
     });
 
-    it('render a Feed item', () => {
+    it('render a Settings item', () => {
         expect(
             wrapped
                 .find(Link)
                 .at(3)
                 .text()
-        ).toBe('Feed');
+        ).toBe('Settings');
     });
 });
