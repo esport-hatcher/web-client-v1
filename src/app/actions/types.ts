@@ -1,3 +1,6 @@
+import { ThunkAction } from 'redux-thunk';
+import { Action as ReduxAction } from 'redux';
+import { RootState } from 'app/reducers';
 import {
     ILoginErrorAction,
     ILoginSuccessAction,
@@ -13,12 +16,7 @@ import {
     IAdminPannelCountFiltersAction,
     IAdminPannelFetchNextPageSuccessAction,
 } from './adminPannel';
-import { ThunkAction } from 'redux-thunk';
-import { Action as ReduxAction } from 'redux';
-
 import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
-import { RootState } from 'app/reducers';
-import { store } from 'app/config';
 
 export type CountQuery = { records: number };
 
@@ -58,7 +56,6 @@ export type Action =
 
 export type IGetState = () => RootState;
 
-export type AppDispatch = typeof store.dispatch;
 export type AsyncDispatch = (action: Function) => Promise<void>;
 
 export type AppThunk = ThunkAction<
