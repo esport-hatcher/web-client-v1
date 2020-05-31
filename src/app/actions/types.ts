@@ -1,22 +1,15 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action as ReduxAction } from 'redux';
 import { RootState } from 'app/reducers';
-import {
-    ILoginErrorAction,
-    ILoginSuccessAction,
-    ILogoutAction,
-    IPatchUserAction,
-    IDeleteUserAction,
-    IRegisterSuccessAction,
-    IRegisterErrorAction,
-} from './authentication';
+import { ILoginSuccess, IRegisterSuccess, ILogout } from './authentication';
 import {
     IAdminPannelFetchUsersSuccessAction,
     IAdminPannelSetLoadingAction,
     IAdminPannelCountFiltersAction,
     IAdminPannelFetchNextPageSuccessAction,
 } from './adminPannel';
-import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
+import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
+import { ITeamsFetchsAction, ITeamsErrorAction } from './teams';
 
 export type CountQuery = { records: number };
 
@@ -25,11 +18,10 @@ export type IFieldData = { [key: string]: any };
 
 export enum ActionTypes {
     loginSuccess,
-    loginError,
     registerSuccess,
-    registerError,
     logout,
-    patchUser,
+    fetchUserSession,
+    patchUserSession,
     deleteUser,
     adminPannelFetchUsersSuccess,
     adminPannelFetchNextPageSuccess,
@@ -40,13 +32,12 @@ export enum ActionTypes {
 }
 
 export type Action =
-    | ILoginSuccessAction
-    | ILoginErrorAction
-    | IRegisterSuccessAction
-    | IRegisterErrorAction
-    | ILogoutAction
-    | IPatchUserAction
-    | IDeleteUserAction
+    | ILoginSuccess
+    | IRegisterSuccess
+    | ILogout
+    | IFetchUserSession
+    | IPatchUserSession
+    | IDeleteUser
     | IAdminPannelFetchUsersSuccessAction
     | IAdminPannelFetchNextPageSuccessAction
     | IAdminPannelSetLoadingAction

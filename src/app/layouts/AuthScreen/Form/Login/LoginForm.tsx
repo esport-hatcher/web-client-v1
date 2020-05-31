@@ -6,17 +6,13 @@ import { FiMail, FiLock } from 'react-icons/fi';
 import { SmartInput, IconButton } from 'app/components';
 import { ReduxFormValues } from '../Register';
 import { login, AsyncDispatch } from 'app/actions';
-import { useSelector } from 'app/custom-hooks';
 
 interface IProps {}
 
 const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
     ({ handleSubmit }) => {
         const [isLoading, setLoading] = useState(false);
-        const errorMsg = useSelector(
-            state => state.authentication.errorMsg,
-            shallowEqual
-        );
+        const [error, setError] = useState<string | null>(null);
         const dispatch = useDispatch() as AsyncDispatch;
 
         const onSubmit = useCallback(
@@ -24,11 +20,12 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                 try {
                     setLoading(true);
                     await dispatch(login(formValues));
-                } catch {
+                } catch (err) {
                     setLoading(false);
+                    setError(err);
                 }
             },
-            [dispatch, setLoading]
+            [dispatch, setLoading, setError]
         );
 
         return (
@@ -58,9 +55,9 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             Icon={FiLock}
                             noValidation
                         />
-                        {errorMsg && errorMsg.login && (
+                        {error && (
                             <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
-                                {errorMsg.login}
+                                {error}
                             </p>
                         )}
                         <IconButton

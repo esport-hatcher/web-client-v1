@@ -1,4 +1,5 @@
 export * from './types';
 export * from './authentication';
-export * from './teamsInfomation';
+export * from './teams';
 export * from './adminPannel';
+export * from './user';

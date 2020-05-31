@@ -1,28 +1,14 @@
 import { ITeams, Action, ActionTypes } from 'app/actions';
 
-export interface IFetchTeam {
-    team: ITeams[];
-}
-
-const INITIAL_STATE: IFetchTeam = {
-    team: [],
-};
-
-export const fetchTeamsReducer = (
-    state: IFetchTeam = INITIAL_STATE,
-    action: Action
-) => {
+const teamsReducer = (state: ITeams[] = [], action: Action) => {
     switch (action.type) {
         case ActionTypes.fetchteamSucess:
-            return {
-                team: action.payload,
-            };
+            return action.payload;
         case ActionTypes.fetchTeamError:
-            return {
-                ...state,
-                teams: action.payload || [],
-            };
+            return [];
         default:
             return state;
     }
 };
+
+export default teamsReducer;
