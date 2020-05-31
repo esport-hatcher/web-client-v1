@@ -1,17 +1,13 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-
-import { App } from '../App';
-import { Root } from '../config';
+import { Root, configureStore } from 'app/config';
 
 let wrapped: ReactWrapper;
 
+const store = configureStore();
+
 beforeEach(() => {
-    wrapped = mount(
-        <Root>
-            <App />
-        </Root>
-    );
+    wrapped = mount(<Root store={store} />);
 });
 
 it('renders the App component', () => {

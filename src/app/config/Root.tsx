@@ -1,46 +1,17 @@
 import React from 'react';
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { BrowserRouter } from 'react-router-dom';
+import { Store, AnyAction } from 'redux';
 import { Provider } from 'react-redux';
-import { rootReducer } from 'app/reducers';
+import { BrowserRouter } from 'react-router-dom';
+import { App } from 'app';
 
-declare global {
-    // tslint:disable-next-line: interface-name
-    interface Window {
-        // tslint:disable-next-line: no-any
-        gapi: any;
-        // tslint:disable-next-line: no-any
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-    }
-}
+// tslint:disable: no-any
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const oldAuthentication = JSON.parse(localStorage.getItem('ehToken')!);
-// tslint:disable-next-line: no-any
-const initialState: any = {
-    authentication: oldAuthentication
-        ? oldAuthentication
-        : { user: null, token: null },
-};
-
-export const store = createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(thunk))
-);
-
-export const Root = ({
-    children,
-}: {
-    // tslint:disable-next-line: no-any
-    children: any;
-    // tslint:disable-next-line: no-any
-}) => {
+export const Root = ({ store }: { store: Store<any, AnyAction> }) => {
     return (
         <Provider store={store}>
-            <BrowserRouter>{children}</BrowserRouter>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
         </Provider>
     );
 };
