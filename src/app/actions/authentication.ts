@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
 import api from 'app/api';
 import { ActionTypes, IGetState, IFieldData, AppThunk } from './types';
-import { uploadFile, S3_LINK, serializeState } from 'app/shared';
+import { uploadFile, S3_LINK } from 'app/shared';
 import { ReduxFormValues } from 'app/layouts';
+import { persistor } from 'index';
 
 export interface IUser {
     id: number;
@@ -83,7 +84,6 @@ export const register = (
             '/users',
             registerFormValues
         );
-        localStorage.setItem('ehToken', JSON.stringify(data));
         dispatch<IRegisterSuccessAction>({
             type: ActionTypes.registerSuccess,
             payload: data,
@@ -104,7 +104,6 @@ export const login = (loginFormValues: ReduxFormValues): AppThunk => async (
             '/users/token',
             loginFormValues
         );
-        localStorage.setItem('ehToken', JSON.stringify(data));
         dispatch<ILoginSuccessAction>({
             type: ActionTypes.loginSuccess,
             payload: data,
@@ -140,7 +139,6 @@ export const fetchUserSession = () => async (
             });
         }
     } catch ({ response: { data } }) {
-        localStorage.removeItem('ehToken');
         dispatch<ILoginErrorAction>({
             type: ActionTypes.loginError,
             payload: data,
@@ -180,7 +178,6 @@ export const patchUser = (patchData: IFieldData) => async (
                     },
                 }
             );
-            serializeState(getState());
             dispatch<IPatchUserAction>({
                 type: ActionTypes.patchUser,
                 payload: data,
@@ -217,7 +214,8 @@ export const deleteUser = (user: IUser) => async (
 };
 
 export const logout = (): ILogoutAction => {
-    localStorage.removeItem('ehToken');
+    // tslint:disable-next-line: no-floating-promises
+    persistor.purge();
     return {
         type: ActionTypes.logout,
     };
