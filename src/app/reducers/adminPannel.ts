@@ -1,4 +1,4 @@
-import { unionBy } from 'lodash';
+import unionBy from 'lodash/unionBy';
 import { IUser, Action, ActionTypes } from 'app/actions';
 
 export interface IAdminPannelFiltersCount {
@@ -24,7 +24,7 @@ const INITIAL_STATE: IAdminPannelReducer = {
     loading: false,
 };
 
-export const adminPannelReducer = (
+const adminPannelReducer = (
     state: IAdminPannelReducer = INITIAL_STATE,
     action: Action
 ) => {
@@ -73,3 +73,5 @@ export const adminPannelReducer = (
             return state;
     }
 };
+
+export default adminPannelReducer;

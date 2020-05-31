@@ -128,4 +128,9 @@
         border-bottom-left-radius: 14px;
         border-bottom-right-radius: 14px;
     }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: auto;
+    }
 }

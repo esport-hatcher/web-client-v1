@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { SettingsProfileForm } from './Form';
 import { UserAvatar } from 'app/components';
-import { IUser, patchUser } from 'app/actions';
+import { IUser, patchUserSession } from 'app/actions';
 
 interface IProps {
     user: IUser;
@@ -14,7 +14,7 @@ export const SettingsProfileBox: React.FC<IProps> = React.memo(({ user }) => {
     const onFileChange = useCallback(
         // tslint:disable-next-line: no-any
         (file: any) => {
-            dispatch(patchUser({ avatarUrl: file }));
+            dispatch(patchUserSession({ avatarUrl: file }));
         },
         [dispatch]
     );

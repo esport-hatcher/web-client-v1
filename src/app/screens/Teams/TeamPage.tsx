@@ -8,7 +8,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 export const _TeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
-    const team = useSelector(state => state.teams.team);
+    const teams = useSelector(state => state.teams);
 
     const [show, onShow] = useToggler(false);
 
@@ -18,8 +18,8 @@ export const _TeamPage: React.FC = React.memo(() => {
 
     return (
         <main className='select-team'>
-            {team &&
-                team.map(item => {
+            {teams &&
+                teams.map(item => {
                     return <TeamCard item={item} />;
                 })}
             <div className='select-team__modal--button' onClick={onShow}>

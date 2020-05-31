@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { ActionTypes, IGetState, CountQuery } from './types';
-import { IUser } from './authentication';
+import { IUser } from './user';
 import api from 'app/api';
 import { IAdminPannelFiltersCount } from 'app/reducers/adminPannel';
 
