@@ -19,7 +19,7 @@ const _RegisterFormBasic: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
 }) => {
     return (
         <div className='register-screen__container'>
-            <div className='register-screen__container__title title title--big'>
+            <div className='register-screen__container__title title title--xl'>
                 Register to <br />
                 Esport-Hatcher
             </div>

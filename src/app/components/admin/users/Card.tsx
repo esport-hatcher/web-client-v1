@@ -36,10 +36,10 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 />
             )}
             <div className='admin-user-card__names'>
-                <p className='admin-user-card__names__firstname important-info important-info--big'>
+                <p className='admin-user-card__names__firstname important-info important-info--xl'>
                     {user.firstName}
                 </p>
-                <p className='admin-user-card__names__lastname important-info important-info--big m-t-xs'>
+                <p className='admin-user-card__names__lastname important-info important-info--xl m-t-xs'>
                     {user.lastName}
                 </p>
             </div>

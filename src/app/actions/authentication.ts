@@ -2,6 +2,7 @@ import api from 'app/api';
 import { ActionTypes, AppThunk } from './types';
 import { ReduxFormValues } from 'app/layouts';
 import { persistor } from 'index';
+import { sendToast } from 'app/shared';
 
 interface IAuthSuccess {
     token: string;
@@ -35,12 +36,22 @@ export const register = (
             type: ActionTypes.registerSuccess,
             token,
         });
+        sendToast({
+            title: 'Sign up success',
+            content: 'We successfully created your account !',
+            type: 'success',
+        });
         return Promise.resolve();
     } catch ({
         response: {
             data: { message },
         },
     }) {
+        sendToast({
+            title: 'Sign up error',
+            content: message,
+            type: 'error',
+        });
         return Promise.reject(message);
     }
 };
@@ -62,6 +73,11 @@ export const login = (
             data: { message },
         },
     }) {
+        sendToast({
+            title: 'Sign in error ',
+            content: message,
+            type: 'error',
+        });
         return Promise.reject(message);
     }
 };
