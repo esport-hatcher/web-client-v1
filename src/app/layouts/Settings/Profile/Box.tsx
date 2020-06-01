@@ -21,7 +21,7 @@ export const SettingsProfileBox: React.FC<IProps> = React.memo(({ user }) => {
 
     return (
         <div className='settings-profile__box'>
-            <h1 className='settings-profile__box__title important-info important-info--big'>
+            <h1 className='settings-profile__box__title important-info important-info--xl'>
                 Public Profile
             </h1>
             <hr className='divider settings-profile__box__divider' />

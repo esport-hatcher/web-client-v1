@@ -3,9 +3,17 @@ import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { IconContext } from 'react-icons/lib';
 import { Navigation } from 'app/layouts';
-import { routes, SCREEN_TRANSITION_MS, BASE_ICON_CLASS } from 'app/config';
-// tslint:disable-next-line: no-import-side-effect
+import {
+    routes,
+    SCREEN_TRANSITION_MS,
+    BASE_ICON_CLASS,
+    TOAST_DURATION,
+    TOAST_CLASSNAMES,
+} from 'app/config';
+// tslint:disable no-import-side-effect
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/sass/main.scss';
+import { ToastContainer } from 'react-toastify';
 
 export const App: React.FC = () => {
     return (
@@ -13,6 +21,10 @@ export const App: React.FC = () => {
             <div className='container'>
                 <Navigation />
                 <div className='container__content'>
+                    <ToastContainer
+                        autoClose={TOAST_DURATION}
+                        position='top-center'
+                    />
                     {routes.map(({ path, Component }) => (
                         <Route key={path} exact path={path}>
                             {({ match }) => (

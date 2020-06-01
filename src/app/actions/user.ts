@@ -1,7 +1,7 @@
 import { persistor } from 'index';
 import api from 'app/api';
 import { ActionTypes, AppThunk, IFieldData } from './types';
-import { uploadFile, S3_LINK } from 'app/shared';
+import { uploadFile, S3_LINK, sendToast } from 'app/shared';
 import { ILogout } from './authentication';
 
 export interface IUser {
@@ -48,6 +48,11 @@ export const fetchUserSession = (): AppThunk => async (dispatch, getState) => {
             dispatch<IFetchUserSession>({
                 type: ActionTypes.fetchUserSession,
                 user: data,
+            });
+            sendToast({
+                title: 'Sign in success',
+                content: `Happy to see you back ${data.username}!`,
+                type: 'success',
             });
         }
     } catch ({ response: { data } }) {
