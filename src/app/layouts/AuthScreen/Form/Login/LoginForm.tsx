@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
