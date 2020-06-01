@@ -3,6 +3,7 @@ import { ActionTypes, AppThunk } from './types';
 import { ReduxFormValues } from 'app/layouts';
 import { persistor } from 'index';
 import { sendToast } from 'app/shared';
+import { toast } from 'react-toastify';
 
 interface IAuthSuccess {
     token: string;
@@ -85,6 +86,7 @@ export const login = (
 export const logout = (): ILogout => {
     // tslint:disable-next-line: no-floating-promises
     persistor.purge();
+    toast.dismiss();
     return {
         type: ActionTypes.logout,
     };

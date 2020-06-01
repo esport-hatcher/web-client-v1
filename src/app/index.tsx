@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { ToastContainer } from 'react-toastify';
 import { IconContext } from 'react-icons/lib';
 import { Navigation } from 'app/layouts';
 import {
@@ -8,12 +9,10 @@ import {
     SCREEN_TRANSITION_MS,
     BASE_ICON_CLASS,
     TOAST_DURATION,
-    TOAST_CLASSNAMES,
 } from 'app/config';
 // tslint:disable no-import-side-effect
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/sass/main.scss';
-import { ToastContainer } from 'react-toastify';
 
 export const App: React.FC = () => {
     return (
