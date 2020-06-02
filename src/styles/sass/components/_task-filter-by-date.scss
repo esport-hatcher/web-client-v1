@@ -1,0 +1,26 @@
+.task-filter-by-date {
+    cursor: pointer;
+    height: 6vh;
+    width: 18vw;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 $color-dark-four;
+    border: 1px solid $color-dark-four;
+    border-color: $color-dark-four;
+    background-color: $color-dark-medium;
+    font-family: Helvetica;
+    font-size: 18px;
+    color: $color-light-grey;
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    &--active {
+        color: $color-white;
+        border-color: $color-dark-medium;
+        background-color: $color-dark-four;
+    }
+}
