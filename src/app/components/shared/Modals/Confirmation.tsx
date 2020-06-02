@@ -20,7 +20,7 @@ export const ModalConfirmation: React.FC<IProps> = React.memo(
                 <div className='modal-confirmation__content'>
                     <p className='title title--xs'>{title}</p>
                     <hr className='divider' />
-                    <p className='body-text body-text--medium'>{message}</p>
+                    <p className='body-text body-text--sm'>{message}</p>
                     <div className='modal-confirmation__content__action-buttons'>
                         <button className='btn btn--primary' onClick={onClose}>
                             Cancel

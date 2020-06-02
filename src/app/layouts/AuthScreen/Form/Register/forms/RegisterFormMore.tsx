@@ -39,7 +39,7 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
 
     return (
         <div className='register-screen__container'>
-            <div className='register-screen__container__title title title--big'>
+            <div className='register-screen__container__title title title--xl'>
                 Tell us more about you
             </div>
 

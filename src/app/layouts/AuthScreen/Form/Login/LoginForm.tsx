@@ -12,7 +12,6 @@ interface IProps {}
 const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
     ({ handleSubmit }) => {
         const [isLoading, setLoading] = useState(false);
-        const [error, setError] = useState<string | null>(null);
         const dispatch = useDispatch() as AsyncDispatch;
 
         const onSubmit = useCallback(
@@ -22,16 +21,15 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                     await dispatch(login(formValues));
                 } catch (err) {
                     setLoading(false);
-                    setError(err);
                 }
             },
-            [dispatch, setLoading, setError]
+            [dispatch, setLoading]
         );
 
         return (
             <section className='login-screen'>
                 <div className='login-screen__container'>
-                    <div className='login-screen__container__title title title--big'>
+                    <div className='login-screen__container__title title title--xl'>
                         Sign in to <br />
                         Esport-Hatcher
                     </div>
@@ -55,11 +53,6 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             Icon={FiLock}
                             noValidation
                         />
-                        {error && (
-                            <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
-                                {error}
-                            </p>
-                        )}
                         <IconButton
                             className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
                             Icon={AiOutlineLogin}

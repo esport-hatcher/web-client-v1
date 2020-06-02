@@ -29,10 +29,9 @@
         position: relative;
 
         &__error-msg {
-            position: absolute;
-            top: 110%;
-            left: 50%;
-            transform: translateX(-50%);
+            color: $color-white;
+            border-radius: 4px;
+            background-color: $color-rosy-pink;
         }
 
         &__btn {
