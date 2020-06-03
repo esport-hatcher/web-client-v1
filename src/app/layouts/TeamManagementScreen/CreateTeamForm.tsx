@@ -12,17 +12,10 @@ export const CreateTeamForm: React.FC = React.memo(() => {
      */
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const info = localStorage.getItem('ehToken');
-        if (info === null) {
-            return null;
-        }
-        const obj = JSON.parse(info);
+
         try {
             await api.post('/teams', {
                 body: { name: valueName, game: valueGame, region: valueRegion },
-                headers: {
-                    Authorization: `Bearer ${obj.token}`,
-                },
             });
             return 200;
         } catch {

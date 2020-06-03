@@ -1,19 +1,19 @@
 import unionBy from 'lodash/unionBy';
-import { IUser, Action, ActionTypes } from 'app/actions';
+import {
+    IUser,
+    Action,
+    ActionTypes,
+    IAdminPanelFiltersCount,
+} from 'app/actions';
 
-export interface IAdminPannelFiltersCount {
-    all: number;
-    players: number;
-    admins: number;
-}
-export interface IAdminPannelReducer {
-    filters: IAdminPannelFiltersCount;
+export interface IAdminPanelReducer {
+    filters: IAdminPanelFiltersCount;
     users: IUser[];
     pages: number;
     loading: boolean;
 }
 
-const INITIAL_STATE: IAdminPannelReducer = {
+const INITIAL_STATE: IAdminPanelReducer = {
     filters: {
         all: 0,
         admins: 0,
@@ -24,30 +24,30 @@ const INITIAL_STATE: IAdminPannelReducer = {
     loading: false,
 };
 
-const adminPannelReducer = (
-    state: IAdminPannelReducer = INITIAL_STATE,
+const adminPanelReducer = (
+    state: IAdminPanelReducer = INITIAL_STATE,
     action: Action
 ) => {
     switch (action.type) {
-        case ActionTypes.adminPannelSetLoading:
+        case ActionTypes.adminPanelSetLoading:
             return {
                 ...state,
                 loading: true,
             };
-        case ActionTypes.adminPannelFetchNextPageSuccess:
+        case ActionTypes.adminPanelFetchNextPageSuccess:
             return {
                 ...state,
                 users: unionBy(state.users, action.payload, 'id'),
                 loading: false,
             };
-        case ActionTypes.adminPannelFetchUsersSuccess:
+        case ActionTypes.adminPanelFetchUsersSuccess:
             return {
                 ...state,
                 users: action.payload.users || [],
                 pages: action.payload.pages,
                 loading: false,
             };
-        case ActionTypes.adminPannelCountFilters:
+        case ActionTypes.adminPanelCountFilters:
             return {
                 ...state,
                 filters: action.payload,
@@ -74,4 +74,4 @@ const adminPannelReducer = (
     }
 };
 
-export default adminPannelReducer;
+export default adminPanelReducer;

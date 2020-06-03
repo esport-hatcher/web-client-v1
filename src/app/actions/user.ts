@@ -36,25 +36,18 @@ export interface IDeleteUser {
     payload: IUser;
 }
 
-export const fetchUserSession = (): AppThunk => async (dispatch, getState) => {
+export const fetchUserSession = (): AppThunk => async dispatch => {
     try {
-        const token = getState().authentication.token;
-        if (token) {
-            const { data } = await api.get<IUser>('/users/me', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch<IFetchUserSession>({
-                type: ActionTypes.fetchUserSession,
-                user: data,
-            });
-            sendToast({
-                title: 'Sign in success',
-                content: `Happy to see you back ${data.username}!`,
-                type: 'success',
-            });
-        }
+        const { data } = await api.get<IUser>('/users/me');
+        dispatch<IFetchUserSession>({
+            type: ActionTypes.fetchUserSession,
+            user: data,
+        });
+        sendToast({
+            title: 'Sign in success',
+            content: `Happy to see you back ${data.username}!`,
+            type: 'success',
+        });
     } catch ({ response: { data } }) {
         await persistor.purge();
         dispatch<ILogout>({
@@ -68,15 +61,13 @@ export const patchUserSession = (patchData: IFieldData): AppThunk => async (
     getState
 ) => {
     try {
-        const token = getState().authentication.token;
         const id = getState().authentication.user!.id;
 
-        if (token && id) {
+        if (id) {
             if (patchData.avatarUrl) {
                 await uploadFile({
                     file: patchData.avatarUrl,
                     name: 'profile-image',
-                    token,
                 });
             }
             const { data } = await api.patch<IUser>(
@@ -88,12 +79,7 @@ export const patchUserSession = (patchData: IFieldData): AppThunk => async (
                               patchData.avatarUrl.type.match(/image\/(.+)/)[1]
                           }`,
                       }
-                    : patchData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+                    : patchData
             );
             dispatch<IPatchUserSession>({
                 type: ActionTypes.patchUserSession,
@@ -106,24 +92,13 @@ export const patchUserSession = (patchData: IFieldData): AppThunk => async (
     }
 };
 
-export const deleteUser = (user: IUser): AppThunk => async (
-    dispatch,
-    getState
-) => {
+export const deleteUser = (user: IUser): AppThunk => async dispatch => {
     try {
-        const token = getState().authentication.token;
-
-        if (token) {
-            await api.delete<IUser>(`/users/${user.id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch<IDeleteUser>({
-                type: ActionTypes.deleteUser,
-                payload: user,
-            });
-        }
+        await api.delete<IUser>(`/users/${user.id}`);
+        dispatch<IDeleteUser>({
+            type: ActionTypes.deleteUser,
+            payload: user,
+        });
     } catch (err) {
         // tslint:disable-next-line: no-console
         console.log(err);

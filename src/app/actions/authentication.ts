@@ -1,9 +1,9 @@
+import { toast } from 'react-toastify';
 import api from 'app/api';
 import { ActionTypes, AppThunk } from './types';
 import { ReduxFormValues } from 'app/layouts';
 import { persistor } from 'index';
 import { sendToast } from 'app/shared';
-import { toast } from 'react-toastify';
 
 interface IAuthSuccess {
     token: string;

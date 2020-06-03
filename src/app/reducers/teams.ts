@@ -2,7 +2,7 @@ import { ITeams, Action, ActionTypes } from 'app/actions';
 
 const teamsReducer = (state: ITeams[] = [], action: Action) => {
     switch (action.type) {
-        case ActionTypes.fetchteamSucess:
+        case ActionTypes.fetchTeamSuccess:
             return action.payload;
         case ActionTypes.fetchTeamError:
             return [];

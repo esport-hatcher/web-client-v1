@@ -7,18 +7,13 @@ interface IUploadable {
     // tslint:disable-next-line: no-any
     file: any;
     name: string;
-    token: string;
 }
 export const uploadFile = async (params: IUploadable) => {
-    const { name, token, file } = params;
+    const { name, file } = params;
 
     const {
         data: { url },
-    } = await api.get(`/upload?key=${name}&type=${file.type}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    } = await api.get(`/upload?key=${name}&type=${file.type}`);
     await Axios.put(url, file, {
         headers: {
             'Content-Type': file.type,

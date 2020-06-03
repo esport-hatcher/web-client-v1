@@ -41,8 +41,8 @@ export const NavBar: React.FC<IProps> = React.memo(({ admin }) => {
                     <NavigationItem
                         activeText={textDisplay}
                         Icon={AiOutlineTool}
-                        path={routesPath.adminPannel}
-                        text='Admin Pannel'
+                        path={routesPath.adminPanel}
+                        text='Admin Panel'
                     />
                 )}
                 <NavigationItem
