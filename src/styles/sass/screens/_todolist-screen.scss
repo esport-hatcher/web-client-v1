@@ -1,13 +1,8 @@
 .todolist-screen {
-    display: grid;
-    grid-template-rows: min-content 1fr;
-    align-content: center;
-    height: 100%;
+    display: flex;
     color: $color-white;
-
-    &__sections {
-        overflow: hidden;
-        width: 20%;
-        border-right: 1px solid $color-dark-four;
+    height: 88.9vh;
+    &__tasks {
+        margin: 10px 0 0 20px;
     }
 }

@@ -1,29 +1,27 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { IconType } from 'react-icons/lib';
-import cx from 'classnames';
 
 interface IProps {
     name: string;
     Icon: IconType;
     iconColor: string;
-    active?: boolean;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    path: string;
 }
 
 export const TaskFilterByDate: React.FC<IProps> = React.memo(
-    ({ Icon, name, iconColor, active, onClick }) => {
+    ({ Icon, name, iconColor, path }) => {
         return (
-            <button
-                className={cx('task-filter-by-date', {
-                    'task-filter-by-date--active': active,
-                })}
-                onClick={onClick}
+            <NavLink
+                // activeClassName='task-filter-by-date--active'
+                className='task-filter-by-date'
+                to={path}
             >
                 <Icon
                     className={`task-filter-by-date__icon icon--${iconColor}`}
                 />
                 <p>{name}</p>
-            </button>
+            </NavLink>
         );
     }
 );
