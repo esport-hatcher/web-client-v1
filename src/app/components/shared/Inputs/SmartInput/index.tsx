@@ -9,7 +9,6 @@ import {
     AiOutlineRight,
     AiOutlineLoading,
 } from 'react-icons/ai';
-import cx from 'classnames';
 
 interface IProps {
     placeholder: string;
@@ -79,9 +78,7 @@ export const SmartInput: React.FC<IProps & WrappedFieldProps> = React.memo(
                     {...(input as any)}
                 />
                 <InputIcon
-                    className={cx('smart-input__icon', {
-                        'smart-input__icon--off': meta.active,
-                    })}
+                    className='smart-input__icon'
                     data-tip
                     data-for={`error-${inputId}`}
                 />
