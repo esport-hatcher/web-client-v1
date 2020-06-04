@@ -3,13 +3,13 @@ import { Action as ReduxAction } from 'redux';
 import { RootState } from 'app/reducers';
 import { ILoginSuccess, IRegisterSuccess, ILogout } from './authentication';
 import {
-    IAdminPannelFetchUsersSuccessAction,
-    IAdminPannelSetLoadingAction,
-    IAdminPannelCountFiltersAction,
-    IAdminPannelFetchNextPageSuccessAction,
-} from './adminPannel';
+    IAdminPanelFetchUsersSuccessAction,
+    IAdminPanelSetLoadingAction,
+    IAdminPanelCountFiltersAction,
+    IAdminPanelFetchNextPageSuccessAction,
+} from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
-import { ITeamsFetchsAction, ITeamsErrorAction } from './teams';
+import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
 
 export type CountQuery = { records: number };
 
@@ -23,11 +23,11 @@ export enum ActionTypes {
     fetchUserSession,
     patchUserSession,
     deleteUser,
-    adminPannelFetchUsersSuccess,
-    adminPannelFetchNextPageSuccess,
-    adminPannelSetLoading,
-    adminPannelCountFilters,
-    fetchteamSucess,
+    adminPanelFetchUsersSuccess,
+    adminPanelFetchNextPageSuccess,
+    adminPanelSetLoading,
+    adminPanelCountFilters,
+    fetchTeamSuccess,
     fetchTeamError,
 }
 
@@ -38,12 +38,12 @@ export type Action =
     | IFetchUserSession
     | IPatchUserSession
     | IDeleteUser
-    | IAdminPannelFetchUsersSuccessAction
-    | IAdminPannelFetchNextPageSuccessAction
-    | IAdminPannelSetLoadingAction
-    | IAdminPannelCountFiltersAction
-    | ITeamsFetchsAction
-    | ITeamsErrorAction;
+    | IAdminPanelFetchUsersSuccessAction
+    | IAdminPanelFetchNextPageSuccessAction
+    | IAdminPanelSetLoadingAction
+    | IAdminPanelCountFiltersAction
+    | IFetchTeamSuccessAction
+    | IFetchTeamErrorAction;
 
 export type IGetState = () => RootState;
 

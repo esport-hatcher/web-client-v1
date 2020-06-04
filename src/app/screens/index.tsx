@@ -1,7 +1,7 @@
-export { AdminPannel } from './Admin/Pannel';
-export { AuthPage } from './Auth';
-export { HomePage } from './Home';
-export { TeamPage, EditTeamPage } from './Teams';
-export { SettingsProfile } from './Settings';
-export { TodolistPage } from './Todolist';
-export { Logout } from './Logout';
+export * from './Admin';
+export * from './Auth';
+export * from './Home';
+export * from './Teams';
+export * from './Todolist';
+export * from './Settings';
+export * from './Logout';

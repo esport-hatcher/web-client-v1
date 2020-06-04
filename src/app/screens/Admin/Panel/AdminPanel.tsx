@@ -1,40 +1,34 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { parse, stringify } from 'query-string';
+import { useDispatch, shallowEqual } from 'react-redux';
 import { AdminFilters, AdminUsersList } from 'app/layouts';
 import { SearchInput, HeaderPage } from 'app/components';
-import { useDispatch, shallowEqual } from 'react-redux';
 import {
-    adminPannelFetchUsers,
-    adminPannelFetchNextPage,
+    adminPanelFetchUsers,
+    adminPanelFetchNextPage,
     ActionTypes,
 } from 'app/actions';
 import { useSelector } from 'app/custom-hooks';
+import { RouteComponentProps } from 'react-router-dom';
 
-interface IProps {
-    history: {
-        push: (path: string) => void;
-    };
-    location: {
-        search: string;
-    };
-}
+interface IProps {}
 
-export interface IAdminPannelFilters {
+export interface IAdminPanelFilters {
     username?: string;
     superAdmin?: string;
 }
 
-export const _AdminPannel: React.FC<IProps> = ({
+export const _AdminPanel: React.FC<IProps & RouteComponentProps> = ({
     location: { search },
     history: { push },
 }) => {
-    const initialFilters: IAdminPannelFilters = parse(
+    const initialFilters: IAdminPanelFilters = parse(
         search
-    ) as IAdminPannelFilters;
-    const [filters, setFilters] = useState<IAdminPannelFilters>(initialFilters);
+    ) as IAdminPanelFilters;
+    const [filters, setFilters] = useState<IAdminPanelFilters>(initialFilters);
     const dispatch = useDispatch();
     const { users, loading, pages } = useSelector(
-        state => state.adminPannel,
+        state => state.adminPanel,
         shallowEqual
     );
     const [currentPage, setPage] = useState<number>(1);
@@ -42,7 +36,7 @@ export const _AdminPannel: React.FC<IProps> = ({
     useEffect(() => {
         if (currentPage > 1 && currentPage <= pages) {
             dispatch(
-                adminPannelFetchNextPage(
+                adminPanelFetchNextPage(
                     stringify({ ...filters, page: currentPage })
                 )
             );
@@ -62,9 +56,9 @@ export const _AdminPannel: React.FC<IProps> = ({
 
     useEffect(() => {
         /** TODO: FIX URL PARAMETERS */
-        // push(`/admin/pannel?${stringify(filters)}`);
-        dispatch({ type: ActionTypes.adminPannelSetLoading });
-        dispatch(adminPannelFetchUsers(stringify(filters)));
+        // push(`/admin/Panel?${stringify(filters)}`);
+        dispatch({ type: ActionTypes.adminPanelSetLoading });
+        dispatch(adminPanelFetchUsers(stringify(filters)));
     }, [filters, push, dispatch]);
 
     const onSearch = useCallback(
@@ -92,14 +86,14 @@ export const _AdminPannel: React.FC<IProps> = ({
     );
 
     return (
-        <main className='admin-pannel'>
-            <HeaderPage title='Admin Pannel' />
+        <main className='admin-panel'>
+            <HeaderPage title='Admin Panel' />
             <AdminFilters
                 onFilter={onFilter}
                 initialValue={filters.superAdmin}
             />
-            <div className='admin-pannel__content'>
-                <div className='admin-pannel__content__search'>
+            <div className='admin-panel__content'>
+                <div className='admin-panel__content__search'>
                     <SearchInput
                         onSearch={onSearch}
                         initialValue={filters.username}

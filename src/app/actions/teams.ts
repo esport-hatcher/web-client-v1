@@ -13,18 +13,17 @@ export interface ITeams {
     updatedAt: string;
 }
 
-export interface ITeamsFetchsAction {
-    type: ActionTypes.fetchteamSucess;
+export interface IFetchTeamSuccessAction {
+    type: ActionTypes.fetchTeamSuccess;
     payload: ITeams[];
+}
+export interface IFetchTeamErrorAction {
+    type: ActionTypes.fetchTeamError;
+    payload: ITeamsFailure;
 }
 
 export interface ITeamsFailure {
     message: string;
-}
-
-export interface ITeamsErrorAction {
-    type: ActionTypes.fetchTeamError;
-    payload: ITeamsFailure;
 }
 
 export interface ITeamsSuccess {
@@ -36,21 +35,16 @@ export const fetchTeams = () => async (
     getState: IGetState
 ) => {
     try {
-        const token = getState().authentication.token;
         const myId = getState().authentication.user;
-        if (token && myId) {
-            const { data } = await api.get<ITeams[]>(`users/${myId.id}/teams`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch<ITeamsFetchsAction>({
-                type: ActionTypes.fetchteamSucess,
+        if (myId) {
+            const { data } = await api.get<ITeams[]>(`users/${myId.id}/teams`);
+            dispatch<IFetchTeamSuccessAction>({
+                type: ActionTypes.fetchTeamSuccess,
                 payload: data,
             });
         }
     } catch ({ response: { data } }) {
-        dispatch<ITeamsErrorAction>({
+        dispatch<IFetchTeamErrorAction>({
             type: ActionTypes.fetchTeamError,
             payload: data,
         });

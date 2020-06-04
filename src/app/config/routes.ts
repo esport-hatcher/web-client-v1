@@ -1,6 +1,6 @@
 import {
     AuthPage,
-    AdminPannel,
+    AdminPanel,
     HomePage,
     TeamPage,
     EditTeamPage,
@@ -13,7 +13,7 @@ export enum routesPath {
     home = '/',
     login = '/login',
     register = '/register',
-    adminPannel = '/admin',
+    adminPanel = '/admin',
     chat = '/chat',
     feed = '/feed',
     logout = '/logout',
@@ -67,8 +67,8 @@ export const routes: IRouteConfig[] = [
         exact: false,
     },
     {
-        path: routesPath.adminPannel,
-        Component: AdminPannel,
+        path: routesPath.adminPanel,
+        Component: AdminPanel,
         exact: true,
     },
     {

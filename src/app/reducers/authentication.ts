@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 const user = (state: IUser | null = null, action: Action) => {
     switch (action.type) {
         case ActionTypes.fetchUserSession:
+        case ActionTypes.patchUserSession:
             return action.user;
         case ActionTypes.logout:
             return null;

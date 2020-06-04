@@ -12,20 +12,12 @@ interface IRecipeState {
 }
 
 const filterColors = async (inputValue: string) => {
-    const selectdata = [];
-    const info = localStorage.getItem('ehToken');
-    if (info === null) {
-        return null;
-    }
-    const obj = JSON.parse(info);
+    const selectData = [];
+
     try {
-        const { data } = await api.get(`/users/?username=${inputValue}`, {
-            headers: {
-                Authorization: `Bearer ${obj.token}`,
-            },
-        });
+        const { data } = await api.get(`/users/?username=${inputValue}`);
         for (const i of data) {
-            selectdata.push({
+            selectData.push({
                 value: i.id,
                 label: (
                     <div className='smart-select-input'>
@@ -39,7 +31,7 @@ const filterColors = async (inputValue: string) => {
                 ),
             });
         }
-        return selectdata;
+        return selectData;
     } catch {
         return null;
     }
