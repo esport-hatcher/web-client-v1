@@ -14,6 +14,7 @@ export const TaskFilterByDate: React.FC<IProps> = React.memo(
         return (
             <NavLink
                 // activeClassName='task-filter-by-date--active'
+                exact
                 className='task-filter-by-date'
                 to={path}
             >
