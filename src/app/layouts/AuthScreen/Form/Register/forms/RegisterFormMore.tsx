@@ -1,40 +1,32 @@
 import React, { useCallback, useState } from 'react';
-import capitalize from 'capitalize';
-import { InjectedFormProps, reduxForm, Field, reset } from 'redux-form';
-import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton, RoundButton } from 'app/components';
-import { normalizePhone, required } from 'app/shared';
-
-import { register } from 'app/actions';
-import { RegisterStage } from '../RegisterForm';
 import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
-
-export type ReduxFormValues = { [key: string]: string };
+import { useForm } from 'react-hook-form';
+import { FormInput, IconButton, RoundButton } from 'app/components';
+import { IFormValues } from 'app/actions';
+import { RegisterStage } from '../RegisterForm';
 
 interface IProps {
     goTo: Function;
+    onSubmit: (formValues: IFormValues) => Promise<void>;
 }
 
-const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
-    goTo,
-    handleSubmit,
-}) => {
-    const dispatch = useDispatch();
+export const RegisterFormMore: React.FC<IProps> = ({ goTo, onSubmit }) => {
     const [loading, setLoading] = useState(false);
-
+    const { register, handleSubmit } = useForm({ mode: 'onChange' });
     const onGoBack = useCallback(() => {
         goTo(RegisterStage.basic);
     }, [goTo]);
 
-    const onSubmit = useCallback(
-        async (formValues: ReduxFormValues) => {
-            setLoading(true);
-            // tslint:disable-next-line: await-promise
-            await dispatch(register(formValues));
-            setLoading(false);
-            dispatch(reset('register'));
+    const _onSubmit = useCallback(
+        async (formValues: IFormValues) => {
+            try {
+                setLoading(true);
+                await onSubmit(formValues);
+            } catch {
+                setLoading(false);
+            }
         },
-        [dispatch, setLoading]
+        [setLoading, onSubmit]
     );
 
     return (
@@ -45,7 +37,7 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
 
             <form
                 className='register-screen__more'
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(_onSubmit)}
             >
                 <RoundButton
                     type='button'
@@ -53,50 +45,36 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
                     Icon={AiOutlineLeft}
                     className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
                 />
-                <Field
-                    component={SmartInput}
+                <FormInput
                     type='text'
                     placeholder='First name'
                     name='firstName'
-                    normalize={capitalize}
-                    validate={[required]}
+                    ref={register}
                 />
-                <Field
-                    component={SmartInput}
+                <FormInput
                     type='text'
-                    icon='portrait'
                     placeholder='Last name'
                     name='lastName'
-                    normalize={capitalize}
-                    validate={[required]}
+                    ref={register}
                 />
-                <Field
-                    component={SmartInput}
+                <FormInput
                     type='text'
-                    icon='map-pin'
                     placeholder='City'
                     name='city'
-                    normalize={capitalize}
-                    validate={[required]}
+                    ref={register}
                 />
-                <Field
-                    component={SmartInput}
+                <FormInput
                     type='text'
-                    icon='map-pin'
                     placeholder='Country'
                     name='country'
-                    normalize={capitalize}
-                    validate={[required]}
+                    ref={register}
                 />
 
-                <Field
-                    component={SmartInput}
+                <FormInput
                     type='text'
-                    icon='phone'
                     placeholder='Phone number'
                     name='phoneNumber'
-                    normalize={normalizePhone}
-                    validate={[required]}
+                    ref={register}
                 />
                 <IconButton
                     className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
@@ -110,9 +88,3 @@ const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
         </div>
     );
 };
-
-export const RegisterFormMore = reduxForm<{}, IProps>({
-    form: 'register',
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-})(_RegisterFormMore);

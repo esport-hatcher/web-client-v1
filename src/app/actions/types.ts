@@ -10,6 +10,7 @@ import {
 } from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
 import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
+import { IUpdateForm, IResetForm } from './form';
 
 export type CountQuery = { records: number };
 
@@ -29,6 +30,8 @@ export enum ActionTypes {
     adminPanelCountFilters,
     fetchTeamSuccess,
     fetchTeamError,
+    updateForm,
+    resetForm,
 }
 
 export type Action =
@@ -43,7 +46,9 @@ export type Action =
     | IAdminPanelSetLoadingAction
     | IAdminPanelCountFiltersAction
     | IFetchTeamSuccessAction
-    | IFetchTeamErrorAction;
+    | IFetchTeamErrorAction
+    | IUpdateForm
+    | IResetForm;
 
 export type IGetState = () => RootState;
 

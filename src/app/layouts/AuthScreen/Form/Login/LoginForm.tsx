@@ -2,21 +2,30 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
-import { IconButton } from 'app/components';
-import { ReduxFormValues } from '../Register';
-import { login, AsyncDispatch } from 'app/actions';
-import { FormInput } from 'app/components/shared/Inputs/FormInput';
 import { useForm } from 'react-hook-form';
+import { IconButton } from 'app/components';
+import { login, AsyncDispatch, IFormValues } from 'app/actions';
+import { FormInput } from 'app/components/shared/Inputs/FormInput';
 
 interface IProps {}
 
+// import { object, string } from 'yup';
+// const SignInSchema = object().shape({
+//     email: string()
+//         .required()
+//         .email(),
+//     password: string()
+//         .required()
+//         .min(8),
+// });
+
 export const LoginForm: React.FC<IProps> = React.memo(() => {
     const [isLoading, setLoading] = useState(false);
+    const { register, handleSubmit } = useForm();
     const dispatch = useDispatch() as AsyncDispatch;
-    const { register, handleSubmit, watch, errors } = useForm();
 
     const onSubmit = useCallback(
-        async (formValues: ReduxFormValues) => {
+        async (formValues: IFormValues) => {
             try {
                 setLoading(true);
                 await dispatch(login(formValues));
@@ -26,6 +35,7 @@ export const LoginForm: React.FC<IProps> = React.memo(() => {
         },
         [dispatch, setLoading]
     );
+
     return (
         <section className='login-screen'>
             <div className='login-screen__container'>
@@ -41,13 +51,17 @@ export const LoginForm: React.FC<IProps> = React.memo(() => {
                         type='email'
                         placeholder='Email'
                         name='email'
-                        ref={register({ required: true })}
+                        noValidation
+                        Icon={FiMail}
+                        ref={register}
                     />
                     <FormInput
                         type='password'
                         placeholder='Password'
                         name='password'
-                        ref={register({ required: true })}
+                        noValidation
+                        Icon={FiLock}
+                        ref={register}
                     />
                     <IconButton
                         className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
