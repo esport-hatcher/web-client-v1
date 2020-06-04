@@ -3,16 +3,18 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineRight } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { RoundButton, FormInput } from 'app/components';
-import { OnSubmitFunction } from 'app/actions';
+import { OnSubmitFunction, IFormValues } from 'app/actions';
 
 interface IProps {
     onSubmit: OnSubmitFunction;
+    defaultValues: IFormValues;
 }
 
 export const RegisterFormBasic: React.FC<IProps> = React.memo(
-    ({ onSubmit }) => {
+    ({ onSubmit, defaultValues }) => {
         const { register, handleSubmit } = useForm({
             mode: 'onChange',
+            defaultValues,
         });
 
         return (

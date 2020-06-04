@@ -12,7 +12,9 @@ interface IProps {
 
 export const RegisterFormMore: React.FC<IProps> = ({ goTo, onSubmit }) => {
     const [loading, setLoading] = useState(false);
-    const { register, handleSubmit } = useForm({ mode: 'onChange' });
+    const { register, handleSubmit } = useForm({
+        mode: 'onChange',
+    });
     const onGoBack = useCallback(() => {
         goTo(RegisterStage.basic);
     }, [goTo]);

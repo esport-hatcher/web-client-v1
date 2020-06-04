@@ -59,7 +59,10 @@ export const RegisterForm: React.FC<IProps> = React.memo(() => {
                 classNames='register-screen__container--basic'
                 timeout={REGISTER_FORM_TRANSITION_MS}
             >
-                <RegisterFormBasic onSubmit={basicSubmit} />
+                <RegisterFormBasic
+                    onSubmit={basicSubmit}
+                    defaultValues={formValues}
+                />
             </CSSTransition>
             <CSSTransition
                 in={stage === RegisterStage.more}
