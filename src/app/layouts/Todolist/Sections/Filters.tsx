@@ -24,6 +24,12 @@ export const Filters: React.FC = React.memo(() => {
                     iconColor='red'
                     path='?filter=sevendays'
                 />
+                <TaskFilterByDate
+                    name='Archive'
+                    Icon={AiOutlineInbox}
+                    iconColor='grey'
+                    path='?filter=archive'
+                />
             </div>
         </React.Fragment>
     );

@@ -14,8 +14,8 @@ export const CreateTaskForm: React.FC<IProps> = React.memo(() => {
     const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
     const [date, setDate] = useState(moment().format('Y/M/D'));
 
-    const handleClick = () => {
-        // console.log('boo create task');
+    const handleClick = (action: string) => {
+        //console.log(action);
     };
     return (
         <div className='create-task'>
@@ -26,12 +26,20 @@ export const CreateTaskForm: React.FC<IProps> = React.memo(() => {
                     placeholder='Enter a title for this task'
                     onChange={setInputValue}
                 />
-                <button
-                    onClick={handleClick}
-                    className='create-task__form__button'
-                >
-                    Add Task
-                </button>
+                <div>
+                    <button
+                        onClick={() => handleClick('create')}
+                        className='create-task__form__button-create'
+                    >
+                        Add Task
+                    </button>
+                    <button
+                        onClick={() => handleClick('cancel')}
+                        className='create-task__form__button-cancel'
+                    >
+                        Cancel
+                    </button>
+                </div>
             </div>
             <DatePicker
                 onClick={setShowMiniCalendar}
