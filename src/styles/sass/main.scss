@@ -15,9 +15,9 @@
 @import './components/smart-input';
 @import './components/btn';
 @import './components/filter-item';
-@import './components/search-field';
+@import './components/search-input';
 @import './components/smart_select';
-@import './components/_simple_imput';
+@import './components/_simple_input';
 @import './components/user-avatar';
 @import './components/admin-user-card';
 @import './components//user-confirmed-info';
@@ -26,6 +26,7 @@
 @import './components/modal-confirmation';
 @import './components/auto-complete';
 @import './components/dropdown';
+@import './components/toast';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -38,9 +39,9 @@
 
 //      SCREENS
 @import './screens/auth-screen';
-@import './screens/admin-pannel';
+@import './screens/admin-panel';
 @import './screens/team-management-screen';
 //      SCREENS
 @import './screens/auth-screen';
-@import './screens/admin-pannel';
+@import './screens/admin-panel';
 @import './screens/settings-profile';

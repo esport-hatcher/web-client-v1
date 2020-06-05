@@ -1,28 +1,27 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { FiMail, FiLock } from 'react-icons/fi';
 import { SmartInput, IconButton } from 'app/components';
 import { ReduxFormValues } from '../Register';
-import { login } from 'app/actions';
-import { useSelector } from 'app/custom-hooks';
+import { login, AsyncDispatch } from 'app/actions';
 
 interface IProps {}
 
 const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
     ({ handleSubmit }) => {
-        const [loading, setLoading] = useState(false);
-        const errorMsg = useSelector(
-            state => state.authentication.errorMsg,
-            shallowEqual
-        );
-        const dispatch = useDispatch();
+        const [isLoading, setLoading] = useState(false);
+        const dispatch = useDispatch() as AsyncDispatch;
 
         const onSubmit = useCallback(
             async (formValues: ReduxFormValues) => {
-                setLoading(true);
-                // tslint:disable-next-line: await-promise
-                await dispatch(login(formValues));
-                setLoading(false);
+                try {
+                    setLoading(true);
+                    await dispatch(login(formValues));
+                } catch (err) {
+                    setLoading(false);
+                }
             },
             [dispatch, setLoading]
         );
@@ -30,7 +29,7 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
         return (
             <section className='login-screen'>
                 <div className='login-screen__container'>
-                    <div className='login-screen__container__title title title--big'>
+                    <div className='login-screen__container__title title title--xl'>
                         Sign in to <br />
                         Esport-Hatcher
                     </div>
@@ -43,7 +42,7 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             type='email'
                             placeholder='Email'
                             name='email'
-                            icon='envelope'
+                            Icon={FiMail}
                             noValidation
                         />
                         <Field
@@ -51,19 +50,14 @@ const _LoginForm: React.FC<IProps & InjectedFormProps<{}, IProps>> = React.memo(
                             type='password'
                             placeholder='Password'
                             name='password'
-                            icon='lock'
+                            Icon={FiLock}
                             noValidation
                         />
-                        {errorMsg && errorMsg.login && (
-                            <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
-                                {errorMsg.login}
-                            </p>
-                        )}
                         <IconButton
                             className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
-                            icon={loading ? 'spinner' : 'sign-in-alt'}
-                            rotation={loading ? 90 : undefined}
-                            loading={loading}
+                            Icon={AiOutlineLogin}
+                            loading={isLoading}
+                            type='submit'
                         >
                             Login
                         </IconButton>

@@ -12,8 +12,8 @@
         grid-template-columns: max-content;
         grid-template-rows: repeat(2, min-content);
         gap: $auth-screen-spacing-layouts;
-        justify-content: center;
-        align-content: center;
+        // justify-content: center;
+        // align-content: center;
 
         &__title {
             text-align: center;
@@ -22,18 +22,16 @@
 
     &__form {
         display: grid;
-        grid-template-columns: min-content;
+        width: 100%;
+        grid-template-columns: 1fr;
         grid-auto-rows: min-content;
         gap: $auth-forms-spacing-inputs;
-        justify-content: center;
-        justify-items: center;
         position: relative;
 
         &__error-msg {
-            position: absolute;
-            top: 110%;
-            left: 50%;
-            transform: translateX(-50%);
+            color: $color-white;
+            border-radius: 4px;
+            background-color: $color-rosy-pink;
         }
 
         &__btn {

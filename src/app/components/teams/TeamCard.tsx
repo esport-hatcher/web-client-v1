@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { ITeams } from 'app/actions';
+import { FiClipboard, FiBell } from 'react-icons/fi';
 
 interface IProps {
     item: ITeams;
@@ -19,11 +19,8 @@ export const TeamCard: React.FC<IProps> = ({ item }) => {
                 {''}
             </div>
             <div className='select-team__box--title'>{item.name}</div>
-            <FontAwesomeIcon
-                className='select-team__box--action'
-                icon='clipboard'
-            />
-            <FontAwesomeIcon className='select-team__box--action' icon='bell' />
+            <FiClipboard className='select-team__box--action' />
+            <FiBell className='select-team__box--action' />
         </Link>
     );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, shallowEqual } from 'react-redux';
 import { FilterItem } from 'app/components';
-import { adminpannelCountFilters } from 'app/actions';
+import { adminPanelCountFilters } from 'app/actions';
 import { useSelector } from 'app/custom-hooks';
 
 enum FilterKeys {
@@ -45,11 +45,11 @@ export const AdminFilters: React.FC<IProps> = React.memo(
         const dispatch = useDispatch();
 
         useEffect(() => {
-            dispatch(adminpannelCountFilters());
+            dispatch(adminPanelCountFilters());
         }, [dispatch]);
 
         const filters = useSelector(
-            state => state.adminPannel.filters,
+            state => state.adminPanel.filters,
             shallowEqual
         );
 

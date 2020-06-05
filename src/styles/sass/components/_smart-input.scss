@@ -1,16 +1,23 @@
 .smart-input {
     position: relative;
+    width: 100%;
 
     &__icon {
         top: 50%;
-        left: $smart-input-padding-sides;
+        left: $base-input-padding-sides;
         transform: translateY(-50%);
         transition: transform $smart-input-animation-duration
                 $smart-input-animation-style,
             opacity $smart-input-animation-duration $smart-input-animation-style;
         color: $color-light-grey;
         position: absolute;
-        font-size: 1.4rem;
+        height: 1.6rem;
+        width: 1.6rem;
+
+        &--off {
+            transform: translateY(-4rem);
+            opacity: 0;
+        }
     }
 
     &__label {
@@ -30,12 +37,9 @@
     }
 
     &__input {
-        @extend %basic-shape;
-        height: $smart-input-height;
-        min-width: $smart-input-width;
-        padding-left: 3 * $smart-input-padding-sides;
-        font-size: 1.2rem;
-        letter-spacing: 0.2rem;
+        @extend %base-input-shape;
+        padding-left: 3 * $base-input-padding-sides;
+        background-color: $color-dark-three;
         transition: border-color $smart-input-animation-duration
                 $smart-input-animation-style,
             padding-left $smart-input-animation-duration
@@ -66,11 +70,10 @@
             }
         }
 
-        &:focus + svg {
-            transform: translateY(-4rem);
-            opacity: 0;
-        }
-
+        // &:focus ~ svg {
+        //     transform: translateY(-4rem);
+        //     opacity: 0;
+        // }
         &:focus {
             padding-left: 2rem;
             border: 1px solid $color-white;

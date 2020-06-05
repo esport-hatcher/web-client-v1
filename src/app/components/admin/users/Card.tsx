@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, shallowEqual } from 'react-redux';
 import { IUser, deleteUser } from 'app/actions';
 import {
     UserConfirmedInfo,
     UserAvatar,
     ModalConfirmation,
 } from 'app/components';
-import { useToggler } from 'app/custom-hooks';
+import { useToggler, useSelector } from 'app/custom-hooks';
 
 interface IProps {
     user: IUser;
@@ -14,6 +14,10 @@ interface IProps {
 
 export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
     const [showModal, toggleModal] = useToggler(false);
+    const userSession = useSelector(
+        state => state.authentication.user,
+        shallowEqual
+    );
     const dispatch = useDispatch();
 
     const onConfirmModal = useCallback(() => dispatch(deleteUser(user)), [
@@ -32,10 +36,10 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 />
             )}
             <div className='admin-user-card__names'>
-                <p className='admin-user-card__names__firstname important-info important-info--big'>
+                <p className='admin-user-card__names__firstname important-info important-info--xl'>
                     {user.firstName}
                 </p>
-                <p className='admin-user-card__names__lastname important-info important-info--big m-t-xs'>
+                <p className='admin-user-card__names__lastname important-info important-info--xl m-t-xs'>
                     {user.lastName}
                 </p>
             </div>
@@ -61,6 +65,7 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 <button
                     className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary'
                     onClick={toggleModal}
+                    disabled={user.id === userSession!.id}
                 >
                     Delete
                 </button>

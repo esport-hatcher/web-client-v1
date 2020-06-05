@@ -1,24 +1,15 @@
-import {
-    ILoginErrorAction,
-    ILoginSuccessAction,
-    ILogoutAction,
-    IPatchUserAction,
-    IDeleteUserAction,
-    IRegisterSuccessAction,
-    IRegisterErrorAction,
-} from './authentication';
-import {
-    IAdminPannelFetchUsersSuccessAction,
-    IAdminPannelSetLoadingAction,
-    IAdminPannelCountFiltersAction,
-    IAdminPannelFetchNextPageSuccessAction,
-} from './adminPannel';
 import { ThunkAction } from 'redux-thunk';
 import { Action as ReduxAction } from 'redux';
-
-import { ITeamsFetchsAction, ITeamsErrorAction } from './teamsInfomation';
 import { RootState } from 'app/reducers';
-import { store } from 'app/config';
+import { ILoginSuccess, IRegisterSuccess, ILogout } from './authentication';
+import {
+    IAdminPanelFetchUsersSuccessAction,
+    IAdminPanelSetLoadingAction,
+    IAdminPanelCountFiltersAction,
+    IAdminPanelFetchNextPageSuccessAction,
+} from './adminPanel';
+import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
+import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
 
 export type CountQuery = { records: number };
 
@@ -27,38 +18,37 @@ export type IFieldData = { [key: string]: any };
 
 export enum ActionTypes {
     loginSuccess,
-    loginError,
     registerSuccess,
-    registerError,
     logout,
-    patchUser,
+    fetchUserSession,
+    patchUserSession,
     deleteUser,
-    adminPannelFetchUsersSuccess,
-    adminPannelFetchNextPageSuccess,
-    adminPannelSetLoading,
-    adminPannelCountFilters,
-    fetchteamSucess,
+    adminPanelFetchUsersSuccess,
+    adminPanelFetchNextPageSuccess,
+    adminPanelSetLoading,
+    adminPanelCountFilters,
+    fetchTeamSuccess,
     fetchTeamError,
 }
 
 export type Action =
-    | ILoginSuccessAction
-    | ILoginErrorAction
-    | IRegisterSuccessAction
-    | IRegisterErrorAction
-    | ILogoutAction
-    | IPatchUserAction
-    | IDeleteUserAction
-    | IAdminPannelFetchUsersSuccessAction
-    | IAdminPannelFetchNextPageSuccessAction
-    | IAdminPannelSetLoadingAction
-    | IAdminPannelCountFiltersAction
-    | ITeamsFetchsAction
-    | ITeamsErrorAction;
+    | ILoginSuccess
+    | IRegisterSuccess
+    | ILogout
+    | IFetchUserSession
+    | IPatchUserSession
+    | IDeleteUser
+    | IAdminPanelFetchUsersSuccessAction
+    | IAdminPanelFetchNextPageSuccessAction
+    | IAdminPanelSetLoadingAction
+    | IAdminPanelCountFiltersAction
+    | IFetchTeamSuccessAction
+    | IFetchTeamErrorAction;
 
 export type IGetState = () => RootState;
 
-export type AppDispatch = typeof store.dispatch;
+export type AsyncDispatch = (action: Function) => Promise<void>;
+
 export type AppThunk = ThunkAction<
     Promise<void>,
     RootState,
