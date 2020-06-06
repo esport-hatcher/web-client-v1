@@ -1,23 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
-import { useForm } from 'react-hook-form';
-import { IconButton } from 'app/components';
+import { IconButton, FormInput } from 'app/components';
 import { login, AsyncDispatch, IFormValues } from 'app/actions';
-import { FormInput } from 'app/components/shared/Inputs/FormInput';
 
 interface IProps {}
-
-// import { object, string } from 'yup';
-// const SignInSchema = object().shape({
-//     email: string()
-//         .required()
-//         .email(),
-//     password: string()
-//         .required()
-//         .min(8),
-// });
 
 export const LoginForm: React.FC<IProps> = React.memo(() => {
     const [isLoading, setLoading] = useState(false);
