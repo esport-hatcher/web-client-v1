@@ -72,12 +72,12 @@ export class MiniCalendar extends React.Component<IProps, IState> {
         );
     };
     render() {
-        const weekdayshortname = this.weekdayshort.map(day => {
-            return <th key={day}>{day}</th>;
+        const weekdayshortname = this.weekdayshort.map((day, index) => {
+            return <th key={index}>{day}</th>;
         });
         const blanks = [];
         for (let i = 1; i < Number(this.firstDayOfMonth()); i++) {
-            blanks.push(<td>{''}</td>);
+            blanks.push(<td key={'blank ' + i}>{''}</td>);
         }
         const daysInMonth = [];
         for (let d = 1; d <= Number(this.daysInMonth()); d++) {
@@ -114,9 +114,8 @@ export class MiniCalendar extends React.Component<IProps, IState> {
                 rows.push(cells);
             }
         });
-        // tslint:disable-next-line: no-any
-        const daysinmonth = rows.map((d: any, i: any) => {
-            return <tr>{d}</tr>;
+        const daysinmonth = rows.map((day: string, index: number) => {
+            return <tr key={index}>{day}</tr>;
         });
         return (
             <div className='mini-calendar'>
@@ -142,7 +141,9 @@ export class MiniCalendar extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <table className='mini-calendar__weekdays'>
-                    <tbody>{weekdayshortname}</tbody>
+                    <tbody>
+                        <tr key={0}>{weekdayshortname}</tr>
+                    </tbody>
                 </table>
                 <table className='mini-calendar__days-table'>
                     <tbody>{daysinmonth}</tbody>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TaskFilterByDate } from 'app/components';
-import { AiOutlineInbox } from 'react-icons/ai';
+import { FaRegCalendarAlt, FaCalendarDay, FaArchive } from 'react-icons/fa';
+import { BsFillInboxesFill } from 'react-icons/bs';
 
 export const Filters: React.FC = React.memo(() => {
     return (
@@ -8,25 +9,25 @@ export const Filters: React.FC = React.memo(() => {
             <div className='task-section'>
                 <TaskFilterByDate
                     name='Inbox'
-                    Icon={AiOutlineInbox}
+                    Icon={BsFillInboxesFill}
                     iconColor='blue'
                     path='?filter=inbox'
                 />
                 <TaskFilterByDate
                     name='Today'
-                    Icon={AiOutlineInbox}
+                    Icon={FaCalendarDay}
                     iconColor='yellow'
                     path='?filter=today'
                 />
                 <TaskFilterByDate
                     name='Next 7 days'
-                    Icon={AiOutlineInbox}
+                    Icon={FaRegCalendarAlt}
                     iconColor='red'
                     path='?filter=sevendays'
                 />
                 <TaskFilterByDate
                     name='Archive'
-                    Icon={AiOutlineInbox}
+                    Icon={FaArchive}
                     iconColor='grey'
                     path='?filter=archive'
                 />
