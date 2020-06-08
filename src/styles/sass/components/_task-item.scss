@@ -1,0 +1,100 @@
+.task-list-item {
+    position: relative;
+    width: 60vw;
+    border-bottom: 1px solid;
+    border-color: $color-light-grey;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+        transform: scale(1.01);
+    }
+
+    &__state {
+        position: absolute;
+        padding: 2.5% 1%;
+        text-align: left;
+        width: 50px;
+        color: #6dd400;
+    }
+
+    &__content {
+        padding: 2% 4%;
+    }
+
+    &__name {
+        color: white;
+    }
+
+    &__date {
+        padding-top: 1%;
+        color: $color-light-grey;
+    }
+
+    &__edit {
+        position: absolute;
+        margin-top: -5%;
+        margin-left: 75%;
+        text-decoration: underline;
+        color: $color-light-grey;
+        background: none;
+        border: none;
+    }
+
+    &__comment {
+        position: absolute;
+        margin-top: -5%;
+        margin-left: 80%;
+        text-decoration: underline;
+        color: $color-light-grey;
+        background: none;
+        border: none;
+    }
+
+    &__delete {
+        position: absolute;
+        margin-top: -5.5%;
+        margin-left: 90%;
+        color: red;
+        background: none;
+        border: none;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+/*
+.cross {
+    position: absolute;
+    margin-top: 1%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 150%;
+    color: #6dd400;
+}
+
+li {
+    display: inline-block;
+    width: 100%;
+    font-family: Helvetica;
+    font-size: 15px;
+    padding-top: 10px;
+    border-bottom: 1px solid;
+    border-color: #748192;
+    & > * {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
+}
+
+li:hover {
+    background-color: #1d2938;
+    color: white;
+    -webkit-transition: background-color 500ms ease-out;
+}
+*/
