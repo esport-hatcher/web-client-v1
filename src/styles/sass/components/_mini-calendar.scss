@@ -1,6 +1,5 @@
 .mini-calendar {
     width: 17vw;
-    height: 29vh;
     box-shadow: 0 2px 4px 0 $color-dark-four;
     border-radius: 5px;
     background-color: $color-dark-medium;
@@ -53,12 +52,12 @@
 
         &__cell {
             cursor: pointer;
-            height: 30px;
+            height: 3.5vh;
         }
 
         &__cell-today {
             cursor: pointer;
-            height: 30px;
+            height: 3.5vh;
             background-color: $color-light-grey;
         }
     }

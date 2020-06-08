@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     CustomizableSimpleInput,
-    DatePicker,
+    DatePickerButton,
     MiniCalendar,
 } from 'app/components';
 import { useToggler, useSelector } from 'app/custom-hooks';
@@ -71,10 +71,14 @@ export const CreateTask: React.FC<IProps> = React.memo(
                         </button>
                     </div>
                 </div>
-                <DatePicker
+                <DatePickerButton
                     onClick={setShowMiniCalendar}
                     isActive={showMiniCalendar}
                     date={date}
+                    className={'create-task__form__input__date-picker'}
+                    activeClassName={
+                        'create-task__form__input__date-picker--active'
+                    }
                 />
                 {showMiniCalendar && (
                     <MiniCalendar

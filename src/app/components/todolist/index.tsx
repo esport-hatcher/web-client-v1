@@ -1,3 +1,2 @@
-export * from './TaskFilterByDate';
-export * from './DatePicker';
-export * from './MiniCalendar';
+export * from './Sections';
+export * from './TasksView';
