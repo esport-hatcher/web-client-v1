@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filters, CreateTask } from 'app/layouts';
+import { Filters, CreateTask, TaskList } from 'app/layouts';
 import { HeaderPage } from 'app/components';
 import { useToggler } from 'app/custom-hooks';
 import { parse } from 'query-string';
@@ -45,6 +45,7 @@ export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
                     {showCreateTask && (
                         <CreateTask setShowCreateTask={setShowCreateTask} />
                     )}
+                    <TaskList section={title()} />
                 </div>
             </div>
         </main>
