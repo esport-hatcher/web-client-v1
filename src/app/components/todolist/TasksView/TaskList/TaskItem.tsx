@@ -1,9 +1,10 @@
 import React from 'react';
 import { FiCircle } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { ITask } from 'app/actions';
 
 interface IProps {
-    task: { name: string; date: string };
+    task: ITask;
 }
 
 export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
@@ -13,8 +14,8 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                 <FiCircle />
             </div>
             <div className='task-list-item__content'>
-                <div className='task-list-item__name'>{task.name}</div>
-                <div className='task-list-item__date'>{task.date}</div>
+                <div className='task-list-item__title'>{task.title}</div>
+                <div className='task-list-item__deadline'>{task.deadline}</div>
             </div>
             <button className='task-list-item__edit'>Editer</button>
             <button className='task-list-item__comment'>Commenter</button>

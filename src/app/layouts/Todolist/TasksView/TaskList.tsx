@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TaskItem } from 'app/components';
+import { useSelector } from 'app/custom-hooks';
+import { useDispatch } from 'react-redux';
+import { fetchTasks } from 'app/actions';
 
 interface IProps {
     section: string;
 }
 
 export const TaskList: React.FC<IProps> = React.memo(() => {
-    const task = [
-        {
-            name: 'Tache 1',
-            date: '12/05/2020',
-        },
-        {
-            name: 'Tache 2',
-            date: '21/05/2020',
-        },
-    ];
+    const dispatch = useDispatch();
+    const tasks = useSelector(state => state.tasks);
+
+    useEffect(() => {
+        dispatch(fetchTasks());
+    }, [dispatch]);
 
     return (
         <div className='task-list'>
-            <div className='list-task__form'>
-                {task.map(task => (
+            <div className='task-list__item'>
+                {tasks.map(task => (
                     <TaskItem task={task} />
                 ))}
             </div>

@@ -1,7 +1,8 @@
 import api from 'app/api';
-import { ActionTypes, AppThunk } from './types';
+import { ActionTypes, AppThunk, IGetState } from './types';
 import { ReduxFormValues } from 'app/layouts';
 import { sendToast } from 'app/shared';
+import { Dispatch } from 'redux';
 
 export interface ITask {
     title: string;
@@ -15,6 +16,12 @@ export interface ITask {
 /** CREATE ACTIONS */
 export interface ICreateTaskSuccess {
     type: ActionTypes.createTaskSuccess;
+    payload: ITask[];
+}
+
+/** GET ACTIONS */
+export interface IFetchTaskSuccess {
+    type: ActionTypes.fetchTaskSuccess;
     payload: ITask[];
 }
 
@@ -49,4 +56,13 @@ export const createTask = (
         });
         return Promise.reject(message);
     }
+};
+
+export const fetchTasks = () => async (dispatch: Dispatch) => {
+    const { data } = await api.get<ITask[]>(`teams/1/tasks`);
+
+    dispatch<IFetchTaskSuccess>({
+        type: ActionTypes.fetchTaskSuccess,
+        payload: data,
+    });
 };

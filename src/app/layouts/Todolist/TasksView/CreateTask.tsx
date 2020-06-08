@@ -40,7 +40,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
                     createTask(
                         { title: inputValue, deadline: date },
                         // Temporary way to get the team
-                        teams[1].id
+                        teams[0].id
                     )
                 );
                 setShowCreateTask(false);
