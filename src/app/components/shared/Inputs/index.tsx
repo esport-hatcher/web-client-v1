@@ -1,3 +1,4 @@
-export * from './SearchInput';
-export * from './ModifiableInput';
 export * from './FormInput';
+export * from './ModifiableInput';
+export * from './NumberInput';
+export * from './SearchInput';

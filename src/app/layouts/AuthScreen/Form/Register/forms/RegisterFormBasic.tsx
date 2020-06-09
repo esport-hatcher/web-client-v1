@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineRight, AiOutlineUser } from 'react-icons/ai';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { RoundButton, FormInput } from 'app/components';
 import { OnSubmitFunction, IFormValues } from 'app/actions';
@@ -71,6 +71,7 @@ export const RegisterFormBasic: React.FC<IProps> = React.memo(
                         name='username'
                         error={errors['username']}
                         touched={dirtyFields.has('username')}
+                        Icon={AiOutlineUser}
                         ref={register}
                     />
                     <FormInput

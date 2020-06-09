@@ -15,7 +15,7 @@ export enum RegisterStage {
 interface IProps {}
 
 export const RegisterForm: React.FC<IProps> = React.memo(() => {
-    const [stage, setStage] = useState<RegisterStage>(RegisterStage.basic);
+    const [stage, setStage] = useState<RegisterStage>(RegisterStage.more);
     const { updateForm, resetForm, formValues } = useWizardForm('register');
     const dispatch = useDispatch();
 
