@@ -5,6 +5,7 @@ import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
 
 export interface ITask {
+    id: number;
     title: string;
     description: string;
     dateBegin: Date;
@@ -22,6 +23,12 @@ export interface ICreateTaskSuccess {
 /** GET ACTIONS */
 export interface IFetchTaskSuccess {
     type: ActionTypes.fetchTaskSuccess;
+    payload: ITask[];
+}
+
+/** DELETE ACTIONS */
+export interface IDeleteTaskSuccess {
+    type: ActionTypes.deleteTaskSuccess;
     payload: ITask[];
 }
 
@@ -64,5 +71,21 @@ export const fetchTasks = () => async (dispatch: Dispatch) => {
     dispatch<IFetchTaskSuccess>({
         type: ActionTypes.fetchTaskSuccess,
         payload: data,
+    });
+};
+
+export const deleteTasks = (task: ITask): AppThunk => async (
+    dispatch: Dispatch
+) => {
+    const { data } = await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
+
+    dispatch<IDeleteTaskSuccess>({
+        type: ActionTypes.deleteTaskSuccess,
+        payload: data,
+    });
+    sendToast({
+        title: 'Task Deleted',
+        content: 'You successfully deleted the task !',
+        type: 'success',
     });
 };

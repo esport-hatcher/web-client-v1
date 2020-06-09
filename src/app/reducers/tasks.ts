@@ -6,6 +6,8 @@ const tasksReducer = (state: ITask[] = [], action: Action) => {
             return action.payload;
         case ActionTypes.fetchTaskSuccess:
             return action.payload;
+        case ActionTypes.deleteTaskSuccess:
+            return action.payload;
         default:
             return state;
     }
