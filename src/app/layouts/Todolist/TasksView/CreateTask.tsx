@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     CustomizableSimpleInput,
     DatePickerButton,
     MiniCalendar,
 } from 'app/components';
-import { useToggler, useSelector } from 'app/custom-hooks';
+import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
 import { useDispatch } from 'react-redux';
-import { createTask, fetchTeams } from 'app/actions';
+import { createTask } from 'app/actions';
 
 interface IProps {
     setShowCreateTask: Function;
@@ -20,32 +20,24 @@ export const CreateTask: React.FC<IProps> = React.memo(
         const [inputValue, setInputValue] = useState('');
         const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
         const [date, setDate] = useState(moment().format('Y/M/D'));
-        const teams = useSelector(state => state.teams);
 
-        useEffect(() => {
-            dispatch(fetchTeams());
-        }, [dispatch]);
-
-        const handleClick = (action: string) => {
-            if (action === 'create' && inputValue.trim() === '') {
-                sendToast({
-                    title: 'No title',
-                    content: 'Cannot create a task without title',
-                    type: 'error',
-                });
-            } else if (action === 'cancel') {
-                setShowCreateTask(false);
-            } else {
-                dispatch(
-                    createTask(
-                        { title: inputValue, deadline: date },
-                        // Temporary way to get the team
-                        teams[0].id
-                    )
-                );
-                setShowCreateTask(false);
-            }
-        };
+        const handleClick = useCallback(
+            (action: string) => {
+                if (action === 'create' && inputValue.trim() === '') {
+                    sendToast({
+                        title: 'No title',
+                        content: 'Cannot create a task without title',
+                        type: 'error',
+                    });
+                } else if (action === 'cancel') {
+                    setShowCreateTask(false);
+                } else {
+                    dispatch(createTask({ title: inputValue, deadline: date }));
+                    setShowCreateTask(false);
+                }
+            },
+            [inputValue, setShowCreateTask, date, dispatch]
+        );
 
         return (
             <div className='create-task'>

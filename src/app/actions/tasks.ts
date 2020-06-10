@@ -1,5 +1,5 @@
 import api from 'app/api';
-import { ActionTypes, AppThunk, IGetState } from './types';
+import { ActionTypes, AppThunk } from './types';
 import { ReduxFormValues } from 'app/layouts';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
@@ -34,11 +34,11 @@ export interface IDeleteTaskSuccess {
 
 export const createTask = (
     createTaskFormValues: ReduxFormValues,
-    teamId: number
+    teamId?: number
 ): AppThunk => async dispatch => {
     try {
         const { data } = await api.post<ITask[]>(
-            `/teams/${teamId}/tasks`,
+            `${teamId ? `/teams/${teamId}` : ''}/teams/1/tasks`,
             createTaskFormValues
         );
         dispatch<ICreateTaskSuccess>({
@@ -77,15 +77,29 @@ export const fetchTasks = () => async (dispatch: Dispatch) => {
 export const deleteTasks = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
-    const { data } = await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
+    try {
+        const { data } = await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
 
-    dispatch<IDeleteTaskSuccess>({
-        type: ActionTypes.deleteTaskSuccess,
-        payload: data,
-    });
-    sendToast({
-        title: 'Task Deleted',
-        content: 'You successfully deleted the task !',
-        type: 'success',
-    });
+        dispatch<IDeleteTaskSuccess>({
+            type: ActionTypes.deleteTaskSuccess,
+            payload: data,
+        });
+        sendToast({
+            title: 'Task Deleted',
+            content: 'You successfully deleted the task !',
+            type: 'success',
+        });
+        return Promise.resolve();
+    } catch ({
+        response: {
+            data: { message },
+        },
+    }) {
+        sendToast({
+            title: 'Task Error',
+            content: message,
+            type: 'error',
+        });
+        return Promise.reject(message);
+    }
 };
