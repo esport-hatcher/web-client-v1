@@ -21,7 +21,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
         const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
         const [date, setDate] = useState(moment().format('Y/M/D'));
 
-        const handleClick = useCallback(
+        const handleForm = useCallback(
             (action: string) => {
                 if (action === 'create' && inputValue.trim() === '') {
                     sendToast({
@@ -40,27 +40,27 @@ export const CreateTask: React.FC<IProps> = React.memo(
         );
 
         return (
-            <div className='create-task'>
+            <form className='create-task' onSubmit={() => handleForm('create')}>
                 <div className='create-task__form'>
                     <CustomizableSimpleInput
                         value={inputValue}
+                        type='text'
                         className='create-task__form__input'
                         placeholder='Enter a title for this task'
                         onChange={setInputValue}
                     />
                     <div>
-                        <button
-                            onClick={() => handleClick('create')}
+                        <input
+                            type='submit'
                             className='create-task__form__button-create'
-                        >
-                            Add Task
-                        </button>
-                        <button
-                            onClick={() => handleClick('cancel')}
+                            value='Add Task'
+                        />
+                        <input
+                            type='button'
+                            onClick={() => handleForm('cancel')}
                             className='create-task__form__button-cancel'
-                        >
-                            Cancel
-                        </button>
+                            value='Cancel'
+                        />
                     </div>
                 </div>
                 <DatePickerButton
@@ -78,7 +78,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
                         setDate={setDate}
                     />
                 )}
-            </div>
+            </form>
         );
     }
 );
