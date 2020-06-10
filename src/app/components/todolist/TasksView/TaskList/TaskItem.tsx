@@ -1,19 +1,20 @@
 import React, { useCallback } from 'react';
 import { FiCircle } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import { ITask, deleteTasks } from 'app/actions';
+import { ITask, deleteTask } from 'app/actions';
 import { useDispatch } from 'react-redux';
 
 interface IProps {
     task: ITask;
 }
 
-export const TaskItem: React.FC<IProps> = ({ task }) => {
+export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const dispatch = useDispatch();
 
-    const handleDelete = useCallback(() => {
-        dispatch(deleteTasks(task));
-    }, [task, dispatch]);
+    const handleDelete = useCallback(() => dispatch(deleteTask(task)), [
+        dispatch,
+        task,
+    ]);
 
     return (
         <div className='task-list-item'>
@@ -31,4 +32,4 @@ export const TaskItem: React.FC<IProps> = ({ task }) => {
             </button>
         </div>
     );
-};
+});

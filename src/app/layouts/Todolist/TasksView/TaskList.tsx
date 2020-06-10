@@ -10,7 +10,7 @@ interface IProps {
     section: string;
 }
 
-export const TaskList: React.FC<IProps> = ({ section }) => {
+export const TaskList: React.FC<IProps> = React.memo(({ section }) => {
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.tasks, shallowEqual);
 
@@ -31,7 +31,7 @@ export const TaskList: React.FC<IProps> = ({ section }) => {
     };
     return (
         <div className='task-list'>
-            {tasks.length > 0 ? renderList() : <p>No tasks.</p>}
+            {tasks.length > 0 ? renderList() : <h2>No tasks.</h2>}
             {/* {currentMonthTasks.map(task => {
                 return <div>{task.deadline}</div>;
             })}
@@ -40,4 +40,4 @@ export const TaskList: React.FC<IProps> = ({ section }) => {
             })} */}
         </div>
     );
-};
+});

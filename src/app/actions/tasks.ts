@@ -44,7 +44,7 @@ export const createTask = (
 ): AppThunk => async dispatch => {
     try {
         const { data } = await api.post<ITask[]>(
-            `${teamId ? `/teams/${teamId}` : ''}/teams/1/tasks`,
+            `${teamId ? `/teams/${teamId}` : ''}/teams/8/tasks`,
             createTaskFormValues
         );
         dispatch<ICreateTaskSuccess>({
@@ -72,7 +72,7 @@ export const createTask = (
 };
 
 export const fetchTasks = () => async (dispatch: Dispatch) => {
-    const { data } = await api.get<ITask[]>(`teams/1/tasks`);
+    const { data } = await api.get<ITask[]>(`teams/8/tasks`);
 
     dispatch<IFetchTaskSuccess>({
         type: ActionTypes.fetchTaskSuccess,
@@ -80,11 +80,11 @@ export const fetchTasks = () => async (dispatch: Dispatch) => {
     });
 };
 
-export const deleteTasks = (task: ITask): AppThunk => async (
+export const deleteTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        const { data } = await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
+        const { data } = await api.delete<ITask[]>(`teams/8/tasks/${task.id}`);
 
         dispatch<IDeleteTaskSuccess>({
             type: ActionTypes.deleteTaskSuccess,
@@ -110,18 +110,32 @@ export const deleteTasks = (task: ITask): AppThunk => async (
     }
 };
 
-export const editTasks = (task: ITask): AppThunk => async (
+export const updateTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
-    const { data } = await api.patch<ITask[]>(`teams/1/tasks/${task.id}`);
+    try {
+        const { data } = await api.patch<ITask[]>(`teams/8/tasks/${task.id}`);
 
-    dispatch<IPatchTaskSuccess>({
-        type: ActionTypes.patchTaskSuccess,
-        payload: data,
-    });
-    sendToast({
-        title: 'Task Edited',
-        content: 'You successfully edited the task !',
-        type: 'success',
-    });
+        dispatch<IPatchTaskSuccess>({
+            type: ActionTypes.patchTaskSuccess,
+            payload: data,
+        });
+        sendToast({
+            title: 'Task Edited',
+            content: 'You successfully edited the task !',
+            type: 'success',
+        });
+        return Promise.resolve();
+    } catch ({
+        response: {
+            data: { message },
+        },
+    }) {
+        sendToast({
+            title: 'Task Error',
+            content: message,
+            type: 'error',
+        });
+        return Promise.reject(message);
+    }
 };

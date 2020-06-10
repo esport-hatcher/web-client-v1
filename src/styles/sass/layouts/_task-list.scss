@@ -3,8 +3,8 @@
     overflow-x: hidden;
     height: 72vh;
     margin-top: 3vh;
-}
 
-.task-list::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
