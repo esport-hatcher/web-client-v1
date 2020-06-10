@@ -32,6 +32,12 @@ export interface IDeleteTaskSuccess {
     payload: ITask[];
 }
 
+/** PATCH ACTIONS */
+export interface IPatchTaskSuccess {
+    type: ActionTypes.patchTaskSuccess;
+    payload: ITask[];
+}
+
 export const createTask = (
     createTaskFormValues: ReduxFormValues,
     teamId?: number
@@ -102,4 +108,20 @@ export const deleteTasks = (task: ITask): AppThunk => async (
         });
         return Promise.reject(message);
     }
+};
+
+export const editTasks = (task: ITask): AppThunk => async (
+    dispatch: Dispatch
+) => {
+    const { data } = await api.patch<ITask[]>(`teams/1/tasks/${task.id}`);
+
+    dispatch<IPatchTaskSuccess>({
+        type: ActionTypes.patchTaskSuccess,
+        payload: data,
+    });
+    sendToast({
+        title: 'Task Edited',
+        content: 'You successfully edited the task !',
+        type: 'success',
+    });
 };

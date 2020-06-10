@@ -14,6 +14,7 @@ import {
     ICreateTaskSuccess,
     IFetchTaskSuccess,
     IDeleteTaskSuccess,
+    IPatchTaskSuccess,
 } from './tasks';
 
 export type CountQuery = { records: number };
@@ -37,6 +38,7 @@ export enum ActionTypes {
     createTaskSuccess,
     fetchTaskSuccess,
     deleteTaskSuccess,
+    patchTaskSuccess,
 }
 
 export type Action =
@@ -54,7 +56,8 @@ export type Action =
     | IFetchTeamErrorAction
     | ICreateTaskSuccess
     | IFetchTaskSuccess
-    | IDeleteTaskSuccess;
+    | IDeleteTaskSuccess
+    | IPatchTaskSuccess;
 
 export type IGetState = () => RootState;
 

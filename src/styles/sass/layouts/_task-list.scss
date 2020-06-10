@@ -1,3 +1,10 @@
 .task-list {
-    overflow-y: auto;;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 72vh;
+    margin-top: 3vh;
+}
+
+.task-list::-webkit-scrollbar {
+    display: none;
 }
