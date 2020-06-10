@@ -3,13 +3,16 @@ import { Action, ITask, ActionTypes } from 'app/actions';
 const tasksReducer = (state: ITask[] = [], action: Action) => {
     switch (action.type) {
         case ActionTypes.createTaskSuccess:
-            return action.payload;
+            return [...state, action.task];
         case ActionTypes.fetchTaskSuccess:
-            return action.payload;
+            return [...state, ...action.tasks];
         case ActionTypes.deleteTaskSuccess:
-            return action.payload;
+            return state.filter(task => task.id !== action.task.id);
         case ActionTypes.patchTaskSuccess:
-            return action.payload;
+            return [
+                ...state.filter(task => task.id !== action.task.id),
+                action.task,
+            ];
         default:
             return state;
     }

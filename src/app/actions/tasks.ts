@@ -17,25 +17,25 @@ export interface ITask {
 /** CREATE ACTIONS */
 export interface ICreateTaskSuccess {
     type: ActionTypes.createTaskSuccess;
-    payload: ITask[];
+    task: ITask;
 }
 
 /** GET ACTIONS */
 export interface IFetchTaskSuccess {
     type: ActionTypes.fetchTaskSuccess;
-    payload: ITask[];
+    tasks: ITask[];
 }
 
 /** DELETE ACTIONS */
 export interface IDeleteTaskSuccess {
     type: ActionTypes.deleteTaskSuccess;
-    payload: ITask[];
+    task: ITask;
 }
 
 /** PATCH ACTIONS */
 export interface IPatchTaskSuccess {
     type: ActionTypes.patchTaskSuccess;
-    payload: ITask[];
+    task: ITask;
 }
 
 export const createTask = (
@@ -43,13 +43,13 @@ export const createTask = (
     teamId?: number
 ): AppThunk => async dispatch => {
     try {
-        const { data } = await api.post<ITask[]>(
-            `${teamId ? `/teams/${teamId}` : ''}/teams/8/tasks`,
+        const { data } = await api.post<ITask>(
+            `/teams/${teamId ? teamId : '8'}/tasks`,
             createTaskFormValues
         );
         dispatch<ICreateTaskSuccess>({
             type: ActionTypes.createTaskSuccess,
-            payload: data,
+            task: data,
         });
         sendToast({
             title: 'Task Created',
@@ -76,7 +76,7 @@ export const fetchTasks = () => async (dispatch: Dispatch) => {
 
     dispatch<IFetchTaskSuccess>({
         type: ActionTypes.fetchTaskSuccess,
-        payload: data,
+        tasks: data,
     });
 };
 
@@ -84,11 +84,11 @@ export const deleteTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        const { data } = await api.delete<ITask[]>(`teams/8/tasks/${task.id}`);
+        await api.delete<ITask[]>(`teams/8/tasks/${task.id}`);
 
         dispatch<IDeleteTaskSuccess>({
             type: ActionTypes.deleteTaskSuccess,
-            payload: data,
+            task: task,
         });
         sendToast({
             title: 'Task Deleted',
@@ -114,11 +114,11 @@ export const updateTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        const { data } = await api.patch<ITask[]>(`teams/8/tasks/${task.id}`);
+        const { data } = await api.patch<ITask>(`teams/8/tasks/${task.id}`);
 
         dispatch<IPatchTaskSuccess>({
             type: ActionTypes.patchTaskSuccess,
-            payload: data,
+            task: data,
         });
         sendToast({
             title: 'Task Edited',
