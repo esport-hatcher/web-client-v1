@@ -1,15 +1,15 @@
 import { combineReducers, Action } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 import { ActionTypes } from 'app/actions';
 import authenticationReducer from './authentication';
 import adminPanelReducer from './adminPanel';
 import fetchTeamsReducer from './teams';
+import formReducer from './forms';
 
 export const appReducer = combineReducers({
     authentication: authenticationReducer,
     adminPanel: adminPanelReducer,
     teams: fetchTeamsReducer,
-    form: formReducer,
+    forms: formReducer,
 });
 
 export type RootState = ReturnType<typeof appReducer>;

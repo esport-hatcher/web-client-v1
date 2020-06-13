@@ -13,11 +13,6 @@
         position: absolute;
         height: 1.6rem;
         width: 1.6rem;
-
-        &--off {
-            transform: translateY(-4rem);
-            opacity: 0;
-        }
     }
 
     &__label {
@@ -77,6 +72,11 @@
         &:focus {
             padding-left: 2rem;
             border: 1px solid $color-white;
+
+            & ~ svg {
+                transform: translateY(-4rem);
+                opacity: 0;
+            }
         }
 
         @include input-placeholder($color-light-grey);

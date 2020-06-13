@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { useToggler } from 'app/custom-hooks';
-import { Spinner } from '../../Spinner';
+import { Spinner } from 'app/components';
 
 interface IProps {
     onSearch: (value: string) => void;
@@ -30,13 +30,10 @@ export const SearchInput: React.FC<IProps> = React.memo(
             setChange('');
         }, [setChange]);
 
-        // TODO: OPTIMIZE
-        const getIcon = () => {
-            if (loading) {
-                // TODO: REPLACE WITH SPINNER
-                return <Spinner className='search-input__icon-status' />;
-            }
-            return (
+        const getIcon = () =>
+            loading ? (
+                <Spinner className='search-input__icon-status' />
+            ) : (
                 <AiOutlineClose
                     className={`search-input__icon-status icon--button ${
                         focused ? 'icon--pink' : 'icon--light-grey'
@@ -44,7 +41,6 @@ export const SearchInput: React.FC<IProps> = React.memo(
                     onClick={emptyInput}
                 />
             );
-        };
 
         return (
             <form action='#' className='search-input'>
