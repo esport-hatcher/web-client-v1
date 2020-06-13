@@ -114,7 +114,7 @@ export const createTeam = (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post<ICreateTeam[]>(
+            const { data } = await api.post(
                 `teams/`,
                 { game: valueGame, name: valueName, region: valueRegion },
                 {
@@ -141,7 +141,7 @@ export const invitePlayer = (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post<ICreateTeam[]>(
+            const { data } = await api.post(
                 `teams/${teamId}/users/${playerId}`,
                 {
                     headers: {

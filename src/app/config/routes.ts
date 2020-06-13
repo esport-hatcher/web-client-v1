@@ -17,7 +17,7 @@ export enum routesPath {
     feed = '/feed',
     logout = '/logout',
     teams = '/teams',
-    teamsDetail = '/teams/:id',
+    teamsDetail = '/team/:id',
     settingsProfile = '/settings/profile',
 }
 

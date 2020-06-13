@@ -11,7 +11,6 @@ export const _TeamPage: React.FC = React.memo(() => {
     const team = useSelector(state => state.teams.team);
 
     const [show, onShow] = useToggler(false);
-
     useEffect(() => {
         dispatch(fetchTeams());
     }, [dispatch]);

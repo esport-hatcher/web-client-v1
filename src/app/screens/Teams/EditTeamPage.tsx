@@ -17,11 +17,9 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     const teams = useSelector(state => state.teams.team);
     const teamUser = useSelector(state => state.teams.teamUsers);
     const user = useSelector(state => state.authentication.user);
-
     const teamSelected = teams.find(element => {
         return element.name === id;
     });
-
     if (!teamSelected) {
         return null;
     }
