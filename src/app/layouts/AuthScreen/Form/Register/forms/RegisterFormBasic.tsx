@@ -1,115 +1,104 @@
-import React, { useCallback } from 'react';
-import { pick } from 'lodash';
-import { SmartInput, RoundButton } from 'app/components';
-import { IUserProps } from 'app/actions';
-import {
-    getMinMaxFunction,
-    getCompareStringFunction,
-    isEmail,
-} from 'app/shared/utils';
-import { checkIfError, displayErrorMsg } from './RegisterBaseForm';
-import {
-    RegisterOnChangeValue,
-    RegisterOnChangeStatus,
-} from 'app/custom-hooks/useRegisterForm';
-import { RegisterStage } from '../RegisterForm';
+import React from 'react';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { AiOutlineRight, AiOutlineUser } from 'react-icons/ai';
+import { FiMail, FiLock } from 'react-icons/fi';
+import { RoundButton, FormInput } from 'app/components';
+import { OnSubmitFunction, IFormValues } from 'app/actions';
+
+import { isEmailAvailable } from 'app/shared';
 
 interface IProps {
-    onChangeValue: RegisterOnChangeValue;
-    onChangeStatus: RegisterOnChangeStatus;
-    fields: IUserProps;
-    goTo: Function;
-    errorMsg?: string;
+    onSubmit: OnSubmitFunction;
+    defaultValues: IFormValues;
 }
 
-export const RegisterFormBasic: React.FC<IProps> = ({
-    errorMsg,
-    fields,
-    goTo,
-    onChangeStatus,
-    onChangeValue,
-}) => {
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+const validationSchema = Yup.object().shape({
+    email: Yup.string()
+        .required('E-mail is required')
+        .email('E-mail must be valid')
+        .test('isEmailAvailable', 'Email is already taken', isEmailAvailable),
+    username: Yup.string()
+        .required('Username is required')
+        .min(2, 'Is it a real username ?'),
+    password: Yup.string()
+        .required('Password is required')
+        .min(8, 'Password must be at least 8 characters long'),
+    passwordConfirm: Yup.string()
+        .required('Password confirm is required')
+        .min(8, 'Password must be at least 8 characters long')
+        .oneOf(
+            [Yup.ref('password')],
+            'Password and confirm password must match'
+        ),
+});
 
-        if (
-            checkIfError(
-                pick(fields, 'email', 'username', 'password', 'passwordConfirm')
-            )
-        ) {
-            goTo(RegisterStage.more);
-        }
-    };
+export const RegisterFormBasic: React.FC<IProps> = React.memo(
+    ({ onSubmit, defaultValues }) => {
+        const {
+            register,
+            handleSubmit,
+            errors,
+            formState: { dirtyFields },
+        } = useForm({
+            mode: 'onChange',
+            defaultValues,
+            validationSchema,
+        });
 
-    const {
-        password: { value },
-    } = fields;
-
-    /**
-     * Memoizing all functions with useCallback to avoid to render each SmartInput on rerender
-     */
-    const _isEmail = useCallback(isEmail, []);
-    const minMaxPwd = useCallback(getMinMaxFunction(5, 20), []);
-    const minMaxUserName = useCallback(getMinMaxFunction(3, 20), []);
-    const compareString = useCallback(getCompareStringFunction(value), [value]);
-
-    return (
-        <div className='register-screen__container'>
-            <div className='register-screen__container__title title title--big'>
-                Register to <br />
-                Esport-Hatcher
+        return (
+            <div className='register-screen__container'>
+                <div className='register-screen__container__title title title--xl'>
+                    Register to <br />
+                    Esport-Hatcher
+                </div>
+                <form
+                    className='register-screen__basic'
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <FormInput
+                        type='text'
+                        placeholder='Email'
+                        name='email'
+                        Icon={FiMail}
+                        error={errors['email']}
+                        touched={dirtyFields.has('email')}
+                        ref={register}
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='Username'
+                        name='username'
+                        error={errors['username']}
+                        touched={dirtyFields.has('username')}
+                        Icon={AiOutlineUser}
+                        ref={register}
+                    />
+                    <FormInput
+                        type='password'
+                        placeholder='Password'
+                        Icon={FiLock}
+                        name='password'
+                        error={errors['password']}
+                        touched={dirtyFields.has('password')}
+                        ref={register}
+                    />
+                    <FormInput
+                        name='passwordConfirm'
+                        type='password'
+                        placeholder='Confirm Password'
+                        Icon={FiLock}
+                        error={errors['passwordConfirm']}
+                        touched={dirtyFields.has('passwordConfirm')}
+                        ref={register}
+                    />
+                    <RoundButton
+                        type='submit'
+                        Icon={AiOutlineRight}
+                        className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
+                    />
+                </form>
             </div>
-            <form className='register-screen__basic' onSubmit={onSubmit}>
-                <SmartInput
-                    icon='envelope'
-                    value={fields.email.value}
-                    type='email'
-                    placeholder='Email'
-                    name='email'
-                    required={true}
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[_isEmail]}
-                />
-                <SmartInput
-                    icon='pen'
-                    required={true}
-                    value={fields.username.value}
-                    type='text'
-                    placeholder='Username'
-                    name='username'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxUserName]}
-                />
-                <SmartInput
-                    icon='lock'
-                    required={true}
-                    value={fields.password.value}
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxPwd]}
-                />
-                <SmartInput
-                    required={true}
-                    icon='lock'
-                    value={fields.passwordConfirm.value}
-                    name='passwordConfirm'
-                    type='password'
-                    placeholder='Confirm Password'
-                    onChange={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    customValidations={[minMaxPwd, compareString]}
-                />
-                {displayErrorMsg(errorMsg)}
-                <RoundButton
-                    icon='chevron-right'
-                    className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
-                />
-            </form>
-        </div>
-    );
-};
+        );
+    }
+);

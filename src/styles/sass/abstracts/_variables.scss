@@ -23,6 +23,9 @@ $color-primary-gradient: linear-gradient(
 /*
 GENERAL
 */
+
+$font-family-body: 'Open Sans', sans-serif;
+$font-family-heading: 'Montserrat', serif;
 $border-slight-dark: 1px solid rgba($color-dark-four, 0.4);
 $border-slight-light: 1px solid rgba($color-white, 0.4);
 $border-focus: 1px solid $color-white;
@@ -62,10 +65,10 @@ ADMIN FILTERS
 $admin-filters-spacing: 4rem;
 
 /*
-ADMIN PANNEL
+ADMIN PANEL
 */
-$admin-pannel-padding-content-sides: 8rem;
-$admin-pannel-gap: 6rem;
+$admin-panel-padding-content-sides: 8rem;
+$admin-panel-gap: 6rem;
 
 /*
 FILTER ITEM
@@ -79,24 +82,26 @@ LABEL
 $label-count-padding: 0.7rem;
 $label-count-font-size: 1rem;
 
+/** input */
+
+$base-input-padding-sides: 1.8rem;
+$base-input-padding-top: 1rem;
+$base-input-max-width: 50rem;
+$base-input-border-radius: 14px;
+
 /*
 SEARCH FIELD
 */
-$search-field-padding: 1rem;
-$search-field-animation-duration: 0.3s;
-$search-field-width: 24rem;
-$search-field-icon-size: 2.5rem;
+$search-input-padding: 1rem;
+$search-input-animation-duration: 0.3s;
+$search-input-width: 24rem;
+$search-input-icon-size: 2rem;
 
 /* 
 SMART INPUT
 */
-$smart-input-width: 30rem;
-$smart-input-height: 4rem;
-$smart-input-border-radius: 14px;
 $smart-input-animation-duration: 0.4s;
 $smart-input-animation-style: ease-in-out;
-$smart-input-padding-sides: 2rem;
-$smart-input-padding-top: 1rem;
 $smart-input-icon-size: 2rem;
 
 /*

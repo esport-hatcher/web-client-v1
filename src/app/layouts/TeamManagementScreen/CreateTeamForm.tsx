@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SimpleImput } from 'app/components';
+import { TeamInput } from 'app/components';
 import { createTeam } from 'app/actions';
 
 interface IProps {
@@ -20,17 +20,17 @@ export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
     };
     return (
         <form className='create-team-form-container' onSubmit={onSubmit}>
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueName}
                 valueForm={valueName}
                 textLabel={'Name of the Team'}
             />
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueRegion}
                 valueForm={valueRegion}
                 textLabel={'Region'}
             />
-            <SimpleImput
+            <TeamInput
                 setTeamForm={setValueGame}
                 valueForm={valueGame}
                 textLabel={'Choose a Game'}

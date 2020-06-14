@@ -31,10 +31,15 @@
     #{$property}: calc(#{$expression});
 }
 
-%basic-shape {
-    background-color: $color-dark-medium;
-    border-radius: $smart-input-border-radius;
-    border: none;
+%base-input-shape {
+    width: 100%;
+    max-width: $base-input-max-width;
+    background-color: inherit;
+    border-radius: $base-input-border-radius;
+    border: 1px solid currentColor;
     color: $color-white;
-    padding: $smart-input-padding-top $smart-input-padding-sides;
+    letter-spacing: 0.2rem;
+    font-size: 1.2rem;
+    font-family: inherit;
+    padding: $base-input-padding-top $base-input-padding-sides;
 }

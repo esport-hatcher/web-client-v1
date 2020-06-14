@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { patchUser, IUser } from 'app/actions';
+import { patchUserSession, IUser } from 'app/actions';
 import { ModifiableInput } from 'app/components';
 
 interface IProps {
@@ -12,7 +12,7 @@ export const SettingsProfileForm: React.FC<IProps> = React.memo(({ user }) => {
 
     const onInputChange = useCallback(
         (e: React.FocusEvent<HTMLInputElement>) => {
-            dispatch(patchUser({ [e.target.name]: e.target.value }));
+            dispatch(patchUserSession({ [e.target.name]: e.target.value }));
         },
         [dispatch]
     );

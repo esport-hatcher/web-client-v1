@@ -1,36 +1,23 @@
 import { ITeams, Action, ActionTypes, IUser } from 'app/actions';
 
-export interface IFetchTeam {
+export interface ITeamsReducer {
     team: ITeams[];
     teamUsers: IUser[];
 }
 
-const INITIAL_STATE: IFetchTeam = {
+const INITIAL_STATE: ITeamsReducer = {
     team: [],
     teamUsers: [],
 };
 
-export const fetchTeamsReducer = (
-    state: IFetchTeam = INITIAL_STATE,
-    action: Action
-) => {
+const teamsReducer = (state: ITeamsReducer = INITIAL_STATE, action: Action) => {
     switch (action.type) {
-        case ActionTypes.fetchUsersSucess:
+        case ActionTypes.fetchTeamSuccess:
             return {
                 ...state,
-                teamUsers: action.payload,
-            };
-        case ActionTypes.fetchteamSucess:
-            return {
-                ...state,
-                team: action.payload,
+                teams: action.payload,
             };
         case ActionTypes.fetchTeamError:
-            return {
-                ...state,
-                teams: action.payload || [],
-            };
-        case ActionTypes.fetchTeamUserError:
             return {
                 ...state,
                 teams: action.payload || [],
@@ -39,3 +26,5 @@ export const fetchTeamsReducer = (
             return state;
     }
 };
+
+export default teamsReducer;

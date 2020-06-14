@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, Description, SearchField } from 'app/components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -59,10 +58,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                         className='select-team__modal--button'
                         onClick={onShow}
                     >
-                        <FontAwesomeIcon
-                            className='select-team__modal--button__icon'
-                            icon='plus-circle'
-                        />{' '}
+                        {' '}
                     </div>
                 </div>
             </div>

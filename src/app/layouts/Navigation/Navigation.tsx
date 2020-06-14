@@ -1,5 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useCallback } from 'react';
+import { FiChevronRight } from 'react-icons/fi';
+import {
+    AiOutlineTool,
+    AiOutlineMail,
+    AiOutlineUser,
+    AiOutlineSetting,
+    AiOutlineFire,
+    AiOutlineLogout,
+} from 'react-icons/ai';
+import cx from 'classnames';
 import { routesPath } from 'app/config';
 import { NavigationItem } from 'app/components';
 
@@ -7,14 +16,9 @@ interface IProps {
     admin: boolean;
 }
 
-export const NavBar: React.FC<IProps> = ({ admin }) => {
-    const [currentItem, setCurrentItem] = useState('');
+export const NavBar: React.FC<IProps> = React.memo(({ admin }) => {
     const [expanded, setExpanded] = useState(false);
     const [textDisplay, setTextDisplay] = useState(false);
-
-    useEffect(() => {
-        setCurrentItem(window.location.pathname);
-    }, []);
 
     const expandNavBar = useCallback(() => {
         setExpanded(expanded => !expanded);
@@ -25,81 +29,61 @@ export const NavBar: React.FC<IProps> = ({ admin }) => {
         }
     }, [textDisplay, setTextDisplay]);
 
-    const onItemClick = useCallback(
-        (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-            setCurrentItem(e.currentTarget.getAttribute('href')!),
-        [setCurrentItem]
-    );
-
     return (
         <React.Fragment>
             <div
-                className={`nav-bar__placeholder ${
-                    expanded ? 'nav-bar__placeholder--expanded' : ''
-                }`}
+                className={cx('nav-bar__placeholder', {
+                    'nav-bar__placeholder--expanded': expanded,
+                })}
             />
-            <nav className={`nav-bar ${expanded && 'nav-bar--expanded'}`}>
+            <nav className={cx('nav-bar', { 'nav-bar--expanded': expanded })}>
                 {admin && (
                     <NavigationItem
-                        active={currentItem.includes(routesPath.adminPannel)}
                         activeText={textDisplay}
-                        icon='tools'
-                        onClick={onItemClick}
-                        path={routesPath.adminPannel}
-                        text='Admin Pannel'
+                        Icon={AiOutlineTool}
+                        path={routesPath.adminPanel}
+                        text='Admin Panel'
                     />
                 )}
                 <NavigationItem
-                    active={currentItem.includes(routesPath.chat)}
                     activeText={textDisplay}
-                    icon='envelope'
-                    onClick={onItemClick}
+                    Icon={AiOutlineMail}
                     path={routesPath.chat}
                     text='Chat'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.teams)}
                     activeText={textDisplay}
-                    icon='users'
-                    onClick={onItemClick}
+                    Icon={AiOutlineUser}
                     path={routesPath.teams}
                     text='Teams management'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.settingsProfile)}
                     activeText={textDisplay}
-                    icon='cog'
-                    onClick={onItemClick}
-                    path={routesPath.settingsProfile}
-                    text='Settings'
-                />
-                <NavigationItem
-                    active={currentItem.includes(routesPath.feed)}
-                    activeText={textDisplay}
-                    icon='poll'
-                    onClick={onItemClick}
+                    Icon={AiOutlineFire}
                     path={routesPath.feed}
                     text='Feed'
                 />
                 <NavigationItem
-                    active={currentItem.includes(routesPath.logout)}
                     activeText={textDisplay}
-                    icon='sign-out-alt'
-                    onClick={onItemClick}
+                    Icon={AiOutlineSetting}
+                    path={routesPath.settingsProfile}
+                    text='Settings'
+                />
+                <NavigationItem
+                    activeText={textDisplay}
+                    Icon={AiOutlineLogout}
                     path={routesPath.logout}
                     text='Logout'
                 />
                 <button
-                    className={`nav-bar__button-expand ${expanded &&
-                        'nav-bar__button-expand--expanded'}`}
+                    className={cx('nav-bar__button-expand', {
+                        'nav-bar__button-expand--expanded': expanded,
+                    })}
                     onClick={expandNavBar}
                 >
-                    <FontAwesomeIcon
-                        className='nav-bar__button-expand__icon'
-                        icon='chevron-right'
-                    />
+                    <FiChevronRight className='nav-bar__button-expand__icon' />
                 </button>
             </nav>
         </React.Fragment>
     );
-};
+});

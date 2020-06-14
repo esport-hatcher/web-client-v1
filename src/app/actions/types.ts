@@ -1,26 +1,21 @@
+import { ThunkAction } from 'redux-thunk';
+import { Action as ReduxAction } from 'redux';
+import { RootState } from 'app/reducers';
+import { ILoginSuccess, IRegisterSuccess, ILogout } from './authentication';
 import {
-    ILoginErrorAction,
-    ILoginSuccessAction,
-    ILogoutAction,
-    IPatchUserAction,
-    IDeleteUserAction,
-} from './authentication';
-import { IRegisterFormFillAction } from './registerForm';
-import { IStoreState } from 'app/reducers';
+    IAdminPanelFetchUsersSuccessAction,
+    IAdminPanelSetLoadingAction,
+    IAdminPanelCountFiltersAction,
+    IAdminPanelFetchNextPageSuccessAction,
+} from './adminPanel';
+import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
 import {
-    IAdminPannelFetchUsersSuccessAction,
-    IAdminPannelSetLoadingAction,
-    IAdminPannelCountFiltersAction,
-    IAdminPannelFetchNextPageSuccessAction,
-} from './adminPannel';
-
-import {
-    ITeamsFetchsAction,
-    ITeamsErrorAction,
-    ITeamsFetchsUsers,
-    ITeamsErrorUsers,
-    ICreateTeamAction,
-} from './teamsInfomation';
+    IFetchTeamErrorAction,
+    IFetchTeamSuccessAction,
+    IFetchTeamUserSucess,
+    IFetchTeamUserError,
+} from './teams';
+import { IUpdateForm, IResetForm } from './form';
 
 export type CountQuery = { records: number };
 
@@ -29,38 +24,49 @@ export type IFieldData = { [key: string]: any };
 
 export enum ActionTypes {
     loginSuccess,
-    loginError,
+    registerSuccess,
     logout,
-    patchUser,
+    fetchUserSession,
+    patchUserSession,
     deleteUser,
-    registerFormFill,
-    adminPannelFetchNextPageSuccess,
-    adminPannelFetchUsersSuccess,
-
-    adminPannelSetLoading,
-    adminPannelCountFilters,
-    fetchteamSucess,
-    fetchTeamError,
-    fetchUsersSucess,
-    fetchTeamUserError,
+    adminPanelFetchUsersSuccess,
+    adminPanelFetchNextPageSuccess,
+    adminPanelSetLoading,
+    adminPanelCountFilters,
     createTeam,
+    fetchTeamSuccess,
+    fetchTeamError,
+    updateForm,
+    resetForm,
+    fetchTeamUserSucess,
+    fetchTeamUserError,
 }
 
 export type Action =
-    | ILoginErrorAction
-    | ILoginSuccessAction
-    | IRegisterFormFillAction
-    | ILogoutAction
-    | IAdminPannelFetchUsersSuccessAction
-    | IAdminPannelFetchNextPageSuccessAction
-    | IAdminPannelSetLoadingAction
-    | IAdminPannelCountFiltersAction
-    | IPatchUserAction
-    | IDeleteUserAction
-    | ITeamsFetchsAction
-    | ITeamsFetchsUsers
-    | ITeamsErrorAction
-    | ITeamsErrorUsers
-    | ICreateTeamAction;
+    | ILoginSuccess
+    | IRegisterSuccess
+    | ILogout
+    | IFetchUserSession
+    | IPatchUserSession
+    | IDeleteUser
+    | IAdminPanelFetchUsersSuccessAction
+    | IAdminPanelFetchNextPageSuccessAction
+    | IAdminPanelSetLoadingAction
+    | IAdminPanelCountFiltersAction
+    | IFetchTeamSuccessAction
+    | IFetchTeamErrorAction
+    | IUpdateForm
+    | IResetForm
+    | IFetchTeamUserSucess
+    | IFetchTeamUserError;
 
-export type IGetState = () => IStoreState;
+export type IGetState = () => RootState;
+
+export type AsyncDispatch = (action: Function) => Promise<void>;
+
+export type AppThunk = ThunkAction<
+    Promise<void>,
+    RootState,
+    unknown,
+    ReduxAction<ActionTypes>
+>;

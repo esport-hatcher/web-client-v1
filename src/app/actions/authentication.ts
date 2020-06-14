@@ -1,208 +1,92 @@
-import { Dispatch } from 'redux';
+import { toast } from 'react-toastify';
 import api from 'app/api';
-import { ActionTypes, IGetState, IFieldData } from './types';
-import { uploadFile, updateLocalUser, S3_LINK } from 'app/shared';
+import { ActionTypes, AppThunk } from './types';
+import { persistor } from 'index';
+import { sendToast } from 'app/shared';
+import { IFormValues } from './form';
 
-export interface IUser {
-    id: number;
-    username: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    avatarUrl: string;
-    hashtag: string;
-    superAdmin: boolean;
-    country: string;
-    city: string;
-    phoneNumber: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface IRegisterForm {
-    username: string;
-    password: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-}
-
-export interface ILoginSuccess {
+interface IAuthSuccess {
     token: string;
-    user: IUser;
 }
 
-export interface ILoginFailure {
-    message: string;
-}
-/**
- * Action dispatched for a successful login or register
- */
-export interface ILoginSuccessAction {
+/** LOGIN ACTIONS */
+export interface ILoginSuccess {
     type: ActionTypes.loginSuccess;
-    payload: ILoginSuccess;
+    token: string;
 }
 
-/**
- * Action dispatched for an error during login or register
- */
-export interface ILoginErrorAction {
-    type: ActionTypes.loginError;
-    payload: ILoginFailure;
+/** REGISTER ACTIONS */
+export interface IRegisterSuccess {
+    type: ActionTypes.registerSuccess;
+    token: string;
 }
 
-export interface ILogoutAction {
+/** LOGOUT ACTIONS */
+export interface ILogout {
     type: ActionTypes.logout;
 }
 
-export interface IPatchUserAction {
-    type: ActionTypes.patchUser;
-    payload: IUser;
-}
-
-export interface IDeleteUserAction {
-    type: ActionTypes.deleteUser;
-    payload: IUser;
-}
-
-export const register = (registerProps: IRegisterForm) => async (
-    dispatch: Dispatch
-) => {
+export const register = (
+    registerFormValues: IFormValues
+): AppThunk => async dispatch => {
     try {
-        const { data } = await api.post<ILoginSuccess>('/users', registerProps);
-        localStorage.setItem('ehToken', JSON.stringify(data));
-        dispatch<ILoginSuccessAction>({
+        const {
+            data: { token },
+        } = await api.post<IAuthSuccess>('/users', registerFormValues);
+        dispatch<IRegisterSuccess>({
+            type: ActionTypes.registerSuccess,
+            token,
+        });
+        sendToast({
+            title: 'Sign up success',
+            content: 'We successfully created your account !',
+            type: 'success',
+        });
+        return Promise.resolve();
+    } catch ({
+        response: {
+            data: { message },
+        },
+    }) {
+        sendToast({
+            title: 'Sign up error',
+            content: message,
+            type: 'error',
+        });
+        return Promise.reject(message);
+    }
+};
+
+export const login = (
+    loginFormValues: IFormValues
+): AppThunk => async dispatch => {
+    try {
+        const {
+            data: { token },
+        } = await api.post<IAuthSuccess>('/users/token', loginFormValues);
+        dispatch<ILoginSuccess>({
             type: ActionTypes.loginSuccess,
-            payload: data,
+            token,
         });
-    } catch ({ response: { data } }) {
-        dispatch<ILoginErrorAction>({
-            type: ActionTypes.loginError,
-            payload: data,
+        return Promise.resolve();
+    } catch ({
+        response: {
+            data: { message },
+        },
+    }) {
+        sendToast({
+            title: 'Sign in error ',
+            content: message,
+            type: 'error',
         });
+        return Promise.reject(message);
     }
 };
 
-export const login = (email: string, password: string) => async (
-    dispatch: Dispatch
-) => {
-    try {
-        const { data } = await api.post<ILoginSuccess>('/users/token', {
-            email,
-            password,
-        });
-        localStorage.setItem('ehToken', JSON.stringify(data));
-        dispatch<ILoginSuccessAction>({
-            type: ActionTypes.loginSuccess,
-            payload: data,
-        });
-    } catch ({ response: { data } }) {
-        dispatch<ILoginErrorAction>({
-            type: ActionTypes.loginError,
-            payload: data,
-        });
-    }
-};
-
-export const fetchUserSession = () => async (
-    dispatch: Dispatch,
-    getState: IGetState
-) => {
-    try {
-        const token = getState().authentication.token;
-        if (token) {
-            const { data } = await api.get<IUser>('/users/me', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch<ILoginSuccessAction>({
-                type: ActionTypes.loginSuccess,
-                payload: {
-                    token,
-                    user: data,
-                },
-            });
-        }
-    } catch ({ response: { data } }) {
-        localStorage.removeItem('ehToken');
-        dispatch<ILoginErrorAction>({
-            type: ActionTypes.loginError,
-            payload: data,
-        });
-    }
-};
-
-export const patchUser = (patchData: IFieldData) => async (
-    dispatch: Dispatch,
-    getState: IGetState
-) => {
-    try {
-        const token = getState().authentication.token;
-        const id = getState().authentication.user!.id;
-
-        if (token && id) {
-            if (patchData.avatarUrl) {
-                await uploadFile({
-                    file: patchData.avatarUrl,
-                    name: 'profile-image',
-                    token,
-                });
-            }
-            const { data } = await api.patch<IUser>(
-                `/users/${id}`,
-                patchData.avatarUrl
-                    ? {
-                          ...patchData,
-                          avatarUrl: `${S3_LINK}/${id}/profile-image.${
-                              patchData.avatarUrl.type.match(/image\/(.+)/)[1]
-                          }`,
-                      }
-                    : patchData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            updateLocalUser(data);
-            dispatch<IPatchUserAction>({
-                type: ActionTypes.patchUser,
-                payload: data,
-            });
-        }
-    } catch (err) {
-        // tslint:disable-next-line: no-console
-        console.log(err);
-    }
-};
-
-export const deleteUser = (user: IUser) => async (
-    dispatch: Dispatch,
-    getState: IGetState
-) => {
-    try {
-        const token = getState().authentication.token;
-
-        if (token) {
-            await api.delete<IUser>(`/users/${user.id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch<IDeleteUserAction>({
-                type: ActionTypes.deleteUser,
-                payload: user,
-            });
-        }
-    } catch (err) {
-        // tslint:disable-next-line: no-console
-        console.log(err);
-    }
-};
-
-export const logout = (): ILogoutAction => {
-    localStorage.removeItem('ehToken');
+export const logout = (): ILogout => {
+    // tslint:disable-next-line: no-floating-promises
+    persistor.purge();
+    toast.dismiss();
     return {
         type: ActionTypes.logout,
     };

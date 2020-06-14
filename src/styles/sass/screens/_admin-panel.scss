@@ -1,0 +1,28 @@
+.admin-panel {
+    display: grid;
+    height: 100%;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr max-content;
+    grid-row-gap: $admin-panel-gap;
+
+    &__content {
+        overflow-y: scroll;
+        grid-column: 1 / -1;
+        padding-bottom: $admin-panel-gap;
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(auto-fit, minmax(min-content, 32rem));
+        grid-auto-rows: min-content;
+        gap: $admin-panel-gap;
+        justify-content: center;
+
+        &__error-msg {
+            @include absCenter();
+        }
+
+        &__search {
+            grid-column: 1 / -1;
+            position: relative;
+        }
+    }
+}

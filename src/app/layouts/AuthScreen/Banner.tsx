@@ -41,7 +41,7 @@ export const AuthBanner: React.FC<IProps> = React.memo(
         return (
             <section className='banner'>
                 <div className='banner__container'>
-                    <div className='banner__container__title title title--big'>
+                    <div className='banner__container__title title title--xl'>
                         {content.header}
                     </div>
                     <div className='banner__container__sub-title title title--xs'>

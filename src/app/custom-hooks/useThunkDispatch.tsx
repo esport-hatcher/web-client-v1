@@ -1,4 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { store } from 'app/config';
+import { store } from 'index';
 
 export const useThunkDispatch = () => useDispatch<typeof store.dispatch>();

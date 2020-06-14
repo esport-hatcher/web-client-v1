@@ -23,6 +23,7 @@ $REGISTER_FORM_TRANSITION_MS: 500ms;
 
         &__title {
             text-align: center;
+            max-width: 36rem;
         }
 
         &--basic {
@@ -69,11 +70,9 @@ $REGISTER_FORM_TRANSITION_MS: 500ms;
     &__basic,
     &__more {
         display: grid;
-        grid-template-columns: min-content;
+        grid-template-columns: 1fr;
         grid-auto-rows: min-content;
         gap: $auth-forms-spacing-inputs;
-        justify-content: center;
-        justify-items: center;
         position: relative;
 
         &__error-msg {
@@ -89,7 +88,7 @@ $REGISTER_FORM_TRANSITION_MS: 500ms;
             padding: 1.4rem 1.6rem;
             position: absolute;
             top: 50%;
-            right: -30%;
+            right: -10rem;
             transform: translateY(-50%);
             transition: all 0.4s;
 
@@ -101,6 +100,7 @@ $REGISTER_FORM_TRANSITION_MS: 500ms;
     }
 
     &__more {
+        // justify-self: center;
         position: relative;
         &__btn {
             padding: $auth-forms-button-padding;
@@ -111,8 +111,8 @@ $REGISTER_FORM_TRANSITION_MS: 500ms;
         &__btn-back {
             position: absolute;
             top: 50%;
-            left: 0%;
-            transform: translate(-50%, -50%);
+            left: -16rem;
+            transform: translateY(-130%);
             padding: 1.4rem 1.6rem;
             transition: all 0.4s;
 

@@ -1,48 +1,28 @@
 import { Action, IUser, ActionTypes } from 'app/actions';
+import { combineReducers } from 'redux';
 
-const INITIAL_STATE = {
-    user: undefined,
-    token: undefined,
-    errorMsg: undefined,
-};
-
-export interface IAuthentication {
-    user?: IUser;
-    token?: string;
-    errorMsg?: string;
-}
-
-export const authenticationReducer = (
-    state: IAuthentication = INITIAL_STATE,
-    action: Action
-) => {
+const user = (state: IUser | null = null, action: Action) => {
     switch (action.type) {
-        case ActionTypes.loginSuccess:
-            return {
-                ...state,
-                user: action.payload.user,
-                token: action.payload.token,
-            };
-        case ActionTypes.loginError:
-            return {
-                ...state,
-                user: undefined,
-                token: undefined,
-                errorMsg: action.payload.message,
-            };
+        case ActionTypes.fetchUserSession:
+        case ActionTypes.patchUserSession:
+            return action.user;
         case ActionTypes.logout:
-            return {
-                ...state,
-                user: undefined,
-                token: undefined,
-                errorMsg: undefined,
-            };
-        case ActionTypes.patchUser:
-            return {
-                ...state,
-                user: action.payload,
-            };
+            return null;
         default:
             return state;
     }
 };
+
+const token = (state: string | null = null, action: Action) => {
+    switch (action.type) {
+        case ActionTypes.loginSuccess:
+        case ActionTypes.registerSuccess:
+            return action.token;
+        case ActionTypes.logout:
+            return null;
+        default:
+            return state;
+    }
+};
+
+export default combineReducers({ user, token });

@@ -10,13 +10,13 @@
     }
 
     &__value {
-        padding: $smart-input-padding-top 1.4rem;
+        padding: $base-input-padding-top 1.4rem;
     }
 
     &__input {
         background-color: $color-dark-medium;
-        border-radius: $smart-input-border-radius;
-        padding: $smart-input-padding-top + 0.1rem 1.4rem;
+        border-radius: $base-input-border-radius;
+        padding: $base-input-padding-top + 0.1rem 1.4rem;
         border: 1px solid rgba($color-white, 0);
     }
 
@@ -43,7 +43,9 @@
         }
 
         &__icon {
-            font-size: 0.8rem;
+            height: 0.8rem;
+            width: 0.8rem;
+            // font-size: 0.8rem;
             color: $color-rosy-pink;
             transition: all 0.4s;
         }

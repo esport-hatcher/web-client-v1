@@ -1,5 +1,5 @@
 .dropdown {
-    @extend %basic-shape;
+    @extend %base-input-shape;
     position: relative;
     letter-spacing: 1px;
 
@@ -20,7 +20,7 @@
         }
 
         &__icon {
-            font-size: 2.2rem;
+            // font-size: 2.2rem;
             color: $color-white;
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
@@ -31,7 +31,7 @@
     }
 
     &__list {
-        @extend %basic-shape;
+        @extend %base-input-shape;
         padding: 0;
         border: none;
         top: 100%;
@@ -58,8 +58,8 @@
                 color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 
             &:last-of-type {
-                border-bottom-left-radius: $smart-input-border-radius;
-                border-bottom-right-radius: $smart-input-border-radius;
+                border-bottom-left-radius: $base-input-border-radius;
+                border-bottom-right-radius: $base-input-border-radius;
             }
 
             &:hover {

@@ -18,7 +18,7 @@ export const AdminUsersList: React.FC<IProps> = React.memo(({ users }) => {
             {users.length > 0 ? (
                 renderList()
             ) : (
-                <p className='admin-pannel__content__error-msg error-msg error-msg--big'>
+                <p className='admin-panel__content__error-msg error-msg error-msg--big'>
                     No matches.
                 </p>
             )}

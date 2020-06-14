@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { shallowEqual } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { useSelector, useRegisterForm } from 'app/custom-hooks';
+import { useDispatch } from 'react-redux';
 import { REGISTER_FORM_TRANSITION_MS } from 'app/config';
+import { useWizardForm } from 'app/custom-hooks';
+import { IFormValues, register } from 'app/actions';
 import { RegisterFormBasic, RegisterFormMore } from './forms';
 
 export enum RegisterStage {
@@ -11,18 +12,12 @@ export enum RegisterStage {
     transition,
 }
 
-interface IProps {
-    errorMsg?: string;
-}
+interface IProps {}
 
-export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
-    const [stage, setStage] = useState<RegisterStage>(RegisterStage.basic);
-    const fields = useSelector(
-        state => state.registerForm.fields,
-        shallowEqual
-    );
-
-    const { onChangeStatus, onChangeValue } = useRegisterForm();
+export const RegisterForm: React.FC<IProps> = React.memo(() => {
+    const [stage, setStage] = useState<RegisterStage>(RegisterStage.more);
+    const { updateForm, resetForm, formValues } = useWizardForm('register');
+    const dispatch = useDispatch();
 
     const goTo = useCallback(
         (stage: RegisterStage) => {
@@ -30,6 +25,29 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
             setTimeout(() => setStage(stage), REGISTER_FORM_TRANSITION_MS);
         },
         [setStage]
+    );
+
+    const basicSubmit = React.useCallback(
+        (formValues: IFormValues) => {
+            dispatch(updateForm(formValues));
+            goTo(RegisterStage.more);
+        },
+        [goTo, updateForm, dispatch]
+    );
+
+    const moreSubmit = React.useCallback(
+        async (_formValues: IFormValues) => {
+            try {
+                dispatch(updateForm(_formValues));
+                // tslint:disable-next-line: await-promise
+                await dispatch(register({ ...formValues, ..._formValues }));
+                dispatch(resetForm());
+                return Promise.resolve();
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        },
+        [resetForm, updateForm, dispatch, formValues]
     );
 
     return (
@@ -42,11 +60,8 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
                 timeout={REGISTER_FORM_TRANSITION_MS}
             >
                 <RegisterFormBasic
-                    goTo={goTo}
-                    errorMsg={errorMsg}
-                    onChangeValue={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    fields={fields}
+                    onSubmit={basicSubmit}
+                    defaultValues={formValues}
                 />
             </CSSTransition>
             <CSSTransition
@@ -56,13 +71,7 @@ export const RegisterForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
                 classNames='register-screen__container--more'
                 timeout={REGISTER_FORM_TRANSITION_MS}
             >
-                <RegisterFormMore
-                    goTo={goTo}
-                    errorMsg={errorMsg}
-                    onChangeValue={onChangeValue}
-                    onChangeStatus={onChangeStatus}
-                    fields={fields}
-                />
+                <RegisterFormMore goTo={goTo} onSubmit={moreSubmit} />
             </CSSTransition>
         </section>
     );

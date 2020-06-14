@@ -1,73 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton } from 'app/components';
-import { useForm } from 'app/custom-hooks';
-import { login } from 'app/actions';
-import { FAKE_LOADING_TIME, SCREEN_TRANSITION_MS } from 'app/config';
+import { useForm } from 'react-hook-form';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { FiMail, FiLock } from 'react-icons/fi';
+import { IconButton, FormInput } from 'app/components';
+import { login, AsyncDispatch, IFormValues } from 'app/actions';
 
-interface IProps {
-    errorMsg?: string;
-}
+interface IProps {}
 
-export const LoginForm: React.FC<IProps> = React.memo(({ errorMsg }) => {
-    const dispatch = useDispatch();
-    const [inputs, setInputs] = useForm({
-        email: '',
-        password: '',
-    });
-    const [loading, setLoading] = useState(false);
+export const LoginForm: React.FC<IProps> = React.memo(() => {
+    const [isLoading, setLoading] = useState(false);
+    const { register, handleSubmit } = useForm();
+    const dispatch = useDispatch() as AsyncDispatch;
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, password } = inputs;
-        e.preventDefault();
-        setLoading(true);
-        setTimeout(() => {
-            dispatch(login(email, password));
-            setLoading(false);
-        }, FAKE_LOADING_TIME + SCREEN_TRANSITION_MS);
-    };
-
-    const displayErrorMsg = () => {
-        if (errorMsg) {
-            return (
-                <p className='body-text body-text--medium body-text--error login-screen__form__error-msg'>
-                    {errorMsg}
-                </p>
-            );
-        }
-        return null;
-    };
+    const onSubmit = useCallback(
+        async (formValues: IFormValues) => {
+            try {
+                setLoading(true);
+                await dispatch(login(formValues));
+            } catch (err) {
+                setLoading(false);
+            }
+        },
+        [dispatch, setLoading]
+    );
 
     return (
         <section className='login-screen'>
             <div className='login-screen__container'>
-                <div className='login-screen__container__title title title--big'>
+                <div className='login-screen__container__title title title--xl'>
                     Sign in to <br />
                     Esport-Hatcher
                 </div>
-                <form className='login-screen__form' onSubmit={onSubmit}>
-                    <SmartInput
+                <form
+                    className='login-screen__form'
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <FormInput
                         type='email'
                         placeholder='Email'
                         name='email'
-                        icon='envelope'
-                        value={inputs.email}
-                        onChange={setInputs}
+                        noValidation
+                        Icon={FiMail}
+                        ref={register}
                     />
-                    <SmartInput
+                    <FormInput
                         type='password'
                         placeholder='Password'
                         name='password'
-                        icon='lock'
-                        value={inputs.password}
-                        onChange={setInputs}
+                        noValidation
+                        Icon={FiLock}
+                        ref={register}
                     />
-                    {displayErrorMsg()}
                     <IconButton
                         className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
-                        icon={loading ? 'spinner' : 'sign-in-alt'}
-                        rotation={loading ? 90 : undefined}
-                        loading={loading}
+                        Icon={AiOutlineLogin}
+                        loading={isLoading}
+                        type='submit'
                     >
                         Login
                     </IconButton>
