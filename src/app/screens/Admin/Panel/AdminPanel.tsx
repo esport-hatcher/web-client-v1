@@ -87,11 +87,12 @@ export const _AdminPanel: React.FC<IProps & RouteComponentProps> = ({
 
     return (
         <main className='admin-panel'>
-            <HeaderPage title='Admin Panel' />
-            <AdminFilters
-                onFilter={onFilter}
-                initialValue={filters.superAdmin}
-            />
+            <HeaderPage title='Admin Panel'>
+                <AdminFilters
+                    onFilter={onFilter}
+                    initialValue={filters.superAdmin}
+                />
+            </HeaderPage>
             <div className='admin-panel__content'>
                 <div className='admin-panel__content__search'>
                     <SearchInput

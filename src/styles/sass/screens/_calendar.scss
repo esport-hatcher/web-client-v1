@@ -1,0 +1,30 @@
+.calendar {
+    display: grid;
+    height: 100%;
+    grid-template-rows: min-content 1fr;
+
+    &__header {
+        display: grid;
+        color: $color-white;
+        align-items: center;
+        grid-template-columns: min-content minmax(20rem, auto) min-content;
+        column-gap: 2rem;
+
+        &__icon {
+            cursor: pointer;
+
+            &:hover {
+                color: $color-blue-light;
+            }
+        }
+        &__currentMonth {
+            text-align: center;
+            text-transform: uppercase;
+            word-spacing: 1rem;
+        }
+    }
+
+    &__content {
+        grid-column: 1 / -1;
+    }
+}

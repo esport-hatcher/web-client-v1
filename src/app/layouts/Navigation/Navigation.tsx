@@ -3,10 +3,11 @@ import { FiChevronRight } from 'react-icons/fi';
 import {
     AiOutlineTool,
     AiOutlineMail,
-    AiOutlineUser,
+    AiOutlineTeam,
     AiOutlineSetting,
     AiOutlineFire,
     AiOutlineLogout,
+    AiOutlineCalendar,
 } from 'react-icons/ai';
 import cx from 'classnames';
 import { routesPath } from 'app/config';
@@ -47,21 +48,15 @@ export const NavBar: React.FC<IProps> = React.memo(({ admin }) => {
                 )}
                 <NavigationItem
                     activeText={textDisplay}
-                    Icon={AiOutlineMail}
-                    path={routesPath.chat}
-                    text='Chat'
-                />
-                <NavigationItem
-                    activeText={textDisplay}
-                    Icon={AiOutlineUser}
+                    Icon={AiOutlineTeam}
                     path={routesPath.teams}
                     text='Teams management'
                 />
                 <NavigationItem
                     activeText={textDisplay}
-                    Icon={AiOutlineFire}
-                    path={routesPath.feed}
-                    text='Feed'
+                    Icon={AiOutlineCalendar}
+                    path={routesPath.calendar}
+                    text='Calendar'
                 />
                 <NavigationItem
                     activeText={textDisplay}
