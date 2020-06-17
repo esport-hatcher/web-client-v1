@@ -11,7 +11,7 @@ interface IProps {
     task: ITask;
 }
 
-export const TaskItem: React.FC<IProps> = ({ task }) => {
+export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const [showModal, toggleModal] = useToggler(false);
 
     const dispatch = useDispatch();
@@ -54,4 +54,4 @@ export const TaskItem: React.FC<IProps> = ({ task }) => {
             </button>
         </div>
     );
-};
+});

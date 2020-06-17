@@ -1,5 +1,5 @@
 import api from 'app/api';
-import { ActionTypes, AppThunk } from './types';
+import { ActionTypes, AppThunk, IFieldData } from './types';
 import { IFormValues } from './form';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
@@ -113,14 +113,17 @@ export const deleteTask = (task: ITask): AppThunk => async (
 
 export const patchTask = (
     task: ITask,
-    editData: IFormValues
+    editData: IFieldData
 ): AppThunk => async (dispatch: Dispatch) => {
     try {
-        await api.patch<ITask>(`teams/1/tasks/${task.id}`, editData);
+        const { data } = await api.patch<ITask>(
+            `teams/1/tasks/${task.id}`,
+            editData
+        );
 
         dispatch<IPatchTaskSuccess>({
             type: ActionTypes.patchTaskSuccess,
-            task: task,
+            task: data,
         });
         sendToast({
             title: 'Task Edited',
