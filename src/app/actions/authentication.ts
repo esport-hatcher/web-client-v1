@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify';
 import api from 'app/api';
 import { ActionTypes, AppThunk } from './types';
-import { ReduxFormValues } from 'app/layouts';
 import { persistor } from 'index';
 import { sendToast } from 'app/shared';
+import { IFormValues } from './form';
 
 interface IAuthSuccess {
     token: string;
@@ -27,7 +27,7 @@ export interface ILogout {
 }
 
 export const register = (
-    registerFormValues: ReduxFormValues
+    registerFormValues: IFormValues
 ): AppThunk => async dispatch => {
     try {
         const {
@@ -58,7 +58,7 @@ export const register = (
 };
 
 export const login = (
-    loginFormValues: ReduxFormValues
+    loginFormValues: IFormValues
 ): AppThunk => async dispatch => {
     try {
         const {

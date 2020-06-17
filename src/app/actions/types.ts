@@ -16,6 +16,7 @@ import {
     IDeleteTaskSuccess,
     IPatchTaskSuccess,
 } from './tasks';
+import { IUpdateForm, IResetForm } from './form';
 
 export type CountQuery = { records: number };
 
@@ -39,6 +40,8 @@ export enum ActionTypes {
     fetchTaskSuccess,
     deleteTaskSuccess,
     patchTaskSuccess,
+    updateForm,
+    resetForm,
 }
 
 export type Action =
@@ -57,7 +60,9 @@ export type Action =
     | ICreateTaskSuccess
     | IFetchTaskSuccess
     | IDeleteTaskSuccess
-    | IPatchTaskSuccess;
+    | IPatchTaskSuccess
+    | IUpdateForm
+    | IResetForm;
 
 export type IGetState = () => RootState;
 

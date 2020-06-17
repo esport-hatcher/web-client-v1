@@ -1,6 +1,6 @@
 import api from 'app/api';
 import { ActionTypes, AppThunk } from './types';
-import { ReduxFormValues } from 'app/layouts';
+import { IFormValues } from './form';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
 
@@ -39,7 +39,7 @@ export interface IPatchTaskSuccess {
 }
 
 export const createTask = (
-    createTaskFormValues: ReduxFormValues,
+    createTaskFormValues: IFormValues,
     teamId?: number
 ): AppThunk => async dispatch => {
     try {
