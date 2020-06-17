@@ -3,6 +3,7 @@ import { FiCircle } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { ITask, deleteTask } from 'app/actions';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 interface IProps {
     task: ITask;
@@ -23,7 +24,9 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
             </div>
             <div className='task-list-item__content'>
                 <div className='task-list-item__title'>{task.title}</div>
-                <div className='task-list-item__deadline'>{task.deadline}</div>
+                <div className='task-list-item__dateEnd'>
+                    {moment(task.dateEnd).format('YYYY-MM-DD')}
+                </div>
             </div>
             <button className='task-list-item__edit'>Edit</button>
             <button className='task-list-item__comment'>Comment</button>

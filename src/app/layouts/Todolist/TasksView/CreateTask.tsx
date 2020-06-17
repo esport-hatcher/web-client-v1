@@ -32,7 +32,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
                 } else if (action === 'cancel') {
                     setShowCreateTask(false);
                 } else {
-                    dispatch(createTask({ title: inputValue, deadline: date }));
+                    dispatch(createTask({ title: inputValue, dateEnd: date }));
                     setShowCreateTask(false);
                 }
             },

@@ -9,7 +9,7 @@ export interface ITask {
     title: string;
     description: string;
     dateBegin: Date;
-    deadline: Date;
+    dateEnd: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -44,7 +44,7 @@ export const createTask = (
 ): AppThunk => async dispatch => {
     try {
         const { data } = await api.post<ITask>(
-            `/teams/${teamId ? teamId : '8'}/tasks`,
+            `/teams/${teamId ? teamId : '1'}/tasks`,
             createTaskFormValues
         );
         dispatch<ICreateTaskSuccess>({
@@ -72,7 +72,7 @@ export const createTask = (
 };
 
 export const fetchTasks = () => async (dispatch: Dispatch) => {
-    const { data } = await api.get<ITask[]>(`teams/8/tasks`);
+    const { data } = await api.get<ITask[]>(`teams/1/tasks`);
 
     dispatch<IFetchTaskSuccess>({
         type: ActionTypes.fetchTaskSuccess,
@@ -84,7 +84,7 @@ export const deleteTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        await api.delete<ITask[]>(`teams/8/tasks/${task.id}`);
+        await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
 
         dispatch<IDeleteTaskSuccess>({
             type: ActionTypes.deleteTaskSuccess,
@@ -114,7 +114,7 @@ export const updateTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        const { data } = await api.patch<ITask>(`teams/8/tasks/${task.id}`);
+        const { data } = await api.patch<ITask>(`teams/1/tasks/${task.id}`);
 
         dispatch<IPatchTaskSuccess>({
             type: ActionTypes.patchTaskSuccess,

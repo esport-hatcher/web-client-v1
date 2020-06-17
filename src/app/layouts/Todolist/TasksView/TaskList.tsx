@@ -19,10 +19,10 @@ export const TaskList: React.FC<IProps> = React.memo(({ section }) => {
     }, [dispatch]);
 
     // const currentDayTasks = remove(tasks, task => {
-    //     return moment(task.deadline).isSame(new Date(), 'week');
+    //     return moment(task.dateEnd).isSame(new Date(), 'week');
     // });
     // const currentMonthTasks = remove(tasks, task => {
-    //     return moment(task.deadline).isSame(new Date(), 'month');
+    //     return moment(task.dateEnd).isSame(new Date(), 'month');
     // });
     const renderList = (): JSX.Element[] => {
         return tasks.map(task => {
@@ -33,7 +33,7 @@ export const TaskList: React.FC<IProps> = React.memo(({ section }) => {
         <div className='task-list'>
             {tasks.length > 0 ? renderList() : <h2>No tasks.</h2>}
             {/* {currentMonthTasks.map(task => {
-                return <div>{task.deadline}</div>;
+                return <div>{task.dateEnd}</div>;
             })}
             {currentDayTasks.map(task => {
                 <TaskItem task={task} />;
