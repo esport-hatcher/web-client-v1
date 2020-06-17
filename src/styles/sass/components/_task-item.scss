@@ -52,10 +52,23 @@
         }
     }
 
-    &__delete {
+    &__validate {
         position: absolute;
         margin-top: -5.5%;
         margin-left: 90%;
+        color: #6dd400;
+        background: none;
+        border: none;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    &__delete {
+        position: absolute;
+        margin-top: -5.5%;
+        margin-left: 94%;
         color: red;
         background: none;
         border: none;

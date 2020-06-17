@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { FiCircle } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { FaCheck } from 'react-icons/fa';
 import { ITask, deleteTask, patchTask } from 'app/actions';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -44,6 +45,13 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
         [task, dispatch]
     );
 
+    const onCompleteTask = useCallback(
+        (e: React.MouseEvent<HTMLButtonElement>) => {
+            dispatch(patchTask(task, { completed: true }));
+        },
+        [task, dispatch]
+    );
+
     const handleDelete = useCallback(() => {
         dispatch(deleteTask(task));
     }, [task, dispatch]);
@@ -71,6 +79,8 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
             <div className='task-list-item__state'>
                 <FiCircle />
             </div>
+
+            {/* TASK TITLE */}
             <div className='task-list-item__content'>
                 <div className='task-list-item__title'>{displayContent()}</div>
                 <div className='task-list-item__dateEnd'>
@@ -78,6 +88,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                 </div>
             </div>
 
+            {/* TASK BUTTON EDIT/COMMENT */}
             <button className='task-list-item__edit' onClick={setInputMode}>
                 Edit
             </button>
@@ -91,6 +102,14 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                     onConfirm={onConfirmModal}
                 />
             )}
+
+            {/* TASK BUTTON COMPLETE/DELETE */}
+            <button
+                onClick={onCompleteTask}
+                className='task-list-item__validate'
+            >
+                <FaCheck />
+            </button>
             <button onClick={handleDelete} className='task-list-item__delete'>
                 <RiDeleteBinLine />
             </button>
