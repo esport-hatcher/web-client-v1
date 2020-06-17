@@ -4,11 +4,6 @@
     border-bottom: 1px solid;
     border-color: $color-light-grey;
     font-size: 1.5em;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    &:hover {
-        transform: scale(1.01);
-    }
 
     &__state {
         position: absolute;
@@ -39,6 +34,9 @@
         color: $color-light-grey;
         background: none;
         border: none;
+        &:hover {
+            color: white;
+        }
     }
 
     &__comment {
@@ -49,6 +47,9 @@
         color: $color-light-grey;
         background: none;
         border: none;
+        &:hover {
+            color: white;
+        }
     }
 
     &__delete {
@@ -63,6 +64,55 @@
             color: white;
         }
     }
+}
+
+.modal-input {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    &__background {
+        height: 100%;
+        width: 100%;
+        background-color: rgba($color-dark, 0.8);
+
+        @supports (-webkit-backdrop-filter: blur(5px)) or
+            (backdrop-filter: blur(5px)) {
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            background-color: rgba($color-dark, 0.3);
+        }
+    }
+
+    &__content {
+        z-index: 1200;
+        @include absCenter();
+        display: grid;
+        row-gap: 2rem;
+        border-radius: 2rem;
+        min-width: 30%;
+        background-color: $color-dark-medium;
+        padding: 2rem 4rem;
+        animation: fadeIn 0.1s ease-in-out;
+
+        &__action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            justify-content: right;
+            column-gap: 1.2rem;
+        }
+    }
+}
+
+.modal-input__content__description {
+    background-color: $color-dark-medium;
+    width: 40vw;
+    height: 20vh;
+    border: none;
+    color: white;
 }
 /*
 .cross {

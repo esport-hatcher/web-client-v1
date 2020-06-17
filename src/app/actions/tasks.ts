@@ -85,7 +85,7 @@ export const deleteTask = (task: ITask): AppThunk => async (
     dispatch: Dispatch
 ) => {
     try {
-        await api.delete<ITask[]>(`teams/1/tasks/${task.id}`);
+        await api.delete<ITask>(`teams/1/tasks/${task.id}`);
 
         dispatch<IDeleteTaskSuccess>({
             type: ActionTypes.deleteTaskSuccess,
@@ -111,15 +111,16 @@ export const deleteTask = (task: ITask): AppThunk => async (
     }
 };
 
-export const updateTask = (task: ITask): AppThunk => async (
-    dispatch: Dispatch
-) => {
+export const patchTask = (
+    task: ITask,
+    editData: IFormValues
+): AppThunk => async (dispatch: Dispatch) => {
     try {
-        const { data } = await api.patch<ITask>(`teams/1/tasks/${task.id}`);
+        await api.patch<ITask>(`teams/1/tasks/${task.id}`, editData);
 
         dispatch<IPatchTaskSuccess>({
             type: ActionTypes.patchTaskSuccess,
-            task: data,
+            task: task,
         });
         sendToast({
             title: 'Task Edited',

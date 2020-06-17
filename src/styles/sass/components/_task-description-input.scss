@@ -1,0 +1,60 @@
+.task-description-input {
+    word-break: break-Word;
+    &__label {
+        grid-column: 1 / -1;
+    }
+
+    &__value {
+        font-family: Montserrat;
+        width: 40vw;
+        height: 20vh;
+    }
+
+    &__textarea {
+        font-family: Montserrat;
+        font-size: medium;
+        width: 44vw;
+        height: 20vh;
+        background-color: $color-dark-medium;
+        border-radius: $base-input-border-radius;
+        padding: $base-input-padding-top + 0.1rem 1.4rem;
+        border: 1px solid rgba($color-white, 0);
+        color: white;
+    }
+
+    &__btn {
+        margin-left: 55rem;
+        cursor: pointer;
+        border: 1px solid $color-rosy-pink;
+        padding: 0.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        background-color: transparent;
+        align-self: center;
+        transition: all 0.4s;
+
+        &--hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &:hover {
+            background-color: $color-rosy-pink;
+            border: 1px transparent solid;
+        }
+
+        &__icon {
+            height: 1rem;
+            width: 5rem;
+            // font-size: 0.8rem;
+            color: $color-rosy-pink;
+            transition: all 0.4s;
+        }
+
+        &:hover > &__icon {
+            color: $color-white;
+        }
+    }
+}
