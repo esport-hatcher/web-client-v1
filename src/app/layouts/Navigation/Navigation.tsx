@@ -2,10 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import {
     AiOutlineTool,
-    AiOutlineMail,
     AiOutlineTeam,
     AiOutlineSetting,
-    AiOutlineFire,
     AiOutlineLogout,
     AiOutlineCalendar,
 } from 'react-icons/ai';

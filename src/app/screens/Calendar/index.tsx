@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { addMonths, subMonths } from 'date-fns';
-import { CalendarHeader } from 'app/layouts';
+import { CalendarHeader, CalendarDaysList } from 'app/layouts';
 import { HeaderPage } from 'app/components';
 
 interface IProps {}
@@ -8,14 +8,6 @@ interface IProps {}
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-
-    // const renderHeader = () => {};
-
-    // const renderDays = () => {};
-
-    // const renderCells = () => {};
-
-    // const onDateClick = () => {};
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));
@@ -34,8 +26,9 @@ export const CalendarPage: React.FC<IProps> = () => {
                     prevMonth={prevMonth}
                 />
             </HeaderPage>
-
-            <section className='calendar__content'>content</section>
+            <section className='calendar__content'>
+                <CalendarDaysList currentMonth={currentMonth} />
+            </section>
         </main>
     );
 };

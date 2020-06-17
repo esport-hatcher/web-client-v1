@@ -8,26 +8,22 @@ interface IProps {
     currentMonth: Date;
 }
 
-export const CalendarHeader: React.FC<IProps> = ({
-    prevMonth,
-    nextMonth,
-    currentMonth,
-}) => {
-    const dateFormat = 'MMMM yyyy';
-
-    return (
-        <div className='calendar__header'>
-            <FiChevronLeft
-                className='calendar__header__icon icon icon--white'
-                onClick={prevMonth}
-            />
-            <span className='calendar__header__currentMonth important-info important-info--md'>
-                {format(currentMonth, dateFormat)}
-            </span>
-            <FiChevronRight
-                className='calendar__header__icon icon icon--white'
-                onClick={nextMonth}
-            />
-        </div>
-    );
-};
+export const CalendarHeader: React.FC<IProps> = React.memo(
+    ({ prevMonth, nextMonth, currentMonth }) => {
+        return (
+            <div className='calendar__header'>
+                <FiChevronLeft
+                    className='calendar__header__icon icon icon--white'
+                    onClick={prevMonth}
+                />
+                <span className='calendar__header__currentMonth important-info important-info--md'>
+                    {format(currentMonth, 'MMMM yyyy')}
+                </span>
+                <FiChevronRight
+                    className='calendar__header__icon icon icon--white'
+                    onClick={nextMonth}
+                />
+            </div>
+        );
+    }
+);
