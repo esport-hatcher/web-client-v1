@@ -10,6 +10,7 @@ export interface ITask {
     description: string;
     dateBegin: Date;
     dateEnd: Date;
+    completed: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
