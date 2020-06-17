@@ -32,7 +32,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     }
 
     return (
-        <main className='select-team'>
+        <main className='team-page'>
             <header className='header-title'>{teamSelected.name}</header>
             <div className='container-information'>
                 <div className='container-information__team-information'>
@@ -67,7 +67,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                 </div>
             </div>
             <ModalForm show={show} handleClose={onShow}>
-                <div className='col-2'>
+                <div className='select-team__modal--form'>
                     <h1>Select your player</h1>
                     <AddPlayerForm change={onShow} teamId={teamSelected.id} />
                 </div>
