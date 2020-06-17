@@ -53,9 +53,19 @@ export interface ITeamsSuccess {
     teams: ITeams[];
 }
 
-export interface ICreateTeamAction {
-    type: ActionTypes.createTeam;
+export interface ICreateTeamActionSucess {
+    type: ActionTypes.createTeamSucess;
     payload: ITeams[];
+}
+
+export interface ICreateTeamActionError {
+    type: ActionTypes.createTeamError;
+    payload: ITeamsFailure;
+}
+
+export interface IInvitePlayerActionSucess {
+    type: ActionTypes.invitePlayerSucess;
+    payload: IUser[];
 }
 
 export const fetchTeams = () => async (
@@ -86,11 +96,7 @@ export const fetchTeamUser = (teamId: number) => async (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.get<IUser[]>(`teams/${teamId}/users`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const { data } = await api.get<IUser[]>(`teams/${teamId}/users`);
             dispatch<IFetchTeamUserSucess>({
                 type: ActionTypes.fetchTeamUserSucess,
                 payload: data,
@@ -113,22 +119,21 @@ export const createTeam = (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post(
-                `teams/`,
-                { game: valueGame, name: valueName, region: valueRegion },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            dispatch({
-                type: ActionTypes.createTeam,
+            const { data } = await api.post<ITeams[]>(`teams/`, {
+                game: valueGame,
+                name: valueName,
+                region: valueRegion,
+            });
+            dispatch<ICreateTeamActionSucess>({
+                type: ActionTypes.createTeamSucess,
                 payload: data,
             });
         }
     } catch (err) {
-        //console.log('nope', err);
+        dispatch<ICreateTeamActionError>({
+            type: ActionTypes.createTeamError,
+            payload: err,
+        });
     }
 };
 
@@ -141,15 +146,10 @@ export const invitePlayer = (
         const myId = getState().authentication.user;
         if (token && myId) {
             const { data } = await api.post(
-                `teams/${teamId}/users/${playerId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+                `teams/${teamId}/users/${playerId}`
             );
-            dispatch({
-                type: ActionTypes.createTeam,
+            dispatch<IInvitePlayerActionSucess>({
+                type: ActionTypes.invitePlayerSucess,
                 payload: data,
             });
         }

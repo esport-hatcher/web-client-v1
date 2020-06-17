@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const TeamUserCard: React.FC<IProps> = ({ item, change }) => {
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     //change(true);
 
     const erase = async (item: IUser) => {

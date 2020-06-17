@@ -14,8 +14,12 @@ import {
     IFetchTeamSuccessAction,
     IFetchTeamUserSucess,
     IFetchTeamUserError,
+    ICreateTeamActionError,
+    ICreateTeamActionSucess,
+    IInvitePlayerActionSucess,
 } from './teams';
 import { IUpdateForm, IResetForm } from './form';
+import { IconType } from 'react-icons/lib';
 
 export type CountQuery = { records: number };
 
@@ -33,13 +37,15 @@ export enum ActionTypes {
     adminPanelFetchNextPageSuccess,
     adminPanelSetLoading,
     adminPanelCountFilters,
-    createTeam,
+    createTeamSucess,
+    createTeamError,
     fetchTeamSuccess,
     fetchTeamError,
     updateForm,
     resetForm,
     fetchTeamUserSucess,
     fetchTeamUserError,
+    invitePlayerSucess,
 }
 
 export type Action =
@@ -57,7 +63,10 @@ export type Action =
     | IFetchTeamErrorAction
     | IUpdateForm
     | IResetForm
+    | ICreateTeamActionSucess
+    | ICreateTeamActionError
     | IFetchTeamUserSucess
+    | IInvitePlayerActionSucess
     | IFetchTeamUserError;
 
 export type IGetState = () => RootState;

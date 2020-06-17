@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, Description, SearchField } from 'app/components';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -19,13 +20,16 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     const teamSelected = teams.find(element => {
         return element.name === id;
     });
+
+    useEffect(() => {
+        if (teamSelected) {
+            dispatch(fetchTeamUser(teamSelected.id));
+        }
+    }, [dispatch]);
+
     if (!teamSelected) {
         return null;
     }
-
-    useEffect(() => {
-        dispatch(fetchTeamUser(teamSelected.id));
-    }, [dispatch]);
 
     return (
         <main className='select-team'>
@@ -58,7 +62,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                         className='select-team__modal--button'
                         onClick={onShow}
                     >
-                        {' '}
+                        <AiOutlinePlus className='select-team__modal--button__icon' />
                     </div>
                 </div>
             </div>
