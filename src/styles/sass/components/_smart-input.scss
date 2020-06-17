@@ -34,7 +34,6 @@
     &__input {
         @extend %base-input-shape;
         padding-left: 3 * $base-input-padding-sides;
-        background-color: $color-dark-three;
         transition: border-color $smart-input-animation-duration
                 $smart-input-animation-style,
             padding-left $smart-input-animation-duration

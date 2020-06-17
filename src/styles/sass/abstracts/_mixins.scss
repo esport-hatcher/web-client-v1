@@ -34,7 +34,7 @@
 %base-input-shape {
     width: 100%;
     max-width: $base-input-max-width;
-    background-color: inherit;
+    background-color: $color-dark-three;
     border-radius: $base-input-border-radius;
     border: 1px solid currentColor;
     color: $color-white;
@@ -42,4 +42,5 @@
     font-size: 1.2rem;
     font-family: inherit;
     padding: $base-input-padding-top $base-input-padding-sides;
+    filter: none;
 }
