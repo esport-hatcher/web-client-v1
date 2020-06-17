@@ -1,5 +1,6 @@
 import { Action, ITask, ActionTypes } from 'app/actions';
 import unionBy from 'lodash/unionBy';
+import findIndex from 'lodash/findIndex';
 
 const tasksReducer = (state: ITask[] = [], action: Action) => {
     switch (action.type) {
@@ -11,10 +12,9 @@ const tasksReducer = (state: ITask[] = [], action: Action) => {
         case ActionTypes.deleteTaskSuccess:
             return state.filter(task => task.id !== action.task.id);
         case ActionTypes.patchTaskSuccess:
-            return [
-                ...state.filter(task => task.id !== action.task.id),
-                action.task,
-            ];
+            return state.map(task =>
+                task.id === action.task.id ? action.task : task
+            );
         default:
             return state;
     }
