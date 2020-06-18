@@ -4,9 +4,9 @@ import { Spinner } from '../../Spinner';
 
 interface IProps {
     Icon: IconType;
-    className: string;
-    type: 'submit' | 'button';
-    loading: boolean;
+    className?: string;
+    type?: 'submit' | 'button';
+    loading?: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -27,7 +27,9 @@ export const IconButton: React.FC<IProps> = React.memo(
                     'btn--disabled'}`}
                 disabled={loading}
             >
-                <p className='btn--icon-holder__text'>{children}</p>
+                {children && (
+                    <p className='btn--icon-holder__text'>{children}</p>
+                )}
                 {loading ? (
                     <Spinner className='btn--icon-holder__icon' />
                 ) : (

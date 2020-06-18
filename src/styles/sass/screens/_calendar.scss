@@ -36,7 +36,7 @@ $calendar-container-max-width: 160rem;
         &__container {
             max-width: $calendar-container-max-width;
             height: 90%;
-            width: 100%;
+            width: 90%;
             display: grid;
             grid-template-rows: min-content auto;
             border-radius: $container-border-radius;
@@ -46,7 +46,7 @@ $calendar-container-max-width: 160rem;
         &__days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            justify-items: center;
+            justify-items: start;
             padding: 2rem 0;
             border-bottom: 1px solid $color-medium-grey;
         }
@@ -66,13 +66,12 @@ $calendar-container-max-width: 160rem;
                     color: $color-white;
                     background-color: $color-dark;
                     position: relative;
-                    cursor: pointer;
                     transition: all 0.2s;
                     border-radius: $container-border-radius;
 
                     &:hover {
                         background-color: lighten($color-dark, 2%);
-                        transform: scale(1.1) translateY(4px);
+                        transform: perspective(500px) translateZ(60px);
                         z-index: 10000;
                     }
 
@@ -90,6 +89,21 @@ $calendar-container-max-width: 160rem;
                         position: absolute;
                         left: 2rem;
                         top: 2rem;
+                    }
+
+                    &__action-buttons {
+                        position: absolute;
+                        bottom: 2rem;
+                        right: 2rem;
+                        display: grid;
+                        grid-template-columns: repeat(2, auto);
+                        column-gap: 0.4rem;
+
+                        &__button {
+                            &:hover {
+                                color: $color-blue-light;
+                            }
+                        }
                     }
                 }
             }
