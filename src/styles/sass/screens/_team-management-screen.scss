@@ -33,7 +33,7 @@
     margin-left: 80px;
 }
 
-.team-page {
+.select-team {
     &__box {
         display: flex;
         border-width: 1px;
@@ -91,24 +91,16 @@
             margin-right: 80px;
             margin-left: 80px;
         }
-        &--form {
-            position: relative;
-            width: 50%;
-            float: left;
-            height: 100%;
-            z-index: 1010101010;
-            margin: 0 auto;
-        }
     }
 
-    .team-page__box:hover {
+    .select-team__box:hover {
         opacity: 0.8;
         transition-duration: 0.3s;
         transition-delay: 0.1s;
         background: #495c70;
     }
 
-    .team-page__modal--button:hover {
+    .select-team__modal--button:hover {
         opacity: 0.8;
         transition-duration: 0.3s;
         transition-delay: 0.1s;

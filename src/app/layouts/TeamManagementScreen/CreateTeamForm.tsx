@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { TeamInput } from 'app/components';
-import { createTeam } from 'app/actions';
+import api from 'app/api';
 
-interface IProps {
-    change: Function;
-}
-
-export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
+export const CreateTeamForm: React.FC = React.memo(() => {
     const [valueName, setValueName] = useState('');
     const [valueRegion, setValueRegion] = useState('');
     const [valueGame, setValueGame] = useState('');
-    const dispatch = useDispatch();
 
+    /**
+     * TODO: NO API CALL IN COMPONENT
+     */
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createTeam(valueName, valueRegion, valueGame));
-        change(false);
+
+        try {
+            await api.post('/teams', {
+                body: { name: valueName, game: valueGame, region: valueRegion },
+            });
+            return 200;
+        } catch {
+            return null;
+        }
     };
     return (
         <form className='create-team-form-container' onSubmit={onSubmit}>
@@ -41,4 +45,4 @@ export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
             </label>
         </form>
     );
-};
+});
