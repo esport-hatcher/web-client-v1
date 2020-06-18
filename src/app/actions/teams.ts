@@ -1,10 +1,8 @@
 import { Dispatch } from 'redux';
 import api from 'app/api';
 import { ActionTypes, IGetState } from './types';
-import { IUser } from './user';
 
 export interface ITeams {
-    TeamUser: [];
     id: number;
     avatarTeamUrl: string;
     bannerUrl: string;
@@ -13,12 +11,6 @@ export interface ITeams {
     region: boolean;
     createdAt: string;
     updatedAt: string;
-}
-
-export interface ICreateTeam {
-    game: string;
-    name: string;
-    region: string;
 }
 
 export interface IFetchTeamSuccessAction {
@@ -30,42 +22,12 @@ export interface IFetchTeamErrorAction {
     payload: ITeamsFailure;
 }
 
-export interface IFetchTeamUserSucess {
-    type: ActionTypes.fetchTeamUserSucess;
-    payload: IUser[];
-}
-
-export interface IFetchTeamUserError {
-    type: ActionTypes.fetchTeamUserError;
-    payload: ITeamsFailure;
-}
-
 export interface ITeamsFailure {
     message: string;
 }
 
-export interface ITeamsErrorAction {
-    type: ActionTypes.fetchTeamError;
-    payload: ITeamsFailure;
-}
-
 export interface ITeamsSuccess {
     teams: ITeams[];
-}
-
-export interface ICreateTeamActionSucess {
-    type: ActionTypes.createTeamSucess;
-    payload: ITeams[];
-}
-
-export interface ICreateTeamActionError {
-    type: ActionTypes.createTeamError;
-    payload: ITeamsFailure;
-}
-
-export interface IInvitePlayerActionSucess {
-    type: ActionTypes.invitePlayerSucess;
-    payload: IUser[];
 }
 
 export const fetchTeams = () => async (
@@ -86,74 +48,5 @@ export const fetchTeams = () => async (
             type: ActionTypes.fetchTeamError,
             payload: data,
         });
-    }
-};
-export const fetchTeamUser = (teamId: number) => async (
-    dispatch: Dispatch,
-    getState: IGetState
-) => {
-    try {
-        const token = getState().authentication.token;
-        const myId = getState().authentication.user;
-        if (token && myId) {
-            const { data } = await api.get<IUser[]>(`teams/${teamId}/users`);
-            dispatch<IFetchTeamUserSucess>({
-                type: ActionTypes.fetchTeamUserSucess,
-                payload: data,
-            });
-        }
-    } catch (err) {
-        dispatch<IFetchTeamUserError>({
-            type: ActionTypes.fetchTeamUserError,
-            payload: err,
-        });
-    }
-};
-
-export const createTeam = (
-    valueName: string,
-    valueRegion: string,
-    valueGame: string
-) => async (dispatch: Dispatch, getState: IGetState) => {
-    try {
-        const token = getState().authentication.token;
-        const myId = getState().authentication.user;
-        if (token && myId) {
-            const { data } = await api.post<ITeams[]>(`teams/`, {
-                game: valueGame,
-                name: valueName,
-                region: valueRegion,
-            });
-            dispatch<ICreateTeamActionSucess>({
-                type: ActionTypes.createTeamSucess,
-                payload: data,
-            });
-        }
-    } catch (err) {
-        dispatch<ICreateTeamActionError>({
-            type: ActionTypes.createTeamError,
-            payload: err,
-        });
-    }
-};
-
-export const invitePlayer = (
-    playerId: NumberConstructor,
-    teamId: string
-) => async (dispatch: Dispatch, getState: IGetState) => {
-    try {
-        const token = getState().authentication.token;
-        const myId = getState().authentication.user;
-        if (token && myId) {
-            const { data } = await api.post(
-                `teams/${teamId}/users/${playerId}`
-            );
-            dispatch<IInvitePlayerActionSucess>({
-                type: ActionTypes.invitePlayerSucess,
-                payload: data,
-            });
-        }
-    } catch (err) {
-        //console.log('nope', err);
     }
 };

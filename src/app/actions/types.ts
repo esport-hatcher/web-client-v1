@@ -9,17 +9,8 @@ import {
     IAdminPanelFetchNextPageSuccessAction,
 } from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
-import {
-    IFetchTeamErrorAction,
-    IFetchTeamSuccessAction,
-    IFetchTeamUserSucess,
-    IFetchTeamUserError,
-    ICreateTeamActionError,
-    ICreateTeamActionSucess,
-    IInvitePlayerActionSucess,
-} from './teams';
+import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
 import { IUpdateForm, IResetForm } from './form';
-import { IconType } from 'react-icons/lib';
 
 export type CountQuery = { records: number };
 
@@ -37,15 +28,10 @@ export enum ActionTypes {
     adminPanelFetchNextPageSuccess,
     adminPanelSetLoading,
     adminPanelCountFilters,
-    createTeamSucess,
-    createTeamError,
     fetchTeamSuccess,
     fetchTeamError,
     updateForm,
     resetForm,
-    fetchTeamUserSucess,
-    fetchTeamUserError,
-    invitePlayerSucess,
 }
 
 export type Action =
@@ -62,12 +48,7 @@ export type Action =
     | IFetchTeamSuccessAction
     | IFetchTeamErrorAction
     | IUpdateForm
-    | IResetForm
-    | ICreateTeamActionSucess
-    | ICreateTeamActionError
-    | IFetchTeamUserSucess
-    | IInvitePlayerActionSucess
-    | IFetchTeamUserError;
+    | IResetForm;
 
 export type IGetState = () => RootState;
 
