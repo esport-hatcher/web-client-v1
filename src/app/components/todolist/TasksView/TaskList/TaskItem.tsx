@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FiCircle } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { FaCheck } from 'react-icons/fa';
+import { BsPencil } from 'react-icons/bs';
 import { ITask, deleteTask, patchTask } from 'app/actions';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { ModalInput } from 'app/components/shared/Modals/Input';
+import { DatePickerButton, MiniCalendar } from 'app/components';
 import { useToggler, useInput } from 'app/custom-hooks';
 
 interface IProps {
@@ -16,6 +18,9 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const [showModal, toggleModal] = useToggler(false);
     const [inputMode, setInputMode] = useToggler(false);
     const [inputValue, setInputValue] = useInput(task.title);
+
+    const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
+    const [date, setDate] = useState(moment(task.dateEnd).format('Y/M/D'));
 
     const dispatch = useDispatch();
 
@@ -35,8 +40,14 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
 
     const onLoseFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         onInputChange(e);
-        setInputMode();
     };
+
+    const onDateChange = useCallback(
+        (e: React.FormEvent<HTMLFormElement>) => {
+            dispatch(patchTask(task, { dateEnd: date }));
+        },
+        [task, date, dispatch]
+    );
 
     const onConfirmModal = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -59,33 +70,71 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const displayContent = () => {
         if (inputMode) {
             return (
-                <div>
-                    <input
-                        className='modifiable-input__input important-info important-info--md'
-                        value={inputValue}
-                        onChange={setInputValue}
-                        autoFocus
-                        name='title'
-                        onBlur={onLoseFocus}
-                    />
-                </div>
+                <form
+                    className='task-list-item__inputmode'
+                    onSubmit={onDateChange}
+                >
+                    <div>
+                        <input
+                            className='task-list-item__inputmode__input'
+                            value={inputValue}
+                            onChange={setInputValue}
+                            autoFocus
+                            name='title'
+                            onBlur={onLoseFocus}
+                        />
+                        <button
+                            type='submit'
+                            className='task-list-item__inputmode__button'
+                        >
+                            <BsPencil className='task-list-item__inputmode__button__icon' />
+                        </button>
+                        <div className='task-list-item__inputmode__calendar'>
+                            <div className='create-task'>
+                                <DatePickerButton
+                                    onClick={setShowMiniCalendar}
+                                    isActive={showMiniCalendar}
+                                    date={date}
+                                    className={
+                                        'task-list-item__inputmode__calendar__date-picker'
+                                    }
+                                    activeClassName={
+                                        'task-list-item__inputmode__calendar__date-picker--active'
+                                    }
+                                />
+                                {showMiniCalendar && (
+                                    <MiniCalendar
+                                        setShowMiniCalendar={
+                                            setShowMiniCalendar
+                                        }
+                                        setDate={setDate}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </form>
             );
         }
-        return <p className='task-list-item__title'>{displayValue()}</p>;
+        return (
+            <div>
+                <p className='task-list-item__title'>{displayValue()}</p>
+                <div className='task-list-item__dateEnd'>
+                    {moment(task.dateEnd).format('YYYY-MM-DD')}
+                </div>
+            </div>
+        );
     };
 
     return (
         <div className='task-list-item'>
             <div className='task-list-item__state'>
-                <FiCircle />
+                <FiCircle className='task-list-item__state__icon' />
             </div>
 
             {/* TASK TITLE */}
             <div className='task-list-item__content'>
                 <div className='task-list-item__title'>{displayContent()}</div>
-                <div className='task-list-item__dateEnd'>
-                    {moment(task.dateEnd).format('YYYY-MM-DD')}
-                </div>
             </div>
 
             {/* TASK BUTTON EDIT/COMMENT */}
@@ -108,10 +157,10 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                 onClick={onCompleteTask}
                 className='task-list-item__validate'
             >
-                <FaCheck />
+                <FaCheck className='task-list-item__icon' />
             </button>
             <button onClick={handleDelete} className='task-list-item__delete'>
-                <RiDeleteBinLine />
+                <RiDeleteBinLine className='task-list-item__icon' />
             </button>
         </div>
     );

@@ -125,11 +125,6 @@ export const patchTask = (
             type: ActionTypes.patchTaskSuccess,
             task: data,
         });
-        sendToast({
-            title: 'Task Edited',
-            content: 'You successfully edited the task !',
-            type: 'success',
-        });
         return Promise.resolve();
     } catch ({
         response: {

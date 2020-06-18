@@ -3,14 +3,18 @@
     width: 65vw;
     border-bottom: 1px solid;
     border-color: $color-light-grey;
-    font-size: 1.5em;
 
     &__state {
         position: absolute;
-        padding: 2.5% 1%;
+        padding: 3.5% 1%;
         text-align: left;
         width: 50px;
         color: #6dd400;
+
+        &__icon {
+            height: 20px;
+            width: 20px;
+        }
     }
 
     &__content {
@@ -18,15 +22,18 @@
     }
 
     &__title {
+        font-size: 1.2em;
         color: white;
     }
 
     &__dateEnd {
+        font-size: 1.2em;
         padding-top: 1%;
         color: $color-light-grey;
     }
 
     &__edit {
+        cursor: pointer;
         position: absolute;
         margin-top: -5%;
         margin-left: 75%;
@@ -40,6 +47,7 @@
     }
 
     &__comment {
+        cursor: pointer;
         position: absolute;
         margin-top: -5%;
         margin-left: 80%;
@@ -53,19 +61,20 @@
     }
 
     &__validate {
+        cursor: pointer;
         position: absolute;
         margin-top: -5.5%;
         margin-left: 90%;
         color: #6dd400;
         background: none;
         border: none;
-
         &:hover {
             color: white;
         }
     }
 
     &__delete {
+        cursor: pointer;
         position: absolute;
         margin-top: -5.5%;
         margin-left: 94%;
@@ -75,6 +84,68 @@
 
         &:hover {
             color: white;
+        }
+    }
+
+    &__icon {
+        height: 16px;
+        width: 16px;
+    }
+
+    &__inputmode {
+        position: relative;
+        z-index: 1;
+        height: 10vh;
+
+        &__input {
+            width: 15vw;
+            height: 5vh;
+            background-color: $color-dark-two;
+            border: none;
+            color: $color-white;
+            box-shadow: 0 2px 4px 0 $color-dark-four;
+            text-indent: 15px;
+        }
+
+        &__calendar {
+            z-index: 10;
+
+            &__date-picker {
+                width: 6vw;
+                height: 5vh;
+                cursor: pointer;
+                font-family: Helvetica;
+                font-size: 16px;
+                box-shadow: 0 2px 4px 0 $color-dark-four;
+                background-color: $color-dark-two;
+                color: $color-light-grey;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0.5%;
+
+                &--active {
+                    color: $color-white;
+                    background-color: $color-dark-four;
+                }
+            }
+        }
+
+        &__button {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: greenyellow;
+            margin-left: 2%;
+
+            &__icon {
+                height: 18px;
+                width: 18px;
+            }
+
+            &:hover {
+                color: white;
+            }
         }
     }
 }
@@ -117,6 +188,20 @@
             justify-content: right;
             column-gap: 1.2rem;
         }
+    }
+    ::-webkit-scrollbar {
+        width: 14px;
+        height: 14px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 4px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    ::-webkit-scrollbar-corner {
+        background-color: transparent;
     }
 }
 
