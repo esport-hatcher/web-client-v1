@@ -24,3 +24,5 @@ export const rootReducer = (state: RootState | undefined, action: Action) => {
 
     return appReducer(state, action);
 };
+
+export * from './tasks';
