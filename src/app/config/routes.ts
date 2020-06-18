@@ -7,6 +7,7 @@ import {
     Logout,
     SettingsProfile,
     TodolistPage,
+    CalendarPage,
 } from 'app/screens';
 
 export enum routesPath {
@@ -14,11 +15,10 @@ export enum routesPath {
     login = '/login',
     register = '/register',
     adminPanel = '/admin',
-    chat = '/chat',
-    feed = '/feed',
     logout = '/logout',
     teams = '/teams',
     teamsDetail = '/teams/:id',
+    calendar = '/calendar',
     settingsProfile = '/settings/profile',
     todolist = '/todolist',
 }
@@ -74,6 +74,11 @@ export const routes: IRouteConfig[] = [
     {
         path: routesPath.todolist,
         Component: TodolistPage,
+        exact: true,
+    },
+    {
+        path: routesPath.calendar,
+        Component: CalendarPage,
         exact: true,
     },
 ];
