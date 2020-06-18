@@ -9,21 +9,35 @@ import moment from 'moment';
 import { ModalInput } from 'app/components/shared/Modals/Input';
 import { DatePickerButton, MiniCalendar } from 'app/components';
 import { useToggler, useInput } from 'app/custom-hooks';
+import { sendToast } from 'app/shared';
 
 interface IProps {
     task: ITask;
 }
 
 export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
-    const [showModal, toggleModal] = useToggler(false);
+    {
+        /* TASK CONST EDIT */
+    }
     const [inputMode, setInputMode] = useToggler(false);
     const [inputValue, setInputValue] = useInput(task.title);
 
+    {
+        /* TASK CONST CALENDAR */
+    }
     const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
     const [date, setDate] = useState(moment(task.dateEnd).format('Y/M/D'));
 
+    {
+        /* TASK CONST COMMENT */
+    }
+    const [showModal, toggleModal] = useToggler(false);
+
     const dispatch = useDispatch();
 
+    {
+        /* TASK FUNCTION DISPLAY */
+    }
     const displayValue = () => {
         if (task.title === inputValue) {
             return task.title;
@@ -31,6 +45,9 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
         return inputValue;
     };
 
+    {
+        /* TASK FUNCTIONS EDIT */
+    }
     const onInputChange = useCallback(
         (e: React.FocusEvent<HTMLInputElement>) => {
             dispatch(patchTask(task, { [e.target.name]: e.target.value }));
@@ -43,26 +60,51 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     };
 
     const onDateChange = useCallback(
-        (e: React.FormEvent<HTMLFormElement>) => {
+        (e: React.MouseEvent<HTMLButtonElement>) => {
             dispatch(patchTask(task, { dateEnd: date }));
+            sendToast({
+                title: 'Task Edited',
+                content: 'You successfully edited the task !',
+                type: 'success',
+            });
+            setInputMode();
         },
         [task, date, dispatch]
     );
 
+    {
+        /* TASK FUNCTION COMMENT */
+    }
     const onConfirmModal = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(patchTask(task, { [e.target.name]: e.target.value }));
+            sendToast({
+                title: 'Task Edited',
+                content: 'You successfully edited the comment !',
+                type: 'success',
+            });
         },
         [task, dispatch]
     );
 
+    {
+        /* TASK FUNCTION COMPLETE */
+    }
     const onCompleteTask = useCallback(
         (e: React.MouseEvent<HTMLButtonElement>) => {
             dispatch(patchTask(task, { completed: true }));
+            sendToast({
+                title: 'Task Completed',
+                content: 'You completed the task !',
+                type: 'success',
+            });
         },
         [task, dispatch]
     );
 
+    {
+        /* TASK FUNCTION DELETE */
+    }
     const handleDelete = useCallback(() => {
         dispatch(deleteTask(task));
     }, [task, dispatch]);
@@ -70,10 +112,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const displayContent = () => {
         if (inputMode) {
             return (
-                <form
-                    className='task-list-item__inputmode'
-                    onSubmit={onDateChange}
-                >
+                <div className='task-list-item__inputmode'>
                     <div>
                         <input
                             className='task-list-item__inputmode__input'
@@ -84,8 +123,8 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                             onBlur={onLoseFocus}
                         />
                         <button
-                            type='submit'
                             className='task-list-item__inputmode__button'
+                            onClick={onDateChange}
                         >
                             <BsPencil className='task-list-item__inputmode__button__icon' />
                         </button>
@@ -113,7 +152,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             );
         }
         return (
