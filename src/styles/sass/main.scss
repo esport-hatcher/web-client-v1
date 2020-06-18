@@ -27,6 +27,10 @@
 @import './components/auto-complete';
 @import './components/dropdown';
 @import './components/toast';
+@import './components/task-filter-by-date';
+@import './components/mini-calendar';
+@import './components/task-item';
+@import './components/task-description-input';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -36,10 +40,14 @@
 @import './layouts/header';
 @import './layouts/admin-filters';
 @import './layouts/create-team-form';
+@import './layouts/task-section';
+@import './layouts/create-task-form';
+@import './layouts/task-list';
 
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-panel';
 @import './screens/team-management-screen';
 @import './screens/settings-profile';
+@import './screens/todolist-screen';
 @import './screens/calendar';

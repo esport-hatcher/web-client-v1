@@ -1,29 +1,32 @@
-.modifiable-input {
-    display: grid;
-    grid-template-rows: repeat(2, min-content);
-    grid-template-columns: max-content 1fr;
-    row-gap: 0.2rem;
-    column-gap: 0.8rem;
-
+.task-description-input {
+    word-break: break-Word;
     &__label {
         grid-column: 1 / -1;
     }
 
     &__value {
-        padding: $base-input-padding-top 1.4rem;
+        font-family: Montserrat;
+        width: 40vw;
+        height: 20vh;
     }
 
-    &__input {
+    &__textarea {
+        font-family: Montserrat;
+        font-size: medium;
+        width: 44vw;
+        height: 20vh;
         background-color: $color-dark-medium;
         border-radius: $base-input-border-radius;
         padding: $base-input-padding-top + 0.1rem 1.4rem;
         border: 1px solid rgba($color-white, 0);
+        color: white;
     }
 
     &__btn {
+        margin-left: 55rem;
         cursor: pointer;
         border: 1px solid $color-rosy-pink;
-        padding: 0.4rem;
+        padding: 0.7rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,8 +46,8 @@
         }
 
         &__icon {
-            height: 0.8rem;
-            width: 0.8rem;
+            height: 1rem;
+            width: 5rem;
             color: $color-rosy-pink;
             transition: all 0.4s;
         }

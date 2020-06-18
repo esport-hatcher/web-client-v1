@@ -10,6 +10,12 @@ import {
 } from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
 import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
+import {
+    ICreateTaskSuccess,
+    IFetchTaskSuccess,
+    IDeleteTaskSuccess,
+    IPatchTaskSuccess,
+} from './tasks';
 import { IUpdateForm, IResetForm } from './form';
 
 export type CountQuery = { records: number };
@@ -30,6 +36,10 @@ export enum ActionTypes {
     adminPanelCountFilters,
     fetchTeamSuccess,
     fetchTeamError,
+    createTaskSuccess,
+    fetchTaskSuccess,
+    deleteTaskSuccess,
+    patchTaskSuccess,
     updateForm,
     resetForm,
 }
@@ -47,6 +57,10 @@ export type Action =
     | IAdminPanelCountFiltersAction
     | IFetchTeamSuccessAction
     | IFetchTeamErrorAction
+    | ICreateTaskSuccess
+    | IFetchTaskSuccess
+    | IDeleteTaskSuccess
+    | IPatchTaskSuccess
     | IUpdateForm
     | IResetForm;
 
