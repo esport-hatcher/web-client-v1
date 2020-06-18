@@ -4,7 +4,7 @@ import { TeamInput } from 'app/components';
 import { createTeam } from 'app/actions';
 
 interface IProps {
-    change: Function;
+    change: (value: boolean) => void;
 }
 
 export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
