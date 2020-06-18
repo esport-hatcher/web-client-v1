@@ -2,8 +2,7 @@
     display: grid;
     height: 100%;
     grid-template-rows: min-content 1fr;
-    grid-template-columns: 1fr max-content;
-    grid-row-gap: $admin-panel-gap;
+    row-gap: $page-header-gap;
 
     &__content {
         overflow-y: scroll;

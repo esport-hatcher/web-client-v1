@@ -5,6 +5,7 @@ import {
     TeamPage,
     EditTeamPage,
     Logout,
+    CalendarPage,
 } from 'app/screens';
 import { SettingsProfile } from 'app/screens/Settings';
 
@@ -13,11 +14,10 @@ export enum routesPath {
     login = '/login',
     register = '/register',
     adminPanel = '/admin',
-    chat = '/chat',
-    feed = '/feed',
     logout = '/logout',
     teams = '/teams',
     teamsDetail = '/teams/:id',
+    calendar = '/calendar',
     settingsProfile = '/settings/profile',
 }
 
@@ -67,6 +67,11 @@ export const routes: IRouteConfig[] = [
     {
         path: routesPath.adminPanel,
         Component: AdminPanel,
+        exact: true,
+    },
+    {
+        path: routesPath.calendar,
+        Component: CalendarPage,
         exact: true,
     },
 ];
