@@ -1,9 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import {
-    CustomizableSimpleInput,
-    DatePickerButton,
-    MiniCalendar,
-} from 'app/components';
+import { DatePickerButton, MiniCalendar } from 'app/components';
 import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
@@ -39,15 +35,19 @@ export const CreateTask: React.FC<IProps> = React.memo(
             [inputValue, setShowCreateTask, date, dispatch]
         );
 
+        const handleChange = (value: React.ChangeEvent<HTMLInputElement>) => {
+            setInputValue(value.target.value);
+        };
+
         return (
             <form className='create-task' onSubmit={() => handleForm('create')}>
                 <div className='create-task__form'>
-                    <CustomizableSimpleInput
+                    <input
                         value={inputValue}
                         type='text'
                         className='create-task__form__input'
                         placeholder='Enter a title for this task'
-                        onChange={setInputValue}
+                        onChange={handleChange}
                     />
                     <div>
                         <input
