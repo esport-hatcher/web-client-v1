@@ -27,7 +27,6 @@ export const CalendarCellsList: React.FC<IProps> = ({
     const startDate = startOfWeek(monthStart);
     const endDate = endOfWeek(monthEnd);
 
-    const dateFormat = 'd';
     const rows = [];
     let days = [];
     let day = startDate;
@@ -45,8 +44,12 @@ export const CalendarCellsList: React.FC<IProps> = ({
             );
             day = addDays(day, 1);
         }
-        rows.push(days);
+        rows.push(
+            <div className='calendar__content__cells__row' key={day.toString()}>
+                {days}
+            </div>
+        );
         days = [];
     }
-    return <>{rows}</>;
+    return <section className='calendar__content__cells'>{rows}</section>;
 };

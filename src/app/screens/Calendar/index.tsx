@@ -35,12 +35,14 @@ export const CalendarPage: React.FC<IProps> = () => {
                 />
             </HeaderPage>
             <section className='calendar__content'>
-                <CalendarDaysList currentMonth={currentMonth} />
-                <CalendarCellsList
-                    currentMonth={currentMonth}
-                    selectedDate={selectedDate}
-                    onCellClick={onCellClick}
-                />
+                <div className='calendar__content__container'>
+                    <CalendarDaysList currentMonth={currentMonth} />
+                    <CalendarCellsList
+                        currentMonth={currentMonth}
+                        selectedDate={selectedDate}
+                        onCellClick={onCellClick}
+                    />
+                </div>
             </section>
         </main>
     );
