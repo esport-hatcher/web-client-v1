@@ -16,28 +16,20 @@ interface IProps {
 }
 
 export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
-    {
-        /* TASK CONST EDIT */
-    }
+    /* TASK CONST EDIT */
     const [inputMode, setInputMode] = useToggler(false);
     const [inputValue, setInputValue] = useInput(task.title);
 
-    {
-        /* TASK CONST CALENDAR */
-    }
+    /* TASK CONST CALENDAR */
     const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
     const [date, setDate] = useState(moment(task.dateEnd).format('Y/M/D'));
 
-    {
-        /* TASK CONST COMMENT */
-    }
+    /* TASK CONST COMMENT */
     const [showModal, toggleModal] = useToggler(false);
 
     const dispatch = useDispatch();
 
-    {
-        /* TASK FUNCTION DISPLAY */
-    }
+    /* TASK FUNCTION DISPLAY */
     const displayValue = () => {
         if (task.title === inputValue) {
             return task.title;
@@ -45,9 +37,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
         return inputValue;
     };
 
-    {
-        /* TASK FUNCTIONS EDIT */
-    }
+    /* TASK FUNCTIONS EDIT */
     const onInputChange = useCallback(
         (e: React.FocusEvent<HTMLInputElement>) => {
             dispatch(patchTask(task, { [e.target.name]: e.target.value }));
@@ -69,12 +59,10 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
             });
             setInputMode();
         },
-        [task, date, dispatch]
+        [task, date, setInputMode, dispatch]
     );
 
-    {
-        /* TASK FUNCTION COMMENT */
-    }
+    /* TASK FUNCTION COMMENT */
     const onConfirmModal = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(patchTask(task, { [e.target.name]: e.target.value }));
@@ -87,9 +75,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
         [task, dispatch]
     );
 
-    {
-        /* TASK FUNCTION COMPLETE */
-    }
+    /* TASK FUNCTION COMPLETE */
     const onCompleteTask = useCallback(
         (e: React.MouseEvent<HTMLButtonElement>) => {
             dispatch(patchTask(task, { completed: true }));
@@ -102,9 +88,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
         [task, dispatch]
     );
 
-    {
-        /* TASK FUNCTION DELETE */
-    }
+    /* TASK FUNCTION DELETE */
     const handleDelete = useCallback(() => {
         dispatch(deleteTask(task));
     }, [task, dispatch]);
