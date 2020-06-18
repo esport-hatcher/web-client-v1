@@ -1,0 +1,277 @@
+/*
+** Description
+*/
+
+.container {
+  width: 778px;
+  height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+  border: solid 4px#1d2938;
+  background-color: #1d2938;
+  color: #1d2938;
+  padding-left: 25px;
+  padding-right: 35px;
+}
+
+.title {
+  width: 100px;
+  height: 22px;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: white;
+}
+
+.outer {
+  width: 100%;
+  height: 146px;
+  border: 2px solid #1d2938;
+  background-color: #16212e;
+  /* padding: 30px; */
+}
+
+.field {
+  margin: 15px;
+  float: left;
+  width: 95%;
+  height: 80%;
+  outline: none;
+  resize: none;
+  border-radius: 8px;
+  background-color: #16212e;
+  border: none;
+  caret-color: white;
+  color: white;
+}
+
+.field::-webkit-scrollbar {
+  /* margin: 0px 10px 0px 10px; */
+  width: 5px;
+  background: #1d2938;
+}
+
+/* Handle */
+.field::-webkit-scrollbar-thumb {
+  background: #748192; 
+}
+
+/*
+** Card
+*/
+
+.member_parent {
+  margin-top: 3px;
+  width: 500px;
+  background-color: #1d2938;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px;
+  padding: 20px;
+  display: flex;
+  position: relative;
+}
+
+.name {
+  color: white;
+}
+
+.status {
+  position: absolute;
+  top: 40%;
+  right: 15%;
+}
+
+.spot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* 
+** Search
+*/
+
+.card {
+  margin-top: 3px;
+  height: 125px;
+  width: 500px;
+  background-color: #1d2938;
+  box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+  display: flex;
+  position: relative;
+}
+
+.search {
+  color: white;
+  top: 30%;
+  margin: 0;
+  position: absolute;
+  left: 20px;
+}
+
+.search-container {
+  width: inherit;
+}
+
+.input-field {
+  position: absolute;
+  top: 37%;
+  right: 9%;
+}
+
+.input {
+  width: 189px;
+  height: 29px;
+  border-radius: 35px;
+  border: solid 3px #748192;
+  background-color: #1d2938;
+}
+
+/*
+**  bnt plus
+*/
+
+.plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.circle {
+  
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #1d2938;
+  border: solid 6px white;
+}
+
+.horizontal {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 50%;
+  height: 12.5%;
+  left: 25%;
+  top: 43.75%;
+}
+.vertical {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 12.5%;
+  height: 50%;
+  left: 43.75%;
+  top: 12.5%;
+}
+
+/*
+** Team Card
+*/
+
+.teamCard {
+  height: 85px;
+  margin-top: 3px;
+  width: 800px;
+  background-color: #1d2938;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px;
+  padding: 20px;
+  display: flex;
+  position: relative;
+}
+
+.team-logo {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.team-name {
+  color: white;
+  margin-left: 50px;
+}
+
+/* 
+** Modal
+*/
+
+.modal-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 40px;
+  top: 40px;
+  left: 40px;
+  bottom: 40px;
+  right: 80px;
+  position: absolute;
+}
+
+.modal-box {
+  border: 2px solid #1d2938;
+  border-radius: 13px;
+}
+
+.create-title {
+  color: #a193f5;
+  text-align: center;
+}
+
+.modal-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 70%;
+  width: 70%;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.create-button {
+  width: 70%;
+  height: 109px;
+  align-items: center;
+  border: none;
+  border-radius: 13px;
+  background-color: #a193f5;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+.create-button:hover{
+  cursor: pointer;
+}
+
+.join-title {
+  color: #82c986;
+  text-align: center;
+}
+
+.join-button {
+  width: 70%;
+  height: 109px;
+  align-items: center;
+  border: none;
+  border-radius: 13px;
+  background-color: #82c986;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+.join-button:hover{
+  cursor: pointer;
+}
+
+
+.action-container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+}

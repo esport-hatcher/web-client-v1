@@ -2,13 +2,13 @@ import { combineReducers, Action } from 'redux';
 import { ActionTypes } from 'app/actions';
 import authenticationReducer from './authentication';
 import adminPanelReducer from './adminPanel';
-import fetchTeamsReducer from './teams';
+import teamsReducer from './teams';
 import formReducer from './forms';
 
 export const appReducer = combineReducers({
     authentication: authenticationReducer,
     adminPanel: adminPanelReducer,
-    teams: fetchTeamsReducer,
+    teams: teamsReducer,
     forms: formReducer,
 });
 

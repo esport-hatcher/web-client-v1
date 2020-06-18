@@ -16,7 +16,7 @@ export enum routesPath {
     adminPanel = '/admin',
     logout = '/logout',
     teams = '/teams',
-    teamsDetail = '/teams/:id',
+    teamsDetail = '/team/:id',
     calendar = '/calendar',
     settingsProfile = '/settings/profile',
 }

@@ -25,6 +25,10 @@
 @import './components/modifiable-input';
 @import './components/modal-confirmation';
 @import './components/auto-complete';
+@import './components/description';
+@import './components/team-user-card';
+@import './components/search-field-team-user';
+@import './components/plus';
 @import './components/dropdown';
 @import './components/toast';
 
@@ -41,5 +45,8 @@
 @import './screens/auth-screen';
 @import './screens/admin-panel';
 @import './screens/team-management-screen';
+@import './screens/edit-team-screen';
+@import './screens/auth-screen';
+@import './screens/admin-panel';
 @import './screens/settings-profile';
 @import './screens/calendar';
