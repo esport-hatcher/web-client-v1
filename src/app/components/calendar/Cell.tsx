@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import format from 'date-fns/format';
 import cx from 'classnames';
 import { IconButton } from '../shared';
