@@ -16,7 +16,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
         const [isFocus, setIsFocus] = useState(false);
 
         const ActionButtons = () => {
-            if (isFocus) {
+            if (isFocus && !disabled) {
                 return (
                     <div className='calendar__content__cells__row__item__action-buttons'>
                         <IconButton

@@ -46,7 +46,7 @@ $calendar-container-max-width: 160rem;
         &__days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            justify-items: start;
+            justify-items: center;
             padding: 2rem 0;
             border-bottom: 1px solid $color-medium-grey;
         }
