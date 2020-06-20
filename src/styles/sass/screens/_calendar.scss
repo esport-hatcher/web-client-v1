@@ -40,7 +40,6 @@ $calendar-container-max-width: 160rem;
             display: grid;
             grid-template-rows: min-content auto;
             border-radius: $container-border-radius;
-            // box-shadow: -3px 4px 6px 6px rgba(0, 0, 0, 0.1);
         }
 
         &__days {
@@ -72,6 +71,7 @@ $calendar-container-max-width: 160rem;
                     &:hover {
                         background-color: lighten($color-dark, 2%);
                         transform: perspective(500px) translateZ(60px);
+                        box-shadow: -6px 6px 12px 12px rgba(0, 0, 0, 0.1);
                         z-index: 10000;
                     }
 
