@@ -7,6 +7,7 @@ import {
     AiOutlineLogout,
     AiOutlineCalendar,
 } from 'react-icons/ai';
+import { FaTasks } from 'react-icons/fa';
 import cx from 'classnames';
 import { routesPath } from 'app/config';
 import { NavigationItem } from 'app/components';
@@ -55,6 +56,12 @@ export const NavBar: React.FC<IProps> = React.memo(({ admin }) => {
                     Icon={AiOutlineCalendar}
                     path={routesPath.calendar}
                     text='Calendar'
+                />
+                <NavigationItem
+                    activeText={textDisplay}
+                    Icon={FaTasks}
+                    path={routesPath.todolist}
+                    text='To-do List'
                 />
                 <NavigationItem
                     activeText={textDisplay}

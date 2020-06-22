@@ -8,26 +8,31 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 export const _TeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
-    const teams = useSelector(state => state.teams.team);
+    const teams = useSelector(state => state.teams);
 
     const [show, onShow] = useToggler(false);
+
     useEffect(() => {
         dispatch(fetchTeams());
     }, [dispatch]);
 
     return (
-        <main className='team-page'>
+        <main className='select-team'>
             {teams &&
                 teams.map(item => {
                     return <TeamCard item={item} />;
                 })}
-            <div className='team-page__modal--button' onClick={onShow}>
-                <AiOutlinePlus className='team-page__modal--button__icon' />
+            <div className='select-team__modal--button' onClick={onShow}>
+                <AiOutlinePlus className='select-team__modal--button__icon' />
             </div>
             <ModalForm show={show} handleClose={onShow}>
                 <div className='col-1'>
                     <h1>Create your team</h1>
-                    <CreateTeamForm change={onShow} />
+                    <CreateTeamForm />
+                </div>
+                <div className='col-2'>
+                    <h1>Select your player</h1>
+                    <AddPlayerForm />
                 </div>
             </ModalForm>
         </main>

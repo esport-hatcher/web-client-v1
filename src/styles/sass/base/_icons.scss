@@ -21,6 +21,18 @@
         color: $color-white;
     }
 
+    &--blue {
+        color: $color-blue;
+    }
+
+    &--yellow {
+        color: $color-yellow;
+    }
+
+    &--red {
+        color: $color-red;
+    }
+
     // ANIMATIONS
     &--spinner {
         animation: 1s ease-out infinite running rotateRight;

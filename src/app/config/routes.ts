@@ -5,9 +5,10 @@ import {
     TeamPage,
     EditTeamPage,
     Logout,
+    SettingsProfile,
+    TodolistPage,
     CalendarPage,
 } from 'app/screens';
-import { SettingsProfile } from 'app/screens/Settings';
 
 export enum routesPath {
     home = '/',
@@ -16,9 +17,10 @@ export enum routesPath {
     adminPanel = '/admin',
     logout = '/logout',
     teams = '/teams',
-    teamsDetail = '/team/:id',
+    teamsDetail = '/teams/:id',
     calendar = '/calendar',
     settingsProfile = '/settings/profile',
+    todolist = '/todolist',
 }
 
 export interface IRouteConfig {
@@ -67,6 +69,11 @@ export const routes: IRouteConfig[] = [
     {
         path: routesPath.adminPanel,
         Component: AdminPanel,
+        exact: true,
+    },
+    {
+        path: routesPath.todolist,
+        Component: TodolistPage,
         exact: true,
     },
     {

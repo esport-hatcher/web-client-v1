@@ -9,18 +9,18 @@ interface IProps {
 
 export const TeamCard: React.FC<IProps> = ({ item }) => {
     return (
-        <Link to={`team/${item.name}`} className='team-page__box'>
+        <Link to={`team/${item.name}`} className='select-team__box'>
             <div
-                className='team-page__box--image'
+                className='select-team__box--image'
                 style={{
                     backgroundImage: `url(${item.bannerUrl})`,
                 }}
             >
                 {''}
             </div>
-            <div className='team-page__box--title'>{item.name}</div>
-            <FiClipboard className='team-page__box--action' />
-            <FiBell className='team-page__box--action' />
+            <div className='select-team__box--title'>{item.name}</div>
+            <FiClipboard className='select-team__box--action' />
+            <FiBell className='select-team__box--action' />
         </Link>
     );
 };
