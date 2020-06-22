@@ -9,7 +9,15 @@ import {
     IAdminPanelFetchNextPageSuccessAction,
 } from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
-import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
+import {
+    IFetchTeamErrorAction,
+    IFetchTeamSuccessAction,
+    IFetchTeamUserSucess,
+    IFetchTeamUserError,
+    ICreateTeamActionError,
+    ICreateTeamActionSucess,
+    IInvitePlayerActionSucess,
+} from './teams';
 import {
     ICreateTaskSuccess,
     IFetchTaskSuccess,
@@ -34,14 +42,19 @@ export enum ActionTypes {
     adminPanelFetchNextPageSuccess,
     adminPanelSetLoading,
     adminPanelCountFilters,
-    fetchTeamSuccess,
-    fetchTeamError,
     createTaskSuccess,
     fetchTaskSuccess,
     deleteTaskSuccess,
     patchTaskSuccess,
     updateForm,
     resetForm,
+    createTeamSucess,
+    createTeamError,
+    fetchTeamSuccess,
+    fetchTeamError,
+    fetchTeamUserSucess,
+    fetchTeamUserError,
+    invitePlayerSucess,
 }
 
 export type Action =
@@ -62,7 +75,12 @@ export type Action =
     | IDeleteTaskSuccess
     | IPatchTaskSuccess
     | IUpdateForm
-    | IResetForm;
+    | IResetForm
+    | IFetchTeamUserSucess
+    | IFetchTeamUserError
+    | ICreateTeamActionError
+    | ICreateTeamActionSucess
+    | IInvitePlayerActionSucess;
 
 export type IGetState = () => RootState;
 
