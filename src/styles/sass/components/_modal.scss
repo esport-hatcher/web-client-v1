@@ -1,12 +1,12 @@
-.modal-confirmation {
+.modal {
     width: 100vw;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 100;
 
-    &__background {
+    &__overlay {
         height: 100%;
         width: 100%;
         background-color: rgba($color-dark, 0.8);
@@ -20,21 +20,24 @@
     }
 
     &__content {
-        z-index: 1200;
+        z-index: 101;
         @include absCenter();
-        display: grid;
-        row-gap: 2rem;
         border-radius: 2rem;
         min-width: 30%;
         background-color: $color-dark-medium;
-        padding: 2rem 4rem;
         animation: fadeIn 0.3s ease-in-out;
+    }
 
-        &__action-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, max-content);
-            justify-content: right;
-            column-gap: 1.2rem;
-        }
+    &--grid {
+        display: grid;
+        row-gap: 2rem;
+        padding: 2rem 4rem;
+    }
+
+    &__action-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: right;
+        column-gap: 1.2rem;
     }
 }
