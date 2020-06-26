@@ -16,6 +16,10 @@ export const CalendarCell: React.FC<IProps> = React.memo(
         const [isFocus, setIsFocus] = useState(false);
         const [showModal, setShowModal] = useState(false);
 
+        const setModalOn = useCallback(() => setShowModal(true), [
+            setShowModal,
+        ]);
+
         const ActionButtons = () => {
             if (isFocus && !disabled) {
                 return (
@@ -23,7 +27,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                         <IconButton
                             Icon={AiOutlinePlus}
                             className='icon icon--white calendar-cell__action-buttons__button'
-                            onClick={() => setShowModal(true)}
+                            onClick={setModalOn}
                         />
                         <IconButton
                             Icon={AiFillEye}
@@ -50,7 +54,11 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                     {format(cellDate, 'd')}
                 </span>
                 {ActionButtons()}
-                <Modal setShow={setShowModal} show={showModal}>
+                <Modal
+                    title='Create a new event'
+                    setShow={setShowModal}
+                    show={showModal}
+                >
                     test
                 </Modal>
             </div>

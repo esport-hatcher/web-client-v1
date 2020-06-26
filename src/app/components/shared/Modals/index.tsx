@@ -4,19 +4,24 @@ import { createPortal } from 'react-dom';
 interface IProps {
     show: boolean;
     setShow: (value: boolean) => void;
-    bodyClassName?: string;
+    title: string;
+    className?: string;
 }
 
 export const Modal: React.FC<IProps> = React.memo(
-    ({ show, setShow, children, bodyClassName }) => {
+    ({ show, setShow, children, className, title }) => {
         const content = show && (
             <div className='modal'>
                 <div
                     className='modal__overlay'
                     onClick={() => setShow(false)}
                 />
-                <div className={`modal__content ${bodyClassName}`}>
-                    {children}
+                <div className='modal__body'>
+                    <p className='title title--xs'>{title}</p>
+                    <hr className='divider' />
+                    <div className={`modal__body__content ${className}`}>
+                        {children}
+                    </div>
                 </div>
             </div>
         );

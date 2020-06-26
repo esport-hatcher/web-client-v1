@@ -173,7 +173,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
             <Modal
                 setShow={setShowModal}
                 show={showModal}
-                bodyClassName='modal--grid'
+                title='Add a description'
             >
                 <p className='title title--xs'>{task.title}</p>
                 <hr className='divider' />

@@ -8,13 +8,9 @@ interface IProps extends React.ComponentProps<typeof Modal> {
 }
 
 export const UserDeleteConfirmation: React.FC<IProps> = React.memo(
-    ({ show, setShow, user, onConfirm }) => {
+    ({ show, setShow, user, onConfirm, title }) => {
         return (
-            <Modal show={show} setShow={setShow} bodyClassName='modal--grid'>
-                <p className='title title--xs'>
-                    Confirm {user.username} deletion ?
-                </p>
-                <hr className='divider' />
+            <Modal show={show} setShow={setShow} title={title}>
                 <p className='body-text body-text--sm'>
                     All data related to {user.username}'s account will be
                     erased.
