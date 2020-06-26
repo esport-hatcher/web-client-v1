@@ -31,7 +31,7 @@
 @import './components/mini-calendar';
 @import './components/task-item';
 @import './components/task-description-input';
-
+@import './components/team-card';
 //      LAYOUTS
 @import './layouts/banner';
 @import './layouts/register-screen';
@@ -47,7 +47,7 @@
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-panel';
-@import './screens/team-management-screen';
 @import './screens/settings-profile';
 @import './screens/todolist-screen';
 @import './screens/calendar';
+@import './screens/team-management-screen';

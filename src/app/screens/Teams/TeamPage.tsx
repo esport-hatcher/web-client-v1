@@ -25,7 +25,7 @@ export const _TeamPage: React.FC = React.memo(() => {
                 <AiOutlinePlus className='team-page__modal--button__icon' />
             </div>
             <ModalForm show={show} handleClose={onShow}>
-                <div className='col-1'>
+                <div>
                     <h1>Create your team</h1>
                     <CreateTeamForm change={onShow} />
                 </div>
