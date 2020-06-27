@@ -1,3 +1,4 @@
 export * from './TeamCard';
 export * from './TeamInput';
-export * from './description';
+export * from './TeamDescription';
+export * from './TeamUserCard';
