@@ -1,5 +1,6 @@
 .react-datepicker {
-    border: 1px solid $color-white;
+    border: none;
+    outline: none;
     border-radius: $container-border-radius;
     font-family: $font-family-body;
     padding: 2rem 4rem;
@@ -7,12 +8,14 @@
     color: $color-white;
     width: 100%;
     overflow: hidden;
+    box-shadow: -7px 8px 13px 13px rgba(0, 0, 0, 0.1);
 
     &__header {
         background-color: $color-dark;
         display: grid;
         grid-template-rows: repeat(2, auto);
         row-gap: 1.2rem;
+        border-color: $color-dark-four;
     }
 
     &__day-names {

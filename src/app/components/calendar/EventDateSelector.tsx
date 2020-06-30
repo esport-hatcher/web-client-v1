@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { addHours, setMinutes, endOfDay } from 'date-fns';
 import { DatePicker, HourPicker } from '../shared';
 
@@ -12,7 +12,12 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
             setMinutes(addHours(initialDate, 1), 0)
         );
         const [dateBegin, setDateBegin] = useState<Date>(day);
-        const [dateEnd, setDateEnd] = useState<Date>(addHours(day, 1));
+        const [dateEnd, setDateEnd] = useState<Date>(addHours(dateBegin, 1));
+
+        useEffect(() => setDateEnd(addHours(dateBegin, 1)), [
+            dateBegin,
+            setDateEnd,
+        ]);
 
         const onDateChange = useCallback((newDate: Date) => setDay(newDate), [
             setDay,

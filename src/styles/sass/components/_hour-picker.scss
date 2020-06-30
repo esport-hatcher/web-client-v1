@@ -22,8 +22,12 @@
     }
 
     &__time {
+        background-color: $color-dark-medium !important;
+        border-radius: 0 !important;
+
         &-container {
             width: 100% !important;
+            background-color: $color-dark !important;
         }
 
         &-box {

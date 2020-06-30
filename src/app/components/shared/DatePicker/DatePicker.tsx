@@ -33,7 +33,9 @@ export const DatePicker: React.FC<IProps> = React.memo(
                         className='date-picker__header'
                     />
                 )}
+                popperPlacement='bottom-start'
                 portalId='root-portal'
+                showPopperArrow={true}
             />
         );
     }
