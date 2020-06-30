@@ -47,6 +47,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                         selected={dateBegin}
                         onChange={onDateBeginChange}
                         inputClassName='calendar__create-event-form__input'
+                        timeCaption='From'
                         wrapperClassName='calendar__create-event-form__input__hour'
                     />
                     <p className='label label--sm'>|</p>
@@ -55,6 +56,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                         onChange={onDateEndChange}
                         minTime={addMinutes(dateBegin, 30)}
                         maxTime={endOfDay(dateBegin)}
+                        timeCaption='To'
                         inputClassName='calendar__create-event-form__input'
                         wrapperClassName='calendar__create-event-form__input__hour'
                     />

@@ -14,7 +14,6 @@ export const HourPicker: React.FC<IProps> = React.memo(
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={30}
-                timeCaption='Time'
                 timeFormat='HH:mm'
                 dateFormat='HH:mm'
                 customInput={
