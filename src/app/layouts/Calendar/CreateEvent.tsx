@@ -43,6 +43,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         inputClassName='calendar__create-event-form__input'
                         className='calendar__create-event-form__input__title'
                         noLabelOnFocus
+                        autoFocus
                     />
                     <FormInput
                         type='text'
