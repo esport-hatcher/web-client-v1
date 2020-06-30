@@ -30,6 +30,12 @@
         transition: all 0.4s ease-in-out;
     }
 
+    &__input:placeholder-shown ~ &__label {
+        transform: translate(2rem, 4rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
     &__input {
         @extend %base-input-shape;
         padding-left: 3 * $base-input-padding-sides;
@@ -80,12 +86,6 @@
 
         &--no-icon {
             padding: $base-input-padding-top $base-input-padding-sides;
-        }
-
-        &:placeholder-shown ~ &__label {
-            transform: translate(2rem, 4rem);
-            opacity: 0;
-            visibility: hidden;
         }
 
         @include input-placeholder($color-light-grey);
