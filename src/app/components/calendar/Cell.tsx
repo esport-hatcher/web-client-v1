@@ -7,19 +7,19 @@ import { CreateEventForm } from 'app/layouts/Calendar/CreateEvent';
 
 interface IProps {
     readonly cellDate: Date;
-    onClick: (day: Date) => void;
     disabled?: boolean;
     selected?: boolean;
 }
 
 export const CalendarCell: React.FC<IProps> = React.memo(
-    ({ cellDate, onClick, disabled = false, selected = false }) => {
+    ({ cellDate, disabled = false, selected = false }) => {
         const [isFocus, setIsFocus] = useState(false);
         const [showModal, setShowModal] = useState(false);
 
-        const setModalOn = useCallback(() => setShowModal(true), [
-            setShowModal,
-        ]);
+        const setModalOn = useCallback(() => {
+            setIsFocus(false);
+            setShowModal(true);
+        }, [setShowModal, setIsFocus]);
 
         const ActionButtons = () => {
             if (isFocus && !disabled) {
@@ -49,7 +49,6 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                 className={cx('calendar-cell', {
                     'calendar-cell--disabled': disabled,
                 })}
-                onClick={() => onClick(cellDate)}
                 onMouseEnter={useCallback(() => setIsFocus(true), [setIsFocus])}
                 onMouseLeave={useCallback(() => setIsFocus(false), [
                     setIsFocus,

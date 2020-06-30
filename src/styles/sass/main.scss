@@ -1,3 +1,5 @@
+@import '~react-datepicker/dist/react-datepicker.css';
+
 //      ABSTRACTS
 @import './abstracts/variables';
 @import './abstracts/functions';
@@ -32,6 +34,8 @@
 @import './components/task-item';
 @import './components/task-description-input';
 @import './components/calendar-cell';
+@import './components/date-picker';
+@import './components/hour-picker';
 
 //      LAYOUTS
 @import './layouts/banner';

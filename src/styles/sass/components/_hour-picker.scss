@@ -1,0 +1,58 @@
+.react-datepicker {
+    &__header--time {
+        display: block;
+        padding: 1.2rem;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    &--time-only {
+        padding: 0rem 0rem;
+        width: auto;
+    }
+    &-time {
+        font-family: $font-family-body;
+
+        &__header {
+            font-size: 1.4rem;
+            color: $color-white;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+        }
+    }
+
+    &__time {
+        &-container {
+            width: 100% !important;
+        }
+
+        &-box {
+            background-color: $color-dark;
+            width: 100% !important;
+        }
+
+        &-list-item {
+            font-size: 1.2rem;
+            padding: 1.2rem 4rem !important;
+            height: auto !important;
+            transition: background-color 0.4s;
+
+            &:hover {
+                background-color: $color-dark-two !important;
+            }
+
+            &--disabled {
+                background-color: darken($color-dark, 2%) !important;
+                color: $color-light-grey !important;
+
+                &:hover {
+                    background-color: darken($color-dark, 2%) !important;
+                }
+            }
+
+            &--selected {
+                background-color: $color-blue-light !important;
+            }
+        }
+    }
+}

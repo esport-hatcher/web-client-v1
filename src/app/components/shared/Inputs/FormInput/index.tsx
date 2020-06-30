@@ -10,6 +10,8 @@ import {
 } from 'react-icons/ai';
 import { FieldError } from 'react-hook-form';
 import { capitalizeFirstLetter } from 'normalize-text';
+import cx from 'classnames';
+import { useToggler } from 'app/custom-hooks';
 
 interface IFormInputProps
     extends Omit<React.HTMLProps<HTMLInputElement>, 'autoCapitalize'> {
@@ -17,7 +19,11 @@ interface IFormInputProps
     touched?: boolean;
     error?: FieldError;
     Icon?: IconType;
+    noLabelOnFocus?: boolean;
+    iconStaysOnFocus?: boolean;
     inputClassName?: string;
+    noCaret?: boolean;
+    noIcon?: boolean;
     autoCapitalize?: boolean;
 }
 
@@ -32,6 +38,10 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
             touched = false,
             Icon = AiOutlineRight,
             autoCapitalize = false,
+            noLabelOnFocus = false,
+            iconStaysOnFocus = false,
+            noCaret = false,
+            noIcon = false,
             inputClassName,
             ...props
         },
@@ -41,6 +51,7 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
         const isError = error;
         const isLoading = false;
         const isValid = touched && !error;
+        const [inputIsFocus, toggleInputFocus] = useToggler(false);
 
         const getIconStatus = (): IconType => {
             if (!noValidation) {
@@ -89,20 +100,39 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
                 <input
                     {...props}
                     id={inputId}
-                    className={`${inputClassName} form-input__input form-input__input--${getInputStatus()}`}
+                    className={cx(
+                        `${inputClassName} form-input__input form-input__input--${getInputStatus()}`,
+                        {
+                            'form-input__input--icon-static': iconStaysOnFocus,
+                            'form-input__input--no-caret': noCaret,
+                            'form-input__input--no-icon': noIcon,
+                        }
+                    )}
                     placeholder={placeholder}
                     name={name}
                     ref={ref}
+                    onFocus={toggleInputFocus}
+                    onBlur={toggleInputFocus}
                     onChange={autoCapitalize ? capitalizeWords : undefined}
                 />
-                <InputIcon
-                    className='form-input__icon'
-                    data-tip
-                    data-for={`error-${inputId}`}
-                />
-                <label htmlFor={name + inputId} className='form-input__label'>
-                    {placeholder}
-                </label>
+                {!noIcon && (
+                    <InputIcon
+                        className={cx('form-input__icon', {
+                            'form-input__icon--focus':
+                                inputIsFocus && !iconStaysOnFocus,
+                        })}
+                        data-tip
+                        data-for={`error-${inputId}`}
+                    />
+                )}
+                {!noLabelOnFocus && (
+                    <label
+                        htmlFor={name + inputId}
+                        className='form-input__label'
+                    >
+                        {placeholder}
+                    </label>
+                )}
                 {error && !noValidation && (
                     <ReactTooltip
                         id={`error-${inputId}`}

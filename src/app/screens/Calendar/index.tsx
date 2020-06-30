@@ -8,7 +8,7 @@ interface IProps {}
 
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [selectedDate] = useState<Date>(new Date());
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));
@@ -18,20 +18,13 @@ export const CalendarPage: React.FC<IProps> = () => {
         setCurrentMonth(currentMonth => subMonths(currentMonth, 1));
     }, [setCurrentMonth]);
 
-    const onCellClick = useCallback(
-        (day: Date) => {
-            setSelectedDate(day);
-        },
-        [setSelectedDate]
-    );
-
     return (
         <main className='calendar'>
             <HeaderPage title='Calendar'>
                 <CalendarHeader
-                    currentMonth={currentMonth}
-                    nextMonth={nextMonth}
-                    prevMonth={prevMonth}
+                    date={currentMonth}
+                    increaseMonth={nextMonth}
+                    decreaseMonth={prevMonth}
                 />
             </HeaderPage>
             <section className='calendar__content'>
@@ -40,7 +33,6 @@ export const CalendarPage: React.FC<IProps> = () => {
                     <CalendarCellsList
                         currentMonth={currentMonth}
                         selectedDate={selectedDate}
-                        onCellClick={onCellClick}
                     />
                 </div>
             </section>

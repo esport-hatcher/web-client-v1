@@ -13,13 +13,11 @@ import { CalendarCell } from 'app/components';
 interface IProps {
     currentMonth: Date;
     selectedDate: Date;
-    onCellClick: (day: Date) => void;
 }
 
 export const CalendarCellsList: React.FC<IProps> = ({
     currentMonth,
     selectedDate,
-    onCellClick,
 }) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
@@ -35,7 +33,6 @@ export const CalendarCellsList: React.FC<IProps> = ({
             days.push(
                 <CalendarCell
                     cellDate={day}
-                    onClick={onCellClick}
                     key={day.toString()}
                     disabled={!isSameMonth(day, monthStart)}
                     selected={isSameDay(day, selectedDate)}
