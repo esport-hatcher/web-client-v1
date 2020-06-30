@@ -11,50 +11,53 @@ import {
 
 interface IProps {
     onSubmit: () => void;
+    initialDate: Date;
 }
 
-export const CreateEventForm: React.FC<IProps> = React.memo(({ onSubmit }) => {
-    const { handleSubmit, register } = useForm();
+export const CreateEventForm: React.FC<IProps> = React.memo(
+    ({ onSubmit, initialDate }) => {
+        const { handleSubmit, register } = useForm();
 
-    const _onSubmit = (formValues: IFormValues) => {
-        // tslint:disable-next-line: no-console
-        console.log('formValues:', formValues);
-        onSubmit();
-    };
+        const _onSubmit = (formValues: IFormValues) => {
+            // tslint:disable-next-line: no-console
+            console.log('formValues:', formValues);
+            onSubmit();
+        };
 
-    return (
-        <div className='calendar__create-event-form'>
-            <BoxHeader
-                title='Create a new event'
-                className='calendar__create-event-form__header'
-            />
-            <form
-                className='calendar__create-event-form__form'
-                onSubmit={handleSubmit(_onSubmit)}
-            >
-                <FormInput
-                    type='text'
-                    placeholder='Title'
-                    name='title'
-                    ref={register}
-                    noValidation
-                    inputClassName='calendar__create-event-form__input'
-                    className='calendar__create-event-form__input__title'
-                    noLabelOnFocus
+        return (
+            <div className='calendar__create-event-form'>
+                <BoxHeader
+                    title='Create a new event'
+                    className='calendar__create-event-form__header'
                 />
-                <FormInput
-                    type='text'
-                    placeholder='Place'
-                    name='place'
-                    ref={register}
-                    noValidation
-                    Icon={FiMapPin}
-                    inputClassName='calendar__create-event-form__input'
-                    className='calendar__create-event-form__input__place'
-                    noLabelOnFocus
-                />
-                <EventDateSelector />
-            </form>
-        </div>
-    );
-});
+                <form
+                    className='calendar__create-event-form__form'
+                    onSubmit={handleSubmit(_onSubmit)}
+                >
+                    <FormInput
+                        type='text'
+                        placeholder='Title'
+                        name='title'
+                        ref={register}
+                        noValidation
+                        inputClassName='calendar__create-event-form__input'
+                        className='calendar__create-event-form__input__title'
+                        noLabelOnFocus
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='Place'
+                        name='place'
+                        ref={register}
+                        noValidation
+                        Icon={FiMapPin}
+                        inputClassName='calendar__create-event-form__input'
+                        className='calendar__create-event-form__input__place'
+                        noLabelOnFocus
+                    />
+                    <EventDateSelector initialDate={initialDate} />
+                </form>
+            </div>
+        );
+    }
+);

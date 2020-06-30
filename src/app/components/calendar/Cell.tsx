@@ -17,8 +17,8 @@ export const CalendarCell: React.FC<IProps> = React.memo(
         const [showModal, setShowModal] = useState(false);
 
         const setModalOn = useCallback(() => {
-            setIsFocus(false);
             setShowModal(true);
+            setTimeout(() => setIsFocus(false), 200);
         }, [setShowModal, setIsFocus]);
 
         const ActionButtons = () => {
@@ -59,7 +59,10 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                 </span>
                 {ActionButtons()}
                 <Modal setShow={setShowModal} show={showModal}>
-                    <CreateEventForm onSubmit={onFormSubmit} />
+                    <CreateEventForm
+                        onSubmit={onFormSubmit}
+                        initialDate={cellDate}
+                    />
                 </Modal>
             </div>
         );
