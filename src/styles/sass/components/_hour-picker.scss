@@ -46,12 +46,7 @@
             }
 
             &--disabled {
-                background-color: darken($color-dark, 2%) !important;
-                color: $color-light-grey !important;
-
-                &:hover {
-                    background-color: darken($color-dark, 2%) !important;
-                }
+                display: none;
             }
 
             &--selected {

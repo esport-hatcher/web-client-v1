@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { addHours, setMinutes, endOfDay } from 'date-fns';
+import { addHours, setMinutes, endOfDay, addMinutes } from 'date-fns';
 import { DatePicker, HourPicker } from '../shared';
 
 interface IProps {
@@ -53,7 +53,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                     <HourPicker
                         selected={dateEnd}
                         onChange={onDateEndChange}
-                        minTime={dateBegin}
+                        minTime={addMinutes(dateBegin, 30)}
                         maxTime={endOfDay(dateBegin)}
                         inputClassName='calendar__create-event-form__input'
                         wrapperClassName='calendar__create-event-form__input__hour'
