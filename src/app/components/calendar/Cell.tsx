@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 import cx from 'classnames';
 import { IconButton, Modal } from '../shared';
 import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
+import { CreateEventForm } from 'app/layouts/Calendar/CreateEvent';
 
 interface IProps {
     readonly cellDate: Date;
@@ -39,6 +40,10 @@ export const CalendarCell: React.FC<IProps> = React.memo(
             return null;
         };
 
+        const onFormSubmit = useCallback(() => setShowModal(false), [
+            setShowModal,
+        ]);
+
         return (
             <div
                 className={cx('calendar-cell', {
@@ -54,12 +59,8 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                     {format(cellDate, 'd')}
                 </span>
                 {ActionButtons()}
-                <Modal
-                    title='Create a new event'
-                    setShow={setShowModal}
-                    show={showModal}
-                >
-                    test
+                <Modal setShow={setShowModal} show={showModal}>
+                    <CreateEventForm onSubmit={onFormSubmit} />
                 </Modal>
             </div>
         );

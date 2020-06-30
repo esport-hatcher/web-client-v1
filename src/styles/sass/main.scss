@@ -12,7 +12,7 @@
 
 //      COMPONENTS
 @import './components/label';
-@import './components/smart-input';
+@import './components/form-input';
 @import './components/btn';
 @import './components/filter-item';
 @import './components/search-input';
@@ -44,6 +44,7 @@
 @import './layouts/task-section';
 @import './layouts/create-task-form';
 @import './layouts/task-list';
+@import './layouts/create-event-form';
 
 //      SCREENS
 @import './screens/auth-screen';

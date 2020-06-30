@@ -29,7 +29,6 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
                 setShow={setShowModal}
                 show={showModal}
                 user={user}
-                title={`Are you sure you want to delete ${user.username}'s account ?`}
             />
             <div className='admin-user-card__names'>
                 <p className='admin-user-card__names__firstname important-info important-info--xl'>

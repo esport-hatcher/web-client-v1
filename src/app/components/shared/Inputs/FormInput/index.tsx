@@ -17,6 +17,7 @@ interface IFormInputProps
     touched?: boolean;
     error?: FieldError;
     Icon?: IconType;
+    inputClassName?: string;
     autoCapitalize?: boolean;
 }
 
@@ -31,6 +32,7 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
             touched = false,
             Icon = AiOutlineRight,
             autoCapitalize = false,
+            inputClassName,
             ...props
         },
         ref
@@ -83,22 +85,22 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
         const InputIcon = getIconStatus();
 
         return (
-            <div className='smart-input'>
+            <div className={`${className} form-input`}>
                 <input
+                    {...props}
                     id={inputId}
-                    className={`smart-input__input smart-input__input--${getInputStatus()} ${className}`}
+                    className={`${inputClassName} form-input__input form-input__input--${getInputStatus()}`}
                     placeholder={placeholder}
                     name={name}
                     ref={ref}
                     onChange={autoCapitalize ? capitalizeWords : undefined}
-                    {...props}
                 />
                 <InputIcon
-                    className='smart-input__icon'
+                    className='form-input__icon'
                     data-tip
                     data-for={`error-${inputId}`}
                 />
-                <label htmlFor={name + inputId} className='smart-input__label'>
+                <label htmlFor={name + inputId} className='form-input__label'>
                     {placeholder}
                 </label>
                 {error && !noValidation && (

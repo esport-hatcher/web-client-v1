@@ -8,3 +8,4 @@ export * from './SmartSelect';
 export * from './Spinner';
 export * from './Toasts';
 export * from './DatePicker';
+export * from './BoxHeader';

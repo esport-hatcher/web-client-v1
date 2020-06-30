@@ -23,15 +23,9 @@
         z-index: 101;
         @include absCenter();
         border-radius: 2rem;
-        min-width: 30%;
         background-color: $color-dark-medium;
         animation: fadeIn 0.3s ease-in-out;
-        display: grid;
-        row-gap: 2rem;
         padding: 2rem 4rem;
-
-        &__content {
-        }
     }
 
     &__action-buttons {
