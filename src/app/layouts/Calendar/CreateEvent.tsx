@@ -5,14 +5,27 @@ import { IFormValues } from 'app/actions';
 import {
     FormInput,
     BoxHeader,
-    DatePicker,
     EventDateSelector,
+    Dropdown,
 } from 'app/components';
+import { TextArea } from 'app/components/shared/Inputs/TextArea';
 
 interface IProps {
     onSubmit: () => void;
     initialDate: Date;
 }
+
+const options = [
+    { value: 'personal', label: 'Personal' },
+    { value: 'fnatic', label: 'Fnatic' },
+    { value: 'gw', label: 'Gameward' },
+    { value: 'peonal', label: 'Pernal' },
+    { value: 'fntic', label: 'Fntic' },
+    { value: 'gwa', label: 'Gamewaaezrd' },
+    { value: 'perezaezasonal', label: 'Pzeenal' },
+    { value: 'fnaaezaetic', label: 'Fnaazeazetic' },
+    { value: 'gzaezaew', label: 'Gamewzaeaeard' },
+];
 
 export const CreateEventForm: React.FC<IProps> = React.memo(
     ({ onSubmit, initialDate }) => {
@@ -29,7 +42,14 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                 <BoxHeader
                     title='Create a new event'
                     className='calendar__create-event-form__header'
-                />
+                >
+                    <Dropdown
+                        options={options}
+                        name='entity'
+                        className='calendar__create-event-form__header-entity'
+                        separatorOnFocus
+                    />
+                </BoxHeader>
                 <form
                     className='calendar__create-event-form__form'
                     onSubmit={handleSubmit(_onSubmit)}
@@ -41,7 +61,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         ref={register}
                         noValidation
                         inputClassName='calendar__create-event-form__input'
-                        className='calendar__create-event-form__input__title'
+                        className='calendar__create-event-form__input-title'
                         noLabelOnFocus
                         autoFocus
                     />
@@ -53,10 +73,16 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         noValidation
                         Icon={FiMapPin}
                         inputClassName='calendar__create-event-form__input'
-                        className='calendar__create-event-form__input__place'
+                        className='calendar__create-event-form__input-place'
                         noLabelOnFocus
                     />
                     <EventDateSelector initialDate={initialDate} />
+                    <TextArea
+                        name='description'
+                        ref={register}
+                        className='calendar__create-event-form__input calendar__create-event-form__input-description'
+                        placeholder='Description...'
+                    />
                 </form>
             </div>
         );

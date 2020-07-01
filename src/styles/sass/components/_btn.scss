@@ -132,5 +132,10 @@
     &:disabled {
         opacity: 0.3;
         cursor: auto;
+        color: $color-light-grey;
+
+        &:hover {
+            color: $color-light-grey;
+        }
     }
 }

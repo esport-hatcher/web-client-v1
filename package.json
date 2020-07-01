@@ -51,7 +51,7 @@
         "@types/react-dom": "^16.9.6",
         "@types/react-redux": "^7.0.9",
         "@types/react-router-dom": "^5.1.4",
-        "@types/react-select": "3.0.0",
+        "@types/react-select": "^3.0.13",
         "@types/react-transition-group": "^4.2.4",
         "@types/uuid": "^7.0.3",
         "@types/yup": "^0.29.2",

@@ -7,6 +7,7 @@ interface IProps {
     className?: string;
     type?: 'submit' | 'button';
     loading?: boolean;
+    disabled?: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
@@ -17,6 +18,7 @@ export const IconButton: React.FC<IProps> = React.memo(
         className,
         type = 'button',
         loading = false,
+        disabled = false,
         onClick,
     }) => {
         return (
@@ -25,7 +27,7 @@ export const IconButton: React.FC<IProps> = React.memo(
                 onClick={onClick}
                 className={`btn btn--icon-holder ${className} ${loading &&
                     'btn--disabled'}`}
-                disabled={loading}
+                disabled={loading || disabled}
             >
                 {children && (
                     <p className='btn--icon-holder__text'>{children}</p>

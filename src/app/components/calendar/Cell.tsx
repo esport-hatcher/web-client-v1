@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import format from 'date-fns/format';
+import { format, isPast, addDays } from 'date-fns';
 import cx from 'classnames';
 import { IconButton, Modal } from '../shared';
 import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
@@ -26,6 +26,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                 return (
                     <div className='calendar-cell__action-buttons'>
                         <IconButton
+                            disabled={isPast(addDays(cellDate, 1))}
                             Icon={AiOutlinePlus}
                             className='icon icon--white calendar-cell__action-buttons__button'
                             onClick={setModalOn}
@@ -58,7 +59,11 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                     {format(cellDate, 'd')}
                 </span>
                 {ActionButtons()}
-                <Modal setShow={setShowModal} show={showModal}>
+                <Modal
+                    setShow={setShowModal}
+                    show={showModal}
+                    className='calendar__create-event-form-modal'
+                >
                     <CreateEventForm
                         onSubmit={onFormSubmit}
                         initialDate={cellDate}

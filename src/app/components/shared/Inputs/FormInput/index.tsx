@@ -25,6 +25,8 @@ interface IFormInputProps
     noCaret?: boolean;
     noIcon?: boolean;
     autoCapitalize?: boolean;
+    // tslint:disable-next-line: no-any
+    innerRef?: React.Ref<any>;
 }
 
 const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
@@ -42,7 +44,9 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
             iconStaysOnFocus = false,
             noCaret = false,
             noIcon = false,
+            innerRef,
             inputClassName,
+
             ...props
         },
         ref
@@ -110,7 +114,7 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
                     )}
                     placeholder={placeholder}
                     name={name}
-                    ref={ref}
+                    ref={ref || innerRef}
                     onFocus={toggleInputFocus}
                     onBlur={toggleInputFocus}
                     onChange={autoCapitalize ? capitalizeWords : undefined}

@@ -1,5 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { addHours, setMinutes, endOfDay, addMinutes } from 'date-fns';
+import {
+    addHours,
+    setMinutes,
+    endOfDay,
+    addMinutes,
+    startOfDay,
+} from 'date-fns';
 import { DatePicker, HourPicker } from '../shared';
 
 interface IProps {
@@ -11,7 +17,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
         const [day, setDay] = useState<Date>(
             setMinutes(addHours(initialDate, 1), 0)
         );
-        const [dateBegin, setDateBegin] = useState<Date>(day);
+        const [dateBegin, setDateBegin] = useState<Date>(startOfDay(day));
         const [dateEnd, setDateEnd] = useState<Date>(addHours(dateBegin, 1));
 
         useEffect(() => setDateEnd(addHours(dateBegin, 1)), [
@@ -39,7 +45,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                     selected={day}
                     onChange={onDateChange}
                     inputClassName='calendar__create-event-form__input'
-                    wrapperClassName='calendar__create-event-form__input__day'
+                    wrapperClassName='calendar__create-event-form__input-day'
                     dateFormat='MMMM d, yyyy'
                 />
                 <div className='calendar__create-event-form__hour-selector'>
@@ -48,7 +54,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                         onChange={onDateBeginChange}
                         inputClassName='calendar__create-event-form__input'
                         timeCaption='From'
-                        wrapperClassName='calendar__create-event-form__input__hour'
+                        wrapperClassName='calendar__create-event-form__input-hour'
                     />
                     <p className='label label--sm'>|</p>
                     <HourPicker
@@ -58,7 +64,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
                         maxTime={endOfDay(dateBegin)}
                         timeCaption='To'
                         inputClassName='calendar__create-event-form__input'
-                        wrapperClassName='calendar__create-event-form__input__hour'
+                        wrapperClassName='calendar__create-event-form__input-hour'
                     />
                 </div>
             </>

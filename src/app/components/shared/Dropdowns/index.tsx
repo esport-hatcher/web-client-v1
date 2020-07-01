@@ -1,64 +1,123 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
-import { useToggler } from 'app/custom-hooks';
+import React from 'react';
+import Select, { Styles } from 'react-select';
+import { SelectComponentsProps } from 'react-select/src/Select';
+import {
+    color_dark,
+    color_blue_light,
+    color_white,
+    color_light_grey,
+    color_dark_two,
+    color_dark_medium,
+    container_box_shadow,
+} from 'app/config';
 
-interface IProps {
-    items: string[];
-    onSelect: (selected: string) => void;
+interface IProps extends SelectComponentsProps {
+    valueBackgroundColor?: string;
+    optionBackgroundColor?: string;
+    separatorOnFocus?: boolean;
 }
 
-export const Dropdown: React.FC<IProps> = React.memo(({ items, onSelect }) => {
-    const [value, setValue] = useState(items[0]);
-    const [listToggled, toggleList, toggleListSpec] = useToggler(false);
-    const [width, setWidth] = useState<number>(0);
-    const listRef = useRef<HTMLUListElement>(null);
+export const Dropdown: React.FC<IProps> = React.memo(
+    ({
+        valueBackgroundColor = color_dark_medium,
+        optionBackgroundColor = color_dark,
+        separatorOnFocus = false,
+        ...selectProps
+    }) => {
+        const customStyle: Partial<Styles> = {
+            option: (provided, state) => ({
+                ...provided,
+                padding: '2rem 4rem',
+                backgroundColor: state.isSelected
+                    ? color_blue_light
+                    : optionBackgroundColor,
+                color: color_white,
+                fontSize: '1.2rem',
+                letterSpacing: '1.2px',
+                transition: 'all 0.4s',
+                cursor: 'pointer',
+                '&:hover': {
+                    backgroundColor: color_dark_two,
+                },
+            }),
+            control: (provided, state) => ({
+                ...provided,
+                backgroundColor: valueBackgroundColor,
+                border: 'none',
+                borderRadius: 8,
+                boxShadow: 'none',
+                transition: 'all 0.4s',
+                cursor: 'pointer',
+                '&:hover': {
+                    borderColor: color_blue_light,
+                },
+            }),
+            valueContainer: provided => ({
+                ...provided,
+                paddingLeft: '1.8rem',
+            }),
+            singleValue: (provided, state) => ({
+                ...provided,
+                color: state.selectProps.menuIsOpen
+                    ? color_white
+                    : color_light_grey,
+                fontSize: '1.2rem',
+                letterSpacing: '1.2px',
+                textAlign: 'right',
+                textTransform: 'uppercase',
+                transition: 'all 0.4s',
+            }),
+            menuPortal: provided => ({
+                ...provided,
+                backgroundColor: color_dark,
+                boxShadow: container_box_shadow,
+                borderRadius: 0,
+            }),
+            menuList: provided => ({
+                ...provided,
+                padding: 0,
+                borderRadius: '8px',
+            }),
+            menu: provided => ({
+                ...provided,
+                backgroundColor: color_dark,
+                boxShadow: container_box_shadow,
+            }),
+            dropdownIndicator: (provided, state) => {
+                return {
+                    ...provided,
+                    transition: 'all 0.4s',
+                    color: state.selectProps.menuIsOpen
+                        ? color_white
+                        : color_light_grey,
+                    transform: state.selectProps.menuIsOpen
+                        ? 'rotate(180deg)'
+                        : 'rotate(0deg)',
+                    '&:hover': {
+                        color: color_blue_light,
+                    },
+                };
+            },
+            indicatorSeparator: (provided, state) => ({
+                ...provided,
+                transition: 'all 0.4s',
+                backgroundColor: separatorOnFocus
+                    ? state.selectProps.menuIsOpen
+                        ? color_white
+                        : 'transparent'
+                    : state.selectProps.menuIsOpen
+                    ? color_white
+                    : color_light_grey,
+            }),
+        };
 
-    useEffect(() => {
-        const width = listRef.current ? listRef.current.offsetWidth : 0;
-        setWidth(width);
-        // eslint-disable-next-line
-    }, [listRef.current]);
-
-    const onItemSelect = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>
-    ) => {
-        const itemValue = event.currentTarget.getAttribute('data-key')!;
-        setValue(itemValue);
-        onSelect(itemValue);
-        toggleListSpec(false);
-    };
-
-    const displayList = () => {
-        return items.map((item: string) => {
-            return (
-                <li
-                    className='dropdown__list__item'
-                    key={item}
-                    data-key={item}
-                    onClick={onItemSelect}
-                >
-                    {item}
-                </li>
-            );
-        });
-    };
-
-    return (
-        <div
-            className={`dropdown ${listToggled && 'dropdown--active'}`}
-            style={{ width }}
-        >
-            <div className='dropdown__header'>
-                <div className='dropdown__header__value'>{value}</div>
-                <FiChevronDown onClick={toggleList} />
-            </div>
-            <ul
-                className={`dropdown__list ${listToggled &&
-                    'dropdown__list--active'}`}
-                ref={listRef}
-            >
-                {displayList()}
-            </ul>
-        </div>
-    );
-});
+        return (
+            <Select
+                {...selectProps}
+                styles={{ ...customStyle, ...selectProps }}
+                defaultValue={selectProps.options[0]}
+                menuPortalTarget={document.getElementById('root-portal')}
+            />
+        );
+    }
+);
