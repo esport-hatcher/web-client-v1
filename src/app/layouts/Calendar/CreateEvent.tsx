@@ -46,6 +46,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                     <Dropdown
                         options={options}
                         name='entity'
+                        defaultValue={options[0]}
                         className='calendar__create-event-form__header-entity'
                         separatorOnFocus
                     />
