@@ -27,12 +27,6 @@ export const AddPlayerForm: React.FC<IProps> = ({ change, teamId }) => {
                 <div className='add-player-form-container__select'>
                     <SmartSelect {...smartSelectProps} />
                 </div>
-                {/*console.log(
-                    'value Player' +
-                        valuePlayer[0].value +
-                        ' /  teamId' +
-                        teamId
-                )*/}
             </div>
             <label>
                 <span> </span>

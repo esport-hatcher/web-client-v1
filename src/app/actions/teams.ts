@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import api from 'app/api';
 import { ActionTypes, IGetState } from './types';
+import { sendToast } from 'app/shared';
 import { IUser } from './user';
 
 export interface ITeams {
@@ -88,6 +89,7 @@ export const fetchTeams = () => async (
         });
     }
 };
+
 export const fetchTeamUser = (teamId: number) => async (
     dispatch: Dispatch,
     getState: IGetState
@@ -128,11 +130,17 @@ export const createTeam = (
                 type: ActionTypes.createTeamSucess,
                 payload: data,
             });
+            sendToast({
+                title: 'Team Created',
+                content: 'You successfully created a team !',
+                type: 'success',
+            });
         }
     } catch (err) {
-        dispatch<ICreateTeamActionError>({
-            type: ActionTypes.createTeamError,
-            payload: err,
+        sendToast({
+            title: 'Team Error',
+            content: err,
+            type: 'error',
         });
     }
 };
@@ -152,8 +160,18 @@ export const invitePlayer = (
                 type: ActionTypes.invitePlayerSucess,
                 payload: data,
             });
+            sendToast({
+                title: 'player invited',
+                content: 'You successfully add a player !',
+                type: 'success',
+            });
         }
     } catch (err) {
+        sendToast({
+            title: 'invitation fail',
+            content: err,
+            type: 'error',
+        });
         //console.log('nope', err);
     }
 };

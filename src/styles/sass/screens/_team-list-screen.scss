@@ -37,6 +37,7 @@
                 margin: 0 auto;
             }
         }
+    }
 
         .team-page__box:hover {
             opacity: 0.8;
@@ -62,8 +63,8 @@
 
             .modal-main {
                 position: fixed;
-                background: #495c70;
-                width: 75%;
+                background: white;
+                width: 55%;
                 margin-top: 80px;
                 margin-bottom: 10px;
                 margin-right: 80px;
@@ -75,8 +76,8 @@
                 border-width: 1px;
                 border-style: groove;
                 border-color: $color-white;
-                border-radius: 10px;
-                box-shadow: 2px 2px 10px gray inset;
+                border-radius: 8px;
+        
             }
         }
 
@@ -98,4 +99,3 @@
             top: 5px;
             cursor: pointer;
         }
-    }
