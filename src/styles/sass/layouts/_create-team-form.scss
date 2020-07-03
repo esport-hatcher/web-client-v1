@@ -1,6 +1,106 @@
+<<<<<<< HEAD
 .create-team-form-container {
     font-size: 16px;
     padding: 30px 30px 15px 30px;
     border-radius: 7px;
     border-radius: 10px 10px / 10px 10px;
 }
+=======
+.create-team-form {
+    &__sudmit-btn
+    {  
+        width: 269px;
+        height: 100px;
+        border-radius: 8px;
+
+        background-color: #a193f5;
+        font-family: Helvetica;
+        font-size: 36px;
+        font-weight: bold;
+        color:white;
+        position:relative;
+        left:60%;
+        width:40%;
+      }
+      &__close-btn
+      { 
+        font-family: Helvetica;
+        font-size: 36px;
+        font-weight: bold;
+        position:relative;
+        width:50%;
+        top: 40%;
+          
+        }
+    &__title{
+        object-fit: contain;
+        font-family: Helvetica;
+        font-size: 34px;
+        font-weight: bold;
+        text-align: center;
+        color: #a193f5;
+    }
+    &__container {
+        padding: 30px 30px 15px 30px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 100px);
+    }
+    
+    &__label{
+        padding: 30px 30px 15px 30px;
+        font-family: Helvetica;
+        font-size: 24px;
+        font-weight: bold;
+        &--team-name{
+            grid-column-start: 1;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 1;    
+
+        }
+        &--reagion-name{
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 2;
+            grid-row-end: 2;
+    
+        }    
+        &--game-name{
+            grid-column-start: 2;
+            grid-column-end: 4;
+            grid-row-start: 2;
+            grid-row-end: 2;
+    
+        }    
+        &--close-sudmit{
+            grid-column-start: 1;
+            grid-column-end: 4;
+            grid-row-start: 3;
+            grid-row-end: 4;
+            width:100%;
+            height: 192px;
+            background-color: #f0f2f5;
+         
+        }    
+    }
+    &__input{
+        border: solid 4px #000000;
+        border-radius: 8px;
+
+
+         &__team-name{
+            border-bottom: solid 4px #000000;
+            border-top-style:hidden;
+            border-right-style:hidden;
+            border-left-style:hidden;
+         }
+    }
+    
+}
+
+.create-team-form__close-btn:hover{
+    border-bottom: solid 4px #000000;
+    width: 150px;
+}
+>>>>>>> 8fbcf2d6b92075d995ab1ad92bf2473c58469527
