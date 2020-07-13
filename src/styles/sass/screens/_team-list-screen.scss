@@ -65,7 +65,7 @@
                 position: fixed;
                 background: white;
                 width: 100vh;
-                height: 90vh;
+                height: 80vh;
                 top: 50%;
                 left: 55%;
                 transform: translate(-50%, -50%);
@@ -73,6 +73,10 @@
                 border-style: groove;
                 border-color: $color-white;
                 border-radius: 8px;
+            }
+
+            &__main > div {
+                height: 100%;
             }
         }
 
