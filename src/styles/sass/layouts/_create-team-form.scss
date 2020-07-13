@@ -10,9 +10,8 @@
     flex-direction: column;
     justify-content: space-between;
 
-    &__sudmit-btn
+    &__submit-btn
     {  
-        width: 269px;
         height: 100px;
         border-radius: 8px;
         border: none;
@@ -22,20 +21,23 @@
         font-weight: bold;
         color:white;
         position:relative;
-        left:60%;
         width:40%;
-      }
+    }
 
-      &__close-btn
-      { 
+    &__submit-btn:hover
+    {
+        cursor: pointer;
+    }
+
+
+    &__close-btn
+    { 
         font-family: Helvetica;
         font-size: 36px;
         font-weight: bold;
         position:relative;
-        width:50%;
-        top: 40%;
-          
-        }
+    }
+
     &__title{
         object-fit: contain;
         font-family: Helvetica;
@@ -82,7 +84,10 @@
     
         }    
         &--close-sudmit{
-            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
             grid-column-start: 1;
             grid-column-end: 4;
             grid-row-start: 3;
@@ -112,6 +117,5 @@
 }
 
 .create-team-form__close-btn:hover{
-    border-bottom: solid 4px #000000;
-    width: 150px;
+    cursor: pointer;
 }

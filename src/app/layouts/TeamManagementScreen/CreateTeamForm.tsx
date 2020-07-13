@@ -65,7 +65,7 @@ export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
                         Back
                     </div>
                     <button
-                        className='create-team-form__sudmit-btn'
+                        className='create-team-form__submit-btn'
                         type='submit'
                         value='Submit'
                     >
