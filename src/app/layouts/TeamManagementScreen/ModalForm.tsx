@@ -16,7 +16,7 @@ export const ModalForm = ({
 
     return (
         <div className={showHideClassName}>
-            <section className='modal-main'>{children}</section>
+            <section className='modal__main'>{children}</section>
         </div>
     );
 };
