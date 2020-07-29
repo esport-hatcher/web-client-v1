@@ -42,8 +42,8 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                     {teamUser &&
                         user &&
                         teamUser.map(item => {
-                            if (inteam == true) {
-                                if (item.id == user.id) {
+                            if (inteam === true) {
+                                if (item.id === user.id) {
                                     return null;
                                 }
                                 return <TeamUserCard item={item} />;
