@@ -4,14 +4,15 @@ import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
 import { useDispatch } from 'react-redux';
-import { createTask } from 'app/actions';
+import { createTask, ITeams } from 'app/actions';
 
 interface IProps {
     setShowCreateTask: Function;
+    selectedTeam: ITeams | undefined;
 }
 
 export const CreateTask: React.FC<IProps> = React.memo(
-    ({ setShowCreateTask }) => {
+    ({ setShowCreateTask, selectedTeam }) => {
         const dispatch = useDispatch();
         const [inputValue, setInputValue] = useState('');
         const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
@@ -19,7 +20,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
 
         const handleForm = useCallback(
             (action: string) => {
-                if (action === 'create' && inputValue.trim() === '') {
+                if (action === 'create' && inputValue.trim().length === 0) {
                     sendToast({
                         title: 'No title',
                         content: 'Cannot create a task without title',
@@ -28,11 +29,16 @@ export const CreateTask: React.FC<IProps> = React.memo(
                 } else if (action === 'cancel') {
                     setShowCreateTask(false);
                 } else {
-                    dispatch(createTask({ title: inputValue, dateEnd: date }));
+                    dispatch(
+                        createTask(
+                            { title: inputValue, dateEnd: date },
+                            selectedTeam
+                        )
+                    );
                     setShowCreateTask(false);
                 }
             },
-            [inputValue, setShowCreateTask, date, dispatch]
+            [inputValue, setShowCreateTask, date, selectedTeam, dispatch]
         );
 
         const handleChange = (value: React.ChangeEvent<HTMLInputElement>) => {

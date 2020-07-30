@@ -7,7 +7,7 @@ const tasksReducer = (state: ITask[] = [], action: Action) => {
         case ActionTypes.createTaskSuccess:
             return [...state, action.task];
         case ActionTypes.fetchTaskSuccess:
-            return unionBy(state, action.tasks, 'id');
+            return action.tasks;
         case ActionTypes.deleteTaskSuccess:
             return state.filter(task => task.id !== action.task.id);
         case ActionTypes.patchTaskSuccess:

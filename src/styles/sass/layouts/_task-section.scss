@@ -2,4 +2,9 @@
     overflow-y: auto;
     width: 20vw;
     border-right: 1px solid $color-dark-four;
+
+    &__team {
+        display: flex;
+        justify-content: center;
+    }
 }
