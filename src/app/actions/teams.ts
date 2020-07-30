@@ -175,3 +175,34 @@ export const invitePlayer = (
         //console.log('nope', err);
     }
 };
+
+export const joinTeam = (playerId: NumberConstructor, teamId: string) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+        const myId = getState().authentication.user;
+        if (token && myId) {
+            const { data } = await api.post(
+                `teams/${teamId}/users/${playerId}`
+            );
+            dispatch<IInvitePlayerActionSucess>({
+                type: ActionTypes.invitePlayerSucess,
+                payload: data,
+            });
+            sendToast({
+                title: 'player invited',
+                content: 'You successfully add a player !',
+                type: 'success',
+            });
+        }
+    } catch (err) {
+        sendToast({
+            title: 'invitation fail',
+            content: err,
+            type: 'error',
+        });
+        //console.log('nope', err);
+    }
+};
