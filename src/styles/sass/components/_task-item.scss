@@ -11,6 +11,10 @@
         width: 50px;
         color: #6dd400;
 
+        &--late {
+            color: red;
+        }
+
         &__icon {
             height: 20px;
             width: 20px;
