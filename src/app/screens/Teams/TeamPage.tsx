@@ -40,17 +40,23 @@ export const _TeamPage: React.FC = React.memo(() => {
             </div>
             <ModalForm show={showMenu} handleClose={onShowMenu}>
                 <div className='modal__main--container'>
-                    <div className='modal__btn'>
+                    <div className='modal__initial'>
+                        <div className='modal__title'>
+                            <h1 className='modal__title--create'>Create</h1>
+                        </div>
                         <button
-                            className='modal__btn--create'
+                            className='modal__btn-create'
                             onClick={createSelected}
                         >
                             create a team
                         </button>
                     </div>
-                    <div className='modal__btn'>
+                    <div className='modal__initial'>
+                        <div className='modal__title'>
+                            <h1 className='modal__title--join'>Join</h1>
+                        </div>
                         <button
-                            className='modal__btn--join'
+                            className='modal__btn-join'
                             onClick={joinSelected}
                         >
                             join a team
