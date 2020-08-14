@@ -29,40 +29,46 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
 
     return (
         <div className='join-team-form'>
-            <h1 className='join-team-form__title'> Join a Team</h1>
-            <form onSubmit={onSubmit}>
-                {/* <SmartSelect {...smartSelectProps} /> */}\
-                <div className='join-team-form__container'>
-                    <div className='join-team-form__label--team-name'>
-                        <label className='join-team-form__label'>
-                            {'Enter an invitation or a team name'} <br />
-                            <br />
-                            <input
-                                className={'join-team-form__input__team-name'}
-                                type='text'
-                                value={valueName}
-                                onChange={handleChange}
-                                placeholder='Here'
-                            />
-                        </label>
+            <div>
+                <h1 className='join-team-form__title'> Join a Team</h1>
+            </div>
+            <div>
+                <form onSubmit={onSubmit}>
+                    {/* <SmartSelect {...smartSelectProps} /> */}\
+                    <div className='join-team-form__container'>
+                        <div className='join-team-form__label--team-name'>
+                            <label className='join-team-form__label'>
+                                {'Enter an invitation or a team name'} <br />
+                                <br />
+                                <input
+                                    className={
+                                        'join-team-form__input__team-name'
+                                    }
+                                    type='text'
+                                    value={valueName}
+                                    onChange={handleChange}
+                                    placeholder='Here'
+                                />
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div className='join-team-form__label--close-sudmit'>
-                    <div
-                        className='join-team-form__close-btn'
-                        onClick={() => change(false)}
-                    >
-                        Back
+                    <div className='join-team-form__label--close-sudmit'>
+                        <div
+                            className='join-team-form__close-btn'
+                            onClick={() => change(false)}
+                        >
+                            Back
+                        </div>
+                        <button
+                            className='join-team-form__submit-btn'
+                            type='submit'
+                            value='Submit'
+                        >
+                            Join !
+                        </button>
                     </div>
-                    <button
-                        className='join-team-form__submit-btn'
-                        type='submit'
-                        value='Submit'
-                    >
-                        Join !
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };

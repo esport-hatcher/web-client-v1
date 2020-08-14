@@ -39,23 +39,33 @@ export const _TeamPage: React.FC = React.memo(() => {
                 <AiOutlinePlus className='team-page__modal--button__icon' />
             </div>
             <ModalForm show={showMenu} handleClose={onShowMenu}>
-                <div className=''>
-                    <button className='' onClick={createSelected}>
-                        create a team
-                    </button>
+                <div className='modal__main--container'>
+                    <div className='modal__btn'>
+                        <button
+                            className='modal__btn--create'
+                            onClick={createSelected}
+                        >
+                            create a team
+                        </button>
+                    </div>
+                    <div className='modal__btn'>
+                        <button
+                            className='modal__btn--join'
+                            onClick={joinSelected}
+                        >
+                            join a team
+                        </button>
+                    </div>
                 </div>
-                <button className='' onClick={joinSelected}>
-                    join a team
-                </button>
             </ModalForm>
             {
                 <ModalForm show={show} handleClose={onShow}>
                     {menuchoice ? (
-                        <div>
+                        <div className='team-page__modal'>
                             <CreateTeamForm change={onShow} />
                         </div>
                     ) : (
-                        <div>
+                        <div className='team-page__modal'>
                             {' '}
                             <JoinTeamForm change={onShow} />{' '}
                         </div>
