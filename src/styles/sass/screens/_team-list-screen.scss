@@ -133,6 +133,10 @@
                 font-weight: bold;
                 background-color: $color-green;
             }
+
+            &__btn-create:hover, &__btn-join:hover {
+                cursor: pointer;
+            }
             
         }
 
