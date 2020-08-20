@@ -9,7 +9,7 @@ export const DropdownValue: React.FC<SingleValueProps<any>> = ({
 }) => (
     <div
         {...innerProps}
-        className={'dropdown__value body-text body-text--md ' + className}
+        className={'dropdown__value body-text body-text--sm ' + className}
     >
         {children}
     </div>

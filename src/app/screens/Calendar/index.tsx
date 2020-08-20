@@ -1,14 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { addMonths, subMonths } from 'date-fns';
-import { CalendarHeader, CalendarDaysList } from 'app/layouts';
+import { useDispatch } from 'react-redux';
+import {
+    CalendarHeader,
+    CalendarDaysList,
+    CalendarCellsList,
+} from 'app/layouts';
 import { HeaderPage } from 'app/components';
-import { CalendarCellsList } from 'app/layouts/Calendar/CellsList';
+import { fetchTeams } from 'app/actions';
 
 interface IProps {}
 
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const [selectedDate] = useState<Date>(new Date());
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTeams());
+    }, []);
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));

@@ -1,6 +1,6 @@
-import { ITeams, Action, ActionTypes } from 'app/actions';
+import { ITeam, Action, ActionTypes } from 'app/actions';
 
-const teamsReducer = (state: ITeams[] = [], action: Action) => {
+const teamsReducer = (state: ITeam[] = [], action: Action) => {
     switch (action.type) {
         case ActionTypes.fetchTeamSuccess:
             return action.payload;

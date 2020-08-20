@@ -1,35 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiMapPin } from 'react-icons/fi';
 import { IFormValues } from 'app/actions';
+import { shallowEqual, useDispatch } from 'react-redux';
+import { OptionsType } from 'react-select';
+import unionBy from 'lodash/unionBy';
 import {
     FormInput,
     BoxHeader,
     EventDateSelector,
     Dropdown,
+    TextArea,
 } from 'app/components';
-import { TextArea } from 'app/components/shared/Inputs/TextArea';
+import { useSelector } from 'app/custom-hooks';
 
 interface IProps {
     onSubmit: () => void;
     initialDate: Date;
 }
 
-const options = [
-    { value: 'personal', label: 'Personal' },
-    { value: 'fnatic', label: 'Fnatic' },
-    { value: 'gw', label: 'Gameward' },
-    { value: 'peonal', label: 'Pernal' },
-    { value: 'fntic', label: 'Fntic' },
-    { value: 'gwa', label: 'Gamewaaezrd' },
-    { value: 'perezaezasonal', label: 'Pzeenal' },
-    { value: 'fnaaezaetic', label: 'Fnaazeazetic' },
-    { value: 'gzaezaew', label: 'Gamewzaeaeard' },
-];
-
 export const CreateEventForm: React.FC<IProps> = React.memo(
     ({ onSubmit, initialDate }) => {
         const { handleSubmit, register } = useForm();
+        const [options, setOptions] = useState<
+            OptionsType<{
+                label: string;
+                value: string;
+            }>
+        >([{ value: '0', label: 'Personal' }]);
+        const rawTeams = useSelector(state => state.teams, shallowEqual);
+
+        useEffect(() => {
+            setOptions(currentOptions =>
+                unionBy(
+                    currentOptions,
+                    rawTeams.map(rawTeam => ({
+                        value: rawTeam.id.toString(),
+                        label: rawTeam.name,
+                    })),
+                    'value'
+                )
+            );
+        }, [rawTeams]);
 
         const _onSubmit = (formValues: IFormValues) => {
             // tslint:disable-next-line: no-console
@@ -48,7 +60,6 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         name='entity'
                         defaultValue={options[0]}
                         className='calendar__create-event-form__header-entity'
-                        separatorOnFocus
                     />
                 </BoxHeader>
                 <form

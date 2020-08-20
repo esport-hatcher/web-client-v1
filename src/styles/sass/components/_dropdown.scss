@@ -59,4 +59,12 @@
         position: relative;
         overflow: hidden;
     }
+
+    &__placeholder {
+        font-size: 1.2rem;
+        letter-spacing: 0.16rem;
+        text-transform: uppercase;
+        color: $color-light-grey !important;
+        opacity: 1;
+    }
 }

@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import api from 'app/api';
 import { ActionTypes, IGetState } from './types';
 
-export interface ITeams {
+export interface ITeam {
     id: number;
     avatarTeamUrl: string;
     bannerUrl: string;
@@ -15,19 +15,18 @@ export interface ITeams {
 
 export interface IFetchTeamSuccessAction {
     type: ActionTypes.fetchTeamSuccess;
-    payload: ITeams[];
+    payload: ITeam[];
 }
 export interface IFetchTeamErrorAction {
     type: ActionTypes.fetchTeamError;
-    payload: ITeamsFailure;
 }
 
-export interface ITeamsFailure {
+export interface ITeamFailure {
     message: string;
 }
 
-export interface ITeamsSuccess {
-    teams: ITeams[];
+export interface ITeamSuccess {
+    teams: ITeam[];
 }
 
 export const fetchTeams = () => async (
@@ -37,7 +36,7 @@ export const fetchTeams = () => async (
     try {
         const myId = getState().authentication.user;
         if (myId) {
-            const { data } = await api.get<ITeams[]>(`users/${myId.id}/teams`);
+            const { data } = await api.get<ITeam[]>(`users/${myId.id}/teams`);
             dispatch<IFetchTeamSuccessAction>({
                 type: ActionTypes.fetchTeamSuccess,
                 payload: data,
@@ -46,7 +45,6 @@ export const fetchTeams = () => async (
     } catch ({ response: { data } }) {
         dispatch<IFetchTeamErrorAction>({
             type: ActionTypes.fetchTeamError,
-            payload: data,
         });
     }
 };
