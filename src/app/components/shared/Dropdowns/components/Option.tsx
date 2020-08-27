@@ -11,7 +11,9 @@ export const DropdownOption: React.FC<OptionProps<any>> = ({
     className,
 }) => (
     <div
-        {...innerProps}
+        // TEMPORARY FIX: FAIL PACKAGE
+        // tslint:disable-next-line: no-any
+        {...(innerProps as any)}
         ref={innerRef}
         className={cx('dropdown__option body-text body-text--sm ' + className, {
             'dropdown__option--selected': isSelected,
