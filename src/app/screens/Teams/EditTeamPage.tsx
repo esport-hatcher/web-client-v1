@@ -38,7 +38,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                 <div className='container-information__team-information'>
                     <TeamDescription />
                 </div>
-                <div className='container-information__team-menber'>
+                <div className='container-information__team-member'>
                     {teamUser &&
                         user &&
                         teamUser.map(item => {

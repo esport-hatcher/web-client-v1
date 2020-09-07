@@ -6,7 +6,7 @@ export const TeamDescription: React.FC = React.memo(() => {
             <h3 className='description__title'>Description</h3>
             <div className='description__outer'>
                 <textarea
-                    className='description__field'
+                    className='description__outer--field'
                     placeholder='Page de presentation'
                 ></textarea>
             </div>
