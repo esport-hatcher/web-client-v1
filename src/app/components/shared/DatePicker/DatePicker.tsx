@@ -15,6 +15,7 @@ export const DatePicker: React.FC<IProps> = React.memo(
                 {...reactDatePickerProps}
                 customInput={
                     <FormInput
+                        readOnly
                         inputClassName={inputClassName}
                         Icon={BsCalendar}
                         iconStaysOnFocus
