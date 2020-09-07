@@ -60,5 +60,9 @@
                 }
             }
         }
+
+        &__submit {
+            grid-column: 5 / 6;
+        }
     }
 }

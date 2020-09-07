@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FiMapPin } from 'react-icons/fi';
 import { IFormValues } from 'app/actions';
 import { shallowEqual } from 'react-redux';
-import { OptionsType } from 'react-select';
+import { OptionsType, ValueType } from 'react-select';
 import unionBy from 'lodash/unionBy';
 import {
     FormInput,
@@ -12,6 +12,7 @@ import {
     Dropdown,
     TextArea,
     IDoubleDate,
+    IOption,
 } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
 
@@ -23,13 +24,11 @@ interface IProps {
 export const CreateEventForm: React.FC<IProps> = React.memo(
     ({ onSubmit, initialDate }) => {
         const { handleSubmit, register } = useForm();
-        const [options, setOptions] = useState<
-            OptionsType<{
-                label: string;
-                value: string;
-            }>
-        >([{ value: '0', label: 'Personal' }]);
+        const [options, setOptions] = useState<OptionsType<IOption>>([
+            { value: '0', label: 'Personal' },
+        ]);
         const rawTeams = useSelector(state => state.teams, shallowEqual);
+        const [selectedOption, setSelectedOption] = useState<number>(0); // set default option to personal
         const [dateBegin, setDateBegin] = useState<Date>(new Date());
         const [dateEnd, setDateEnd] = useState<Date>(new Date());
 
@@ -46,8 +45,9 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
             );
         }, [rawTeams]);
 
-        const _onSubmit = (formValues: IFormValues) => {
+        const _onSubmit = (tempFormValues: IFormValues) => {
             // tslint:disable-next-line: no-console
+            const formValues = { ...tempFormValues, dateBegin, dateEnd };
             onSubmit();
         };
 
@@ -57,6 +57,15 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                 setDateEnd(newDateEnd);
             },
             [setDateBegin, setDateEnd]
+        );
+
+        const onOptionChange = useCallback(
+            (value: ValueType<IOption>) => {
+                if (value) {
+                    setSelectedOption(parseInt((value as IOption).value));
+                }
+            },
+            [setSelectedOption]
         );
 
         return (
@@ -70,6 +79,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         name='entity'
                         defaultValue={options[0]}
                         className='calendar__create-event-form__header-entity'
+                        onChange={onOptionChange}
                     />
                 </BoxHeader>
                 <form
@@ -108,6 +118,12 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         className='calendar__create-event-form__input calendar__create-event-form__input-description'
                         placeholder='Description...'
                     />
+                    <button
+                        type='submit'
+                        className='btn btn--primary calendar__create-event-form__submit'
+                    >
+                        Create
+                    </button>
                 </form>
             </div>
         );

@@ -9,6 +9,11 @@ import {
     DropdownControl,
 } from './components';
 
+export interface IOption {
+    label: string;
+    value: string;
+}
+
 interface IDropdownProps extends SelectProps {
     controlClassName?: string;
     menuClassName?: string;
