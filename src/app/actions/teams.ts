@@ -11,7 +11,7 @@ export interface ITeams {
     bannerUrl: string;
     game: string;
     name: string;
-    region: boolean;
+    region: string;
     createdAt: string;
     updatedAt: string;
 }
