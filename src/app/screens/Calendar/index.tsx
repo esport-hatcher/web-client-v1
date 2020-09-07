@@ -18,7 +18,7 @@ export const CalendarPage: React.FC<IProps> = () => {
 
     useEffect(() => {
         dispatch(fetchTeams());
-    }, []);
+    }, [dispatch]);
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));

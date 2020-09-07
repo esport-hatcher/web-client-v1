@@ -31,19 +31,21 @@ export const DoubleDateSelector: React.FC<IProps> = React.memo(
         const [dateEnd, setDateEnd] = useState<Date>(addHours(dateBegin, 1));
 
         useEffect(() => {
-            setDateBegin(setHours(currentDay, getHours(dateBegin)));
-            setDateEnd(setHours(currentDay, getHours(dateEnd)));
+            setDateBegin(dateBegin =>
+                setHours(currentDay, getHours(dateBegin))
+            );
+            setDateEnd(dateEnd => setHours(currentDay, getHours(dateEnd)));
         }, [currentDay, setDateBegin, setDateEnd]);
 
         useEffect(() => {
             if (dateBegin > dateEnd) {
                 setDateEnd(addHours(dateBegin, 1));
             }
-        }, [dateBegin, setDateEnd]);
+        }, [dateBegin, setDateEnd, dateEnd]);
 
         useEffect(
             () => onChange({ newDateBegin: dateBegin, newDateEnd: dateEnd }),
-            [dateBegin, dateEnd]
+            [dateBegin, dateEnd, onChange]
         );
 
         const onDateChange = useCallback(

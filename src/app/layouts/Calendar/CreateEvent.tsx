@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiMapPin } from 'react-icons/fi';
-import { IFormValues } from 'app/actions';
-import { shallowEqual } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import { OptionsType, ValueType } from 'react-select';
 import unionBy from 'lodash/unionBy';
 import {
@@ -15,6 +14,7 @@ import {
     IOption,
 } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
+import { AsyncDispatch, IFormValues, createEvent } from 'app/actions';
 
 interface IProps {
     onSubmit: () => void;
@@ -31,6 +31,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
         const [selectedOption, setSelectedOption] = useState<number>(0); // set default option to personal
         const [dateBegin, setDateBegin] = useState<Date>(new Date());
         const [dateEnd, setDateEnd] = useState<Date>(new Date());
+        const dispatch = useDispatch() as AsyncDispatch;
 
         useEffect(() => {
             setOptions(currentOptions =>
@@ -45,9 +46,10 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
             );
         }, [rawTeams]);
 
-        const _onSubmit = (tempFormValues: IFormValues) => {
+        const _onSubmit = async (tempFormValues: IFormValues) => {
             // tslint:disable-next-line: no-console
             const formValues = { ...tempFormValues, dateBegin, dateEnd };
+            await dispatch(createEvent(formValues, selectedOption));
             onSubmit();
         };
 
