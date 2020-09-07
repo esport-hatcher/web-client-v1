@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiMapPin } from 'react-icons/fi';
 import { IFormValues } from 'app/actions';
-import { shallowEqual, useDispatch } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { OptionsType } from 'react-select';
 import unionBy from 'lodash/unionBy';
 import {
     FormInput,
     BoxHeader,
-    EventDateSelector,
+    DoubleDateSelector,
     Dropdown,
     TextArea,
+    IDoubleDate,
 } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
 
@@ -29,6 +30,8 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
             }>
         >([{ value: '0', label: 'Personal' }]);
         const rawTeams = useSelector(state => state.teams, shallowEqual);
+        const [dateBegin, setDateBegin] = useState<Date>(new Date());
+        const [dateEnd, setDateEnd] = useState<Date>(new Date());
 
         useEffect(() => {
             setOptions(currentOptions =>
@@ -45,9 +48,16 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
 
         const _onSubmit = (formValues: IFormValues) => {
             // tslint:disable-next-line: no-console
-            console.log('formValues:', formValues);
             onSubmit();
         };
+
+        const onDateChange = useCallback(
+            ({ newDateBegin, newDateEnd }: IDoubleDate) => {
+                setDateBegin(newDateBegin);
+                setDateEnd(newDateEnd);
+            },
+            [setDateBegin, setDateEnd]
+        );
 
         return (
             <div className='calendar__create-event-form'>
@@ -88,7 +98,10 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         className='calendar__create-event-form__input-place'
                         noLabelOnFocus
                     />
-                    <EventDateSelector initialDate={initialDate} />
+                    <DoubleDateSelector
+                        onChange={onDateChange}
+                        initialDate={initialDate}
+                    />
                     <TextArea
                         name='description'
                         ref={register}

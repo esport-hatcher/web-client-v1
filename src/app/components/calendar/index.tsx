@@ -1,2 +1,2 @@
 export * from './Cell';
-export * from './EventDateSelector';
+export * from './DoubleDateSelector';

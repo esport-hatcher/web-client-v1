@@ -5,29 +5,51 @@ import {
     endOfDay,
     addMinutes,
     startOfDay,
+    getHours,
+    setHours,
 } from 'date-fns';
 import { DatePicker, HourPicker } from '../shared';
 
-interface IProps {
-    initialDate: Date;
+export interface IDoubleDate {
+    newDateBegin: Date;
+    newDateEnd: Date;
 }
 
-export const EventDateSelector: React.FC<IProps> = React.memo(
-    ({ initialDate }) => {
-        const [day, setDay] = useState<Date>(
+interface IProps {
+    initialDate: Date;
+    onChange: (newDates: IDoubleDate) => void;
+}
+
+export const DoubleDateSelector: React.FC<IProps> = React.memo(
+    ({ initialDate, onChange }) => {
+        const [currentDay, setCurrentDay] = useState<Date>(
             setMinutes(addHours(initialDate, 1), 0)
         );
-        const [dateBegin, setDateBegin] = useState<Date>(startOfDay(day));
+        const [dateBegin, setDateBegin] = useState<Date>(
+            startOfDay(currentDay)
+        );
         const [dateEnd, setDateEnd] = useState<Date>(addHours(dateBegin, 1));
 
-        useEffect(() => setDateEnd(addHours(dateBegin, 1)), [
-            dateBegin,
-            setDateEnd,
-        ]);
+        useEffect(() => {
+            setDateBegin(setHours(currentDay, getHours(dateBegin)));
+            setDateEnd(setHours(currentDay, getHours(dateEnd)));
+        }, [currentDay, setDateBegin, setDateEnd]);
 
-        const onDateChange = useCallback((newDate: Date) => setDay(newDate), [
-            setDay,
-        ]);
+        useEffect(() => {
+            if (dateBegin > dateEnd) {
+                setDateEnd(addHours(dateBegin, 1));
+            }
+        }, [dateBegin, setDateEnd]);
+
+        useEffect(
+            () => onChange({ newDateBegin: dateBegin, newDateEnd: dateEnd }),
+            [dateBegin, dateEnd]
+        );
+
+        const onDateChange = useCallback(
+            (newDate: Date) => setCurrentDay(newDate),
+            [setCurrentDay]
+        );
 
         const onDateBeginChange = useCallback(
             (newDate: Date) => setDateBegin(newDate),
@@ -42,7 +64,7 @@ export const EventDateSelector: React.FC<IProps> = React.memo(
         return (
             <>
                 <DatePicker
-                    selected={day}
+                    selected={currentDay}
                     onChange={onDateChange}
                     inputClassName='calendar__create-event-form__input'
                     wrapperClassName='calendar__create-event-form__input-day'
