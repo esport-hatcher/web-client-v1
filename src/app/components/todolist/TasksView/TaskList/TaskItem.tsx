@@ -10,12 +10,14 @@ import { ModalInput } from 'app/components/shared/Modals/Input';
 import { DatePickerButton, MiniCalendar } from 'app/components';
 import { useToggler, useInput } from 'app/custom-hooks';
 import { sendToast } from 'app/shared';
+import cx from 'classnames';
 
 interface IProps {
     task: ITask;
+    late: boolean;
 }
 
-export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
+export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
     /* TASK CONST EDIT */
     const [inputMode, setInputMode] = useToggler(false);
     const [inputValue, setInputValue] = useInput(task.title);
@@ -151,7 +153,11 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
 
     return (
         <div className='task-list-item'>
-            <div className='task-list-item__state'>
+            <div
+                className={cx('task-list-item__state', {
+                    'task-list-item__state--late': late,
+                })}
+            >
                 <FiCircle className='task-list-item__state__icon' />
             </div>
 
