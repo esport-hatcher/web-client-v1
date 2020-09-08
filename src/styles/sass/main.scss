@@ -38,6 +38,9 @@
 @import './components/textarea';
 @import './components/box-header';
 @import './components/dropdown';
+@import './components/team-card';
+@import './components/team-user-card';
+@import './components/description-team';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -47,6 +50,8 @@
 @import './layouts/header';
 @import './layouts/admin-filters';
 @import './layouts/create-team-form';
+@import './layouts/join-team-form';
+@import './layouts/main-modal-team-form';
 @import './layouts/task-section';
 @import './layouts/create-task-form';
 @import './layouts/task-list';
@@ -55,7 +60,8 @@
 //      SCREENS
 @import './screens/auth-screen';
 @import './screens/admin-panel';
-@import './screens/team-management-screen';
 @import './screens/settings-profile';
 @import './screens/todolist-screen';
 @import './screens/calendar';
+@import './screens/team-list-screen';
+@import './screens/edit-team-screen';

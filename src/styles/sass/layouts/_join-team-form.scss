@@ -1,10 +1,10 @@
-.create-team-form-container {
+.join-team-form-container {
     font-size: 16px;
     padding: 30px 30px 15px 30px;
     border-radius: 7px;
     border-radius: 10px 10px / 10px 10px;
 }
-.create-team-form {
+.join-team-form {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
         height: 100px;
         border-radius: 8px;
         border: none;
-        background-color: #a193f5;
+        background-color: $color-green;
         font-family: Helvetica;
         font-size: 36px;
         font-weight: bold;
@@ -44,7 +44,7 @@
         font-size: 50px;
         font-weight: bold;
         text-align: center;
-        color: #a193f5;
+        color: $color-green;
         margin-top: 80px;
     }
     &__container {
@@ -106,7 +106,7 @@
 
 
          &__team-name{
-            width: 100%;
+            width: 50%;
             border-bottom: solid 1px #000000;
             border-top-style:hidden;
             border-right-style:hidden;
@@ -116,6 +116,6 @@
     
 }
 
-.create-team-form__close-btn:hover{
+.join-team-form__close-btn:hover{
     cursor: pointer;
 }

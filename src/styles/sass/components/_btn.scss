@@ -129,6 +129,39 @@
         border-bottom-right-radius: 14px;
     }
 
+    &--plus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &__circle {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: #1d2938;
+            border: solid 6px white;
+        }
+
+        &__horizontal {
+            position: relative;
+            background-color: #FFFFFF;
+            width: 50%;
+            height: 12.5%;
+            left: 25%;
+            top: 43.75%;
+        }
+
+        &__vertical {
+            position: relative;
+            background-color: #FFFFFF;
+            width: 12.5%;
+            height: 50%;
+            left: 43.75%;
+            top: 12.5%;
+        }
+    }
+
     &:disabled {
         opacity: 0.3;
         cursor: auto;

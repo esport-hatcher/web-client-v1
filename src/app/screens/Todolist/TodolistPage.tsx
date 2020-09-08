@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Filters, CreateTask, TaskList } from 'app/layouts';
 import { HeaderPage } from 'app/components';
-import { useToggler } from 'app/custom-hooks';
+import { useToggler, useSelector } from 'app/custom-hooks';
 import { parse } from 'query-string';
+import { fetchTeams, ITeams } from 'app/actions';
+import { useDispatch, shallowEqual } from 'react-redux';
 
 interface IProps {
     location: {
@@ -16,7 +18,10 @@ interface IFilters {
 }
 
 export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
+    const dispatch = useDispatch();
+    const teams = useSelector(state => state.teams, shallowEqual);
     const [showCreateTask, setShowCreateTask] = useToggler(false);
+    const [selectedTeam, setSelectedTeam] = useState<ITeams>();
     const section: IFilters = parse(location.search) as IFilters;
     const title = () => {
         return section.filter === 'today'
@@ -27,11 +32,15 @@ export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
             ? 'Archive'
             : 'Inbox';
     };
+    useEffect(() => {
+        dispatch(fetchTeams());
+    }, [dispatch]);
+
     return (
         <main>
             <HeaderPage title='To-do List' />
             <div className='todolist-screen'>
-                <Filters />
+                <Filters teams={teams.team} setSelectedTeam={setSelectedTeam} />
                 <div className='todolist-screen__tasks'>
                     <h1 className='todolist-screen__tasks__title'>{title()}</h1>
                     {!showCreateTask && (
@@ -43,9 +52,12 @@ export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
                         </button>
                     )}
                     {showCreateTask && (
-                        <CreateTask setShowCreateTask={setShowCreateTask} />
+                        <CreateTask
+                            setShowCreateTask={setShowCreateTask}
+                            selectedTeam={selectedTeam}
+                        />
                     )}
-                    <TaskList section={title()} />
+                    <TaskList section={title()} selectedTeam={selectedTeam} />
                 </div>
             </div>
         </main>
