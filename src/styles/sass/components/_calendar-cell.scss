@@ -1,0 +1,46 @@
+.calendar-cell {
+    color: $color-white;
+    background-color: $color-dark;
+    position: relative;
+    transition: all 0.2s;
+    border-radius: $container-border-radius;
+
+    &:hover {
+        background-color: lighten($color-dark, 2%);
+        transform: perspective(500px) translateZ(60px);
+        box-shadow: -6px 6px 12px 12px rgba(0, 0, 0, 0.1);
+        z-index: 98;
+    }
+
+    &--disabled {
+        background-color: darken($color-dark, 2%);
+        cursor: auto;
+
+        &:hover {
+            background-color: darken($color-dark, 2%);
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    &__date {
+        position: absolute;
+        left: 2rem;
+        top: 2rem;
+    }
+
+    &__action-buttons {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        column-gap: 0.4rem;
+
+        &__button {
+            &:hover {
+                color: $color-blue-light;
+            }
+        }
+    }
+}

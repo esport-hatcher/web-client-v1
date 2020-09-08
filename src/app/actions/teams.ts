@@ -4,7 +4,7 @@ import { ActionTypes, IGetState } from './types';
 import { sendToast } from 'app/shared';
 import { IUser } from './user';
 
-export interface ITeams {
+export interface ITeam {
     TeamUser: [];
     id: number;
     avatarTeamUrl: string;
@@ -24,11 +24,18 @@ export interface ICreateTeam {
 
 export interface IFetchTeamSuccessAction {
     type: ActionTypes.fetchTeamSuccess;
-    payload: ITeams[];
+    payload: ITeam[];
 }
 export interface IFetchTeamErrorAction {
     type: ActionTypes.fetchTeamError;
-    payload: ITeamsFailure;
+}
+
+export interface ITeamFailure {
+    message: string;
+}
+
+export interface ITeamSuccess {
+    teams: ITeam[];
 }
 
 export interface IFetchTeamUserSucess {
@@ -51,12 +58,12 @@ export interface ITeamsErrorAction {
 }
 
 export interface ITeamsSuccess {
-    teams: ITeams[];
+    teams: ITeam[];
 }
 
 export interface ICreateTeamActionSucess {
     type: ActionTypes.createTeamSucess;
-    payload: ITeams[];
+    payload: ITeam[];
 }
 
 export interface ICreateTeamActionError {
@@ -76,7 +83,7 @@ export const fetchTeams = () => async (
     try {
         const myId = getState().authentication.user;
         if (myId) {
-            const { data } = await api.get<ITeams[]>(`users/${myId.id}/teams`);
+            const { data } = await api.get<ITeam[]>(`users/${myId.id}/teams`);
             dispatch<IFetchTeamSuccessAction>({
                 type: ActionTypes.fetchTeamSuccess,
                 payload: data,
@@ -85,7 +92,6 @@ export const fetchTeams = () => async (
     } catch ({ response: { data } }) {
         dispatch<IFetchTeamErrorAction>({
             type: ActionTypes.fetchTeamError,
-            payload: data,
         });
     }
 };
@@ -121,7 +127,7 @@ export const createTeam = (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post<ITeams[]>(`teams/`, {
+            const { data } = await api.post<ITeam[]>(`teams/`, {
                 game: valueGame,
                 name: valueName,
                 region: valueRegion,

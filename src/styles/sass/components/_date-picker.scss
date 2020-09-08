@@ -1,0 +1,69 @@
+.react-datepicker {
+    border: none;
+    outline: none;
+    border-radius: $container-border-radius;
+    font-family: $font-family-body;
+    padding: 2rem 4rem;
+    background-color: $color-dark;
+    color: $color-white;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: -7px 8px 13px 13px rgba(0, 0, 0, 0.1);
+
+    &__header {
+        background-color: $color-dark;
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        row-gap: 1.2rem;
+        border-color: $color-dark-four;
+    }
+
+    &__day-names {
+        background-color: $color-dark;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    &__month {
+        padding: 1.2rem 0;
+    }
+
+    &__day-name {
+        color: $color-white;
+        font-size: 1.6rem;
+        padding: 1.2rem 0;
+        font-weight: 600;
+    }
+
+    &__day {
+        color: $color-white;
+        font-size: 1.2rem;
+        width: 2.8rem;
+        height: 2.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s;
+
+        &:hover {
+            background-color: $color-dark-two;
+            transform: perspective(500px) translateZ(100px);
+            z-index: 98;
+        }
+
+        &--selected {
+            background-color: $color-blue-light;
+        }
+    }
+
+    &__week {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        &:not(:last-child) {
+            margin-bottom: 1.2rem;
+        }
+    }
+}

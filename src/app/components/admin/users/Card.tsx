@@ -1,19 +1,16 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, shallowEqual } from 'react-redux';
 import { IUser, deleteUser } from 'app/actions';
-import {
-    UserConfirmedInfo,
-    UserAvatar,
-    ModalConfirmation,
-} from 'app/components';
-import { useToggler, useSelector } from 'app/custom-hooks';
+import { UserConfirmedInfo, UserAvatar } from 'app/components';
+import { useSelector } from 'app/custom-hooks';
+import { UserDeleteConfirmation } from './Delete';
 
 interface IProps {
     user: IUser;
 }
 
 export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
-    const [showModal, toggleModal] = useToggler(false);
+    const [showModal, setShowModal] = useState(false);
     const userSession = useSelector(
         state => state.authentication.user,
         shallowEqual
@@ -27,14 +24,12 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
 
     return (
         <div className='admin-user-card'>
-            {showModal && (
-                <ModalConfirmation
-                    title={`Confirm ${user.username} deletion ?`}
-                    message={`All data related to ${user.username}'s account will be erased.`}
-                    onClose={toggleModal}
-                    onConfirm={onConfirmModal}
-                />
-            )}
+            <UserDeleteConfirmation
+                onConfirm={onConfirmModal}
+                setShow={setShowModal}
+                show={showModal}
+                user={user}
+            />
             <div className='admin-user-card__names'>
                 <p className='admin-user-card__names__firstname important-info important-info--xl'>
                     {user.firstName}
@@ -64,7 +59,7 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
             <div className='admin-user-card__action-buttons'>
                 <button
                     className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary'
-                    onClick={toggleModal}
+                    onClick={() => setShowModal(true)}
                     disabled={user.id === userSession!.id}
                 >
                     Delete

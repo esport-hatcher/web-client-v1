@@ -3,7 +3,7 @@ import { Filters, CreateTask, TaskList } from 'app/layouts';
 import { HeaderPage } from 'app/components';
 import { useToggler, useSelector } from 'app/custom-hooks';
 import { parse } from 'query-string';
-import { fetchTeams, ITeams } from 'app/actions';
+import { fetchTeams, ITeam } from 'app/actions';
 import { useDispatch, shallowEqual } from 'react-redux';
 
 interface IProps {
@@ -21,7 +21,7 @@ export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
     const dispatch = useDispatch();
     const teams = useSelector(state => state.teams, shallowEqual);
     const [showCreateTask, setShowCreateTask] = useToggler(false);
-    const [selectedTeam, setSelectedTeam] = useState<ITeams>();
+    const [selectedTeam, setSelectedTeam] = useState<ITeam>();
     const section: IFilters = parse(location.search) as IFilters;
     const title = () => {
         return section.filter === 'today'
@@ -40,7 +40,10 @@ export const _TodolistPage: React.FC<IProps> = React.memo(({ location }) => {
         <main>
             <HeaderPage title='To-do List' />
             <div className='todolist-screen'>
-                <Filters teams={teams.team} setSelectedTeam={setSelectedTeam} />
+                <Filters
+                    teams={teams.teams}
+                    setSelectedTeam={setSelectedTeam}
+                />
                 <div className='todolist-screen__tasks'>
                     <h1 className='todolist-screen__tasks__title'>{title()}</h1>
                     {!showCreateTask && (

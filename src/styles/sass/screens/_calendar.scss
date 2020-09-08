@@ -1,3 +1,5 @@
+$calendar-container-max-width: 160rem;
+
 .calendar {
     display: grid;
     height: 100%;
@@ -27,13 +29,38 @@
     }
 
     &__content {
-        padding: 6rem $header-padding-sides;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-auto-rows: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__container {
+            max-width: $calendar-container-max-width;
+            height: 90%;
+            width: 90%;
+            display: grid;
+            grid-template-rows: min-content auto;
+            border-radius: $container-border-radius;
+        }
 
         &__days {
-            justify-self: center;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid $color-medium-grey;
+        }
+
+        &__cells {
+            width: 100%;
+            height: 100%;
+            color: $color-white;
+            display: grid;
+            grid-template-rows: repeat(5, auto);
+
+            &__row {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+            }
         }
     }
 }
