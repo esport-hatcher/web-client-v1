@@ -8,7 +8,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 export const _TeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
-    const teams = useSelector(state => state.teams.team);
+    const teams = useSelector(state => state.teams.teams);
     const [menuchoice, setmenuchoice] = useState(true);
 
     const [show, onShow] = useToggler(false);

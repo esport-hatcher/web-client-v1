@@ -3,7 +3,7 @@ import { ActionTypes, AppThunk, IFieldData, IGetState } from './types';
 import { IFormValues } from './form';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
-import { ITeams } from './teams';
+import { ITeam } from './teams';
 
 export interface ITask {
     id: number;
@@ -43,7 +43,7 @@ export interface IPatchTaskSuccess {
 
 export const createTask = (
     createTaskFormValues: IFormValues,
-    team?: ITeams
+    team?: ITeam
 ): AppThunk => async (dispatch: Dispatch, getState: IGetState) => {
     try {
         const user = getState().authentication.user;
@@ -79,7 +79,7 @@ export const createTask = (
     }
 };
 
-export const fetchTasks = (team?: ITeams): AppThunk => async (
+export const fetchTasks = (team?: ITeam): AppThunk => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {

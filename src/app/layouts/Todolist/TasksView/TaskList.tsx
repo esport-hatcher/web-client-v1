@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { TaskItem } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
 import { useDispatch, shallowEqual } from 'react-redux';
-import { fetchTasks, ITask, ITeams } from 'app/actions';
+import { fetchTasks, ITask, ITeam } from 'app/actions';
 import {
     getTodoTasks,
     getCompletedTasks,
@@ -13,7 +13,7 @@ import {
 
 interface IProps {
     section: string;
-    selectedTeam: ITeams | undefined;
+    selectedTeam: ITeam | undefined;
 }
 
 export const TaskList: React.FC<IProps> = React.memo(

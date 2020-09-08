@@ -27,7 +27,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
         const [options, setOptions] = useState<OptionsType<IOption>>([
             { value: '0', label: 'Personal' },
         ]);
-        const rawTeams = useSelector(state => state.teams, shallowEqual);
+        const rawTeams = useSelector(state => state.teams.teams, shallowEqual);
         const [selectedOption, setSelectedOption] = useState<number>(0); // set default option to personal
         const [dateBegin, setDateBegin] = useState<Date>(new Date());
         const [dateEnd, setDateEnd] = useState<Date>(new Date());

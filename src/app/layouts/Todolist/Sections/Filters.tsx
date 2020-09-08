@@ -2,10 +2,10 @@ import React from 'react';
 import { TaskFilterByDate, Dropdown } from 'app/components';
 import { FaRegCalendarAlt, FaCalendarDay, FaArchive } from 'react-icons/fa';
 import { BsFillInboxesFill } from 'react-icons/bs';
-import { ITeams } from 'app/actions';
+import { ITeam } from 'app/actions';
 
 interface IProps {
-    teams: ITeams[];
+    teams: ITeam[];
     setSelectedTeam: Function;
 }
 
