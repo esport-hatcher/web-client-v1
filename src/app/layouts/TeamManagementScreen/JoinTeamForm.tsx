@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { SmartSelect } from 'app/components';
 import { createTeam } from 'app/actions';
 
 interface IProps {
@@ -9,9 +8,8 @@ interface IProps {
 
 export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
     const [valueName, setValueName] = useState('');
-    const [valueRegion, setValueRegion] = useState('');
-    const [valuePlayer, setPlayerSelected] = useState([{ value: Number }]);
-    const [valueGame, setValueGame] = useState('');
+    const [valueRegion] = useState('');
+    const [valueGame] = useState('');
     const dispatch = useDispatch();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,9 +17,7 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
         dispatch(createTeam(valueName, valueRegion, valueGame));
         change(false);
     };
-    const smartSelectProps = {
-        setPlayerSelected: setPlayerSelected,
-    };
+
     // tslint:disable-next-line:no-any
     const handleChange = (value: any) => {
         setValueName(value.target.value);

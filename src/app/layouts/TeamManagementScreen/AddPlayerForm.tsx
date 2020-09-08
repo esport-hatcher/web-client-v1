@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SmartSelect } from 'app/components';
 import { useDispatch } from 'react-redux';
-import { createTeam, invitePlayer, fetchTeamUser } from 'app/actions';
+import { invitePlayer } from 'app/actions';
 
 interface IProps {
     change: Function;

@@ -9,7 +9,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
-    const [inteam, setinteam] = useToggler(false);
+    const [inTeam] = useToggler(false);
     const [show, onShow] = useToggler(false);
 
     const { id } = useParams();
@@ -25,7 +25,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
         if (teamSelected) {
             dispatch(fetchTeamUser(teamSelected.id));
         }
-    }, [dispatch]);
+    }, [dispatch, teamSelected]);
 
     if (!teamSelected) {
         return null;
@@ -42,7 +42,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                     {teamUser &&
                         user &&
                         teamUser.map(item => {
-                            if (inteam === true) {
+                            if (inTeam === true) {
                                 if (item.id === user.id) {
                                     return null;
                                 }
