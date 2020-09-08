@@ -12,6 +12,7 @@ $color-dark-medium: #1d2938;
 $color-dark-four: #0e1623;
 $color-white: #fff;
 $color-light-grey: #748192;
+$color-medium-grey: darken($color-light-grey, 10%);
 $color-green-light: rgb(30, 226, 30);
 $color-green: #42b945;
 $color-blue: #6eb3ed;
@@ -36,6 +37,8 @@ $border-focus: 1px solid $color-white;
 
 $page-transition-ms: 500ms;
 $page-header-gap: 6rem;
+
+$container-border-radius: 8px;
 
 /*
 AUTH SCREEN
@@ -92,7 +95,7 @@ $label-count-font-size: 1rem;
 $base-input-padding-sides: 1.8rem;
 $base-input-padding-top: 1rem;
 $base-input-max-width: 50rem;
-$base-input-border-radius: 14px;
+$base-input-border-radius: 8px;
 
 /*
 SEARCH FIELD

@@ -17,6 +17,7 @@
 
 .team-page {
         &__modal {
+            height: 100%;
             &--button {
                 display: flex;
                 justify-content: center;
@@ -73,11 +74,70 @@
                 border-style: groove;
                 border-color: $color-white;
                 border-radius: 8px;
+
+                &--container {
+                    padding: 75px;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    align-content: stretch;
+                    // align-items: stretch;
+                }
             }
 
-            &__main > div {
-                height: 100%;
+            &__initial {
+                width: 100%;
+                border: solid 1px $color-light-grey;
+                border-radius: 5px;
+                margin: 5px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 20px;
             }
+
+            &__title {
+                object-fit: contain;
+                font-family: Helvetica;
+                font-size: 50px;
+                font-weight: bold;
+                text-align: center;
+                &--create {
+                    color: #a193f5;
+                }
+
+                &--join {
+                    color: $color-green;
+                }
+            }
+
+            &__btn-create {
+                height: 80px;
+                border: none;
+                border-radius: 8px;
+                font-size: 36px;
+                color: white;
+                font-family: Helvetica, sans-serif;
+                font-weight: bold;
+                background-color: #a193f5;
+            }
+
+            &__btn-join {
+                height: 80px;
+                border: none;
+                border-radius: 8px;
+                font-size: 36px;
+                color: white;
+                font-family: Helvetica, sans-serif;
+                font-weight: bold;
+                background-color: $color-green;
+            }
+
+            &__btn-create:hover, &__btn-join:hover {
+                cursor: pointer;
+            }
+            
         }
 
         .display-block {

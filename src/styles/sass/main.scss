@@ -1,3 +1,5 @@
+@import '~react-datepicker/dist/react-datepicker.css';
+
 //      ABSTRACTS
 @import './abstracts/variables';
 @import './abstracts/functions';
@@ -12,7 +14,7 @@
 
 //      COMPONENTS
 @import './components/label';
-@import './components/smart-input';
+@import './components/form-input';
 @import './components/btn';
 @import './components/filter-item';
 @import './components/search-input';
@@ -23,17 +25,23 @@
 @import './components//user-confirmed-info';
 @import './components/user-confirmed-info';
 @import './components/modifiable-input';
-@import './components/modal-confirmation';
+@import './components/modal';
 @import './components/auto-complete';
-@import './components/dropdown';
 @import './components/toast';
 @import './components/task-filter-by-date';
 @import './components/mini-calendar';
 @import './components/task-item';
 @import './components/task-description-input';
+@import './components/calendar-cell';
+@import './components/date-picker';
+@import './components/hour-picker';
+@import './components/textarea';
+@import './components/box-header';
+@import './components/dropdown';
 @import './components/team-card';
 @import './components/team-user-card';
 @import './components/description-team';
+
 //      LAYOUTS
 @import './layouts/banner';
 @import './layouts/register-screen';
@@ -42,9 +50,12 @@
 @import './layouts/header';
 @import './layouts/admin-filters';
 @import './layouts/create-team-form';
+@import './layouts/join-team-form';
+@import './layouts/main-modal-team-form';
 @import './layouts/task-section';
 @import './layouts/create-task-form';
 @import './layouts/task-list';
+@import './layouts/create-event-form';
 
 //      SCREENS
 @import './screens/auth-screen';

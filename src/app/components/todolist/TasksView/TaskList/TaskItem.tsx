@@ -6,16 +6,22 @@ import { BsPencil } from 'react-icons/bs';
 import { ITask, deleteTask, patchTask } from 'app/actions';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { ModalInput } from 'app/components/shared/Modals/Input';
-import { DatePickerButton, MiniCalendar } from 'app/components';
+import {
+    DatePickerButton,
+    MiniCalendar,
+    Modal,
+    ModifiableTextArea,
+} from 'app/components';
 import { useToggler, useInput } from 'app/custom-hooks';
 import { sendToast } from 'app/shared';
+import cx from 'classnames';
 
 interface IProps {
     task: ITask;
+    late: boolean;
 }
 
-export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
+export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
     /* TASK CONST EDIT */
     const [inputMode, setInputMode] = useToggler(false);
     const [inputValue, setInputValue] = useInput(task.title);
@@ -25,7 +31,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
     const [date, setDate] = useState(moment(task.dateEnd).format('Y/M/D'));
 
     /* TASK CONST COMMENT */
-    const [showModal, toggleModal] = useToggler(false);
+    const [showModal, setShowModal] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -151,7 +157,11 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
 
     return (
         <div className='task-list-item'>
-            <div className='task-list-item__state'>
+            <div
+                className={cx('task-list-item__state', {
+                    'task-list-item__state--late': late,
+                })}
+            >
                 <FiCircle className='task-list-item__state__icon' />
             </div>
 
@@ -164,16 +174,30 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task }) => {
             <button className='task-list-item__edit' onClick={setInputMode}>
                 Edit
             </button>
-            <button className='task-list-item__comment' onClick={toggleModal}>
+            <button
+                className='task-list-item__comment'
+                onClick={() => setShowModal(true)}
+            >
                 Comment
             </button>
-            {showModal && (
-                <ModalInput
-                    task={task}
-                    onClose={toggleModal}
-                    onConfirm={onConfirmModal}
+            <Modal setShow={setShowModal} show={showModal}>
+                <p className='title title--xs'>{task.title}</p>
+                <hr className='divider' />
+                <ModifiableTextArea
+                    value={task.description}
+                    label='Description'
+                    name='description'
+                    onChange={onConfirmModal}
                 />
-            )}
+                <div className='modal__action-buttons'>
+                    <button
+                        className='btn btn--primary'
+                        onClick={() => setShowModal(false)}
+                    >
+                        Close
+                    </button>
+                </div>
+            </Modal>
 
             {/* TASK BUTTON COMPLETE/DELETE */}
             <button

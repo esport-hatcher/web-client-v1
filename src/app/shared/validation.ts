@@ -5,11 +5,11 @@ export type ReduxFormValidation = undefined | string;
 
 // tslint:disable-next-line: no-any
 export const isEmailAvailable = async (
-    email: string
+    value: string | null | undefined
 ): Promise<boolean | ValidationError> => {
     try {
         await api.post('/users/email', {
-            email,
+            value,
         });
         return Promise.resolve(true);
     } catch {

@@ -25,6 +25,7 @@ import {
     IPatchTaskSuccess,
 } from './tasks';
 import { IUpdateForm, IResetForm } from './form';
+import { ICalendarEventCreationSuccess } from './calendar';
 
 export type CountQuery = { records: number };
 
@@ -46,6 +47,7 @@ export enum ActionTypes {
     fetchTaskSuccess,
     deleteTaskSuccess,
     patchTaskSuccess,
+    calendarEventCreationSuccess,
     updateForm,
     resetForm,
     createTeamSucess,
@@ -74,6 +76,7 @@ export type Action =
     | IFetchTaskSuccess
     | IDeleteTaskSuccess
     | IPatchTaskSuccess
+    | ICalendarEventCreationSuccess
     | IUpdateForm
     | IResetForm
     | IFetchTeamUserSucess

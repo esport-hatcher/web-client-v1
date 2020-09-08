@@ -1,13 +1,13 @@
-import { ITeams, Action, ActionTypes, IUser } from 'app/actions';
+import { ITeam, Action, ActionTypes, IUser } from 'app/actions';
 import concat from 'lodash/concat';
 
 export interface ITeamsReducer {
-    team: ITeams[];
+    teams: ITeam[];
     teamUsers: IUser[];
 }
 
 const INITIAL_STATE: ITeamsReducer = {
-    team: [],
+    teams: [],
     teamUsers: [],
 };
 
@@ -16,17 +16,17 @@ const teamsReducer = (state: ITeamsReducer = INITIAL_STATE, action: Action) => {
         case ActionTypes.fetchTeamSuccess:
             return {
                 ...state,
-                team: action.payload,
+                teams: action.payload,
             };
         case ActionTypes.fetchTeamError:
             return {
                 ...state,
-                teams: action.payload || [],
+                teams: [],
             };
         case ActionTypes.createTeamSucess:
             return {
                 ...state,
-                team: concat(state.team, action.payload),
+                teams: concat(state.teams, action.payload),
             };
         case ActionTypes.createTeamError:
             return {

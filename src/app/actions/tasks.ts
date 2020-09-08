@@ -1,8 +1,9 @@
 import api from 'app/api';
-import { ActionTypes, AppThunk, IFieldData } from './types';
+import { ActionTypes, AppThunk, IFieldData, IGetState } from './types';
 import { IFormValues } from './form';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
+import { ITeam } from './teams';
 
 export interface ITask {
     id: number;
@@ -11,6 +12,7 @@ export interface ITask {
     dateBegin: Date;
     dateEnd: Date;
     completed: boolean;
+    TeamId: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -41,23 +43,28 @@ export interface IPatchTaskSuccess {
 
 export const createTask = (
     createTaskFormValues: IFormValues,
-    teamId?: number
-): AppThunk => async dispatch => {
+    team?: ITeam
+): AppThunk => async (dispatch: Dispatch, getState: IGetState) => {
     try {
-        const { data } = await api.post<ITask>(
-            `/teams/${teamId ? teamId : '1'}/tasks`,
-            createTaskFormValues
-        );
-        dispatch<ICreateTaskSuccess>({
-            type: ActionTypes.createTaskSuccess,
-            task: data,
-        });
-        sendToast({
-            title: 'Task Created',
-            content: 'You successfully created the task !',
-            type: 'success',
-        });
-        return Promise.resolve();
+        const user = getState().authentication.user;
+        if (user) {
+            const { data } = await api.post<ITask>(
+                `${
+                    team ? `/teams/${team.id}/tasks` : `/users/${user.id}/tasks`
+                }`,
+                createTaskFormValues
+            );
+            dispatch<ICreateTaskSuccess>({
+                type: ActionTypes.createTaskSuccess,
+                task: data,
+            });
+            sendToast({
+                title: 'Task Created',
+                content: 'You successfully created the task !',
+                type: 'success',
+            });
+            return Promise.resolve();
+        }
     } catch ({
         response: {
             data: { message },
@@ -72,31 +79,47 @@ export const createTask = (
     }
 };
 
-export const fetchTasks = () => async (dispatch: Dispatch) => {
-    const { data } = await api.get<ITask[]>(`teams/1/tasks`);
-
-    dispatch<IFetchTaskSuccess>({
-        type: ActionTypes.fetchTaskSuccess,
-        tasks: data,
-    });
+export const fetchTasks = (team?: ITeam): AppThunk => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    const user = getState().authentication.user;
+    if (user) {
+        const { data } = await api.get<ITask[]>(
+            `${team ? `/teams/${team.id}/tasks` : `/users/${user.id}/tasks`}`
+        );
+        dispatch<IFetchTaskSuccess>({
+            type: ActionTypes.fetchTaskSuccess,
+            tasks: data,
+        });
+    }
 };
 
 export const deleteTask = (task: ITask): AppThunk => async (
-    dispatch: Dispatch
+    dispatch: Dispatch,
+    getState: IGetState
 ) => {
     try {
-        await api.delete<ITask>(`teams/1/tasks/${task.id}`);
-
-        dispatch<IDeleteTaskSuccess>({
-            type: ActionTypes.deleteTaskSuccess,
-            task: task,
-        });
-        sendToast({
-            title: 'Task Deleted',
-            content: 'You successfully deleted the task !',
-            type: 'success',
-        });
-        return Promise.resolve();
+        const user = getState().authentication.user;
+        if (user) {
+            await api.delete<ITask>(
+                `${
+                    task.TeamId
+                        ? `/teams/${task.TeamId}/tasks/${task.id}`
+                        : `/users/${user.id}/tasks/${task.id}`
+                }`
+            );
+            dispatch<IDeleteTaskSuccess>({
+                type: ActionTypes.deleteTaskSuccess,
+                task: task,
+            });
+            sendToast({
+                title: 'Task Deleted',
+                content: 'You successfully deleted the task !',
+                type: 'success',
+            });
+            return Promise.resolve();
+        }
     } catch ({
         response: {
             data: { message },
@@ -114,18 +137,24 @@ export const deleteTask = (task: ITask): AppThunk => async (
 export const patchTask = (
     task: ITask,
     editData: IFieldData
-): AppThunk => async (dispatch: Dispatch) => {
+): AppThunk => async (dispatch: Dispatch, getState: IGetState) => {
     try {
-        const { data } = await api.patch<ITask>(
-            `teams/1/tasks/${task.id}`,
-            editData
-        );
-
-        dispatch<IPatchTaskSuccess>({
-            type: ActionTypes.patchTaskSuccess,
-            task: data,
-        });
-        return Promise.resolve();
+        const user = getState().authentication.user;
+        if (user) {
+            const { data } = await api.patch<ITask>(
+                `${
+                    task.TeamId
+                        ? `/teams/${task.TeamId}/tasks/${task.id}`
+                        : `/users/${user.id}/tasks/${task.id}`
+                }`,
+                editData
+            );
+            dispatch<IPatchTaskSuccess>({
+                type: ActionTypes.patchTaskSuccess,
+                task: data,
+            });
+            return Promise.resolve();
+        }
     } catch ({
         response: {
             data: { message },
