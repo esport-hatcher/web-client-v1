@@ -16,12 +16,7 @@ export const ModalForm = ({
 
     return (
         <div className={showHideClassName}>
-            <section className='modal-main'>
-                {children}
-                <div onClick={handleClose} className='close-thik'>
-                    X
-                </div>
-            </section>
+            <section className='modal__main'>{children}</section>
         </div>
     );
 };
