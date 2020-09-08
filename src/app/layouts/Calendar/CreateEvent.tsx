@@ -48,7 +48,11 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
 
         const _onSubmit = async (tempFormValues: IFormValues) => {
             // tslint:disable-next-line: no-console
-            const formValues = { ...tempFormValues, dateBegin, dateEnd };
+            const formValues = {
+                ...tempFormValues,
+                dateBegin: dateBegin.toISOString(),
+                dateEnd: dateEnd.toISOString(),
+            };
             await dispatch(createEvent(formValues, selectedOption));
             onSubmit();
         };

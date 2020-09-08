@@ -8,11 +8,10 @@ import { CreateEventForm } from 'app/layouts/Calendar/CreateEvent';
 interface IProps {
     readonly cellDate: Date;
     disabled?: boolean;
-    selected?: boolean;
 }
 
 export const CalendarCell: React.FC<IProps> = React.memo(
-    ({ cellDate, disabled = false, selected = false }) => {
+    ({ cellDate, disabled = false }) => {
         const [isFocus, setIsFocus] = useState(false);
         const [showModal, setShowModal] = useState(false);
 

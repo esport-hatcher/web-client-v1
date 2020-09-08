@@ -5,20 +5,15 @@ import {
     startOfWeek,
     endOfWeek,
     isSameMonth,
-    isSameDay,
     addDays,
 } from 'date-fns';
 import { CalendarCell } from 'app/components';
 
 interface IProps {
     currentMonth: Date;
-    selectedDate: Date;
 }
 
-export const CalendarCellsList: React.FC<IProps> = ({
-    currentMonth,
-    selectedDate,
-}) => {
+export const CalendarCellsList: React.FC<IProps> = ({ currentMonth }) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
@@ -35,7 +30,6 @@ export const CalendarCellsList: React.FC<IProps> = ({
                     cellDate={day}
                     key={day.toString()}
                     disabled={!isSameMonth(day, monthStart)}
-                    selected={isSameDay(day, selectedDate)}
                 />
             );
             day = addDays(day, 1);

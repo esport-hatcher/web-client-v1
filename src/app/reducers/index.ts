@@ -5,6 +5,7 @@ import adminPanelReducer from './adminPanel';
 import fetchTeamsReducer from './teams';
 import taskReducer from './tasks';
 import formReducer from './forms';
+import calendarReducer from './calendar';
 
 export const appReducer = combineReducers({
     authentication: authenticationReducer,
@@ -12,6 +13,7 @@ export const appReducer = combineReducers({
     teams: fetchTeamsReducer,
     tasks: taskReducer,
     forms: formReducer,
+    calendar: calendarReducer,
 });
 
 export type RootState = ReturnType<typeof appReducer>;

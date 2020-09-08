@@ -7,18 +7,21 @@ import {
     CalendarCellsList,
 } from 'app/layouts';
 import { HeaderPage } from 'app/components';
-import { fetchTeams } from 'app/actions';
+import { fetchTeams, fetchEvents } from 'app/actions';
 
 interface IProps {}
 
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-    const [selectedDate] = useState<Date>(new Date());
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchTeams());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchEvents(currentMonth));
+    }, [dispatch, currentMonth]);
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));
@@ -40,10 +43,7 @@ export const CalendarPage: React.FC<IProps> = () => {
             <section className='calendar__content'>
                 <div className='calendar__content__container'>
                     <CalendarDaysList currentMonth={currentMonth} />
-                    <CalendarCellsList
-                        currentMonth={currentMonth}
-                        selectedDate={selectedDate}
-                    />
+                    <CalendarCellsList currentMonth={currentMonth} />
                 </div>
             </section>
         </main>
