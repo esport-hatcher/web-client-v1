@@ -30,7 +30,11 @@ export const AddPlayerForm: React.FC<IProps> = ({ change, teamId }) => {
             </div>
             <label>
                 <span> </span>
-                <input type='submit' value='invite player' />
+                <input
+                    type='submit'
+                    value='invite player'
+                    className='add-player-form-container__btn'
+                />
             </label>
         </form>
     );

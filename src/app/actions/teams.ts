@@ -22,6 +22,10 @@ export interface ICreateTeam {
     region: string;
 }
 
+export interface IJoinTeam {
+    valueNameTeam: string;
+}
+
 export interface IFetchTeamSuccessAction {
     type: ActionTypes.fetchTeamSuccess;
     payload: ITeam[];
@@ -182,7 +186,7 @@ export const invitePlayer = (
     }
 };
 
-export const joinTeam = (playerId: NumberConstructor, teamId: string) => async (
+export const joinTeam = (teamName: string) => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {
@@ -190,25 +194,34 @@ export const joinTeam = (playerId: NumberConstructor, teamId: string) => async (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post(
-                `teams/${teamId}/users/${playerId}`
-            );
-            dispatch<IInvitePlayerActionSucess>({
-                type: ActionTypes.invitePlayerSucess,
-                payload: data,
+            const { data } = await api.get<ITeam[]>(`/teams/?name=${teamName}`);
+            const teamSelected = data.find(element => {
+                return element.name === teamName;
             });
-            sendToast({
-                title: 'player invited',
-                content: 'You successfully add a player !',
-                type: 'success',
-            });
+            if (teamSelected) {
+                await api.post(`teams/${teamSelected.id}/users/${myId.id}`);
+                dispatch<ICreateTeamActionSucess>({
+                    type: ActionTypes.createTeamSucess,
+                    payload: [teamSelected],
+                });
+                sendToast({
+                    title: 'player invited',
+                    content: 'You successfully add a player !',
+                    type: 'success',
+                });
+            } else {
+                sendToast({
+                    title: 'unknown Team Name',
+                    content: '',
+                    type: 'error',
+                });
+            }
         }
     } catch (err) {
         sendToast({
-            title: 'invitation fail',
-            content: err,
+            title: 'Invitation fail',
+            content: '',
             type: 'error',
         });
-        //console.log('nope', err);
     }
 };
