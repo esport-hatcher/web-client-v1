@@ -7,8 +7,7 @@
     border: solid 4px#1d2938;
     background-color: #1d2938;
     color: #1d2938;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 10px 15px 10px 15px;
   }
   
   &__title {
@@ -22,12 +21,12 @@
     line-height: normal;
     letter-spacing: normal;
     color: white;
-    margin-bottom: 10px;
+    margin: 0px 0px 5px 0px;
   }
   
   &__outer {
     width: 100%;
-    height: 80%;
+    height: 85%;
     border: 2px solid #1d2938;
     background-color: #16212e;
     border-radius: 8px;

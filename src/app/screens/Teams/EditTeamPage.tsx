@@ -57,8 +57,15 @@ export const _EditTeamPage: React.FC = React.memo(() => {
             </div>
             <ModalForm show={show} handleClose={onShow}>
                 <div className='team-page__modal--form'>
-                    <h1>Select your player</h1>
-                    <AddPlayerForm change={onShow} teamId={teamSelected.id} />
+                    <div className='team-page__modal--title'>
+                        <h1>Select your player</h1>
+                    </div>
+                    <div className='team-page__modal--input'>
+                        <AddPlayerForm
+                            change={onShow}
+                            teamId={teamSelected.id}
+                        />
+                    </div>
                 </div>
             </ModalForm>
         </main>
