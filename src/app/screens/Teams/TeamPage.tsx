@@ -5,6 +5,7 @@ import { TeamCard } from 'app/components';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { fetchTeams } from 'app/actions';
 import { AiOutlinePlus } from 'react-icons/ai';
+import PlusButton from 'app/components/teams/PlusButton';
 
 export const _TeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export const _TeamPage: React.FC = React.memo(() => {
                     return <TeamCard item={item} />;
                 })}
             <div className='team-page__modal--button' onClick={onShowMenu}>
-                <AiOutlinePlus className='team-page__modal--button__icon' />
+                <PlusButton />
             </div>
             <ModalForm show={showMenu} handleClose={onShowMenu}>
                 <div className='modal__main--container'>
