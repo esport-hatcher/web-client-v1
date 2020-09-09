@@ -34,14 +34,14 @@ $calendar-container-max-width: 160rem;
         align-items: center;
 
         &__container {
-            max-width: $calendar-container-max-width;
+            // max-width: $calendar-container-max-width;
             height: 90%;
-            width: 90%;
-            padding: 0 2rem;
+            width: 100%;
+            padding: 0 4rem;
             display: grid;
             grid-template-columns: min-content 1fr;
             grid-template-rows: min-content auto;
-            column-gap: 2rem;
+            column-gap: 4rem;
             border-radius: $container-border-radius;
         }
 
@@ -72,7 +72,7 @@ $calendar-container-max-width: 160rem;
             grid-row: 2 / -1;
             grid-column: 1 / 2;
             position: relative;
-            padding-right: 2rem;
+            padding-right: 4rem;
 
             &--datepicker {
                 box-shadow: none;
