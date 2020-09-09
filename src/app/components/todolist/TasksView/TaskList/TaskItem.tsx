@@ -134,7 +134,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
                                 <DoubleDateSelector
                                     onChange={ondateChange}
                                     initialDate={day}
-                                    cname='calendar'
+                                    className='calendar'
                                 />
                             </div>
                         </div>
