@@ -37,11 +37,6 @@ export const register = (
             type: ActionTypes.registerSuccess,
             token,
         });
-        sendToast({
-            title: 'Sign up success',
-            content: 'We successfully created your account !',
-            type: 'success',
-        });
         return Promise.resolve();
     } catch ({
         response: {
