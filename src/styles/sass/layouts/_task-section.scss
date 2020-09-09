@@ -6,5 +6,29 @@
     &__team {
         display: flex;
         justify-content: center;
+
+        &-dropdown {
+            cursor: pointer;
+            height: 6vh;
+            width: 18vw;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px 0 $color-dark-four;
+            border: 1px solid $color-dark-four;
+            background-color: $color-dark-medium;
+            font-family: Helvetica;
+            font-size: 18px;
+            color: $color-light-grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:active {
+                background-color: lighten($color-dark-medium, 0.4%);
+            }
+
+            &:hover {
+                background-color: lighten($color-dark-medium, 0.4%);
+            }
+        }
     }
 }
