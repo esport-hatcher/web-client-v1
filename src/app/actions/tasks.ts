@@ -3,7 +3,6 @@ import { ActionTypes, AppThunk, IFieldData, IGetState } from './types';
 import { IFormValues } from './form';
 import { sendToast } from 'app/shared';
 import { Dispatch } from 'redux';
-import { ITeam } from './teams';
 
 export interface ITask {
     id: number;
@@ -43,14 +42,16 @@ export interface IPatchTaskSuccess {
 
 export const createTask = (
     createTaskFormValues: IFormValues,
-    team?: ITeam
+    teamId?: number
 ): AppThunk => async (dispatch: Dispatch, getState: IGetState) => {
     try {
         const user = getState().authentication.user;
         if (user) {
             const { data } = await api.post<ITask>(
                 `${
-                    team ? `/teams/${team.id}/tasks` : `/users/${user.id}/tasks`
+                    teamId
+                        ? `/teams/${teamId}/tasks`
+                        : `/users/${user.id}/tasks`
                 }`,
                 createTaskFormValues
             );
@@ -79,14 +80,14 @@ export const createTask = (
     }
 };
 
-export const fetchTasks = (team?: ITeam): AppThunk => async (
+export const fetchTasks = (teamId?: number): AppThunk => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {
     const user = getState().authentication.user;
     if (user) {
         const { data } = await api.get<ITask[]>(
-            `${team ? `/teams/${team.id}/tasks` : `/users/${user.id}/tasks`}`
+            `${teamId ? `/teams/${teamId}/tasks` : `/users/${user.id}/tasks`}`
         );
         dispatch<IFetchTaskSuccess>({
             type: ActionTypes.fetchTaskSuccess,

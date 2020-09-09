@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createTeam } from 'app/actions';
+import { joinTeam } from 'app/actions';
 
 interface IProps {
     change: (value: boolean) => void;
@@ -10,17 +10,18 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
     const [valueName, setValueName] = useState('');
     const [valueRegion] = useState('');
     const [valueGame] = useState('');
+    const [valueNameTeam, setValueNameTeam] = useState('');
     const dispatch = useDispatch();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createTeam(valueName, valueRegion, valueGame));
+        dispatch(joinTeam(valueNameTeam));
         change(false);
     };
-
+  
     // tslint:disable-next-line:no-any
     const handleChange = (value: any) => {
-        setValueName(value.target.value);
+        setValueNameTeam(value.target.value);
     };
 
     return (
@@ -30,7 +31,6 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
             </div>
             <div>
                 <form onSubmit={onSubmit}>
-                    {/* <SmartSelect {...smartSelectProps} /> */}\
                     <div className='join-team-form__container'>
                         <div className='join-team-form__label--team-name'>
                             <label className='join-team-form__label'>
@@ -41,7 +41,7 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
                                         'join-team-form__input__team-name'
                                     }
                                     type='text'
-                                    value={valueName}
+                                    value={valueNameTeam}
                                     onChange={handleChange}
                                     placeholder='Here'
                                 />

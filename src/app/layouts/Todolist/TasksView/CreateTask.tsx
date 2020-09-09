@@ -4,11 +4,11 @@ import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
 import { useDispatch } from 'react-redux';
-import { createTask, ITeam } from 'app/actions';
+import { createTask } from 'app/actions';
 
 interface IProps {
     setShowCreateTask: Function;
-    selectedTeam: ITeam | undefined;
+    selectedTeam: number;
 }
 
 export const CreateTask: React.FC<IProps> = React.memo(
