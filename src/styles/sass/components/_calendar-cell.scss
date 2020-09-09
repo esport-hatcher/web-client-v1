@@ -43,4 +43,26 @@
             }
         }
     }
+
+    &__event-list {
+        list-style: none;
+        padding: 6rem 0rem;
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+
+            &--hour {
+                margin-left: auto;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 0.2rem;
+            }
+        }
+    }
 }

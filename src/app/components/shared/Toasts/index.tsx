@@ -11,7 +11,7 @@ type ToastType = 'error' | 'success';
 
 export interface IToastConfig {
     title: string;
-    content: string;
+    content?: string;
     type: ToastType;
     Icon?: IconType;
 }
@@ -37,9 +37,11 @@ export const CustomToast: React.FC<IToastConfig &
             <h1 className='toast__container__title important-info important-info--md'>
                 {title}
             </h1>
-            <p className='toast__container__body body-text body-text--sm'>
-                {content}
-            </p>
+            {content && (
+                <p className='toast__container__body body-text body-text--sm'>
+                    {content}
+                </p>
+            )}
         </div>
     );
 });

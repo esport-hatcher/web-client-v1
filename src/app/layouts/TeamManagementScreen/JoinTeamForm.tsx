@@ -7,6 +7,9 @@ interface IProps {
 }
 
 export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
+    const [valueName, setValueName] = useState('');
+    const [valueRegion] = useState('');
+    const [valueGame] = useState('');
     const [valueNameTeam, setValueNameTeam] = useState('');
     const dispatch = useDispatch();
 
@@ -15,6 +18,7 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
         dispatch(joinTeam(valueNameTeam));
         change(false);
     };
+  
     // tslint:disable-next-line:no-any
     const handleChange = (value: any) => {
         setValueNameTeam(value.target.value);

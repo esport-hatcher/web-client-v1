@@ -47,4 +47,15 @@ const teamsReducer = (state: ITeamsReducer = INITIAL_STATE, action: Action) => {
     }
 };
 
+export const getTeamById = (
+    state: ITeam[],
+    teamId?: number
+): ITeam | undefined => {
+    if (teamId) {
+        const team = state.find(team => team.id === teamId);
+        return team;
+    }
+    return undefined;
+};
+
 export default teamsReducer;
