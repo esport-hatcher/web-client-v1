@@ -79,7 +79,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
                 <DoubleDateSelector
                     onChange={onDateChange}
                     initialDate={day}
-                    cname='taskdate'
+                    className='taskdate'
                 />
             </form>
         );
