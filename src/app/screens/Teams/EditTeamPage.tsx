@@ -6,6 +6,7 @@ import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, TeamDescription } from 'app/components';
 import { AiOutlinePlus } from 'react-icons/ai';
+import PlusButton from 'app/components/teams/PlusButton';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                             return <TeamUserCard item={item} />;
                         })}
                     <div className='team-page__modal--button' onClick={onShow}>
-                        <AiOutlinePlus className='team-page__modal--button__icon' />
+                        <PlusButton />
                     </div>
                 </div>
             </div>
