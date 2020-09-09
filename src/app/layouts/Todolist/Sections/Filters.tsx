@@ -1,8 +1,11 @@
-import React from 'react';
-import { TaskFilterByDate, Dropdown } from 'app/components';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FaRegCalendarAlt, FaCalendarDay, FaArchive } from 'react-icons/fa';
 import { BsFillInboxesFill } from 'react-icons/bs';
 import { ITeam } from 'app/actions';
+import { OptionsType, ValueType } from 'react-select';
+import unionBy from 'lodash/unionBy';
+
+import { TaskFilterByDate, Dropdown, IOption } from 'app/components';
 
 interface IProps {
     teams: ITeam[];
@@ -11,13 +14,31 @@ interface IProps {
 
 export const Filters: React.FC<IProps> = React.memo(
     ({ teams, setSelectedTeam }) => {
-        const teamList = ['Personal'].concat(teams.map(team => team.name));
-        const onSelect = (selectedTeamName: string) => {
-            const teamSelected = teams.find(team => {
-                return team.name === selectedTeamName;
-            });
-            setSelectedTeam(teamSelected);
-        };
+        const [options, setOptions] = useState<OptionsType<IOption>>([
+            { value: '0', label: 'Personal' },
+        ]);
+
+        useEffect(() => {
+            setOptions(currentOptions =>
+                unionBy(
+                    currentOptions,
+                    teams.map(team => ({
+                        value: team.id.toString(),
+                        label: team.name,
+                    })),
+                    'value'
+                )
+            );
+        }, [teams]);
+
+        const onOptionChange = useCallback(
+            (value: ValueType<IOption>) => {
+                if (value) {
+                    setSelectedTeam(parseInt((value as IOption).value));
+                }
+            },
+            [setSelectedTeam]
+        );
 
         return (
             <React.Fragment>
@@ -47,7 +68,13 @@ export const Filters: React.FC<IProps> = React.memo(
                         path='?filter=archive'
                     />
                     <div className='task-section__team'>
-                        <Dropdown items={teamList} onSelect={onSelect} />
+                        <Dropdown
+                            options={options}
+                            name='entity'
+                            defaultValue={options[0]}
+                            className='task-section__team-dropdown'
+                            onChange={onOptionChange}
+                        />{' '}
                     </div>
                 </div>
             </React.Fragment>
