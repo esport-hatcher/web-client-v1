@@ -6,6 +6,7 @@ import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, TeamDescription } from 'app/components';
 import { AiOutlinePlus } from 'react-icons/ai';
+import PlusButton from 'app/components/teams/PlusButton';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                 <div className='container-information__team-information'>
                     <TeamDescription />
                 </div>
-                <div className='container-information__team-menber'>
+                <div className='container-information__team-member'>
                     {teamUser &&
                         user &&
                         teamUser.map(item => {
@@ -51,14 +52,21 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                             return <TeamUserCard item={item} />;
                         })}
                     <div className='team-page__modal--button' onClick={onShow}>
-                        <AiOutlinePlus className='team-page__modal--button__icon' />
+                        <PlusButton />
                     </div>
                 </div>
             </div>
             <ModalForm show={show} handleClose={onShow}>
                 <div className='team-page__modal--form'>
-                    <h1>Select your player</h1>
-                    <AddPlayerForm change={onShow} teamId={teamSelected.id} />
+                    <div className='team-page__modal--title'>
+                        <h1>Select your player</h1>
+                    </div>
+                    <div className='team-page__modal--input'>
+                        <AddPlayerForm
+                            change={onShow}
+                            teamId={teamSelected.id}
+                        />
+                    </div>
                 </div>
             </ModalForm>
         </main>

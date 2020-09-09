@@ -30,14 +30,16 @@
 }
 
 .container-information{
-    &__team-menber {
-        padding-left: 50px;
-        width:50%;
-        float:right;
+    padding-top: 20px;
+    // height: 100vmax;
+    display: flex;
+    justify-content: space-around;
+    &__team-member {
+        // padding-left: 50px;
+        width:45%;
   }
   
     &__team-information {
-        width:50%;
-        float:left;
+        width:45%;
   }
 }
