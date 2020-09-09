@@ -91,32 +91,9 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             column-gap: 1.2rem;
-            row-gap: 2rem;
         }
 
-        &__input {
-            background-color: $color-dark;
-
-            &-title {
-                grid-column: 1 / span 3;
-            }
-
-            &-place {
-                grid-column: span 2;
-            }
-
-            &-day {
-                grid-column: span 3;
-            }
-
-            &-description {
-                grid-column: 1 / -1;
-                min-height: 8rem;
-                transition: all 0.4s;
-            }
-        }
-
-        &__hour-selector {
+        &__input__hour {
             background: transparent;
             border: none !important;
             font-size: 0;

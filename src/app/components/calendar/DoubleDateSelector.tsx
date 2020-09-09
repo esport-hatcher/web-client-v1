@@ -76,7 +76,7 @@ export const DoubleDateSelector: React.FC<IProps> = React.memo(
                     <HourPicker
                         selected={dateBegin}
                         onChange={onDateBeginChange}
-                        inputClassName={`${cname}__create-event-form__input`}
+                        inputClassName={`${cname}__create-event-form__input__hour`}
                         timeCaption='From'
                         wrapperClassName={`${cname}__create-event-form__input-hour`}
                     />
@@ -87,7 +87,7 @@ export const DoubleDateSelector: React.FC<IProps> = React.memo(
                         minTime={addMinutes(dateBegin, 30)}
                         maxTime={endOfDay(dateBegin)}
                         timeCaption='To'
-                        inputClassName={`${cname}__create-event-form__input`}
+                        inputClassName={`${cname}__create-event-form__input__hour`}
                         wrapperClassName={`${cname}__create-event-form__input-hour`}
                     />
                 </div>
