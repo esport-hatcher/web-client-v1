@@ -1,10 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import {
-    DatePickerButton,
-    MiniCalendar,
-    DoubleDateSelector,
-    IDoubleDate,
-} from 'app/components';
+import { DoubleDateSelector, IDoubleDate } from 'app/components';
 import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
@@ -21,8 +16,6 @@ export const CreateTask: React.FC<IProps> = React.memo(
     ({ setShowCreateTask, selectedTeam }) => {
         const dispatch = useDispatch();
         const [inputValue, setInputValue] = useState('');
-        const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
-        const [date] = useState(moment().format('Y/M/D'));
         const [day, setDate] = useState<Date>(new Date());
 
         const handleForm = useCallback(
@@ -83,22 +76,11 @@ export const CreateTask: React.FC<IProps> = React.memo(
                         />
                     </div>
                 </div>
-                <DatePickerButton
-                    onClick={setShowMiniCalendar}
-                    isActive={showMiniCalendar}
-                    date={date}
-                    className={'create-task__form__input__date-picker'}
-                    activeClassName={
-                        'create-task__form__input__date-picker--active'
-                    }
+                <DoubleDateSelector
+                    onChange={onDateChange}
+                    initialDate={day}
+                    cname='taskdate'
                 />
-                {showMiniCalendar && (
-                    <MiniCalendar
-                        setShowMiniCalendar={setShowMiniCalendar}
-                        setDate={setDate}
-                    />
-                )}
-                <DoubleDateSelector onChange={onDateChange} initialDate={day} />
             </form>
         );
     }

@@ -6,6 +6,7 @@ interface IProps {
     value: string;
     label: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    className: string;
 }
 
 export const ModifiableTextArea: React.FC<IProps> = ({
@@ -13,6 +14,7 @@ export const ModifiableTextArea: React.FC<IProps> = ({
     value,
     label,
     onChange,
+    className,
 }) => {
     const [inputValue, setInputValue] = useInput(value);
 
@@ -23,7 +25,7 @@ export const ModifiableTextArea: React.FC<IProps> = ({
     const displayContent = () => {
         return (
             <textarea
-                className='task-description-input__textarea'
+                className={`${className}__textarea`}
                 name={name}
                 value={inputValue}
                 onChange={setInputValue}
@@ -33,8 +35,8 @@ export const ModifiableTextArea: React.FC<IProps> = ({
     };
 
     return (
-        <div className='task-description-input'>
-            <label className='task-description-input__label label label-sm'>
+        <div className={`${className}`}>
+            <label className={`${className}__label label label-sm`}>
                 {label}
             </label>
             {displayContent()}
