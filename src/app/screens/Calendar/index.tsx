@@ -5,6 +5,7 @@ import {
     CalendarHeader,
     CalendarDaysList,
     CalendarCellsList,
+    CalendarToolbar,
 } from 'app/layouts';
 import { HeaderPage } from 'app/components';
 import { fetchTeams, fetchEvents } from 'app/actions';
@@ -33,6 +34,13 @@ export const CalendarPage: React.FC<IProps> = () => {
         setCurrentMonth(currentMonth => subMonths(currentMonth, 1));
     }, [setCurrentMonth]);
 
+    const onDateChange = useCallback(
+        (newDate: Date) => {
+            setCurrentMonth(newDate);
+        },
+        [setCurrentMonth]
+    );
+
     return (
         <main className='calendar'>
             <HeaderPage title='Calendar'>
@@ -44,6 +52,7 @@ export const CalendarPage: React.FC<IProps> = () => {
             </HeaderPage>
             <section className='calendar__content'>
                 <div className='calendar__content__container'>
+                    <CalendarToolbar onDateSelectedChange={onDateChange} />
                     <CalendarDaysList currentMonth={currentMonth} />
                     <CalendarCellsList
                         currentMonth={currentMonth}

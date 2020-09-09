@@ -36,9 +36,12 @@ $calendar-container-max-width: 160rem;
         &__container {
             max-width: $calendar-container-max-width;
             height: 90%;
-            width: 90%;
+            width: 100%;
+            padding: 0 2rem;
             display: grid;
+            grid-template-columns: min-content 1fr;
             grid-template-rows: min-content auto;
+            column-gap: 2rem;
             border-radius: $container-border-radius;
         }
 
@@ -47,6 +50,7 @@ $calendar-container-max-width: 160rem;
             grid-template-columns: repeat(7, 1fr);
             justify-items: center;
             padding: 2rem 0;
+            grid-column: 2 / 3;
             border-bottom: 1px solid $color-medium-grey;
         }
 
@@ -56,10 +60,33 @@ $calendar-container-max-width: 160rem;
             color: $color-white;
             display: grid;
             grid-template-rows: repeat(5, auto);
+            grid-column: 2 / 3;
 
             &__row {
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
+            }
+        }
+
+        &__toolbar {
+            grid-row: 2 / -1;
+            grid-column: 1 / 2;
+            position: relative;
+            padding-right: 2rem;
+
+            &--datepicker {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            &--delimiter {
+                position: absolute;
+                right: 0;
+                top: 0;
+                border: none;
+                height: 100%;
+                width: 1px;
+                background-color: $color-dark-four;
             }
         }
     }
