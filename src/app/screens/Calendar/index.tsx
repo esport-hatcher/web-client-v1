@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { addMonths, subMonths } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import {
     CalendarHeader,
     CalendarDaysList,
@@ -8,11 +8,13 @@ import {
 } from 'app/layouts';
 import { HeaderPage } from 'app/components';
 import { fetchTeams, fetchEvents } from 'app/actions';
+import { useSelector } from 'app/custom-hooks';
 
 interface IProps {}
 
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+    const teams = useSelector(state => state.teams.teams, shallowEqual);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,7 +45,10 @@ export const CalendarPage: React.FC<IProps> = () => {
             <section className='calendar__content'>
                 <div className='calendar__content__container'>
                     <CalendarDaysList currentMonth={currentMonth} />
-                    <CalendarCellsList currentMonth={currentMonth} />
+                    <CalendarCellsList
+                        currentMonth={currentMonth}
+                        teams={teams}
+                    />
                 </div>
             </section>
         </main>

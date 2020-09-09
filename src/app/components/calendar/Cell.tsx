@@ -1,17 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { format, isPast, addDays } from 'date-fns';
 import cx from 'classnames';
 import { IconButton, Modal } from '../shared';
 import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
-import { CreateEventForm } from 'app/layouts/Calendar/CreateEvent';
+import { CreateEventForm } from 'app/layouts';
+import { IEvent, ITeam } from 'app/actions';
+import { EventList } from './EventList';
 
 interface IProps {
     readonly cellDate: Date;
+    events: IEvent[];
+    teams: ITeam[];
     disabled?: boolean;
 }
 
 export const CalendarCell: React.FC<IProps> = React.memo(
-    ({ cellDate, disabled = false }) => {
+    ({ cellDate, events, teams, disabled = false }) => {
         const [isFocus, setIsFocus] = useState(false);
         const [showModal, setShowModal] = useState(false);
 
@@ -57,6 +61,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                 <span className='calendar-cell__date important-info important-info--md'>
                     {format(cellDate, 'd')}
                 </span>
+                <EventList events={events} teams={teams} />
                 {ActionButtons()}
                 <Modal
                     setShow={setShowModal}

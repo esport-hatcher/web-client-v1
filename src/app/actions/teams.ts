@@ -4,14 +4,26 @@ import { ActionTypes, IGetState } from './types';
 import { sendToast } from 'app/shared';
 import { IUser } from './user';
 
+export interface ITeamUser {
+    id: number;
+    playerStatus: boolean;
+    teamStatus: boolean;
+    role: 'Owner' | 'Admin' | 'Staff' | 'Player';
+    color: string;
+    createdAt: Date;
+    updatedAt: Date;
+    UserId: number;
+    TeamId: number;
+}
+
 export interface ITeam {
-    TeamUser: [];
     id: number;
     avatarTeamUrl: string;
     bannerUrl: string;
     game: string;
     name: string;
     region: string;
+    TeamUser: ITeamUser;
     createdAt: string;
     updatedAt: string;
 }

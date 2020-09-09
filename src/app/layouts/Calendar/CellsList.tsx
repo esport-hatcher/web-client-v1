@@ -8,16 +8,25 @@ import {
     addDays,
 } from 'date-fns';
 import { CalendarCell } from 'app/components';
+import { useSelector } from 'app/custom-hooks';
+import { shallowEqual } from 'react-redux';
+import { getEventsByDay } from 'app/reducers/calendar';
+import { ITeam } from 'app/actions';
 
 interface IProps {
     currentMonth: Date;
+    teams: ITeam[];
 }
 
-export const CalendarCellsList: React.FC<IProps> = ({ currentMonth }) => {
+export const CalendarCellsList: React.FC<IProps> = ({
+    currentMonth,
+    teams,
+}) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
     const endDate = endOfWeek(monthEnd);
+    const events = useSelector(state => state.calendar.events, shallowEqual);
 
     const rows = [];
     let days = [];
@@ -27,6 +36,8 @@ export const CalendarCellsList: React.FC<IProps> = ({ currentMonth }) => {
         for (let i = 0; i < 7; i++) {
             days.push(
                 <CalendarCell
+                    teams={teams}
+                    events={getEventsByDay(events, day)}
                     cellDate={day}
                     key={day.toString()}
                     disabled={!isSameMonth(day, monthStart)}

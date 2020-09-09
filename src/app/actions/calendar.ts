@@ -4,6 +4,18 @@ import { IFormValues } from './form';
 import { ActionTypes, AppThunk } from './types';
 import { startOfMonth, endOfMonth } from 'date-fns';
 
+export interface IRawEvent {
+    id: number;
+    title: string;
+    description: string;
+    place: string;
+    dateBegin: string;
+    dateEnd: string;
+    TeamId?: number;
+    updatedAt: Date;
+    createdAt: Date;
+}
+
 export interface IEvent {
     id: number;
     title: string;
@@ -18,11 +30,12 @@ export interface IEvent {
 
 export interface ICalendarCreateEventSuccess {
     type: ActionTypes.calendarCreateEventSuccess;
+    event: IRawEvent;
 }
 
 export interface ICalendarFetchEventSuccess {
     type: ActionTypes.calendarFetchEventSuccess;
-    events: IEvent[];
+    events: IRawEvent[];
 }
 
 export const createEvent = (
@@ -31,7 +44,7 @@ export const createEvent = (
 ): AppThunk => async (dispatch, getState) => {
     try {
         const userId = getState().authentication.user!.id;
-        const { data } = await api.post<IEvent>(
+        const { data } = await api.post<IRawEvent>(
             option === 0
                 ? `/users/${userId}/events`
                 : `/teams/${option}/events`,
@@ -39,10 +52,10 @@ export const createEvent = (
         );
         dispatch<ICalendarCreateEventSuccess>({
             type: ActionTypes.calendarCreateEventSuccess,
+            event: data,
         });
         sendToast({
-            title: 'Event created successfully !',
-            content: `Ok`,
+            title: 'Event created !',
             type: 'success',
         });
     } catch ({ response: { data } }) {
@@ -58,7 +71,7 @@ export const fetchEvents = (currentMonth: Date): AppThunk => async (
     try {
         const userId = getState().authentication.user!.id;
 
-        const { data } = await api.get<IEvent[]>(
+        const { data } = await api.get<IRawEvent[]>(
             `/users/${userId}/events?dateBegin=${startOfMonth(
                 currentMonth
             )}&dateEnd=${endOfMonth(currentMonth)}`
