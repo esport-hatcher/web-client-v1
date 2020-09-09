@@ -7,6 +7,7 @@ interface IProps {
     value: string;
     label: string;
     onChange: (e: React.FocusEvent<HTMLInputElement>) => void;
+    className: string;
 }
 
 export const ModifiableInput: React.FC<IProps> = ({
@@ -14,6 +15,7 @@ export const ModifiableInput: React.FC<IProps> = ({
     value,
     label,
     onChange,
+    className,
 }) => {
     const [inputMode, setInputMode] = useToggler(false);
     const [displayButton, , setDisplayButton] = useToggler(false);
@@ -43,7 +45,7 @@ export const ModifiableInput: React.FC<IProps> = ({
         if (inputMode) {
             return (
                 <input
-                    className='modifiable-input__input important-info important-info--md'
+                    className={`${className}__input important-info important-info--md`}
                     name={name}
                     value={inputValue}
                     onChange={setInputValue}
@@ -53,7 +55,9 @@ export const ModifiableInput: React.FC<IProps> = ({
             );
         }
         return (
-            <p className='modifiable-input__value important-info important-info--md'>
+            <p
+                className={`${className}__value important-info important-info--md`}
+            >
                 {displayValue()}
             </p>
         );
@@ -61,19 +65,19 @@ export const ModifiableInput: React.FC<IProps> = ({
 
     return (
         <div
-            className='modifiable-input'
+            className={`${className}`}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
-            <label className='modifiable-input__label label label-sm'>
+            <label className={`${className}__label label label-sm`}>
                 {label}
             </label>
             <button
-                className={`modifiable-input__btn ${!displayButton &&
-                    'modifiable-input__btn--hidden'}`}
+                className={`${className}__btn ${!displayButton &&
+                    `${className}__btn--hidden`}`}
                 onClick={setInputMode}
             >
-                <BsPencil className='modifiable-input__btn__icon' />
+                <BsPencil className={`${className}__btn__icon`} />
             </button>
             {displayContent()}
         </div>

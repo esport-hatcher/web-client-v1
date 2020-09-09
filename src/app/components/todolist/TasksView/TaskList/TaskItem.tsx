@@ -11,6 +11,8 @@ import {
     MiniCalendar,
     Modal,
     ModifiableTextArea,
+    DoubleDateSelector,
+    IDoubleDate,
 } from 'app/components';
 import { useToggler, useInput } from 'app/custom-hooks';
 import { sendToast } from 'app/shared';
@@ -28,7 +30,9 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
 
     /* TASK CONST CALENDAR */
     const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
-    const [date, setDate] = useState(moment(task.dateEnd).format('Y/M/D'));
+    const [date] = useState(moment(task.dateEnd).format('Y/M/D'));
+
+    const [day, setDate] = useState<Date>(new Date());
 
     /* TASK CONST COMMENT */
     const [showModal, setShowModal] = useState(false);
@@ -57,7 +61,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
 
     const onDateChange = useCallback(
         (e: React.MouseEvent<HTMLButtonElement>) => {
-            dispatch(patchTask(task, { dateEnd: date }));
+            dispatch(patchTask(task, { dateEnd: day }));
             sendToast({
                 title: 'Task Edited',
                 content: 'You successfully edited the task !',
@@ -65,7 +69,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
             });
             setInputMode();
         },
-        [task, date, setInputMode, dispatch]
+        [task, day, setInputMode, dispatch]
     );
 
     /* TASK FUNCTION COMMENT */
@@ -99,6 +103,13 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
         dispatch(deleteTask(task));
     }, [task, dispatch]);
 
+    const ondateChange = useCallback(
+        ({ newDateEnd }: IDoubleDate) => {
+            setDate(newDateEnd);
+        },
+        [setDate]
+    );
+
     const displayContent = () => {
         if (inputMode) {
             return (
@@ -120,25 +131,11 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
                         </button>
                         <div className='task-list-item__inputmode__calendar'>
                             <div className='create-task'>
-                                <DatePickerButton
-                                    onClick={setShowMiniCalendar}
-                                    isActive={showMiniCalendar}
-                                    date={date}
-                                    className={
-                                        'task-list-item__inputmode__calendar__date-picker'
-                                    }
-                                    activeClassName={
-                                        'task-list-item__inputmode__calendar__date-picker--active'
-                                    }
+                                <DoubleDateSelector
+                                    onChange={ondateChange}
+                                    initialDate={day}
+                                    cname='calendar'
                                 />
-                                {showMiniCalendar && (
-                                    <MiniCalendar
-                                        setShowMiniCalendar={
-                                            setShowMiniCalendar
-                                        }
-                                        setDate={setDate}
-                                    />
-                                )}
                             </div>
                         </div>
                     </div>
@@ -188,6 +185,7 @@ export const TaskItem: React.FC<IProps> = React.memo(({ task, late }) => {
                     label='Description'
                     name='description'
                     onChange={onConfirmModal}
+                    className='task-description-input'
                 />
                 <div className='modal__action-buttons'>
                     <button

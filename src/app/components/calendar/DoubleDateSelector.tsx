@@ -18,10 +18,11 @@ export interface IDoubleDate {
 interface IProps {
     initialDate: Date;
     onChange: (newDates: IDoubleDate) => void;
+    cname: String;
 }
 
 export const DoubleDateSelector: React.FC<IProps> = React.memo(
-    ({ initialDate, onChange }) => {
+    ({ initialDate, onChange, cname }) => {
         const [currentDay, setCurrentDay] = useState<Date>(
             setMinutes(addHours(initialDate, 1), 0)
         );
@@ -62,23 +63,22 @@ export const DoubleDateSelector: React.FC<IProps> = React.memo(
             (newDate: Date) => setDateEnd(newDate),
             [setDateEnd]
         );
-
         return (
             <>
                 <DatePicker
                     selected={currentDay}
                     onChange={onDateChange}
-                    inputClassName='calendar__create-event-form__input'
-                    wrapperClassName='calendar__create-event-form__input-day'
+                    inputClassName={`${cname}__create-event-form__input`}
+                    wrapperClassName={`${cname}__create-event-form__input-day`}
                     dateFormat='MMMM d, yyyy'
                 />
-                <div className='calendar__create-event-form__hour-selector'>
+                <div className={`${cname}__create-event-form__hour-selector`}>
                     <HourPicker
                         selected={dateBegin}
                         onChange={onDateBeginChange}
-                        inputClassName='calendar__create-event-form__input'
+                        inputClassName={`${cname}__create-event-form__input__hour`}
                         timeCaption='From'
-                        wrapperClassName='calendar__create-event-form__input-hour'
+                        wrapperClassName={`${cname}__create-event-form__input-hour`}
                     />
                     <p className='label label--sm'>|</p>
                     <HourPicker
@@ -87,8 +87,8 @@ export const DoubleDateSelector: React.FC<IProps> = React.memo(
                         minTime={addMinutes(dateBegin, 30)}
                         maxTime={endOfDay(dateBegin)}
                         timeCaption='To'
-                        inputClassName='calendar__create-event-form__input'
-                        wrapperClassName='calendar__create-event-form__input-hour'
+                        inputClassName={`${cname}__create-event-form__input__hour`}
+                        wrapperClassName={`${cname}__create-event-form__input-hour`}
                     />
                 </div>
             </>

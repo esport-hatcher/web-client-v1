@@ -113,6 +113,7 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                     <DoubleDateSelector
                         onChange={onDateChange}
                         initialDate={initialDate}
+                        cname='calendar'
                     />
                     <TextArea
                         name='description'

@@ -25,42 +25,49 @@ export const SettingsProfileForm: React.FC<IProps> = React.memo(({ user }) => {
                     label='Firstname'
                     name='firstName'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={user.lastName}
                     label='Lastname'
                     name='lastName'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={user.username}
                     label='Username'
                     name='username'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={user.email}
                     label='Email'
                     name='email'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={user.country}
                     label='Country'
                     name='country'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={user.city}
                     label='City'
                     name='city'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
                 <ModifiableInput
                     value={`+${user.phoneNumber}`}
                     label='Phone number'
                     name='phoneNumber'
                     onChange={onInputChange}
+                    className='modifiable-input'
                 />
             </div>
         );

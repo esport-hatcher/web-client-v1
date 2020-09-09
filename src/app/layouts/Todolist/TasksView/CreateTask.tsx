@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { DatePickerButton, MiniCalendar } from 'app/components';
+import { DoubleDateSelector, IDoubleDate } from 'app/components';
 import { useToggler } from 'app/custom-hooks';
 import moment from 'moment';
 import { sendToast } from 'app/shared';
 import { useDispatch } from 'react-redux';
 import { createTask, ITeam } from 'app/actions';
+import { startOfWeek, startOfMonth } from 'date-fns';
 
 interface IProps {
     setShowCreateTask: Function;
@@ -15,8 +16,7 @@ export const CreateTask: React.FC<IProps> = React.memo(
     ({ setShowCreateTask, selectedTeam }) => {
         const dispatch = useDispatch();
         const [inputValue, setInputValue] = useState('');
-        const [showMiniCalendar, setShowMiniCalendar] = useToggler(false);
-        const [date, setDate] = useState(moment().format('Y/M/D'));
+        const [day, setDate] = useState<Date>(new Date());
 
         const handleForm = useCallback(
             (action: string) => {
@@ -31,19 +31,26 @@ export const CreateTask: React.FC<IProps> = React.memo(
                 } else {
                     dispatch(
                         createTask(
-                            { title: inputValue, dateEnd: date },
+                            { title: inputValue, dateEnd: day },
                             selectedTeam
                         )
                     );
                     setShowCreateTask(false);
                 }
             },
-            [inputValue, setShowCreateTask, date, selectedTeam, dispatch]
+            [inputValue, setShowCreateTask, day, selectedTeam, dispatch]
         );
 
         const handleChange = (value: React.ChangeEvent<HTMLInputElement>) => {
             setInputValue(value.target.value);
         };
+
+        const onDateChange = useCallback(
+            ({ newDateEnd }: IDoubleDate) => {
+                setDate(newDateEnd);
+            },
+            [setDate]
+        );
 
         return (
             <form className='create-task' onSubmit={() => handleForm('create')}>
@@ -69,21 +76,11 @@ export const CreateTask: React.FC<IProps> = React.memo(
                         />
                     </div>
                 </div>
-                <DatePickerButton
-                    onClick={setShowMiniCalendar}
-                    isActive={showMiniCalendar}
-                    date={date}
-                    className={'create-task__form__input__date-picker'}
-                    activeClassName={
-                        'create-task__form__input__date-picker--active'
-                    }
+                <DoubleDateSelector
+                    onChange={onDateChange}
+                    initialDate={day}
+                    cname='taskdate'
                 />
-                {showMiniCalendar && (
-                    <MiniCalendar
-                        setShowMiniCalendar={setShowMiniCalendar}
-                        setDate={setDate}
-                    />
-                )}
             </form>
         );
     }
