@@ -9,10 +9,6 @@
     &__input {
         @extend %base-input-shape;
         padding-left: $search-input-icon-size + $base-input-padding-sides * 2;
-        border: 1px solid $color-light-grey;
-        // font-size: 1.5rem;
-        // display: block;
-        // font-family: inherit;
         transition: padding-left $search-input-animation-duration,
             color $search-input-animation-duration,
             border $search-input-animation-duration;
@@ -21,7 +17,6 @@
 
         &:focus {
             color: $color-white;
-            border: 1px solid $color-white;
             padding-left: $search-input-padding * 2;
         }
     }

@@ -5,3 +5,4 @@ export * from './adminPanel';
 export * from './user';
 export * from './tasks';
 export * from './form';
+export * from './calendar';

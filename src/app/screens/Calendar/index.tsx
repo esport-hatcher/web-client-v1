@@ -1,13 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { addMonths, subMonths } from 'date-fns';
-import { CalendarHeader, CalendarDaysList } from 'app/layouts';
+import { useDispatch } from 'react-redux';
+import {
+    CalendarHeader,
+    CalendarDaysList,
+    CalendarCellsList,
+} from 'app/layouts';
 import { HeaderPage } from 'app/components';
+import { fetchTeams } from 'app/actions';
 
 interface IProps {}
 
 export const CalendarPage: React.FC<IProps> = () => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [selectedDate] = useState<Date>(new Date());
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTeams());
+    }, [dispatch]);
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));
@@ -21,13 +32,19 @@ export const CalendarPage: React.FC<IProps> = () => {
         <main className='calendar'>
             <HeaderPage title='Calendar'>
                 <CalendarHeader
-                    currentMonth={currentMonth}
-                    nextMonth={nextMonth}
-                    prevMonth={prevMonth}
+                    date={currentMonth}
+                    increaseMonth={nextMonth}
+                    decreaseMonth={prevMonth}
                 />
             </HeaderPage>
             <section className='calendar__content'>
-                <CalendarDaysList currentMonth={currentMonth} />
+                <div className='calendar__content__container'>
+                    <CalendarDaysList currentMonth={currentMonth} />
+                    <CalendarCellsList
+                        currentMonth={currentMonth}
+                        selectedDate={selectedDate}
+                    />
+                </div>
             </section>
         </main>
     );

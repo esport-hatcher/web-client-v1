@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ITeams } from 'app/actions';
+import { ITeam } from 'app/actions';
 import { FiClipboard, FiBell } from 'react-icons/fi';
 
 interface IProps {
-    item: ITeams;
+    item: ITeam;
 }
 
 export const TeamCard: React.FC<IProps> = ({ item }) => {

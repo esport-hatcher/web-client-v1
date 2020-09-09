@@ -27,3 +27,10 @@ body {
         position: relative;
     }
 }
+
+#root-portal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 142;
+}

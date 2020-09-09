@@ -14,7 +14,7 @@ export const CalendarDaysList: React.FC<IProps> = React.memo(
             for (let i = 0; i < 7; i++) {
                 days.push(
                     <div
-                        className='calendar__content__days placeholder placeholder--md'
+                        className='calendar__content__days__item placeholder placeholder--md'
                         key={i}
                     >
                         {format(addDays(startDate, i), 'eeee')}
@@ -24,6 +24,10 @@ export const CalendarDaysList: React.FC<IProps> = React.memo(
             return days;
         };
 
-        return <>{renderDays()}</>;
+        return (
+            <section className='calendar__content__days'>
+                {renderDays()}
+            </section>
+        );
     }
 );
