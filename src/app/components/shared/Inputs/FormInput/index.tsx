@@ -47,6 +47,7 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
             innerRef,
             inputClassName,
             readOnly,
+            onChange,
             ...props
         },
         ref
@@ -117,7 +118,7 @@ const _FormInput = React.forwardRef<HTMLInputElement, IFormInputProps>(
                     ref={ref || innerRef}
                     onFocus={toggleInputFocus}
                     onBlur={toggleInputFocus}
-                    onChange={autoCapitalize ? capitalizeWords : () => null}
+                    onChange={autoCapitalize ? capitalizeWords : onChange}
                 />
                 {!noIcon && (
                     <InputIcon
