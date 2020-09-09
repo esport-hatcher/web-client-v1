@@ -194,9 +194,7 @@ export const joinTeam = (teamName: string) => async (
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.get<ITeams[]>(
-                `/teams/?name=${teamName}`
-            );
+            const { data } = await api.get<ITeam[]>(`/teams/?name=${teamName}`);
             const teamSelected = data.find(element => {
                 return element.name === teamName;
             });
