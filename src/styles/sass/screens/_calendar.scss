@@ -59,7 +59,7 @@ $calendar-container-max-width: 160rem;
             height: 100%;
             color: $color-white;
             display: grid;
-            grid-template-rows: repeat(5, auto);
+            grid-template-rows: repeat(5, 1fr);
             grid-column: 2 / 3;
 
             &__row {
