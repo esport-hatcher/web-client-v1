@@ -45,7 +45,7 @@
     }
 
     &__event-list {
-        overflow-y: auto;
+        overflow-y: none;
         list-style: none;
         position: absolute;
         top: 6rem;
@@ -55,15 +55,8 @@
         flex-direction: column;
         transition: overflow-y 0.2s;
 
-        &::-webkit-scrollbar-track {
-            background-color: $color-dark-four;
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: $color-dark;
-        }
-
-        &::-webkit-scrollbar {
-            display: none;
+        &:hover {
+            overflow-y: auto;
         }
 
         &__item {
