@@ -83,35 +83,16 @@
     }
 }
 
-/* react-transition-group animations */
+.switch-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
 
-.router-transition {
-    &__container {
+    & > div {
         position: absolute;
-        width: 100%;
+        top: 0;
+        left: 0;
         height: 100%;
-    }
-
-    &-enter {
-        opacity: 0;
-        transform: scale(1.1);
-
-        &-active {
-            opacity: 1;
-            transform: scale(1);
-            transition: opacity $page-transition-ms ease-out,
-                transform $page-transition-ms ease-out;
-        }
-    }
-
-    &-exit {
-        opacity: 1;
-        transform: scale(1);
-        &-active {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity $page-transition-ms ease-in,
-                transform $page-transition-ms ease-in;
-        }
+        width: 100%;
     }
 }

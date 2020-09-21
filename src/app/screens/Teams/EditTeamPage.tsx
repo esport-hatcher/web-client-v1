@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, TeamDescription } from 'app/components';
-import { AiOutlinePlus } from 'react-icons/ai';
 import PlusButton from 'app/components/teams/PlusButton';
 
 export const _EditTeamPage: React.FC = React.memo(() => {

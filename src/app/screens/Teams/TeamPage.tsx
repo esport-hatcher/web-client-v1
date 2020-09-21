@@ -4,7 +4,6 @@ import { CreateTeamForm, JoinTeamForm, ModalForm } from 'app/layouts';
 import { TeamCard } from 'app/components';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { fetchTeams } from 'app/actions';
-import { AiOutlinePlus } from 'react-icons/ai';
 import PlusButton from 'app/components/teams/PlusButton';
 
 export const _TeamPage: React.FC = React.memo(() => {
