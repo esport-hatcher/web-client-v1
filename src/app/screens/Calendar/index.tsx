@@ -7,15 +7,17 @@ import {
     CalendarCellsList,
     CalendarToolbar,
 } from 'app/layouts';
-import { HeaderPage } from 'app/components';
+import { HeaderPage, LinkDrawer } from 'app/components';
 import { fetchTeams, fetchEvents } from 'app/actions';
 import { useSelector } from 'app/custom-hooks';
+import { IPageSubrouteProps } from '..';
 
-interface IProps {}
+interface IProps extends IPageSubrouteProps {}
 
-export const CalendarPage: React.FC<IProps> = () => {
+export const CalendarPage: React.FC<IProps> = ({ routes }) => {
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const teams = useSelector(state => state.teams.teams, shallowEqual);
+    const [detailsRoute] = routes;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,6 +45,10 @@ export const CalendarPage: React.FC<IProps> = () => {
 
     return (
         <main className='calendar'>
+            <LinkDrawer
+                route={detailsRoute}
+                className='event-details__drawer'
+            />
             <HeaderPage title='Calendar'>
                 <CalendarHeader
                     date={currentMonth}

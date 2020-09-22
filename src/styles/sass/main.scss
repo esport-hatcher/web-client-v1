@@ -42,6 +42,7 @@
 @import './components/team-user-card';
 @import './components/description-team';
 @import './components/slide-drawer';
+@import './components/link-drawer';
 
 //      LAYOUTS
 @import './layouts/banner';
@@ -57,6 +58,8 @@
 @import './layouts/create-task-form';
 @import './layouts/task-list';
 @import './layouts/create-event-form';
+@import './layouts/event-list';
+@import './layouts/event-details';
 
 //      SCREENS
 @import './screens/auth-screen';

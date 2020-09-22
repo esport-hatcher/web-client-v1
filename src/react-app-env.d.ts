@@ -15,7 +15,14 @@ declare module 'react-router-transition' {
         children: React.ReactNode;
     }
 
-    interface AnimatedRouteProps extends RouteProps {}
+    interface AnimatedRouteProps extends RouteProps {
+        atEnter: React.CSSProperties;
+        atLeave: React.CSSProperties;
+        atActive: React.CSSProperties;
+        mapStyles?: (styles: React.CSSProperties) => React.CSSProperties;
+        className?: string;
+        wrapperComponent?: boolean;
+    }
 
     export const AnimatedSwitch: React.ComponentClass<AnimatedSwitchProps>;
     export const AnimatedRoute: React.ComponentClass<AnimatedRouteProps>;

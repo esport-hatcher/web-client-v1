@@ -3,7 +3,10 @@ $calendar-container-max-width: 160rem;
 .calendar {
     display: grid;
     height: 100%;
+    width: 100%;
     grid-template-rows: min-content 1fr;
+    grid-template-columns: 100%;
+    position: relative;
 
     &__header {
         display: grid;
@@ -32,6 +35,7 @@ $calendar-container-max-width: 160rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
 
         &__container {
             // max-width: $calendar-container-max-width;
