@@ -28,7 +28,7 @@ export const getEventsByDay = (
 ): IEvent[] => {
     const dayEvents: IEvent[] = [];
 
-    events.map(event => {
+    events.forEach(event => {
         if (
             isSameDay(event.dateBegin, currentDay) ||
             isSameDay(event.dateEnd, currentDay)

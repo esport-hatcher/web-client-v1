@@ -5,7 +5,6 @@
         "no-console": true,
         "await-promise": true,
         "class-name": false,
-        "interface-name": true,
         "curly": true,
         "import-blacklist": true,
         "no-import-side-effect": true,
