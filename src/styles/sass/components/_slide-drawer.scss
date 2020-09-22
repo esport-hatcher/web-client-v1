@@ -1,0 +1,23 @@
+.slide-drawer {
+    height: 100%;
+    min-width: 800px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: $color-dark-two;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(100%);
+    border-left: 1px solid $color-dark-four;
+
+    &--isOpen {
+        transform: translateX(0);
+        z-index: 99;
+    }
+
+    &__close-btn {
+        color: white;
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+    }
+}
