@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { format, isPast, addDays } from 'date-fns';
 import cx from 'classnames';
-import { IconButton, Modal } from '../shared';
+import { IconButton, Modal, SlideDrawer } from '../shared';
 import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
 import { CreateEventForm } from 'app/layouts';
 import { IEvent, ITeam } from 'app/actions';
 import { EventList } from './EventList';
+import { useToggler } from 'app/custom-hooks';
 
 interface IProps {
     readonly cellDate: Date;
@@ -18,11 +19,20 @@ export const CalendarCell: React.FC<IProps> = React.memo(
     ({ cellDate, events, teams, disabled = false }) => {
         const [isFocus, setIsFocus] = useState(false);
         const [showModal, setShowModal] = useState(false);
+        const [showDetails, setShowDetails] = useState(false);
 
         const setModalOn = useCallback(() => {
             setShowModal(true);
             setTimeout(() => setIsFocus(false), 200);
         }, [setShowModal, setIsFocus]);
+
+        const toggleDetailsOn = useCallback(() => {
+            setShowDetails(true);
+        }, [setShowDetails]);
+
+        const toggleDetailsOff = useCallback(() => {
+            setShowDetails(false);
+        }, [setShowDetails]);
 
         const ActionButtons = () => {
             if (isFocus && !disabled) {
@@ -37,6 +47,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                         <IconButton
                             Icon={AiFillEye}
                             className='icon icon--white calendar-cell__action-buttons__button'
+                            onClick={toggleDetailsOn}
                         />
                     </div>
                 );
@@ -73,6 +84,7 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                         initialDate={cellDate}
                     />
                 </Modal>
+                <SlideDrawer isOpen={showDetails} onClose={toggleDetailsOff} />
             </div>
         );
     }
