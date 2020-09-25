@@ -1,5 +1,10 @@
 .event-details {
-    width: 40%;
+    width: 100%;
+    height: 100vh;
     background-color: $color-dark-medium;
     border-left: 1px solid $color-dark-four;
+
+    &__drawer {
+        width: 40%;
+    }
 }

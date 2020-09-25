@@ -45,7 +45,10 @@ export const CalendarPage: React.FC<IProps> = ({ routes }) => {
 
     return (
         <main className='calendar'>
-            <LinkDrawer route={detailsRoute} />
+            <LinkDrawer
+                route={detailsRoute}
+                className='event-details__drawer'
+            />
             <HeaderPage title='Calendar'>
                 <CalendarHeader
                     date={currentMonth}
