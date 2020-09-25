@@ -27,7 +27,7 @@ const EventListItem: React.FC<IEventItemProps> = React.memo(
                         : color_blue_light,
                 }}
             >
-                <p className='important-info important-info--sm'>
+                <p className='event-list__item--title important-info important-info--sm'>
                     {event.title}
                 </p>
                 <span className='event-list__item--hour important-info important-info--sm'>

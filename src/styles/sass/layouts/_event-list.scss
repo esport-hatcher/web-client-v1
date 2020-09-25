@@ -1,5 +1,6 @@
 .event-list {
     overflow-y: hidden;
+    overflow-x: hidden;
     list-style: none;
     position: absolute;
     top: 6rem;
@@ -18,10 +19,21 @@
         border-radius: 4px;
         display: flex;
         align-items: center;
+        justify-content: start;
         text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         &--hour {
             margin-left: auto;
+            flex-grow: 1;
+        }
+
+        &--title {
+            width: 100%;
+            text-overflow: ellipsis;
+            flex-grow: 2;
+            overflow: hidden;
         }
 
         &:not(:last-child) {

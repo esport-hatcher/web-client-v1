@@ -9,7 +9,7 @@
         background-color: lighten($color-dark, 2%);
         transform: perspective(500px) translateZ(60px);
         box-shadow: -6px 6px 12px 12px rgba(0, 0, 0, 0.1);
-        z-index: 98;
+        z-index: 90;
     }
 
     &--disabled {
@@ -31,7 +31,7 @@
 
     &__action-buttons {
         position: absolute;
-        bottom: 2rem;
+        bottom: 8%;
         right: 2rem;
         display: grid;
         grid-template-columns: repeat(2, auto);
