@@ -1,11 +1,28 @@
 .link-drawer {
-    width: 20%;
     height: 100%;
     position: absolute;
     right: 0;
     overflow: hidden;
     z-index: 99;
     pointer-events: none;
+
+    &__overlay {
+        z-index: 98;
+        width: 100vh;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($color-dark, 0.8);
+        animation: fadeIn 0.3s ease-in;
+
+        @supports (-webkit-backdrop-filter: blur(5px)) or
+            (backdrop-filter: blur(5px)) {
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            background-color: rgba($color-dark, 0.3);
+        }
+    }
 
     &--active {
         pointer-events: auto;
