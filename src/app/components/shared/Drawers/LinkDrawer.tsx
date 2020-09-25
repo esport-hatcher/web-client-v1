@@ -6,10 +6,9 @@ import { AnimatedRoute } from 'react-router-transition';
 
 interface IProps {
     route: IRouteConfig;
-    className?: string;
 }
 
-export const LinkDrawer: React.FC<IProps> = ({ route, className }) => {
+export const LinkDrawer: React.FC<IProps> = ({ route }) => {
     const location = useLocation();
 
     return (
@@ -22,7 +21,7 @@ export const LinkDrawer: React.FC<IProps> = ({ route, className }) => {
             mapStyles={styles => ({
                 transform: `translateX(${styles.offset}%)`,
             })}
-            className={cx('link-drawer', className, {
+            className={cx('link-drawer', {
                 'link-drawer--active': matchPath(location.pathname, route.path),
             })}
         />
