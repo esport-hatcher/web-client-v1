@@ -10,6 +10,8 @@ import {
     CalendarPage,
 } from 'app/screens';
 
+import { EventDetails } from 'app/layouts';
+
 export enum routesPath {
     home = '/',
     login = '/login',
@@ -19,6 +21,7 @@ export enum routesPath {
     teams = '/teams',
     teamsDetail = '/teams/:id',
     calendar = '/calendar',
+    eventDetails = '/calendar/events/:eventId/details',
     settingsProfile = '/settings/profile',
     todolist = '/todolist',
 }
@@ -79,6 +82,13 @@ export const routes: IRouteConfig[] = [
     {
         path: routesPath.calendar,
         Component: CalendarPage,
-        exact: true,
+        exact: false,
+        routes: [
+            {
+                path: routesPath.eventDetails,
+                Component: EventDetails,
+                exact: false,
+            },
+        ],
     },
 ];

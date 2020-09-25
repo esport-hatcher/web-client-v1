@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { format, isPast, addDays } from 'date-fns';
 import cx from 'classnames';
-import { IconButton, Modal, SlideDrawer } from '../shared';
 import { AiOutlinePlus, AiFillEye } from 'react-icons/ai';
+import { IconButton, Modal, SlideDrawer } from '../shared';
 import { CreateEventForm } from 'app/layouts';
 import { IEvent, ITeam } from 'app/actions';
 import { EventList } from './EventList';
-import { useToggler } from 'app/custom-hooks';
 
 interface IProps {
     readonly cellDate: Date;

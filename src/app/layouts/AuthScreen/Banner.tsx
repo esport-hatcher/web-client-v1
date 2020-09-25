@@ -51,6 +51,7 @@ export const AuthBanner: React.FC<IProps> = React.memo(
                         to={loginMode ? '/register' : '/login'}
                         onClick={onButtonClick}
                         className='btn btn--outline btn--white banner__container__button'
+                        replace
                     >
                         {content.button.toUpperCase()}
                     </Link>

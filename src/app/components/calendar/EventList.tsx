@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import { IEvent, ITeam } from 'app/actions';
 import { getTeamById } from 'app/reducers/teams';
@@ -17,9 +18,9 @@ interface IProps {
 const EventListItem: React.FC<IEventItemProps> = React.memo(
     ({ event, team }) => {
         return (
-            <li
-                className='calendar-cell__event-list__item'
-                key={event.id}
+            <Link
+                to={`/calendar/events/${event.id}/details`}
+                className='event-list__item'
                 style={{
                     backgroundColor: team
                         ? team.TeamUser.color
@@ -29,10 +30,10 @@ const EventListItem: React.FC<IEventItemProps> = React.memo(
                 <p className='important-info important-info--sm'>
                     {event.title}
                 </p>
-                <span className='calendar-cell__event-list__item--hour important-info important-info--sm'>
+                <span className='event-list__item--hour important-info important-info--sm'>
                     {format(event.dateBegin, 'H:mm')}
                 </span>
-            </li>
+            </Link>
         );
     }
 );
@@ -47,10 +48,11 @@ export const EventList: React.FC<IProps> = React.memo(({ events, teams }) => {
     }, [events, setOrderedEvents]);
 
     return (
-        <ul className='calendar-cell__event-list'>
+        <ul className='event-list'>
             {orderedEvents.map(event => {
                 return (
                     <EventListItem
+                        key={event.id}
                         event={event}
                         team={getTeamById(teams, event.TeamId)}
                     />

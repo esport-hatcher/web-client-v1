@@ -1,0 +1,13 @@
+.link-drawer {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    z-index: 99;
+    pointer-events: none;
+
+    &--active {
+        pointer-events: auto;
+    }
+}
