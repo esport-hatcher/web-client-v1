@@ -4,6 +4,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { OptionsType, ValueType } from 'react-select';
 import unionBy from 'lodash/unionBy';
+import * as Yup from 'yup';
 import {
     FormInput,
     BoxHeader,
@@ -21,9 +22,22 @@ interface IProps {
     initialDate: Date;
 }
 
+const validationSchema = Yup.object().shape({
+    title: Yup.string().required('E-mail is required'),
+    place: Yup.string().required('Where is it taking place ?'),
+    description: Yup.string().required('Description is required'),
+});
+
 export const CreateEventForm: React.FC<IProps> = React.memo(
     ({ onSubmit, initialDate }) => {
-        const { handleSubmit, register } = useForm();
+        const {
+            handleSubmit,
+            register,
+            errors,
+            formState: { dirtyFields },
+        } = useForm({
+            validationSchema,
+        });
         const [options, setOptions] = useState<OptionsType<IOption>>([
             { value: '0', label: 'Personal' },
         ]);
@@ -97,10 +111,10 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         placeholder='Title'
                         name='title'
                         ref={register}
-                        noValidation
                         inputClassName='calendar__create-event-form__input'
                         className='calendar__create-event-form__input-title'
-                        noLabelOnFocus
+                        error={errors['title']}
+                        touched={dirtyFields.has('title')}
                         autoFocus
                     />
                     <FormInput
@@ -108,11 +122,11 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
                         placeholder='Place'
                         name='place'
                         ref={register}
-                        noValidation
                         Icon={FiMapPin}
                         inputClassName='calendar__create-event-form__input'
                         className='calendar__create-event-form__input-place'
-                        noLabelOnFocus
+                        error={errors['place']}
+                        touched={dirtyFields.has('place')}
                     />
                     <DoubleDateSelector
                         onChange={onDateChange}
