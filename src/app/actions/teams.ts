@@ -8,7 +8,7 @@ export interface ITeamUser {
     id: number;
     playerStatus: boolean;
     teamStatus: boolean;
-    role: 'Owner' | 'Admin' | 'Staff' | 'Player';
+    role: 'Owner' | 'Admin' | 'Player';
     color: string;
     createdAt: Date;
     updatedAt: Date;

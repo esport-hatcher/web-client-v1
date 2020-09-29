@@ -58,4 +58,11 @@ export const getTeamById = (
     return undefined;
 };
 
+/** RETURN only teams where TeamUser = 'Owner' | 'Admin'  */
+export const getAdminTeams = (state: ITeam[]): ITeam[] => {
+    return state.filter(
+        team => team.TeamUser.role === 'Owner' || team.TeamUser.role === 'Admin'
+    );
+};
+
 export default teamsReducer;
