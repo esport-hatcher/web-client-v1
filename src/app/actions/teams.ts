@@ -92,6 +92,11 @@ export interface IInvitePlayerActionSucess {
     payload: IUser[];
 }
 
+export interface IPatchTeamUser {
+    type: ActionTypes.patchTeamUser;
+    payload: IUser[];
+}
+
 export const fetchTeams = () => async (
     dispatch: Dispatch,
     getState: IGetState
@@ -112,6 +117,31 @@ export const fetchTeams = () => async (
     }
 };
 
+export const pathTeamUser = (teamId: number) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const myId = getState().authentication.user;
+        if (myId) {
+            const { data } = await api.patch(
+                `teams/${teamId}/users/${myId.id}`,
+                {
+                    playerStatus: true,
+                    teamStatus: true,
+                }
+            );
+            dispatch<IPatchTeamUser>({
+                type: ActionTypes.patchTeamUser,
+                payload: data,
+            });
+        }
+    } catch ({ response: { data } }) {
+        dispatch<IFetchTeamErrorAction>({
+            type: ActionTypes.fetchTeamError,
+        });
+    }
+};
 export const fetchTeamUser = (teamId: number) => async (
     dispatch: Dispatch,
     getState: IGetState
@@ -211,7 +241,7 @@ export const joinTeam = (teamName: string) => async (
                 return element.name === teamName;
             });
             if (teamSelected) {
-                await api.post(`teams/${teamSelected.id}/users/${myId.id}`);
+                await api.post(`users/${myId.id}/teams/${teamSelected.id}`);
                 dispatch<ICreateTeamActionSucess>({
                     type: ActionTypes.createTeamSucess,
                     payload: [teamSelected],

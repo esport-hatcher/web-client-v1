@@ -17,6 +17,7 @@ import {
     ICreateTeamActionError,
     ICreateTeamActionSucess,
     IInvitePlayerActionSucess,
+    IPatchTeamUser,
 } from './teams';
 import {
     ICreateTaskSuccess,
@@ -61,6 +62,7 @@ export enum ActionTypes {
     fetchTeamUserSucess,
     fetchTeamUserError,
     invitePlayerSucess,
+    patchTeamUser,
 }
 
 export type Action =
@@ -88,7 +90,8 @@ export type Action =
     | IFetchTeamUserError
     | ICreateTeamActionError
     | ICreateTeamActionSucess
-    | IInvitePlayerActionSucess;
+    | IInvitePlayerActionSucess
+    | IPatchTeamUser;
 
 export type IGetState = () => RootState;
 

@@ -42,13 +42,24 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                     {teamUser &&
                         user &&
                         teamUser.map(item => {
-                            if (inTeam === true) {
-                                if (item.id === user.id) {
-                                    return null;
-                                }
-                                return <TeamUserCard item={item} />;
+                            if (
+                                item.TeamUser.teamStatus &&
+                                item.TeamUser.playerStatus
+                            ) {
+                                return (
+                                    <TeamUserCard
+                                        item={item}
+                                        needvalidation={true}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <TeamUserCard
+                                        item={item}
+                                        needvalidation={false}
+                                    />
+                                );
                             }
-                            return <TeamUserCard item={item} />;
                         })}
                     <div className='team-page__modal--button' onClick={onShow}>
                         <PlusButton />

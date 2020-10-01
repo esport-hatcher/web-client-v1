@@ -37,6 +37,11 @@ const teamsReducer = (state: ITeamsReducer = INITIAL_STATE, action: Action) => {
                 ...state,
                 teamUsers: action.payload,
             };
+        case ActionTypes.fetchTeamUserError:
+            return {
+                ...state,
+                teamUsers: [],
+            };
         case ActionTypes.invitePlayerSucess:
             return {
                 ...state,
