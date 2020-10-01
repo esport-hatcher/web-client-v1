@@ -15,6 +15,7 @@ import {
     IOption,
 } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
+import { getAdminTeams } from 'app/reducers';
 import { AsyncDispatch, IFormValues, createEvent } from 'app/actions';
 
 interface IProps {
@@ -48,10 +49,11 @@ export const CreateEventForm: React.FC<IProps> = React.memo(
         const dispatch = useDispatch() as AsyncDispatch;
 
         useEffect(() => {
+            const adminTeams = getAdminTeams(rawTeams);
             setOptions(currentOptions =>
                 unionBy(
                     currentOptions,
-                    rawTeams.map(rawTeam => ({
+                    adminTeams.map(rawTeam => ({
                         value: rawTeam.id.toString(),
                         label: rawTeam.name,
                     })),
