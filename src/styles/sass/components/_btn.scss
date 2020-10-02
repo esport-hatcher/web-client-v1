@@ -38,6 +38,11 @@
         background-color: $color-rosy-pink;
         color: $color-white;
 
+        &--gradient {
+            color: $color-white;
+            background-image: $color-primary-gradient;
+        }
+
         &:hover {
             background-color: darken($color-rosy-pink, 10%);
         }
@@ -46,6 +51,11 @@
     &--secondary {
         background-color: $color-blue-light;
         color: $color-white;
+
+        &--gradient {
+            color: $color-white;
+            background-image: $color-secondary-gradient;
+        }
 
         &:hover {
             background-color: darken($color-blue-light, 10%);
@@ -145,7 +155,7 @@
 
         &__horizontal {
             position: relative;
-            background-color: #FFFFFF;
+            background-color: #ffffff;
             width: 50%;
             height: 12.5%;
             left: 25%;
@@ -154,7 +164,7 @@
 
         &__vertical {
             position: relative;
-            background-color: #FFFFFF;
+            background-color: #ffffff;
             width: 12.5%;
             height: 50%;
             left: 43.75%;

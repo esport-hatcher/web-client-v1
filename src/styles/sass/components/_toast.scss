@@ -28,11 +28,11 @@
 
     &--error {
         color: $color-white;
-        background-color: $color-rosy-pink;
+        background-image: $color-primary-gradient;
     }
 
     &--success {
-        background-color: $color-green-light;
         color: $color-white;
+        background-image: $color-secondary-gradient;
     }
 }

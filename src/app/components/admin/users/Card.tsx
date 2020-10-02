@@ -58,13 +58,13 @@ export const AdminUserCard: React.FC<IProps> = React.memo(({ user }) => {
             />
             <div className='admin-user-card__action-buttons'>
                 <button
-                    className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary'
+                    className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--1 btn btn--primary--gradient'
                     onClick={() => setShowModal(true)}
                     disabled={user.id === userSession!.id}
                 >
                     Delete
                 </button>
-                <button className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--2 btn btn--secondary'>
+                <button className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--2 btn btn--secondary--gradient'>
                     Logs
                 </button>
                 <button className='admin-user-card__action-buttons__button admin-user-card__action-buttons__button--3 btn btn--tertiary'>
