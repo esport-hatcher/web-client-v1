@@ -30,6 +30,8 @@ $color-secondary-gradient: linear-gradient(
     lighten($color-blue-light, 10%),
     $color-blue-light
 );
+
+$color-tertiary-gradient: linear-gradient(122deg, #4c617b, $color-dark);
 /*
 GENERAL
 */

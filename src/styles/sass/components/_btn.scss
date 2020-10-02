@@ -69,6 +69,15 @@
         &:hover {
             background-color: darken($color-dark-two, 10%);
         }
+
+        &--gradient {
+            color: $color-white;
+            background-image: $color-tertiary-gradient;
+
+            & > svg {
+                color: $color-white;
+            }
+        }
     }
 
     &--primary-gradient {

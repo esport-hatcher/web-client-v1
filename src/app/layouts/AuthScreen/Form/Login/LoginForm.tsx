@@ -53,7 +53,7 @@ export const LoginForm: React.FC<IProps> = React.memo(() => {
                         ref={register}
                     />
                     <IconButton
-                        className='btn--primary-gradient btn--rounded-bottom login-screen__form__btn'
+                        className='btn--primary--gradient btn--rounded-bottom login-screen__form__btn'
                         Icon={AiOutlineLogin}
                         loading={isLoading}
                         type='submit'

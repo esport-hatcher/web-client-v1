@@ -82,7 +82,7 @@ export const RegisterFormMore: React.FC<IProps> = React.memo(
                         type='button'
                         onClick={onGoBack}
                         Icon={AiOutlineLeft}
-                        className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
+                        className='register-screen__more__btn-back btn btn--round btn--tertiary--gradient'
                     />
                     <FormInput
                         type='text'
@@ -135,7 +135,7 @@ export const RegisterFormMore: React.FC<IProps> = React.memo(
                         format='+33 # ## ## ## ##'
                     />
                     <IconButton
-                        className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
+                        className='btn--primary--gradient btn--rounded-bottom register-screen__more__btn'
                         Icon={AiOutlineLogin}
                         loading={loading}
                         type='submit'

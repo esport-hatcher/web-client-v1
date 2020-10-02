@@ -25,12 +25,15 @@ export const UserDeleteConfirmation: React.FC<IProps> = React.memo(
                 </p>
                 <div className='modal__action-buttons'>
                     <button
-                        className='btn btn--primary'
+                        className='btn btn--primary--gradient'
                         onClick={() => setShow(false)}
                     >
                         Cancel
                     </button>
-                    <button className='btn btn--secondary' onClick={onConfirm}>
+                    <button
+                        className='btn btn--secondary--gradient'
+                        onClick={onConfirm}
+                    >
                         Confirm
                     </button>
                 </div>

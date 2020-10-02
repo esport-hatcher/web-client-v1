@@ -95,7 +95,7 @@ export const RegisterFormBasic: React.FC<IProps> = React.memo(
                     <RoundButton
                         type='submit'
                         Icon={AiOutlineRight}
-                        className='register-screen__basic__btn btn btn--round btn--secondary-gradient'
+                        className='register-screen__basic__btn btn btn--round btn--tertiary--gradient'
                     />
                 </form>
             </div>
