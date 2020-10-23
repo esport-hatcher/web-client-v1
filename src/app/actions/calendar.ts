@@ -3,6 +3,22 @@ import { sendToast } from 'app/shared';
 import { IFormValues } from './form';
 import { ActionTypes, AppThunk } from './types';
 import { startOfMonth, endOfMonth } from 'date-fns';
+import { ITeam } from './teams';
+import { IUser } from './user';
+
+/** DATA TYPES */
+
+interface IUserE extends IUser {
+    EventUser: IEventUser;
+}
+
+interface IEventUser {
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+    EventId: number;
+    UserId: number;
+}
 
 export interface IRawEvent {
     id: number;
@@ -16,26 +32,37 @@ export interface IRawEvent {
     createdAt: Date;
 }
 
-export interface IEvent {
-    id: number;
-    title: string;
-    description: string;
-    place: string;
+export interface IEvent extends Omit<IRawEvent, 'dateBegin' | 'dateEnd'> {
     dateBegin: Date;
     dateEnd: Date;
-    TeamId?: number;
-    updatedAt: Date;
-    createdAt: Date;
 }
+
+export interface IRawDetailedEvent extends IRawEvent {
+    Team: ITeam;
+    Users: IUserE[];
+}
+
+export interface IDetailedEvent
+    extends Omit<IRawDetailedEvent, 'dateBegin' | 'dateEnd'> {
+    dateBegin: Date;
+    dateEnd: Date;
+}
+
+/** ACTION TYPES */
 
 export interface ICalendarCreateEventSuccess {
     type: ActionTypes.calendarCreateEventSuccess;
     event: IRawEvent;
 }
 
+export interface ICalendarFetchEventsSuccess {
+    type: ActionTypes.calendarFetchEventsSuccess;
+    events: IRawEvent[];
+}
+
 export interface ICalendarFetchEventSuccess {
     type: ActionTypes.calendarFetchEventSuccess;
-    events: IRawEvent[];
+    event: IRawDetailedEvent;
 }
 
 export const createEvent = (
@@ -76,9 +103,29 @@ export const fetchEvents = (currentMonth: Date): AppThunk => async (
                 currentMonth
             )}&dateEnd=${endOfMonth(currentMonth)}`
         );
+        dispatch<ICalendarFetchEventsSuccess>({
+            type: ActionTypes.calendarFetchEventsSuccess,
+            events: data,
+        });
+    } catch ({ response: { data } }) {
+        // tslint:disable-next-line: no-console
+        console.log(data);
+    }
+};
+
+export const fetchEvent = (eventId: number): AppThunk => async (
+    dispatch,
+    getState
+) => {
+    try {
+        const userId = getState().authentication.user!.id;
+
+        const { data } = await api.get<IRawDetailedEvent>(
+            `/users/${userId}/events/${eventId}`
+        );
         dispatch<ICalendarFetchEventSuccess>({
             type: ActionTypes.calendarFetchEventSuccess,
-            events: data,
+            event: data,
         });
     } catch ({ response: { data } }) {
         // tslint:disable-next-line: no-console

@@ -27,6 +27,7 @@ import {
 import { IUpdateForm, IResetForm } from './form';
 import {
     ICalendarCreateEventSuccess,
+    ICalendarFetchEventsSuccess,
     ICalendarFetchEventSuccess,
 } from './calendar';
 
@@ -51,6 +52,7 @@ export enum ActionTypes {
     deleteTaskSuccess,
     patchTaskSuccess,
     calendarCreateEventSuccess,
+    calendarFetchEventsSuccess,
     calendarFetchEventSuccess,
     updateForm,
     resetForm,
@@ -81,6 +83,7 @@ export type Action =
     | IDeleteTaskSuccess
     | IPatchTaskSuccess
     | ICalendarCreateEventSuccess
+    | ICalendarFetchEventsSuccess
     | ICalendarFetchEventSuccess
     | IUpdateForm
     | IResetForm

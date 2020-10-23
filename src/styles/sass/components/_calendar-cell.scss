@@ -35,12 +35,6 @@
         right: 2rem;
         display: grid;
         grid-template-columns: repeat(2, auto);
-        column-gap: 0.4rem;
-
-        &__button {
-            &:hover {
-                color: $color-blue-light;
-            }
-        }
+        column-gap: 2rem;
     }
 }
