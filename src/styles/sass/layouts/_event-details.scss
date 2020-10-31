@@ -5,7 +5,7 @@
     border-left: 1px solid $color-dark-four;
     padding: 2rem 4rem;
     display: grid;
-    grid-template-rows: repeat(3, min-content);
+    grid-auto-rows: min-content;
     row-gap: 4rem;
 
     &__drawer {
@@ -19,10 +19,57 @@
         }
     }
 
+    &__field {
+        display: grid;
+        grid-template-rows: min-content max-content;
+        row-gap: 2rem;
+    }
+
     &__description {
-        background-color: $color-dark;
-        padding: 2rem 4rem;
-        border-radius: 8px;
-        min-height: 10rem;
+        &__body {
+            background-color: $color-dark;
+            padding: 2rem 4rem;
+            border-radius: 8px;
+            min-height: 10rem;
+        }
+    }
+
+    &__team {
+        position: absolute;
+        right: 4rem;
+        top: 3rem;
+    }
+
+    &__members {
+        list-style: none;
+
+        &__item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: $color-dark;
+            padding: 2rem 4rem;
+            border-radius: 8px;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid $color-light-grey;
+            }
+
+            &--img {
+                width: 4rem;
+                height: 4rem;
+                border-radius: 6px;
+                margin-right: 1.4rem;
+            }
+
+            &--name {
+                text-transform: capitalize;
+            }
+        }
+
+        &__add {
+            width: max-content;
+            text-transform: none;
+        }
     }
 }

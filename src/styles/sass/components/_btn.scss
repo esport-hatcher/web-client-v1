@@ -41,6 +41,13 @@
         &--gradient {
             color: $color-white;
             background-image: $color-primary-gradient;
+            transition: background-color 0s ease-in-out 0s,
+                background-image 0.3s ease-in;
+
+            &:hover {
+                background-color: $color-rosy-pink;
+                background-image: none;
+            }
         }
 
         &:hover {
@@ -77,24 +84,6 @@
             & > svg {
                 color: $color-white;
             }
-        }
-    }
-
-    &--primary-gradient {
-        background-image: $color-primary-gradient;
-        color: $color-white;
-
-        & > svg {
-            color: $color-white;
-        }
-    }
-
-    &--secondary-gradient {
-        color: $color-white;
-        background-image: linear-gradient(176deg, #4c617b, $color-dark);
-
-        & > svg {
-            color: $color-white;
         }
     }
 
@@ -164,6 +153,7 @@
 
     &--rounded-bottom {
         border: none;
+        border-radius: 0;
         border-bottom-left-radius: 14px;
         border-bottom-right-radius: 14px;
     }
