@@ -36,7 +36,12 @@
     border-bottom-left-radius: $base-input-border-radius;
     border-bottom-right-radius: $base-input-border-radius;
     z-index: 2;
-    overflow: hidden;
+    overflow-y: hidden;
+    max-height: 40rem;
+
+    &:hover {
+        overflow-y: auto;
+    }
 }
 
 .react-autosuggest__suggestions-list {

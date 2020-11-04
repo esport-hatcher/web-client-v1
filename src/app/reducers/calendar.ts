@@ -33,6 +33,8 @@ const events = (state: IEvent[] = [], action: Action) => {
             return action.events.map(event => normalizeEvent(event));
         case ActionTypes.calendarCreateEventSuccess:
             return [...state, normalizeEvent(action.event)];
+        case ActionTypes.calendarDeleteEventSuccess:
+            return state.filter(event => event.id !== action.eventId);
         default:
             return state;
     }

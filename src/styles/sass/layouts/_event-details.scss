@@ -1,7 +1,6 @@
 .event-details {
     width: 100%;
     min-height: 100vh;
-    overflow-y: auto;
     background-color: $color-dark-medium;
     border-left: 1px solid $color-dark-four;
     padding: 2rem 4rem;
@@ -26,6 +25,33 @@
         row-gap: 2rem;
     }
 
+    &__dates {
+        display: grid;
+        width: 100%;
+        max-width: 60rem;
+        margin: auto;
+        grid-template-columns: 48% 4% 48%;
+        grid-template-rows: min-content;
+        align-items: center;
+
+        &--separator {
+            text-align: center;
+        }
+
+        &--item {
+            background-color: $color-dark;
+            padding: 0.8rem 1.6rem;
+            border-radius: 8px;
+        }
+
+        &--begin {
+            text-align: left;
+        }
+        &--end {
+            text-align: right;
+        }
+    }
+
     &__description {
         &__body {
             background-color: $color-dark;
@@ -44,8 +70,12 @@
     &__members {
         list-style: none;
         max-height: 40rem;
-        overflow-y: auto;
+        overflow: hidden;
         border-radius: 8px;
+
+        &:hover {
+            overflow-y: auto;
+        }
 
         &__item {
             display: flex;
@@ -84,18 +114,29 @@
             width: 50%;
             min-width: 21rem;
             position: relative;
+        }
+    }
 
+    &__action-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+        &--add {
+            width: 100%;
+            position: relative;
             &--btn {
                 width: 100%;
                 text-transform: none;
             }
-
             &--confirm {
                 position: absolute;
                 top: 50%;
-                right: 5%;
+                right: 2rem;
                 transform: translateY(-50%);
             }
+        }
+        &--it {
+            text-transform: none;
         }
     }
 }

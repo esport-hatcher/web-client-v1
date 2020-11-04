@@ -55,6 +55,11 @@ export interface ICalendarCreateEventSuccess {
     event: IRawEvent;
 }
 
+export interface ICalendarDeleteEventSuccess {
+    type: ActionTypes.calendarDeleteEventSuccess;
+    eventId: number;
+}
+
 export interface ICalendarFetchEventsSuccess {
     type: ActionTypes.calendarFetchEventsSuccess;
     events: IRawEvent[];
@@ -101,6 +106,30 @@ export const createEvent = (
     }
 };
 
+export const deleteEvent = (
+    eventId: number,
+    teamId?: number
+): AppThunk => async (dispatch, getState) => {
+    try {
+        if (!teamId) {
+            const userId = getState().authentication.user!.id;
+            await api.delete(`/users/${userId}/events/${eventId}`);
+        } else {
+            await api.delete(`/teams/${teamId}/events/${eventId}`);
+        }
+        dispatch<ICalendarDeleteEventSuccess>({
+            type: ActionTypes.calendarDeleteEventSuccess,
+            eventId,
+        });
+        sendToast({
+            title: 'Event deleted !',
+            type: 'error',
+        });
+    } catch ({ response: { data } }) {
+        // tslint:disable-next-line: no-console
+        console.log(data);
+    }
+};
 export const fetchEvents = (currentMonth: Date): AppThunk => async (
     dispatch,
     getState

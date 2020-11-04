@@ -3,9 +3,11 @@ import {
     AiOutlineCheck,
     AiOutlineClose,
     AiOutlineDelete,
+    AiOutlineDoubleRight,
 } from 'react-icons/ai';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch } from 'react-redux';
+import format from 'date-fns/format';
 import { routesPath } from 'app/config';
 import {
     IconButton,
@@ -22,10 +24,10 @@ import {
     ITeam,
     IUserE,
     IDetailedEvent,
+    deleteEvent,
 } from 'app/actions';
 import { getTeamById } from 'app/reducers';
 import { useSelector, useToggler } from 'app/custom-hooks';
-import { number } from 'yup';
 
 interface IParams {
     eventId?: string;
@@ -35,9 +37,15 @@ interface IProps {
     opened: boolean | null;
 }
 
-interface IEventDeleteModalProps extends React.ComponentProps<typeof Modal> {
+interface IEventDeleteMemberModalProps
+    extends React.ComponentProps<typeof Modal> {
     event: IDetailedEvent;
     user: IUserE;
+    onConfirm: () => void;
+}
+
+interface IEventDeleteModalProps extends React.ComponentProps<typeof Modal> {
+    event: IDetailedEvent;
     onConfirm: () => void;
 }
 
@@ -50,7 +58,7 @@ interface IEventMemberProps {
     event: ITeamEvent;
 }
 
-const EventDeleteModal: React.FC<IEventDeleteModalProps> = React.memo(
+const EventDeleteMemberModal: React.FC<IEventDeleteMemberModalProps> = React.memo(
     ({ show, setShow, user, event, onConfirm }) => (
         <Modal show={show} setShow={setShow} className='modal--grid'>
             <BoxHeader
@@ -79,6 +87,34 @@ const EventDeleteModal: React.FC<IEventDeleteModalProps> = React.memo(
     )
 );
 
+const EventDeleteModal: React.FC<IEventDeleteModalProps> = React.memo(
+    ({ show, setShow, event, onConfirm }) => (
+        <Modal show={show} setShow={setShow} className='modal--grid'>
+            <BoxHeader
+                title={`Are you sure you want to delete ${event.title} ?`}
+                size='xs'
+            />
+            <p className='body-text body-text--sm'>
+                This event and all data related to it will be completely erased
+            </p>
+            <div className='modal__action-buttons'>
+                <button
+                    className='btn btn--primary--gradient'
+                    onClick={() => setShow(false)}
+                >
+                    Cancel
+                </button>
+                <button
+                    className='btn btn--secondary--gradient'
+                    onClick={onConfirm}
+                >
+                    Confirm
+                </button>
+            </div>
+        </Modal>
+    )
+);
+
 const EventMember: React.FC<IEventMemberProps> = React.memo(
     ({ user, event }) => {
         const [modalDelete, setModalDelete] = useState(false);
@@ -88,14 +124,14 @@ const EventMember: React.FC<IEventMemberProps> = React.memo(
             setModalDelete,
         ]);
 
-        const onDelete = useCallback(
-            () => dispatch(removeMemberEvent(event.TeamId, user.id, event.id)),
-            [dispatch, event.TeamId, user.id, event.id]
-        );
+        const onDelete = useCallback(() => {
+            setModalDelete(false);
+            dispatch(removeMemberEvent(event.TeamId, user.id, event.id));
+        }, [dispatch, event.TeamId, user.id, event.id]);
 
         return (
             <li className='event-details__members__item' key={id}>
-                <EventDeleteModal
+                <EventDeleteMemberModal
                     show={modalDelete}
                     setShow={setModalDelete}
                     onConfirm={onDelete}
@@ -129,10 +165,12 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
     const { eventId } = useParams<IParams>();
     const [eventTeam, setEventTeam] = useState<ITeam | undefined>(undefined);
     const [addMemberOn, toggleAddMember, setAddMember] = useToggler(false);
+    const [eventDeleteMode, setEventDeleteMode] = useState(false);
     const teams = useSelector(state => state.teams.teams, shallowEqual);
     const [invitedMember, setInvitedMember] = useState<number | undefined>(
         undefined
     );
+    const history = useHistory();
     const event = useSelector(
         state => state.calendar.selectedEvent,
         shallowEqual
@@ -206,11 +244,23 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
         return [];
     };
 
-    const renderActionButtons = () => {
+    const toggleDeleteModeOn = useCallback(() => setEventDeleteMode(true), [
+        setEventDeleteMode,
+    ]);
+
+    const onDeleteConfirm = useCallback(() => {
+        if (event) {
+            dispatch(deleteEvent(event.id, event.TeamId));
+            setEventDeleteMode(false);
+            history.goBack();
+        }
+    }, [dispatch, event, setEventDeleteMode]);
+
+    const renderAddMemberButton = () => {
         if (addMemberOn && eventTeam) {
             const memberItems = mapMembers();
             return (
-                <>
+                <div className='event-details__action-buttons--add'>
                     <AutoComplete
                         items={memberItems}
                         onSelect={onSelectedMember}
@@ -218,20 +268,34 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
                     {invitedMember && (
                         <IconButton
                             Icon={AiOutlineCheck}
-                            className='event-details__members__add--confirm icon--green'
+                            className='event-details__action-buttons--add--confirm icon--green'
                             onClick={onAddMember}
                         />
                     )}
-                </>
+                </div>
             );
         }
         return (
             <button
-                className='btn btn--primary--gradient event-details__members__add--btn'
+                className='btn btn--secondary--gradient event-details__action-buttons--add--btn event-details__action-buttons--it'
                 onClick={toggleAddMember}
             >
                 Add member
             </button>
+        );
+    };
+
+    const renderActionButtons = () => {
+        return (
+            <>
+                {eventTeam && renderAddMemberButton()}
+                <button
+                    className='btn btn--primary--gradient event-details__action-buttons--delete event-details__action-buttons--it'
+                    onClick={toggleDeleteModeOn}
+                >
+                    Delete event
+                </button>
+            </>
         );
     };
 
@@ -248,6 +312,12 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
             </Link>
             {event && (
                 <>
+                    <EventDeleteModal
+                        show={eventDeleteMode}
+                        setShow={setEventDeleteMode}
+                        onConfirm={onDeleteConfirm}
+                        event={event}
+                    />
                     {eventTeam && (
                         <Badge
                             className='event-details__team'
@@ -262,6 +332,22 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
                     >
                         {event.title}
                     </h1>
+                    <div className='event-details__dates event-details__field important-info important-info--md'>
+                        <p className='event-details__dates--begin'>
+                            <span className='event-details__dates--item'>
+                                {format(
+                                    event.dateBegin,
+                                    'dd MMMM yyyy (HH:mm)'
+                                )}
+                            </span>
+                        </p>
+                        <AiOutlineDoubleRight className='event-details__dates--separator' />
+                        <p className='event-details__dates--end'>
+                            <span className='event-details__dates--item'>
+                                {format(event.dateEnd, 'dd MMMM yyyy (HH:mm)')}
+                            </span>
+                        </p>
+                    </div>
                     <div className='event-details__description event-details__field'>
                         <h3 className='title title--xs'>Description</h3>
                         <div className='event-details__description__body body-text body-text--md'>
@@ -274,11 +360,11 @@ export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
                             <ul className='event-details__members'>
                                 {renderMembers()}
                             </ul>
-                            <div className='event-details__members__add'>
-                                {renderActionButtons()}
-                            </div>
                         </div>
                     )}
+                    <div className='event-details__action-buttons'>
+                        {renderActionButtons()}
+                    </div>
                 </>
             )}
         </div>
