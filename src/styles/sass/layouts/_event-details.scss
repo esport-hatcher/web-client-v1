@@ -68,6 +68,16 @@
             &--name {
                 text-transform: capitalize;
             }
+
+            &--delete {
+                margin-left: auto;
+                opacity: 0;
+                transition: opacity 0.3s ease-in;
+            }
+
+            &:hover > &--delete {
+                opacity: 1;
+            }
         }
 
         &__add {

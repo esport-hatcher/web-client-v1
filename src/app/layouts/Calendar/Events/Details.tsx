@@ -1,12 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+    AiOutlineCheck,
+    AiOutlineClose,
+    AiOutlineDelete,
+} from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { routesPath } from 'app/config';
-import { IconButton, Badge, UserAvatar, AutoComplete } from 'app/components';
-import { fetchEvent, addMemberEvent, ITeam } from 'app/actions';
+import {
+    IconButton,
+    Badge,
+    UserAvatar,
+    AutoComplete,
+    Modal,
+    BoxHeader,
+} from 'app/components';
+import {
+    fetchEvent,
+    addMemberEvent,
+    removeMemberEvent,
+    ITeam,
+    IUserE,
+    IDetailedEvent,
+} from 'app/actions';
 import { getTeamById } from 'app/reducers';
 import { useSelector, useToggler } from 'app/custom-hooks';
+import { number } from 'yup';
 
 interface IParams {
     eventId?: string;
@@ -16,7 +35,97 @@ interface IProps {
     opened: boolean | null;
 }
 
-export const EventDetails: React.FC<IProps> = ({ opened }) => {
+interface IEventDeleteModalProps extends React.ComponentProps<typeof Modal> {
+    event: IDetailedEvent;
+    user: IUserE;
+    onConfirm: () => void;
+}
+
+interface ITeamEvent extends Omit<IDetailedEvent, 'TeamId'> {
+    TeamId: number;
+}
+
+interface IEventMemberProps {
+    user: IUserE;
+    event: ITeamEvent;
+}
+
+const EventDeleteModal: React.FC<IEventDeleteModalProps> = React.memo(
+    ({ show, setShow, user, event, onConfirm }) => (
+        <Modal show={show} setShow={setShow} className='modal--grid'>
+            <BoxHeader
+                title={`Are you sure you want to remove ${user.firstName} ${user.lastName} from ${event.title} ?`}
+                size='xs'
+            />
+            <p className='body-text body-text--sm'>
+                This user will not be able to see any data related to this
+                event.
+            </p>
+            <div className='modal__action-buttons'>
+                <button
+                    className='btn btn--primary--gradient'
+                    onClick={() => setShow(false)}
+                >
+                    Cancel
+                </button>
+                <button
+                    className='btn btn--secondary--gradient'
+                    onClick={onConfirm}
+                >
+                    Confirm
+                </button>
+            </div>
+        </Modal>
+    )
+);
+
+const EventMember: React.FC<IEventMemberProps> = React.memo(
+    ({ user, event }) => {
+        const [modalDelete, setModalDelete] = useState(false);
+        const dispatch = useDispatch();
+        const { id, avatarUrl, firstName, lastName } = user;
+        const toggleModalOn = useCallback(() => setModalDelete(true), [
+            setModalDelete,
+        ]);
+
+        const onDelete = useCallback(
+            () => dispatch(removeMemberEvent(event.TeamId, user.id, event.id)),
+            [dispatch, event.TeamId, user.id, event.id]
+        );
+
+        return (
+            <li className='event-details__members__item' key={id}>
+                <EventDeleteModal
+                    show={modalDelete}
+                    setShow={setModalDelete}
+                    onConfirm={onDelete}
+                    user={user}
+                    event={event}
+                />
+                <UserAvatar
+                    avatarUrl={avatarUrl}
+                    className='event-details__members__item--img'
+                />
+                <span className='important-info important-info--md'>
+                    <span className='event-details__members__item--name'>
+                        {firstName}
+                    </span>
+                    &nbsp;
+                    <span className='event-details__members__item--name'>
+                        {lastName}
+                    </span>
+                </span>
+                <IconButton
+                    Icon={AiOutlineDelete}
+                    className='event-details__members__item--delete icon--red'
+                    onClick={toggleModalOn}
+                />
+            </li>
+        );
+    }
+);
+
+export const EventDetails: React.FC<IProps> = React.memo(({ opened }) => {
     const { eventId } = useParams<IParams>();
     const [eventTeam, setEventTeam] = useState<ITeam | undefined>(undefined);
     const [addMemberOn, toggleAddMember, setAddMember] = useToggler(false);
@@ -51,38 +160,22 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
         }
     }, [setAddMember, opened]);
 
-    const onSelectedMember = (value: number | undefined) => {
-        setInvitedMember(value);
-    };
+    const onSelectedMember = useCallback(
+        (value: number | undefined) => {
+            setInvitedMember(value);
+        },
+        [setInvitedMember]
+    );
 
     const renderMembers = () => {
-        if (event && event.Users) {
-            return event.Users.map(member => {
-                return (
-                    <li
-                        className='event-details__members__item'
-                        key={member.id}
-                    >
-                        <UserAvatar
-                            avatarUrl={member.avatarUrl}
-                            className='event-details__members__item--img'
-                        />
-                        <span className='important-info important-info--md'>
-                            <span className='event-details__members__item--name'>
-                                {member.firstName}
-                            </span>
-                            &nbsp;
-                            <span className='event-details__members__item--name'>
-                                {member.lastName}
-                            </span>
-                        </span>
-                    </li>
-                );
-            });
+        if (event && event.Users && event.TeamId) {
+            return event.Users.map(member => (
+                <EventMember user={member} event={event as ITeamEvent} />
+            ));
         }
     };
 
-    const onAddMember = () => {
+    const onAddMember = useCallback(() => {
         if (eventTeam && invitedMember && eventId) {
             dispatch(
                 addMemberEvent(eventTeam.id, invitedMember, parseInt(eventId))
@@ -90,7 +183,15 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
             setInvitedMember(undefined);
             setAddMember(false);
         }
-    };
+    }, [
+        eventTeam,
+        invitedMember,
+        eventId,
+        addMemberEvent,
+        dispatch,
+        setInvitedMember,
+        setAddMember,
+    ]);
 
     const mapMembers = () => {
         if (eventTeam && event) {
@@ -182,4 +283,4 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
             )}
         </div>
     );
-};
+});

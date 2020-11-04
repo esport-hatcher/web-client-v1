@@ -30,6 +30,7 @@ import {
     ICalendarCreateEventSuccess,
     ICalendarFetchEventsSuccess,
     ICalendarFetchEventSuccess,
+    ICalendarRemoveMemberEventSuccess,
 } from './calendar';
 
 export type CountQuery = { records: number };
@@ -56,6 +57,7 @@ export enum ActionTypes {
     calendarFetchEventsSuccess,
     calendarFetchEventSuccess,
     calendarAddMemberEventSuccess,
+    calendarRemoveMemberEventSuccess,
     updateForm,
     resetForm,
     createTeamSucess,
@@ -88,6 +90,7 @@ export type Action =
     | ICalendarFetchEventsSuccess
     | ICalendarFetchEventSuccess
     | ICalendarAddMemberEventSuccess
+    | ICalendarRemoveMemberEventSuccess
     | IUpdateForm
     | IResetForm
     | IFetchTeamUserSucess

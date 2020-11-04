@@ -53,6 +53,15 @@ const selectedEvent = (
                 };
             }
             return state;
+        case ActionTypes.calendarRemoveMemberEventSuccess:
+            if (state) {
+                return {
+                    ...state,
+                    Users: state.Users.filter(
+                        user => user.id !== action.userId
+                    ),
+                };
+            }
         default:
             return state;
     }

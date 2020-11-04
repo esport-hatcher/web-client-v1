@@ -8,7 +8,7 @@ import { IUser } from './user';
 
 /** DATA TYPES */
 
-interface IUserE extends IUser {
+export interface IUserE extends IUser {
     EventUser: IEventUser;
 }
 
@@ -68,6 +68,11 @@ export interface ICalendarFetchEventSuccess {
 export interface ICalendarAddMemberEventSuccess {
     type: ActionTypes.calendarAddMemberEventSuccess;
     user: IUserE;
+}
+
+export interface ICalendarRemoveMemberEventSuccess {
+    type: ActionTypes.calendarRemoveMemberEventSuccess;
+    userId: number;
 }
 
 export const createEvent = (
@@ -150,6 +155,23 @@ export const addMemberEvent = (
         dispatch<ICalendarAddMemberEventSuccess>({
             type: ActionTypes.calendarAddMemberEventSuccess,
             user: data,
+        });
+    } catch ({ response: { data } }) {
+        // tslint:disable-next-line: no-console
+        console.log(data);
+    }
+};
+
+export const removeMemberEvent = (
+    teamId: number,
+    userId: number,
+    eventId: number
+): AppThunk => async dispatch => {
+    try {
+        await api.delete(`/teams/${teamId}/events/${eventId}/users/${userId}`);
+        dispatch<ICalendarRemoveMemberEventSuccess>({
+            type: ActionTypes.calendarRemoveMemberEventSuccess,
+            userId,
         });
     } catch ({ response: { data } }) {
         // tslint:disable-next-line: no-console
