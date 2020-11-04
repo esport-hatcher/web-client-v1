@@ -1,6 +1,7 @@
 .event-details {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
     background-color: $color-dark-medium;
     border-left: 1px solid $color-dark-four;
     padding: 2rem 4rem;
@@ -42,6 +43,9 @@
 
     &__members {
         list-style: none;
+        max-height: 40rem;
+        overflow-y: auto;
+        border-radius: 8px;
 
         &__item {
             display: flex;
@@ -49,7 +53,6 @@
             align-items: center;
             background-color: $color-dark;
             padding: 2rem 4rem;
-            border-radius: 8px;
 
             &:not(:last-of-type) {
                 border-bottom: 1px solid $color-light-grey;
@@ -68,8 +71,21 @@
         }
 
         &__add {
-            width: max-content;
-            text-transform: none;
+            width: 50%;
+            min-width: 21rem;
+            position: relative;
+
+            &--btn {
+                width: 100%;
+                text-transform: none;
+            }
+
+            &--confirm {
+                position: absolute;
+                top: 50%;
+                right: 5%;
+                transform: translateY(-50%);
+            }
         }
     }
 }

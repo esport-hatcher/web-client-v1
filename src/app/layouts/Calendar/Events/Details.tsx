@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { routesPath } from 'app/config';
-import { IconButton, Badge, UserAvatar } from 'app/components';
-import { fetchEvent, ITeam } from 'app/actions';
+import { IconButton, Badge, UserAvatar, AutoComplete } from 'app/components';
+import { fetchEvent, addMemberEvent, ITeam } from 'app/actions';
 import { getTeamById } from 'app/reducers';
 import { useSelector, useToggler } from 'app/custom-hooks';
 
@@ -21,6 +21,9 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
     const [eventTeam, setEventTeam] = useState<ITeam | undefined>(undefined);
     const [addMemberOn, toggleAddMember, setAddMember] = useToggler(false);
     const teams = useSelector(state => state.teams.teams, shallowEqual);
+    const [invitedMember, setInvitedMember] = useState<number | undefined>(
+        undefined
+    );
     const event = useSelector(
         state => state.calendar.selectedEvent,
         shallowEqual
@@ -28,7 +31,7 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (event && event.TeamId) {
+        if (event) {
             const team = getTeamById(teams, event.TeamId);
             setEventTeam(team);
         }
@@ -43,8 +46,14 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
     useEffect(() => {
         if (!opened) {
             setAddMember(false);
+            setInvitedMember(undefined);
+            setEventTeam(undefined);
         }
     }, [setAddMember, opened]);
+
+    const onSelectedMember = (value: number | undefined) => {
+        setInvitedMember(value);
+    };
 
     const renderMembers = () => {
         if (event && event.Users) {
@@ -73,13 +82,51 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
         }
     };
 
+    const onAddMember = () => {
+        if (eventTeam && invitedMember && eventId) {
+            dispatch(
+                addMemberEvent(eventTeam.id, invitedMember, parseInt(eventId))
+            );
+            setInvitedMember(undefined);
+            setAddMember(false);
+        }
+    };
+
+    const mapMembers = () => {
+        if (eventTeam && event) {
+            /** removes all users already present in the event from the dropdown */
+            return eventTeam.Users.filter(
+                user => !event.Users.find(eventUser => eventUser.id === user.id)
+            ).map(user => ({
+                label: `${user.firstName} ${user.lastName}`,
+                value: user.id,
+            }));
+        }
+        return [];
+    };
+
     const renderActionButtons = () => {
-        if (addMemberOn) {
-            return <div>add member</div>;
+        if (addMemberOn && eventTeam) {
+            const memberItems = mapMembers();
+            return (
+                <>
+                    <AutoComplete
+                        items={memberItems}
+                        onSelect={onSelectedMember}
+                    />
+                    {invitedMember && (
+                        <IconButton
+                            Icon={AiOutlineCheck}
+                            className='event-details__members__add--confirm icon--green'
+                            onClick={onAddMember}
+                        />
+                    )}
+                </>
+            );
         }
         return (
             <button
-                className='btn btn--primary--gradient event-details__members__add'
+                className='btn btn--primary--gradient event-details__members__add--btn'
                 onClick={toggleAddMember}
             >
                 Add member
@@ -120,13 +167,17 @@ export const EventDetails: React.FC<IProps> = ({ opened }) => {
                             {event.description}
                         </div>
                     </div>
-                    <div className='event-details__field'>
-                        <h3 className='title title--xs'>Members</h3>
-                        <ul className='event-details__members'>
-                            {renderMembers()}
-                        </ul>
-                        {renderActionButtons()}
-                    </div>
+                    {eventTeam && (
+                        <div className='event-details__field'>
+                            <h3 className='title title--xs'>Members</h3>
+                            <ul className='event-details__members'>
+                                {renderMembers()}
+                            </ul>
+                            <div className='event-details__members__add'>
+                                {renderActionButtons()}
+                            </div>
+                        </div>
+                    )}
                 </>
             )}
         </div>

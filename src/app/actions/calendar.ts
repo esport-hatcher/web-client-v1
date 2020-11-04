@@ -65,6 +65,11 @@ export interface ICalendarFetchEventSuccess {
     event: IRawDetailedEvent;
 }
 
+export interface ICalendarAddMemberEventSuccess {
+    type: ActionTypes.calendarAddMemberEventSuccess;
+    user: IUserE;
+}
+
 export const createEvent = (
     formValues: IFormValues,
     option: number
@@ -126,6 +131,25 @@ export const fetchEvent = (eventId: number): AppThunk => async (
         dispatch<ICalendarFetchEventSuccess>({
             type: ActionTypes.calendarFetchEventSuccess,
             event: data,
+        });
+    } catch ({ response: { data } }) {
+        // tslint:disable-next-line: no-console
+        console.log(data);
+    }
+};
+
+export const addMemberEvent = (
+    teamId: number,
+    userId: number,
+    eventId: number
+): AppThunk => async dispatch => {
+    try {
+        const { data } = await api.post<IUserE>(
+            `/teams/${teamId}/events/${eventId}/users/${userId}`
+        );
+        dispatch<ICalendarAddMemberEventSuccess>({
+            type: ActionTypes.calendarAddMemberEventSuccess,
+            user: data,
         });
     } catch ({ response: { data } }) {
         // tslint:disable-next-line: no-console

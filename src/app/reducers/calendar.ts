@@ -45,6 +45,14 @@ const selectedEvent = (
     switch (action.type) {
         case ActionTypes.calendarFetchEventSuccess:
             return normalizeDetailedEvent(action.event);
+        case ActionTypes.calendarAddMemberEventSuccess:
+            if (state) {
+                return {
+                    ...state,
+                    Users: [...state.Users, action.user],
+                };
+            }
+            return state;
         default:
             return state;
     }

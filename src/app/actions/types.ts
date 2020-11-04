@@ -26,6 +26,7 @@ import {
 } from './tasks';
 import { IUpdateForm, IResetForm } from './form';
 import {
+    ICalendarAddMemberEventSuccess,
     ICalendarCreateEventSuccess,
     ICalendarFetchEventsSuccess,
     ICalendarFetchEventSuccess,
@@ -54,6 +55,7 @@ export enum ActionTypes {
     calendarCreateEventSuccess,
     calendarFetchEventsSuccess,
     calendarFetchEventSuccess,
+    calendarAddMemberEventSuccess,
     updateForm,
     resetForm,
     createTeamSucess,
@@ -85,6 +87,7 @@ export type Action =
     | ICalendarCreateEventSuccess
     | ICalendarFetchEventsSuccess
     | ICalendarFetchEventSuccess
+    | ICalendarAddMemberEventSuccess
     | IUpdateForm
     | IResetForm
     | IFetchTeamUserSucess

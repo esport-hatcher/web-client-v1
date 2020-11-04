@@ -12,3 +12,4 @@ export * from './BoxHeader';
 export * from './HourPicker';
 export * from './Drawers';
 export * from './Badge';
+export * from './Autocomplete';
