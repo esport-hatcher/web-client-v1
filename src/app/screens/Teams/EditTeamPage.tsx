@@ -2,10 +2,18 @@ import React, { useEffect } from 'react';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { fetchTeamUser } from 'app/actions';
+import { fetchTeamUser, joinTeam } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, TeamDescription } from 'app/components';
 import PlusButton from 'app/components/teams/PlusButton';
+
+declare global {
+    interface HTMLIFrameElement {
+        type?: string;
+        // tslint:disable-next-line: no-any
+        frameborder?: any;
+    }
+}
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -20,6 +28,10 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     const teamSelected = teams.find(element => {
         return element.name === id;
     });
+
+    const validateUserTeam = (teamid: string, userId: number) => {
+        dispatch(joinTeam(teamid, 0));
+    };
 
     useEffect(() => {
         if (teamSelected) {
@@ -37,32 +49,52 @@ export const _EditTeamPage: React.FC = React.memo(() => {
             <div className='container-information'>
                 <div className='container-information__team-information'>
                     <TeamDescription />
+                    {teamUser.length > 0 ? (
+                        <div>
+                            {' '}
+                            <iframe
+                                src='https://player.twitch.tv/?channel=faker&parent=www.example.com'
+                                scrolling='no'
+                                height='378'
+                                width='620'
+                            ></iframe>
+                        </div>
+                    ) : null}
                 </div>
                 <div className='container-information__team-member'>
+                    {teamUser.length <= 0 ? (
+                        <button
+                            onClick={() =>
+                                validateUserTeam(teamSelected.name, 0)
+                            }
+                        >
+                            {' '}
+                            validation requise
+                        </button>
+                    ) : null}
                     {teamUser &&
                         user &&
                         teamUser.map(item => {
-                            if (
-                                item.TeamUser.teamStatus &&
-                                item.TeamUser.playerStatus
-                            ) {
-                                return (
-                                    <TeamUserCard
-                                        item={item}
-                                        needvalidation={true}
-                                    />
-                                );
-                            } else {
+                            if (!item.TeamUser) {
+                                return null;
+                            } else if (item.TeamUser.teamStatus) {
                                 return (
                                     <TeamUserCard
                                         item={item}
                                         needvalidation={false}
                                     />
                                 );
+                            } else {
+                                return (
+                                    <TeamUserCard
+                                        item={item}
+                                        needvalidation={true}
+                                    />
+                                );
                             }
                         })}
                     <div className='team-page__modal--button' onClick={onShow}>
-                        <PlusButton />
+                        {teamUser.length <= 0 ? null : <PlusButton />}
                     </div>
                 </div>
             </div>

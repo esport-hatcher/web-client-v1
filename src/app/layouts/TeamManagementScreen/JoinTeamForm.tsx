@@ -12,7 +12,7 @@ export const JoinTeamForm: React.FC<IProps> = ({ change }) => {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(joinTeam(valueNameTeam));
+        dispatch(joinTeam(valueNameTeam, 0));
         change(false);
     };
 

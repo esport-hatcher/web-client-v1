@@ -1,6 +1,7 @@
 import React from 'react';
-import { IUser, pathTeamUser } from 'app/actions';
+import { IUser, joinTeam, invitePlayer } from 'app/actions';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 
 interface IProps {
     item: IUser;
@@ -8,11 +9,11 @@ interface IProps {
 }
 
 export const TeamUserCard: React.FC<IProps> = ({ item, needvalidation }) => {
+    const { id } = useParams();
     const dispatch = useDispatch();
-    const validateTeamUser = (teamId: number) => {
-        dispatch(pathTeamUser(teamId));
+    const validateTeamUser = (userid: number, teamId: number) => {
+        dispatch(invitePlayer(userid, teamId));
     };
-
     return (
         <div className='team-user-card'>
             <div className='membername'>
@@ -25,7 +26,9 @@ export const TeamUserCard: React.FC<IProps> = ({ item, needvalidation }) => {
                 ></span>
                 {needvalidation == true ? (
                     <button
-                        onClick={() => validateTeamUser(item.TeamUser.TeamId)}
+                        onClick={() =>
+                            validateTeamUser(item.id, item.TeamUser.TeamId)
+                        }
                     >
                         {' '}
                         validation requise
@@ -33,7 +36,7 @@ export const TeamUserCard: React.FC<IProps> = ({ item, needvalidation }) => {
                 ) : (
                     ''
                 )}
-                <span>{item.TeamUser.role}</span>
+                {item.TeamUser ? <span>{item.TeamUser.role}</span> : ' '}
             </div>
         </div>
     );

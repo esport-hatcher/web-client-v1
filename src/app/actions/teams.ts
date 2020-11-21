@@ -197,15 +197,16 @@ export const createTeam = (
     }
 };
 
-export const invitePlayer = (
-    playerId: NumberConstructor,
-    teamId: string
-) => async (dispatch: Dispatch, getState: IGetState) => {
+// tslint:disable-next-line: no-any
+export const invitePlayer = (playerId: any, teamId: any) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
     try {
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
         if (token && myId) {
-            const { data } = await api.post(
+            const { data } = await api.post<IUser[]>(
                 `teams/${teamId}/users/${playerId}`
             );
             dispatch<IInvitePlayerActionSucess>({
@@ -228,7 +229,7 @@ export const invitePlayer = (
     }
 };
 
-export const joinTeam = (teamName: string) => async (
+export const joinTeam = (teamName: string, userId: number) => async (
     dispatch: Dispatch,
     getState: IGetState
 ) => {
@@ -241,7 +242,11 @@ export const joinTeam = (teamName: string) => async (
                 return element.name === teamName;
             });
             if (teamSelected) {
-                await api.post(`users/${myId.id}/teams/${teamSelected.id}`);
+                if (userId === 0) {
+                    await api.post(`users/${myId.id}/teams/${teamSelected.id}`);
+                } else {
+                    await api.post(`users/${userId}/teams/${teamSelected.id}`);
+                }
                 dispatch<ICreateTeamActionSucess>({
                     type: ActionTypes.createTeamSucess,
                     payload: [teamSelected],
