@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { fetchTeamUser } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
-import { TeamUserCard, TeamDescription } from 'app/components';
+import { TeamUserCard, TeamDescription, PlayerStats } from 'app/components';
 import PlusButton from 'app/components/teams/PlusButton';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
@@ -53,6 +53,20 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                     <div className='team-page__modal--button' onClick={onShow}>
                         <PlusButton />
                     </div>
+                </div>
+
+                <div className='stats__container'>
+                    {teamUser &&
+                        user &&
+                        teamUser.map(item => {
+                            if (inTeam === true) {
+                                if (item.id === user.id) {
+                                    return null;
+                                }
+                                return <PlayerStats item={item} />;
+                            }
+                            return <PlayerStats item={item} />;
+                        })}
                 </div>
             </div>
             <ModalForm show={show} handleClose={onShow}>
