@@ -8,6 +8,7 @@ import {
     SettingsProfile,
     TodolistPage,
     CalendarPage,
+    ContactPage,
 } from 'app/screens';
 
 import { EventDetails } from 'app/layouts';
@@ -24,6 +25,7 @@ export enum routesPath {
     eventDetails = '/calendar/events/:eventId/details',
     settingsProfile = '/settings/profile',
     todolist = '/todolist',
+    contact = '/contact',
 }
 
 export interface IRouteConfig {
@@ -90,5 +92,10 @@ export const routes: IRouteConfig[] = [
                 exact: false,
             },
         ],
+    },
+    {
+        path: routesPath.contact,
+        Component: ContactPage,
+        exact: true,
     },
 ];
