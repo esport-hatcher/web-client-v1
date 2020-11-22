@@ -82,6 +82,11 @@ export interface ICreateTeamActionSucess {
     payload: ITeam[];
 }
 
+export interface IJoinActionSucess {
+    type: ActionTypes.joinTeamSucess;
+    payload: IUser[];
+}
+
 export interface ICreateTeamActionError {
     type: ActionTypes.createTeamError;
     payload: ITeamsFailure;
@@ -167,10 +172,11 @@ export const createTeam = (
     }
 };
 
-export const invitePlayer = (
-    playerId: NumberConstructor,
-    teamId: string
-) => async (dispatch: Dispatch, getState: IGetState) => {
+// tslint:disable-next-line: no-any
+export const invitePlayer = (playerId: any, teamId: any) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
     try {
         const token = getState().authentication.token;
         const myId = getState().authentication.user;
@@ -211,10 +217,10 @@ export const joinTeam = (teamName: string) => async (
                 return element.name === teamName;
             });
             if (teamSelected) {
-                await api.post(`teams/${teamSelected.id}/users/${myId.id}`);
-                dispatch<ICreateTeamActionSucess>({
-                    type: ActionTypes.createTeamSucess,
-                    payload: [teamSelected],
+                await api.post(`users/${myId.id}/teams/${teamSelected.id}`);
+                dispatch<IJoinActionSucess>({
+                    type: ActionTypes.joinTeamSucess,
+                    payload: [myId],
                 });
                 sendToast({
                     title: 'player invited',

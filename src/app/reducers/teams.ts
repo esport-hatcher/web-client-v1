@@ -32,10 +32,20 @@ const teamsReducer = (state: ITeamsReducer = INITIAL_STATE, action: Action) => {
             return {
                 ...state,
             };
+        case ActionTypes.joinTeamSucess:
+            return {
+                ...state,
+                //teamUsers: concat(state.teamUsers, action.payload),
+            };
         case ActionTypes.fetchTeamUserSucess:
             return {
                 ...state,
                 teamUsers: action.payload,
+            };
+        case ActionTypes.fetchTeamUserError:
+            return {
+                ...state,
+                teamUsers: [],
             };
         case ActionTypes.invitePlayerSucess:
             return {

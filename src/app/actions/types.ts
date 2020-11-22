@@ -17,6 +17,7 @@ import {
     ICreateTeamActionError,
     ICreateTeamActionSucess,
     IInvitePlayerActionSucess,
+    IJoinActionSucess,
 } from './teams';
 import {
     ICreateTaskSuccess,
@@ -55,6 +56,7 @@ export enum ActionTypes {
     updateForm,
     resetForm,
     createTeamSucess,
+    joinTeamSucess,
     createTeamError,
     fetchTeamSuccess,
     fetchTeamError,
@@ -84,6 +86,7 @@ export type Action =
     | ICalendarFetchEventSuccess
     | IUpdateForm
     | IResetForm
+    | IJoinActionSucess
     | IFetchTeamUserSucess
     | IFetchTeamUserError
     | ICreateTeamActionError
