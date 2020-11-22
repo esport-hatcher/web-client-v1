@@ -10,6 +10,8 @@ export interface ITeamUser {
     teamStatus: boolean;
     role: 'Owner' | 'Admin' | 'Player';
     color: string;
+    lolSummonerName: string;
+    lolRegion: string;
     createdAt: Date;
     updatedAt: Date;
     UserId: number;

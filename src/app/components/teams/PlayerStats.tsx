@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IUser } from 'app/actions';
 import darius from 'assets/darius.jpg';
 import jinx from 'assets/jinx.jpg';
 import garen from 'assets/Garen.jpg';
 import leesin from 'assets/lee sin.jpg';
 import wukong from 'assets/Wukong.jpg';
+import { fetchStats } from 'app/shared';
 
 interface IProps {
     item: IUser;
 }
 
 export const PlayerStats: React.FC<IProps> = ({ item }) => {
+    const [stats, setStats] = useState();
+
+    const getStats = async (teamId: number, userId: number) => {
+        console.log(teamId, userId);
+        // const data = await fetchStats(1, 1);
+        const data = await fetchStats(teamId, userId);
+        console.log(data);
+    };
+
+    useEffect(() => {
+        getStats(item.TeamUser.TeamId, item.TeamUser.UserId);
+    }, [item]);
+
     return (
         <div className='stats__card'>
             <div className='membername'>
