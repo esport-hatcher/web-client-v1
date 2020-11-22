@@ -15,6 +15,7 @@ import { IPageSubrouteProps } from '..';
 interface IProps extends IPageSubrouteProps {}
 
 export const CalendarPage: React.FC<IProps> = ({ routes }) => {
+    const [teamIdsFilter, setTeamIdsFilter] = useState<number[]>([]);
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const teams = useSelector(state => state.teams.teams, shallowEqual);
     const [detailsRoute] = routes;
@@ -27,6 +28,11 @@ export const CalendarPage: React.FC<IProps> = ({ routes }) => {
     useEffect(() => {
         dispatch(fetchEvents(currentMonth));
     }, [dispatch, currentMonth]);
+
+    const onFiltersChange = useCallback(
+        (teamIds: number[]) => setTeamIdsFilter(teamIds),
+        [setTeamIdsFilter]
+    );
 
     const nextMonth = useCallback(() => {
         setCurrentMonth(currentMonth => addMonths(currentMonth, 1));
@@ -58,11 +64,16 @@ export const CalendarPage: React.FC<IProps> = ({ routes }) => {
             </HeaderPage>
             <section className='calendar__content'>
                 <div className='calendar__content__container'>
-                    <CalendarToolbar onDateSelectedChange={onDateChange} />
+                    <CalendarToolbar
+                        onDateSelectedChange={onDateChange}
+                        onFiltersChange={onFiltersChange}
+                        teams={teams}
+                    />
                     <CalendarDaysList currentMonth={currentMonth} />
                     <CalendarCellsList
                         currentMonth={currentMonth}
                         teams={teams}
+                        filters={teamIdsFilter}
                     />
                 </div>
             </section>

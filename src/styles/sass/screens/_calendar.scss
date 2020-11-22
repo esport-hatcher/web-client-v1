@@ -77,6 +77,9 @@ $calendar-container-max-width: 160rem;
             grid-column: 1 / 2;
             position: relative;
             padding-right: 4rem;
+            display: grid;
+            grid-auto-rows: min-content;
+            row-gap: 2.4rem;
 
             &--datepicker {
                 box-shadow: none;
@@ -91,6 +94,20 @@ $calendar-container-max-width: 160rem;
                 height: 100%;
                 width: 1px;
                 background-color: $color-dark-four;
+            }
+
+            &__team-filters {
+                max-height: 30rem;
+                padding: 2rem;
+                list-style: none;
+                display: grid;
+                grid-auto-rows: min-content;
+                row-gap: 2rem;
+                overflow-y: none;
+
+                &:hover {
+                    overflow-y: auto;
+                }
             }
         }
     }

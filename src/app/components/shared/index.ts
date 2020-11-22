@@ -13,3 +13,4 @@ export * from './HourPicker';
 export * from './Drawers';
 export * from './Badge';
 export * from './Autocomplete';
+export * from './Checkbox';

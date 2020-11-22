@@ -88,4 +88,9 @@ export const getEventsByDay = (
     return dayEvents;
 };
 
+export const getEventsForTeams = (
+    events: IEvent[],
+    teamIds: number[]
+): IEvent[] => events.filter(event => teamIds.includes(event.TeamId || 0));
+
 export default combineReducers({ events, selectedEvent });
