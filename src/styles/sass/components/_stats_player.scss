@@ -55,17 +55,18 @@
         margin-top: 20px;
 
         &--heroes {
-            height: 50px;
-            // width: 50px;
-            overflow: hidden;
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
             flex-direction: row;
+        }
 
+        &--heroe {
+            overflow: hidden;
+            height: 50px;
         }
 
         &--heroes img {
-            // max-width: -webkit-fill-available;
             width: 50px;
         }
         

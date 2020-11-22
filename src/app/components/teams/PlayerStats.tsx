@@ -34,11 +34,21 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                             Most played heroes:
                         </p>
                         <div className='stats__boxtwo--heroes'>
-                            <img src={darius} alt='heros1' />
-                            <img src={jinx} alt='heros2' />
-                            <img src={garen} alt='heros3' />
-                            <img src={leesin} alt='heros4' />
-                            <img src={wukong} alt='heros5' />
+                            <div className='stats__boxtwo--heroe'>
+                                <img src={darius} alt='heros1' />
+                            </div>
+                            <div className='stats__boxtwo--heroe'>
+                                <img src={jinx} alt='heros2' />
+                            </div>
+                            <div className='stats__boxtwo--heroe'>
+                                <img src={garen} alt='heros3' />
+                            </div>
+                            <div className='stats__boxtwo--heroe'>
+                                <img src={leesin} alt='heros4' />
+                            </div>
+                            <div className='stats__boxtwo--heroe'>
+                                <img src={wukong} alt='heros5' />
+                            </div>
                         </div>
                     </div>
                 </div>
