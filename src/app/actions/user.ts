@@ -3,6 +3,7 @@ import api from 'app/api';
 import { ActionTypes, AppThunk, IFieldData } from './types';
 import { uploadFile, S3_LINK, sendToast } from 'app/shared';
 import { ILogout } from './authentication';
+import { ITeamUser } from './teams';
 
 export interface IUser {
     id: number;
@@ -18,6 +19,8 @@ export interface IUser {
     phoneNumber: string;
     createdAt: Date;
     updatedAt: Date;
+    twitchUsername: string;
+    TeamUser: ITeamUser;
 }
 
 export interface IFetchUserSession {
