@@ -10,11 +10,7 @@ interface IProps extends React.ComponentProps<typeof Modal> {
 export const UserDeleteConfirmation: React.FC<IProps> = React.memo(
     ({ show, setShow, user, onConfirm }) => {
         return (
-            <Modal
-                show={show}
-                setShow={setShow}
-                className='admin-user-card__delete-modal'
-            >
+            <Modal show={show} setShow={setShow} className='modal--grid'>
                 <BoxHeader
                     title={`Are you sure you want to delete ${user.username}'s account ?`}
                     size='xs'

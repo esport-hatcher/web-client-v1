@@ -40,12 +40,12 @@ export const CalendarCell: React.FC<IProps> = React.memo(
                         <IconButton
                             disabled={isPast(addDays(cellDate, 1))}
                             Icon={AiOutlinePlus}
-                            className='icon icon--white calendar-cell__action-buttons__button'
+                            className='btn--icon--secondary'
                             onClick={setModalOn}
                         />
                         <IconButton
                             Icon={AiFillEye}
-                            className='icon icon--white calendar-cell__action-buttons__button'
+                            className='btn--icon--secondary'
                             onClick={toggleDetailsOn}
                         />
                     </div>

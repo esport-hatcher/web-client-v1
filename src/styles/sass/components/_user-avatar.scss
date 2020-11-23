@@ -2,10 +2,12 @@
     overflow: hidden;
     border-radius: 1.8rem;
     position: relative;
+    max-width: 100px;
+    max-height: 100px;
 
     &__img {
         object-fit: cover;
-        cursor: pointer;
+        cursor: auto;
         height: 100%;
         width: 100%;
         transition: all 0.4s;
@@ -13,14 +15,17 @@
         overflow: hidden;
     }
 
-    &:hover figcaption {
-        transform: translate(-50%, -100%);
-        visibility: visible;
-    }
+    &--changable {
+        cursor: pointer;
+        &:hover figcaption {
+            transform: translate(-50%, -100%);
+            visibility: visible;
+        }
 
-    &:hover img {
-        filter: blur(3px) brightness(80%);
-        transform: scale(1);
+        &:hover img {
+            filter: blur(3px) brightness(80%);
+            transform: scale(1);
+        }
     }
 
     &__button {
