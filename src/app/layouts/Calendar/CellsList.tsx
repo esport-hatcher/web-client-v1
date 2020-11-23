@@ -7,26 +7,32 @@ import {
     isSameMonth,
     addDays,
 } from 'date-fns';
+import { shallowEqual } from 'react-redux';
 import { CalendarCell } from 'app/components';
 import { useSelector } from 'app/custom-hooks';
-import { shallowEqual } from 'react-redux';
-import { getEventsByDay } from 'app/reducers/calendar';
+import { getEventsByDay, getEventsForTeams } from 'app/reducers';
 import { ITeam } from 'app/actions';
 
 interface IProps {
     currentMonth: Date;
     teams: ITeam[];
+    // ids of the teams to fetch event from
+    filters: number[];
 }
 
 export const CalendarCellsList: React.FC<IProps> = ({
     currentMonth,
     teams,
+    filters,
 }) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
     const endDate = endOfWeek(monthEnd);
-    const events = useSelector(state => state.calendar.events, shallowEqual);
+    const events = getEventsForTeams(
+        useSelector(state => state.calendar.events, shallowEqual),
+        filters
+    );
 
     const rows = [];
     let days = [];

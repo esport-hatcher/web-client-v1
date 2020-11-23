@@ -34,4 +34,9 @@
         justify-content: right;
         column-gap: 1.2rem;
     }
+
+    &--grid {
+        display: grid;
+        row-gap: 2rem;
+    }
 }

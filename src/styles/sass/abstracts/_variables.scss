@@ -25,6 +25,12 @@ $color-primary-gradient: linear-gradient(
     $color-rosy-pink
 );
 
+$color-primary-gradient-darker: linear-gradient(
+    122deg,
+    $color-rosy-pink,
+    darken($color-rosy-pink, 10%)
+);
+
 $color-secondary-gradient: linear-gradient(
     122deg,
     lighten($color-blue-light, 10%),

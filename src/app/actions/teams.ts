@@ -16,6 +16,10 @@ export interface ITeamUser {
     TeamId: number;
 }
 
+export interface IMember extends IUser {
+    TeamUser: ITeamUser;
+}
+
 export interface ITeam {
     id: number;
     avatarTeamUrl: string;
@@ -24,6 +28,7 @@ export interface ITeam {
     name: string;
     region: string;
     TeamUser: ITeamUser;
+    Users: IMember[];
     createdAt: string;
     updatedAt: string;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { IconType } from 'react-icons/lib';
+import cx from 'classnames';
 import { Spinner } from '../../Spinner';
 
 interface IProps {
@@ -25,17 +26,21 @@ export const IconButton: React.FC<IProps> = React.memo(
             <button
                 type={type}
                 onClick={onClick}
-                className={`btn btn--icon-holder ${className} ${loading &&
-                    'btn--disabled'}`}
+                className={cx('btn', 'btn--icon', className, {
+                    'btn--disabled': loading,
+                    'btn--icon--no-padding': !children,
+                })}
                 disabled={loading || disabled}
             >
-                {children && (
-                    <p className='btn--icon-holder__text'>{children}</p>
-                )}
+                {children && <p className='btn--icon__text'>{children}</p>}
                 {loading ? (
-                    <Spinner className='btn--icon-holder__icon' />
+                    <Spinner className='btn--icon__icon' />
                 ) : (
-                    <Icon className='btn--icon-holder__icon' />
+                    <Icon
+                        className={cx({
+                            'btn--icon__icon': children,
+                        })}
+                    />
                 )}
             </button>
         );
