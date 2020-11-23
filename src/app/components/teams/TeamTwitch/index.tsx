@@ -14,24 +14,29 @@ export const TeamTwitch: React.FC = React.memo(() => {
 
     return (
         <div className='team-twitch'>
-            {teamUser &&
-                teamUser.map(item => {
-                    if (item.twitchUsername) {
-                        return (
-                            <div>
-                                <span>stream de {item.twitchUsername}</span>
-                                <iframe
-                                    src={`https://player.twitch.tv/?channel=${item.twitchUsername}&parent=${window.location.hostname}`}
-                                    scrolling='no'
-                                    height='378'
-                                    width='620'
-                                ></iframe>
-                            </div>
-                        );
-                    } else {
-                        return null;
-                    }
-                })}
+            <div className='twitch-carrousel'>
+                {teamUser &&
+                    teamUser.map(item => {
+                        if (item.twitchUsername) {
+                            return (
+                                <div className='team-twitch__container'>
+                                    <h1 className='team-twitch__title'>
+                                        Stream de {item.twitchUsername}
+                                    </h1>
+                                    <iframe
+                                        className='team-twitch__stream'
+                                        src={`https://player.twitch.tv/?channel=${item.twitchUsername}&parent=${window.location.hostname}`}
+                                        scrolling='no'
+                                        height='378'
+                                        width='620'
+                                    ></iframe>
+                                </div>
+                            );
+                        } else {
+                            return null;
+                        }
+                    })}
+            </div>
         </div>
     );
 });

@@ -1,19 +1,47 @@
-
 .team-twitch {
+    margin-left: 2%;
+    width: 97%;
     display: flex;
     flex-wrap: wrap;
+    background-color: #1d2938;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px;
+    padding: 10px;
+
+    &__title {
+        color: white;
+    }
+
+    &__stream {
+        margin-top: 1%;
+        background-color: #1d2938;
+        border-color: #1d2938;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px;
+    }
+
+    &__container {
+        margin-left: 1%;
+    }
+}
+
+.twitch-carrousel {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: 100px;
 }
 
 .team-card__box:hover {
-        opacity: 0.8;
-        transition-duration: 0.3s;
-        transition-delay: 0.1s;
-        background: #495c70;
-    }
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
+}
 
 .team-card__box--button:hover {
-        opacity: 0.8;
-        transition-duration: 0.3s;
-        transition-delay: 0.1s;
-        background: #495c70;
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
 }
