@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IUser, invitePlayer } from 'app/actions';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import moment from 'moment';
+import { constants } from 'fs';
 
 interface IProps {
     item: IUser;
@@ -25,9 +26,13 @@ export const TeamUserCard: React.FC<IProps> = ({ item }) => {
                 ></span>
             </div>
             {item.TeamUser ? (
-                <div>
-                    <span>{item.TeamUser.role}</span>
-                    <span> Member since : {item.TeamUser.createdAt}</span>
+                <div className='team-user-card__infos'>
+                    <span>{item.TeamUser.role}</span> /
+                    <span>
+                        {' '}
+                        Member since :{' '}
+                        {moment(item.TeamUser.createdAt).format('Y/M/D')}
+                    </span>
                 </div>
             ) : (
                 ' '

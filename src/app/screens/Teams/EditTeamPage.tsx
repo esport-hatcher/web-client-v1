@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { fetchTeamUser, joinTeam } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
-import { TeamUserCard, TeamDescription } from 'app/components';
+import { TeamUserCard, TeamDescription, TeamTwitch } from 'app/components';
 import PlusButton from 'app/components/teams/PlusButton';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
@@ -69,6 +69,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                             </div>
                         </div>
                     </div>
+                    <TeamTwitch />
                     <ModalForm show={show} handleClose={onShow}>
                         <div className='team-page__modal--form'>
                             <div className='team-page__modal--title'>
@@ -84,9 +85,23 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                     </ModalForm>{' '}
                 </div>
             ) : (
-                <button
-                    onClick={() => validateUserTeamb(teamSelected.name)}
-                ></button>
+                <div className='validate-team'>
+                    <div className='validate-team__text'>
+                        <div className='validate-team__text__announce'>
+                            Vous avez été invité par l'équipe{' '}
+                            {teamSelected.name}.
+                        </div>
+                        <div className='validate-team__text__question'>
+                            Souhaitez vous la rejoindre?
+                        </div>
+                    </div>
+                    <input
+                        type='button'
+                        onClick={() => validateUserTeamb(teamSelected.name)}
+                        className='validate-team__button'
+                        value='OUI'
+                    />
+                </div>
             )}
         </main>
     );
