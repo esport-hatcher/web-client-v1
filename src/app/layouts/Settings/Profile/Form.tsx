@@ -62,6 +62,12 @@ export const SettingsProfileForm: React.FC<IProps> = React.memo(({ user }) => {
                     name='phoneNumber'
                     onChange={onInputChange}
                 />
+                <ModifiableInput
+                    value={`+${user.twitchUsername}`}
+                    label='Twitch UserName  '
+                    name='twitchUsername'
+                    onChange={onInputChange}
+                />
             </div>
         );
     }

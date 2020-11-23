@@ -19,6 +19,7 @@ export interface IUser {
     phoneNumber: string;
     createdAt: Date;
     updatedAt: Date;
+    twitchUsername: string;
     TeamUser: ITeamUser;
 }
 

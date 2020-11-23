@@ -29,3 +29,4 @@ export const rootReducer = (state: RootState | undefined, action: Action) => {
 
 export * from './tasks';
 export * from './teams';
+export * from './calendar';

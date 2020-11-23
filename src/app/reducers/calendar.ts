@@ -1,20 +1,69 @@
 import { combineReducers } from 'redux';
-import { Action, ActionTypes, IEvent, IRawEvent } from 'app/actions';
 import { parseISO, isSameDay } from 'date-fns';
+import {
+    Action,
+    ActionTypes,
+    IDetailedEvent,
+    IEvent,
+    IRawDetailedEvent,
+    IRawEvent,
+} from 'app/actions';
 
-const normalizeEvents = (rawEvents: IRawEvent[]): IEvent[] => {
-    return rawEvents.map(rawEvent => ({
+const normalizeEvent = (rawEvent: IRawEvent): IEvent => {
+    return {
         ...rawEvent,
         dateBegin: parseISO(rawEvent.dateBegin),
         dateEnd: parseISO(rawEvent.dateEnd),
-    }));
+    };
 };
+
+const normalizeDetailedEvent = (
+    rawEvent: IRawDetailedEvent
+): IDetailedEvent => {
+    return {
+        ...rawEvent,
+        dateBegin: parseISO(rawEvent.dateBegin),
+        dateEnd: parseISO(rawEvent.dateEnd),
+    };
+};
+
 const events = (state: IEvent[] = [], action: Action) => {
     switch (action.type) {
-        case ActionTypes.calendarFetchEventSuccess:
-            return normalizeEvents(action.events);
+        case ActionTypes.calendarFetchEventsSuccess:
+            return action.events.map(event => normalizeEvent(event));
         case ActionTypes.calendarCreateEventSuccess:
-            return [...state, ...normalizeEvents([action.event])];
+            return [...state, normalizeEvent(action.event)];
+        case ActionTypes.calendarDeleteEventSuccess:
+            return state.filter(event => event.id !== action.eventId);
+        default:
+            return state;
+    }
+};
+
+const selectedEvent = (
+    state: IDetailedEvent | null = null,
+    action: Action
+): IDetailedEvent | null => {
+    switch (action.type) {
+        case ActionTypes.calendarFetchEventSuccess:
+            return normalizeDetailedEvent(action.event);
+        case ActionTypes.calendarAddMemberEventSuccess:
+            if (state) {
+                return {
+                    ...state,
+                    Users: [...state.Users, action.user],
+                };
+            }
+            return state;
+        case ActionTypes.calendarRemoveMemberEventSuccess:
+            if (state) {
+                return {
+                    ...state,
+                    Users: state.Users.filter(
+                        user => user.id !== action.userId
+                    ),
+                };
+            }
         default:
             return state;
     }
@@ -39,4 +88,9 @@ export const getEventsByDay = (
     return dayEvents;
 };
 
-export default combineReducers({ events });
+export const getEventsForTeams = (
+    events: IEvent[],
+    teamIds: number[]
+): IEvent[] => events.filter(event => teamIds.includes(event.TeamId || 0));
+
+export default combineReducers({ events, selectedEvent });

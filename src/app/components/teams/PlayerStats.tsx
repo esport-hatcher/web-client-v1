@@ -5,30 +5,16 @@ import jinx from 'assets/jinx.jpg';
 import garen from 'assets/Garen.jpg';
 import leesin from 'assets/lee sin.jpg';
 import wukong from 'assets/Wukong.jpg';
-import { fetchStats } from 'app/shared';
 
 interface IProps {
-    item: IUser;
+    item: any;
 }
 
 export const PlayerStats: React.FC<IProps> = ({ item }) => {
-    const [stats, setStats] = useState();
-
-    const getStats = async (teamId: number, userId: number) => {
-        console.log(teamId, userId);
-        // const data = await fetchStats(1, 1);
-        const data = await fetchStats(teamId, userId);
-        console.log(data);
-    };
-
-    useEffect(() => {
-        getStats(item.TeamUser.TeamId, item.TeamUser.UserId);
-    }, [item]);
-
     return (
         <div className='stats__card'>
             <div className='membername'>
-                <h1 className='name'>{item.username}</h1>
+                <h1 className='name'>{item.user.username}</h1>
             </div>
             <div className='stats__card--container'>
                 <div className='stats__card--bloc'>
@@ -48,21 +34,16 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                             Most played heroes:
                         </p>
                         <div className='stats__boxtwo--heroes'>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={darius} alt='heros1' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={jinx} alt='heros2' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={garen} alt='heros3' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={leesin} alt='heros4' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={wukong} alt='heros5' />
-                            </div>
+                            {item.bestMasteryChampions.map((champion: any) => {
+                                return (
+                                    <div className='stats__boxtwo--heroe'>
+                                        <img
+                                            src={champion.imageUrl}
+                                            alt={champion.championName}
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -84,21 +65,16 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                             Most played heroes:
                         </p>
                         <div className='stats__boxtwo--heroes'>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={darius} alt='heros1' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={jinx} alt='heros2' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={garen} alt='heros3' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={leesin} alt='heros4' />
-                            </div>
-                            <div className='stats__boxtwo--heroe'>
-                                <img src={wukong} alt='heros5' />
-                            </div>
+                            {item.bestMasteryChampions.map((champion: any) => {
+                                return (
+                                    <div className='stats__boxtwo--heroe'>
+                                        <img
+                                            src={champion.imageUrl}
+                                            alt={champion.championName}
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

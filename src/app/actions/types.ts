@@ -17,6 +17,7 @@ import {
     ICreateTeamActionError,
     ICreateTeamActionSucess,
     IInvitePlayerActionSucess,
+    IJoinActionSucess,
 } from './teams';
 import {
     ICreateTaskSuccess,
@@ -26,8 +27,12 @@ import {
 } from './tasks';
 import { IUpdateForm, IResetForm } from './form';
 import {
+    ICalendarAddMemberEventSuccess,
     ICalendarCreateEventSuccess,
+    ICalendarDeleteEventSuccess,
+    ICalendarFetchEventsSuccess,
     ICalendarFetchEventSuccess,
+    ICalendarRemoveMemberEventSuccess,
 } from './calendar';
 
 export type CountQuery = { records: number };
@@ -51,10 +56,15 @@ export enum ActionTypes {
     deleteTaskSuccess,
     patchTaskSuccess,
     calendarCreateEventSuccess,
+    calendarDeleteEventSuccess,
+    calendarFetchEventsSuccess,
     calendarFetchEventSuccess,
+    calendarAddMemberEventSuccess,
+    calendarRemoveMemberEventSuccess,
     updateForm,
     resetForm,
     createTeamSucess,
+    joinTeamSucess,
     createTeamError,
     fetchTeamSuccess,
     fetchTeamError,
@@ -81,9 +91,14 @@ export type Action =
     | IDeleteTaskSuccess
     | IPatchTaskSuccess
     | ICalendarCreateEventSuccess
+    | ICalendarDeleteEventSuccess
+    | ICalendarFetchEventsSuccess
     | ICalendarFetchEventSuccess
+    | ICalendarAddMemberEventSuccess
+    | ICalendarRemoveMemberEventSuccess
     | IUpdateForm
     | IResetForm
+    | IJoinActionSucess
     | IFetchTeamUserSucess
     | IFetchTeamUserError
     | ICreateTeamActionError

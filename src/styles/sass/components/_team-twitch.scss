@@ -1,0 +1,19 @@
+
+.team-twitch {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.team-card__box:hover {
+        opacity: 0.8;
+        transition-duration: 0.3s;
+        transition-delay: 0.1s;
+        background: #495c70;
+    }
+
+.team-card__box--button:hover {
+        opacity: 0.8;
+        transition-duration: 0.3s;
+        transition-delay: 0.1s;
+        background: #495c70;
+}

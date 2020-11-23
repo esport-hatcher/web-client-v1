@@ -28,3 +28,5 @@ declare module 'react-router-transition' {
     export const AnimatedRoute: React.ComponentClass<AnimatedRouteProps>;
     export const RouteTransition: React.ComponentClass<AnimatedSwitchProps>;
 }
+
+type Modify<T, R> = Omit<T, keyof R> & R;
