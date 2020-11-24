@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IUser, invitePlayer } from 'app/actions';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { constants } from 'fs';
 
 interface IProps {
     item: IUser;

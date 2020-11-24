@@ -34,5 +34,17 @@
         display: grid;
         grid-auto-rows: min-content;
         row-gap: 2rem;
+
+        &__lol-infos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &__dropdown {
+                margin-top: 1em;
+                border: 1px solid $color-dark-four;
+                width: 15vw;
+            }
+        }
     }
 }
