@@ -91,7 +91,10 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                         </div>
                     </div>
                     <TeamTwitch />
-                    <button onClick={() => eraseteam(teamSelected.id)}>
+                    <button
+                        className='btn--primary'
+                        onClick={() => eraseteam(teamSelected.id)}
+                    >
                         {' '}
                         supp team
                     </button>

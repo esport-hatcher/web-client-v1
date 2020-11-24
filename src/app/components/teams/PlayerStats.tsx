@@ -57,8 +57,6 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                                 Win rate: {item.advancedStats.kda}
                             </p>
                         </div>
-                    </div>
-                    <div className='stats__boxone'>
                         <div>
                             <p className='stats__type--kills'>
                                 Kills: {item.advancedStats.kills}
@@ -74,8 +72,6 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                                 Assists: {item.advancedStats.assists}
                             </p>
                         </div>
-                    </div>
-                    <div className='stats__boxone'>
                         <div>
                             <p className='stats__type--kills'>
                                 Damages: {item.advancedStats.totalDamageDealt}
