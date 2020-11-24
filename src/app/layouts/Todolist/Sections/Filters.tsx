@@ -74,7 +74,7 @@ export const Filters: React.FC<IProps> = React.memo(
                             defaultValue={options[0]}
                             className='task-section__team-dropdown'
                             onChange={onOptionChange}
-                        />{' '}
+                        />
                     </div>
                 </div>
             </React.Fragment>

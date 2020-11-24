@@ -20,6 +20,8 @@ export interface IUser {
     createdAt: Date;
     updatedAt: Date;
     twitchUsername: string;
+    lolSummonerName: string;
+    lolRegion: string;
     TeamUser: ITeamUser;
 }
 
