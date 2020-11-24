@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { fetchTeamUser, joinTeam } from 'app/actions';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { deleteTeam, fetchTeamUser, joinTeam } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
 import { TeamUserCard, TeamDescription, TeamTwitch } from 'app/components';
 import PlusButton from 'app/components/teams/PlusButton';
@@ -25,11 +26,15 @@ export const _EditTeamPage: React.FC = React.memo(() => {
         if (teamSelected) {
             // tslint:disable-next-line:no-floating-promises
             Promise.resolve(dispatch(joinTeam(teamId)))
-                .catch(() => 'obligatory catch')
+                .catch(() => 'obligatory catchs')
                 .then(() => dispatch(fetchTeamUser(teamSelected.id)));
         }
     };
 
+    const eraseteam = (teamId: number) => {
+        dispatch(deleteTeam(teamId));
+        return <Redirect to='/teams' />;
+    };
     useEffect(() => {
         if (teamSelected) {
             dispatch(fetchTeamUser(teamSelected.id));
@@ -70,6 +75,10 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                         </div>
                     </div>
                     <TeamTwitch />
+                    <button onClick={() => eraseteam(teamSelected.id)}>
+                        {' '}
+                        supp team
+                    </button>
                     <ModalForm show={show} handleClose={onShow}>
                         <div className='team-page__modal--form'>
                             <div className='team-page__modal--title'>

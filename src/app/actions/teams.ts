@@ -122,6 +122,21 @@ export const fetchTeams = () => async (
     }
 };
 
+export const deleteTeam = (teamId: number) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+        const myId = getState().authentication.user;
+        if (token && myId) {
+            const { data } = await api.delete(`teams/${teamId}`);
+        }
+    } catch (err) {
+        //console.log(err);
+    }
+};
+
 export const fetchTeamUser = (teamId: number) => async (
     dispatch: Dispatch,
     getState: IGetState
