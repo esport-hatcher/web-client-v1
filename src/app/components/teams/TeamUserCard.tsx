@@ -27,8 +27,8 @@ export const TeamUserCard: React.FC<IProps> = ({ item }) => {
             </div>
             {item.TeamUser ? (
                 <div className='team-user-card__infos'>
-                    <span>{item.TeamUser.role}</span> /
-                    <span>
+                    <h4>{item.TeamUser.role}</h4>
+                    <span className='team-user-card__date'>
                         {' '}
                         Member since :{' '}
                         {moment(item.TeamUser.createdAt).format('Y/M/D')}

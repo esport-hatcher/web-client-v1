@@ -10,6 +10,8 @@ export interface ITeamUser {
     teamStatus: boolean;
     role: 'Owner' | 'Admin' | 'Player';
     color: string;
+    lolSummonerName: string;
+    lolRegion: string;
     createdAt: Date;
     updatedAt: Date;
     UserId: number;
@@ -119,6 +121,21 @@ export const fetchTeams = () => async (
         dispatch<IFetchTeamErrorAction>({
             type: ActionTypes.fetchTeamError,
         });
+    }
+};
+
+export const deleteTeam = (teamId: number) => async (
+    dispatch: Dispatch,
+    getState: IGetState
+) => {
+    try {
+        const token = getState().authentication.token;
+        const myId = getState().authentication.user;
+        if (token && myId) {
+            const { data } = await api.delete(`teams/${teamId}`);
+        }
+    } catch (err) {
+        //console.log(err);
     }
 };
 
