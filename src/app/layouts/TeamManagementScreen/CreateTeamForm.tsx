@@ -46,6 +46,7 @@ export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
                             valueForm={valueRegion}
                             textLabel={'Country'}
                             className={'create-team-form__input'}
+                            max={2}
                         />
                     </div>
                     <div className='create-team-form__label--game-name'>
@@ -54,6 +55,7 @@ export const CreateTeamForm: React.FC<IProps> = ({ change }) => {
                             valueForm={valueGame}
                             textLabel={'Game Name'}
                             className={'create-team-form__input'}
+                            max={30}
                         />
                     </div>
                 </div>

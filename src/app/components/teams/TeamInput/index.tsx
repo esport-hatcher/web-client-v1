@@ -1,3 +1,4 @@
+import { max } from 'lodash';
 import React from 'react';
 
 interface IProps {
@@ -5,6 +6,7 @@ interface IProps {
     valueForm: string;
     textLabel: string;
     className: string;
+    max: number;
 }
 
 export const TeamInput: React.FC<IProps> = ({
@@ -12,6 +14,7 @@ export const TeamInput: React.FC<IProps> = ({
     valueForm,
     textLabel,
     className,
+    max,
 }) => {
     // tslint:disable-next-line:no-any
     const handleChange = (value: any) => {
@@ -27,6 +30,7 @@ export const TeamInput: React.FC<IProps> = ({
                 type='text'
                 value={valueForm}
                 onChange={handleChange}
+                maxLength={max}
             />
         </label>
     );
