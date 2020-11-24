@@ -12,7 +12,6 @@
         "no-duplicate-imports": true,
         "import-spacing": true,
         "match-default-export-name": false,
-        "no-any": true,
         "no-empty": true,
         "no-duplicate-super": true,
         "no-empty-interface": false,

@@ -1,18 +1,23 @@
+import React, { useEffect, useState } from 'react';
 import { useSelector, useToggler } from 'app/custom-hooks';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { deleteTeam, fetchTeamUser, joinTeam } from 'app/actions';
 import { AddPlayerForm, ModalForm } from 'app/layouts';
-import { TeamUserCard, TeamDescription, TeamTwitch } from 'app/components';
+import {
+    TeamUserCard,
+    TeamDescription,
+    TeamTwitch,
+    PlayerStats,
+} from 'app/components';
 import PlusButton from 'app/components/teams/PlusButton';
+import { fetchStats } from 'app/shared';
 
 export const _EditTeamPage: React.FC = React.memo(() => {
     const dispatch = useDispatch();
     const [inTeam] = useToggler(false);
     const [show, onShow] = useToggler(false);
-
     const { id } = useParams();
 
     const teams = useSelector(state => state.teams.teams);
@@ -21,7 +26,7 @@ export const _EditTeamPage: React.FC = React.memo(() => {
     const teamSelected = teams.find(element => {
         return element.name === id;
     });
-
+    const [stats, setStats] = useState<any[]>();
     const validateUserTeamb = (teamId: string) => {
         if (teamSelected) {
             // tslint:disable-next-line:no-floating-promises
@@ -35,8 +40,15 @@ export const _EditTeamPage: React.FC = React.memo(() => {
         dispatch(deleteTeam(teamId));
         return <Redirect to='/teams' />;
     };
+    const getStats = async (teamId: number) => {
+        const data = await fetchStats(teamId);
+        setStats(data);
+    };
+
     useEffect(() => {
         if (teamSelected) {
+            // tslint:disable-next-line: no-floating-promises
+            getStats(teamSelected.id);
             dispatch(fetchTeamUser(teamSelected.id));
         }
     }, [dispatch, teamSelected]);
@@ -72,6 +84,10 @@ export const _EditTeamPage: React.FC = React.memo(() => {
                             >
                                 <PlusButton />
                             </div>
+                        </div>
+                        <div className='stats__container'>
+                            {stats &&
+                                stats.map(item => <PlayerStats item={item} />)}
                         </div>
                     </div>
                     <TeamTwitch />
