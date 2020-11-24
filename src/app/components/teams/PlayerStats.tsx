@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { IUser } from 'app/actions';
+import React from 'react';
 
 interface IProps {
     item: any;
