@@ -46,6 +46,7 @@
     }
 
     &__boxone p {
+        margin-top: 5px;
         text-align: left;
     }
 
@@ -93,6 +94,15 @@
     }
 
     &__boxtwo p {
+        text-align: left;
+    }
+
+    &__boxthree {
+        display: grid;
+        grid-template-columns: 33% 33% 34%;
+    }
+
+    &__boxthree  p {
         text-align: left;
     }
 }

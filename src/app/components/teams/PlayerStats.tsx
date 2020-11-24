@@ -37,6 +37,7 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                         </div>
                     </div>
                 </div>
+
                 <div className='stats__card--bloc'>
                     <h3>Solo/ Duo</h3>
                     <div className='stats__boxone'>
@@ -49,6 +50,41 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                         <div>
                             <p className='stats__type--winrate'>
                                 Win rate: {item.rankedInfos[0].winrate}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--winrate'>
+                                Win rate: {item.advancedStats.kda}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--kills'>
+                                Kills: {item.advancedStats.kills}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--deaths'>
+                                Deaths: {item.advancedStats.deaths}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--assists'>
+                                Assists: {item.advancedStats.assists}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--kills'>
+                                Damages: {item.advancedStats.totalDamageDealt}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--deaths'>
+                                Vision score: {item.advancedStats.visionScore}
+                            </p>
+                        </div>
+                        <div>
+                            <p className='stats__type--assists'>
+                                Last hit/ min: {item.advancedStats.csPerMinutes}
                             </p>
                         </div>
                     </div>
