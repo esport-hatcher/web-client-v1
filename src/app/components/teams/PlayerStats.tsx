@@ -1,10 +1,45 @@
 import React from 'react';
+import Challenger from '../../../assets/lol/ranks/Challenger.png';
+import Grandmaster from '../../../assets/lol/ranks/Grandmaster.png';
+import Master from '../../../assets/lol/ranks/Master.png';
+import Diamond from '../../../assets/lol/ranks/Diamond.png';
+import Platinum from '../../../assets/lol/ranks/Platinum.png';
+import Gold from '../../../assets/lol/ranks/Gold.png';
+import Silver from '../../../assets/lol/ranks/Silver.png';
+import Bronze from '../../../assets/lol/ranks/Bronze.png';
+import Iron from '../../../assets/lol/ranks/Iron.png';
+import Unranked from '../../../assets/lol/ranks/Unranked.png';
 
 interface IProps {
     item: any;
 }
 
 export const PlayerStats: React.FC<IProps> = ({ item }) => {
+    const getTierUrl = (tier: string) => {
+        switch (tier) {
+            case 'CHALLENGER':
+                return Challenger;
+            case 'GRANDMASTER':
+                return Grandmaster;
+            case 'MASTER':
+                return Master;
+            case 'DIAMOND':
+                return Diamond;
+            case 'PLATINUM':
+                return Platinum;
+            case 'GOLD':
+                return Gold;
+            case 'SILVER':
+                return Silver;
+            case 'BRONZE':
+                return Bronze;
+            case 'IRON':
+                return Iron;
+            default:
+                return Unranked;
+        }
+    };
+
     return (
         <div className='stats__card'>
             <div className='membername'>
@@ -40,16 +75,21 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
 
                 <div className='stats__card--bloc'>
                     <h3>Solo/ Duo</h3>
+                    <br />
+                    <img
+                        style={{ width: '100px' }}
+                        src={getTierUrl(item.rankedInfos[1].tier)}
+                    />
                     <div className='stats__boxone'>
                         <div>
                             <p className='stats__type--rank'>
-                                Rank: {item.rankedInfos[0].tier}{' '}
-                                {item.rankedInfos[0].rank}
+                                Rank: {item.rankedInfos[1].tier}{' '}
+                                {item.rankedInfos[1].rank}
                             </p>
                         </div>
                         <div>
                             <p className='stats__type--winrate'>
-                                Win rate: {item.rankedInfos[0].winrate}
+                                Win rate: {item.rankedInfos[1].winrate}
                             </p>
                         </div>
                         <div>
@@ -92,16 +132,21 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
 
                 <div className='stats__card--bloc'>
                     <h3>Flex</h3>
+                    <br />
+                    <img
+                        style={{ width: '100px' }}
+                        src={getTierUrl(item.rankedInfos[0].tier)}
+                    />
                     <div className='stats__boxone'>
                         <div>
                             <p className='stats__type--rank'>
-                                Rank: {item.rankedInfos[1].tier}{' '}
-                                {item.rankedInfos[1].rank}
+                                Rank: {item.rankedInfos[0].tier}{' '}
+                                {item.rankedInfos[0].rank}
                             </p>
                         </div>
                         <div>
                             <p className='stats__type--winrate'>
-                                Win rate: {item.rankedInfos[1].winrate}
+                                Win rate: {item.rankedInfos[0].winrate}
                             </p>
                         </div>
                     </div>

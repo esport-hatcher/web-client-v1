@@ -1,4 +1,4 @@
 import { requireLogin } from 'app/HOC';
-import { _HomePage } from './HomePage';
+import { TeamPage } from '../Teams/index';
 
-export const HomePage = requireLogin(_HomePage);
+export const HomePage = requireLogin(TeamPage);
