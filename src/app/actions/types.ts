@@ -29,6 +29,10 @@ import {
     ICalendarCreateEventSuccess,
     ICalendarFetchEventSuccess,
 } from './calendar';
+import {
+    IFetchContactSuccessAction,
+    IFetchContactErrorAction,
+} from './contact';
 
 export type CountQuery = { records: number };
 
@@ -61,6 +65,8 @@ export enum ActionTypes {
     fetchTeamUserSucess,
     fetchTeamUserError,
     invitePlayerSucess,
+    fetchContactSuccess,
+    fetchContactError,
 }
 
 export type Action =
@@ -88,7 +94,9 @@ export type Action =
     | IFetchTeamUserError
     | ICreateTeamActionError
     | ICreateTeamActionSucess
-    | IInvitePlayerActionSucess;
+    | IInvitePlayerActionSucess
+    | IFetchContactSuccessAction
+    | IFetchContactErrorAction;
 
 export type IGetState = () => RootState;
 

@@ -8,3 +8,4 @@ export * from './users';
 export * from './teams';
 export * from './todolist';
 export * from './calendar';
+export * from './contact';
