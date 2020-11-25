@@ -27,3 +27,23 @@ body {
         position: relative;
     }
 }
+
+#root-portal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 142;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    background-color: $color-dark-four;
+    border-radius: 8px;
+}

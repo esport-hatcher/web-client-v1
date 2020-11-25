@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import cx from 'classnames';
 
 interface IProps {
     avatarUrl: string;
-    changable: boolean;
+    changable?: boolean;
     className?: string;
     onChange?: Function;
 }
 
 export const UserAvatar: React.FC<IProps> = React.memo(
-    ({ avatarUrl, changable, className, onChange }) => {
+    ({ avatarUrl, changable = false, className, onChange }) => {
         const [file, setFile] = useState(null);
 
         // tslint:disable-next-line: no-any
@@ -23,7 +24,11 @@ export const UserAvatar: React.FC<IProps> = React.memo(
         }, [file, onChange]);
 
         return (
-            <figure className={`user-avatar ${className}`}>
+            <figure
+                className={cx(`user-avatar ${className}`, {
+                    'user-avatar--changable': changable,
+                })}
+            >
                 <img
                     src={file ? URL.createObjectURL(file) : avatarUrl}
                     className='user-avatar__img'

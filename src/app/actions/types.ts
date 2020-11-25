@@ -9,7 +9,31 @@ import {
     IAdminPanelFetchNextPageSuccessAction,
 } from './adminPanel';
 import { IDeleteUser, IFetchUserSession, IPatchUserSession } from './user';
-import { IFetchTeamErrorAction, IFetchTeamSuccessAction } from './teams';
+import {
+    IFetchTeamErrorAction,
+    IFetchTeamSuccessAction,
+    IFetchTeamUserSucess,
+    IFetchTeamUserError,
+    ICreateTeamActionError,
+    ICreateTeamActionSucess,
+    IInvitePlayerActionSucess,
+    IJoinActionSucess,
+} from './teams';
+import {
+    ICreateTaskSuccess,
+    IFetchTaskSuccess,
+    IDeleteTaskSuccess,
+    IPatchTaskSuccess,
+} from './tasks';
+import { IUpdateForm, IResetForm } from './form';
+import {
+    ICalendarAddMemberEventSuccess,
+    ICalendarCreateEventSuccess,
+    ICalendarDeleteEventSuccess,
+    ICalendarFetchEventsSuccess,
+    ICalendarFetchEventSuccess,
+    ICalendarRemoveMemberEventSuccess,
+} from './calendar';
 
 export type CountQuery = { records: number };
 
@@ -27,8 +51,26 @@ export enum ActionTypes {
     adminPanelFetchNextPageSuccess,
     adminPanelSetLoading,
     adminPanelCountFilters,
+    createTaskSuccess,
+    fetchTaskSuccess,
+    deleteTaskSuccess,
+    patchTaskSuccess,
+    calendarCreateEventSuccess,
+    calendarDeleteEventSuccess,
+    calendarFetchEventsSuccess,
+    calendarFetchEventSuccess,
+    calendarAddMemberEventSuccess,
+    calendarRemoveMemberEventSuccess,
+    updateForm,
+    resetForm,
+    createTeamSucess,
+    joinTeamSucess,
+    createTeamError,
     fetchTeamSuccess,
     fetchTeamError,
+    fetchTeamUserSucess,
+    fetchTeamUserError,
+    invitePlayerSucess,
 }
 
 export type Action =
@@ -43,7 +85,25 @@ export type Action =
     | IAdminPanelSetLoadingAction
     | IAdminPanelCountFiltersAction
     | IFetchTeamSuccessAction
-    | IFetchTeamErrorAction;
+    | IFetchTeamErrorAction
+    | ICreateTaskSuccess
+    | IFetchTaskSuccess
+    | IDeleteTaskSuccess
+    | IPatchTaskSuccess
+    | ICalendarCreateEventSuccess
+    | ICalendarDeleteEventSuccess
+    | ICalendarFetchEventsSuccess
+    | ICalendarFetchEventSuccess
+    | ICalendarAddMemberEventSuccess
+    | ICalendarRemoveMemberEventSuccess
+    | IUpdateForm
+    | IResetForm
+    | IJoinActionSucess
+    | IFetchTeamUserSucess
+    | IFetchTeamUserError
+    | ICreateTeamActionError
+    | ICreateTeamActionSucess
+    | IInvitePlayerActionSucess;
 
 export type IGetState = () => RootState;
 

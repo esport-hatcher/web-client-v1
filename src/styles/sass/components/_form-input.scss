@@ -1,4 +1,4 @@
-.smart-input {
+.form-input {
     position: relative;
     width: 100%;
 
@@ -14,7 +14,7 @@
         height: 1.6rem;
         width: 1.6rem;
 
-        &--off {
+        &--focus {
             transform: translateY(-4rem);
             opacity: 0;
         }
@@ -39,13 +39,11 @@
     &__input {
         @extend %base-input-shape;
         padding-left: 3 * $base-input-padding-sides;
-        background-color: $color-dark-three;
         transition: border-color $smart-input-animation-duration
                 $smart-input-animation-style,
             padding-left $smart-input-animation-duration
                 $smart-input-animation-style,
             border $smart-input-animation-duration $smart-input-animation-style;
-        border: 1px solid rgba($color-white, 0);
 
         &--error {
             border-color: $color-rosy-pink;
@@ -70,13 +68,24 @@
             }
         }
 
-        // &:focus ~ svg {
-        //     transform: translateY(-4rem);
-        //     opacity: 0;
-        // }
         &:focus {
-            padding-left: 2rem;
-            border: 1px solid $color-white;
+            padding-left: $base-input-padding-sides;
+        }
+
+        &--icon-static {
+            &:focus {
+                padding-left: 3 * $base-input-padding-sides;
+            }
+        }
+
+        &--no-caret {
+            &:focus {
+                caret-color: transparent;
+            }
+        }
+
+        &--no-icon {
+            padding: $base-input-padding-top $base-input-padding-sides;
         }
 
         @include input-placeholder($color-light-grey);

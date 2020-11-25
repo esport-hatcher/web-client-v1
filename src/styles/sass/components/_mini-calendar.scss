@@ -1,0 +1,64 @@
+.mini-calendar {
+    width: 17vw;
+    box-shadow: 0 2px 4px 0 $color-dark-four;
+    border-radius: 5px;
+    background-color: $color-dark-medium;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &__navigator {
+        height: 4vh;
+        display: flex;
+
+        &__current-month-year {
+            width: 50vw;
+            color: $color-white;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__buttons {
+            width: 50vw;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            &__icon {
+                cursor: pointer;
+                color: $color-light-grey;
+            }
+        }
+    }
+
+    &__weekdays {
+        width: 100%;
+        height: 4vh;
+        table-layout: fixed;
+        text-align: center;
+        border-top: 1px solid $color-dark;
+    }
+
+    &__days-table {
+        width: 100%;
+        table-layout: fixed;
+        text-align: center;
+        border-top: 1px solid $color-dark;
+
+        &__cell {
+            cursor: pointer;
+            height: 3.5vh;
+        }
+
+        &__cell-today {
+            cursor: pointer;
+            height: 3.5vh;
+            background-color: $color-light-grey;
+        }
+    }
+}

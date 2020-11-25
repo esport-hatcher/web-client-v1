@@ -1,5 +1,5 @@
 .icon {
-    transition: color $icon-animation-duration;
+    transition: all $icon-animation-duration;
     vertical-align: center;
     width: 2.4rem;
     height: 2.4rem;
@@ -21,6 +21,18 @@
         color: $color-white;
     }
 
+    &--blue {
+        color: $color-blue;
+    }
+
+    &--yellow {
+        color: $color-yellow;
+    }
+
+    &--red {
+        color: $color-red;
+    }
+
     // ANIMATIONS
     &--spinner {
         animation: 1s ease-out infinite running rotateRight;
@@ -29,5 +41,9 @@
     // DIVERS
     &--button {
         cursor: pointer;
+    }
+
+    &--rotate {
+        transform: rotate(180deg);
     }
 }

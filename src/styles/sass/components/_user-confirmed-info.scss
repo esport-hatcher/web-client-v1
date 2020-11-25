@@ -10,18 +10,12 @@
     &__content {
         white-space: nowrap;
         display: inline;
-        overflow: scroll;
+        overflow: hidden;
         margin-left: 2rem;
     }
 
     &__icon {
-        // font-size: 1.8rem;
         height: 1.8rem;
         width: 1.8rem;
-        color: $color-rosy-pink;
-
-        &--completed {
-            color: $color-green-light;
-        }
     }
 }

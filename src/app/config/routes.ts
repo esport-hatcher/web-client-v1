@@ -5,20 +5,25 @@ import {
     TeamPage,
     EditTeamPage,
     Logout,
+    SettingsProfile,
+    TodolistPage,
+    CalendarPage,
 } from 'app/screens';
-import { SettingsProfile } from 'app/screens/Settings';
+
+import { EventDetails } from 'app/layouts';
 
 export enum routesPath {
     home = '/',
     login = '/login',
     register = '/register',
     adminPanel = '/admin',
-    chat = '/chat',
-    feed = '/feed',
     logout = '/logout',
     teams = '/teams',
     teamsDetail = '/teams/:id',
+    calendar = '/calendar',
+    eventDetails = '/calendar/events/:eventId/details',
     settingsProfile = '/settings/profile',
+    todolist = '/todolist',
 }
 
 export interface IRouteConfig {
@@ -68,5 +73,22 @@ export const routes: IRouteConfig[] = [
         path: routesPath.adminPanel,
         Component: AdminPanel,
         exact: true,
+    },
+    {
+        path: routesPath.todolist,
+        Component: TodolistPage,
+        exact: true,
+    },
+    {
+        path: routesPath.calendar,
+        Component: CalendarPage,
+        exact: false,
+        routes: [
+            {
+                path: routesPath.eventDetails,
+                Component: EventDetails,
+                exact: false,
+            },
+        ],
     },
 ];

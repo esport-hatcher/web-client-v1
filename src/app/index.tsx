@@ -1,18 +1,29 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { AnimatedSwitch } from 'react-router-transition';
 import { ToastContainer } from 'react-toastify';
 import { IconContext } from 'react-icons/lib';
 import { Navigation } from 'app/layouts';
 import {
     routes,
-    SCREEN_TRANSITION_MS,
     BASE_ICON_CLASS,
     TOAST_DURATION,
+    IRouteConfig,
 } from 'app/config';
 // tslint:disable no-import-side-effect
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/sass/main.scss';
+
+const RouteWithSubroutes = (route: IRouteConfig) => {
+    return (
+        <Route
+            path={route.path}
+            render={props => (
+                <route.Component {...props} routes={route.routes} />
+            )}
+        />
+    );
+};
 
 export const App: React.FC = () => {
     return (
@@ -24,22 +35,16 @@ export const App: React.FC = () => {
                         autoClose={TOAST_DURATION}
                         position='top-center'
                     />
-                    {routes.map(({ path, Component }) => (
-                        <Route key={path} exact path={path}>
-                            {({ match }) => (
-                                <CSSTransition
-                                    in={match != null}
-                                    timeout={SCREEN_TRANSITION_MS}
-                                    classNames='router-transition'
-                                    unmountOnExit
-                                >
-                                    <div className='router-transition__container'>
-                                        <Component />
-                                    </div>
-                                </CSSTransition>
-                            )}
-                        </Route>
-                    ))}
+                    <AnimatedSwitch
+                        atEnter={{ opacity: 0 }}
+                        atLeave={{ opacity: 0 }}
+                        atActive={{ opacity: 1 }}
+                        className='switch-wrapper'
+                    >
+                        {routes.map((route, i) => (
+                            <RouteWithSubroutes key={i} {...route} />
+                        ))}
+                    </AnimatedSwitch>
                 </div>
             </div>
         </IconContext.Provider>

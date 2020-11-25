@@ -1,0 +1,62 @@
+.description {
+    &__container {
+        width: 100%;
+        height: 250px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+        border: solid 4px#1d2938;
+        background-color: #1d2938;
+        color: #1d2938;
+        padding: 10px 15px 10px 15px;
+    }
+
+    &__title {
+        width: 100px;
+        height: 22px;
+        font-family: Helvetica;
+        font-size: 18px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: white;
+        margin: 0px 0px 5px 0px;
+    }
+
+    &__outer {
+        width: 100%;
+        height: 85%;
+        border: 2px solid #1d2938;
+        background-color: #16212e;
+        border-radius: 8px;
+
+        &--field {
+            float: left;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            resize: none;
+            border-radius: 8px;
+            background-color: #16212e;
+            border: none;
+            caret-color: white;
+            color: white;
+        }
+
+        &--field::placeholder {
+            padding: 10px 0px 0px 15px;
+        }
+    }
+
+    .field::-webkit-scrollbar {
+        /* margin: 0px 10px 0px 10px; */
+        width: 5px;
+        background: #1d2938;
+    }
+
+    /* Handle */
+    .field::-webkit-scrollbar-thumb {
+        background: #748192;
+    }
+}

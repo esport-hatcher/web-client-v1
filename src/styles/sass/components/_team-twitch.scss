@@ -1,0 +1,45 @@
+.team-twitch {
+    display: flex;
+
+    &__title {
+        color: white;
+    }
+
+    &__stream {
+        margin-top: 1%;
+        background-color: #1d2938;
+        border-color: #1d2938;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px;
+    }
+
+    &__container {
+        margin-left: 2%;
+        width: 76%;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #1d2938;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px;
+        padding: 10px;
+    }
+}
+
+.twitch-carrousel {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.team-card__box:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
+}
+
+.team-card__box--button:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
+}

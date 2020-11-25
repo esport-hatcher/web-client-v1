@@ -1,0 +1,12 @@
+.box-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-bottom: 1px solid $color-white;
+    align-items: center;
+    padding-bottom: 1.2rem;
+
+    &__title {
+        margin-right: auto;
+    }
+}

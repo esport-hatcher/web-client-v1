@@ -1,118 +1,149 @@
 import React, { useCallback, useState } from 'react';
-import capitalize from 'capitalize';
-import { InjectedFormProps, reduxForm, Field, reset } from 'redux-form';
-import { useDispatch } from 'react-redux';
-import { SmartInput, IconButton, RoundButton } from 'app/components';
-import { normalizePhone, required } from 'app/shared';
-
-import { register } from 'app/actions';
+import { AiOutlineLeft, AiOutlineLogin, AiOutlineUser } from 'react-icons/ai';
+import { BsPhone } from 'react-icons/bs';
+import { FiMapPin } from 'react-icons/fi';
+import { useForm, Controller } from 'react-hook-form';
+import * as Yup from 'yup';
+import {
+    FormInput,
+    IconButton,
+    RoundButton,
+    NumberInput,
+} from 'app/components';
+import { IFormValues } from 'app/actions';
+import { phoneRegExp } from 'app/shared';
 import { RegisterStage } from '../RegisterForm';
-import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
-
-export type ReduxFormValues = { [key: string]: string };
 
 interface IProps {
     goTo: Function;
+    onSubmit: (formValues: IFormValues) => Promise<void>;
 }
 
-const _RegisterFormMore: React.FC<IProps & InjectedFormProps<{}, IProps>> = ({
-    goTo,
-    handleSubmit,
-}) => {
-    const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false);
+const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .required('First name is required')
+        .min(2, 'Is it your real first name ?'),
+    lastName: Yup.string()
+        .required('Last name is required')
+        .min(2, 'Is it your real last name ?'),
+    city: Yup.string()
+        .notRequired()
+        .min(2, 'Is it a real city ?'),
+    country: Yup.string()
+        .notRequired()
+        .min(2, 'Is it a real country ?'),
+    phoneNumber: Yup.string()
+        .notRequired()
+        .matches(phoneRegExp, 'Please enter a valid phone number'),
+});
 
-    const onGoBack = useCallback(() => {
-        goTo(RegisterStage.basic);
-    }, [goTo]);
+export const RegisterFormMore: React.FC<IProps> = React.memo(
+    ({ goTo, onSubmit }) => {
+        const [loading, setLoading] = useState(false);
 
-    const onSubmit = useCallback(
-        async (formValues: ReduxFormValues) => {
-            setLoading(true);
-            // tslint:disable-next-line: await-promise
-            await dispatch(register(formValues));
-            setLoading(false);
-            dispatch(reset('register'));
-        },
-        [dispatch, setLoading]
-    );
+        const {
+            register,
+            handleSubmit,
+            errors,
+            formState: { dirtyFields },
+            control,
+        } = useForm({
+            mode: 'onChange',
+            validationSchema,
+        });
 
-    return (
-        <div className='register-screen__container'>
-            <div className='register-screen__container__title title title--xl'>
-                Tell us more about you
-            </div>
+        const onGoBack = useCallback(() => {
+            goTo(RegisterStage.basic);
+        }, [goTo]);
 
-            <form
-                className='register-screen__more'
-                onSubmit={handleSubmit(onSubmit)}
-            >
-                <RoundButton
-                    type='button'
-                    onClick={onGoBack}
-                    Icon={AiOutlineLeft}
-                    className='register-screen__more__btn-back btn btn--round btn--secondary-gradient'
-                />
-                <Field
-                    component={SmartInput}
-                    type='text'
-                    placeholder='First name'
-                    name='firstName'
-                    normalize={capitalize}
-                    validate={[required]}
-                />
-                <Field
-                    component={SmartInput}
-                    type='text'
-                    icon='portrait'
-                    placeholder='Last name'
-                    name='lastName'
-                    normalize={capitalize}
-                    validate={[required]}
-                />
-                <Field
-                    component={SmartInput}
-                    type='text'
-                    icon='map-pin'
-                    placeholder='City'
-                    name='city'
-                    normalize={capitalize}
-                    validate={[required]}
-                />
-                <Field
-                    component={SmartInput}
-                    type='text'
-                    icon='map-pin'
-                    placeholder='Country'
-                    name='country'
-                    normalize={capitalize}
-                    validate={[required]}
-                />
+        const _onSubmit = useCallback(
+            async (formValues: IFormValues) => {
+                try {
+                    setLoading(true);
+                    await onSubmit(formValues);
+                } catch {
+                    setLoading(false);
+                }
+            },
+            [setLoading, onSubmit]
+        );
 
-                <Field
-                    component={SmartInput}
-                    type='text'
-                    icon='phone'
-                    placeholder='Phone number'
-                    name='phoneNumber'
-                    normalize={normalizePhone}
-                    validate={[required]}
-                />
-                <IconButton
-                    className='btn--primary-gradient btn--rounded-bottom register-screen__more__btn'
-                    Icon={AiOutlineLogin}
-                    loading={loading}
-                    type='submit'
+        return (
+            <div className='register-screen__container'>
+                <div className='register-screen__container__title title title--xl'>
+                    Tell us more about you
+                </div>
+
+                <form
+                    className='register-screen__more'
+                    onSubmit={handleSubmit(_onSubmit)}
                 >
-                    Register
-                </IconButton>
-            </form>
-        </div>
-    );
-};
-
-export const RegisterFormMore = reduxForm<{}, IProps>({
-    form: 'register',
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-})(_RegisterFormMore);
+                    <RoundButton
+                        type='button'
+                        onClick={onGoBack}
+                        Icon={AiOutlineLeft}
+                        className='register-screen__more__btn-back btn btn--round btn--tertiary--gradient'
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='First name'
+                        name='firstName'
+                        error={errors['firstName']}
+                        touched={dirtyFields.has('firstName')}
+                        Icon={AiOutlineUser}
+                        autoCapitalize
+                        ref={register}
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='Last name'
+                        name='lastName'
+                        error={errors['lastName']}
+                        touched={dirtyFields.has('lastName')}
+                        Icon={AiOutlineUser}
+                        autoCapitalize
+                        ref={register}
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='City'
+                        name='city'
+                        error={errors['city']}
+                        touched={dirtyFields.has('city')}
+                        Icon={FiMapPin}
+                        autoCapitalize
+                        ref={register}
+                    />
+                    <FormInput
+                        type='text'
+                        placeholder='Country'
+                        name='country'
+                        error={errors['country']}
+                        touched={dirtyFields.has('country')}
+                        Icon={FiMapPin}
+                        autoCapitalize
+                        ref={register}
+                    />
+                    <Controller
+                        name='phoneNumber'
+                        control={control}
+                        as={NumberInput}
+                        Icon={BsPhone}
+                        error={errors['phoneNumber']}
+                        touched={dirtyFields.has('phoneNumber')}
+                        placeholder='Phone number'
+                        format='+33 # ## ## ## ##'
+                    />
+                    <IconButton
+                        className='btn--primary--gradient btn--rounded-bottom register-screen__more__btn'
+                        Icon={AiOutlineLogin}
+                        loading={loading}
+                        type='submit'
+                    >
+                        Register
+                    </IconButton>
+                </form>
+            </div>
+        );
+    }
+);

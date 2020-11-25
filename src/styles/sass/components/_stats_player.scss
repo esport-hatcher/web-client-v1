@@ -1,0 +1,108 @@
+.stats {
+    &__container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    
+    &__card{
+        padding: 20px;
+        width: 400px;
+        // height: 550px;
+        text-align:center;
+        background-color: $color-dark-three;
+        box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+        border-radius: 8px;
+
+        &--container {
+            width: 100%;
+            height: 100%;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        &--bloc {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 14px;
+            background-color: $color-dark;
+        }
+    }
+
+    &__card h1 {
+        margin:auto;
+    }
+
+    &__boxone {
+        display: grid;
+        grid-template-columns: 50% auto;
+        margin-top: 20px;
+        &--rank {
+            
+        }
+    }
+
+    &__boxone p {
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    &__boxtwo {
+        display: grid;
+        grid-template-rows: auto;
+
+        &--heroes {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        &--heroe {   
+            overflow: hidden;
+            height: 50px;
+        }
+
+        &--heroes img {
+            width: 50px;
+        }
+
+        &--tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: 60%;
+            margin-left: -85px;
+        }
+
+        &--heroe:hover &--tooltip {
+            visibility: visible;
+        }   
+        
+    }
+
+    &__boxtwo p {
+        text-align: left;
+    }
+
+    &__boxthree {
+        display: grid;
+        grid-template-columns: 33% 33% 34%;
+    }
+
+    &__boxthree  p {
+        text-align: left;
+    }
+}

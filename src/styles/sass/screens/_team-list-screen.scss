@@ -1,0 +1,252 @@
+.add-team-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px 0 rgba(14, 12, 12, 0.5);
+    border: solid 4px $color-dark-three;
+    background-color: $color-dark-three;
+    height: 114px;
+    width: 122px;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-right: 80px;
+    margin-left: 80px;
+}
+
+.team-page {
+    &__modal {
+        height: 100%;
+
+        &--title {
+            font-size: 50px;
+            color: $color-blue-light;
+        }
+
+        &--input {
+            width: 100%;
+        }
+
+        &--button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 115px;
+            width: 122px;
+            // margin-top: 80px;
+            // margin-bottom: 10px;
+            // margin-right: 80px;
+            // margin-left: 80px;
+        }
+        &--form {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+
+            padding: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &--input {
+            width: 100%;
+        }
+
+        &--button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 115px;
+            width: 122px;
+            margin-top: 80px;
+            margin-bottom: 10px;
+            margin-right: 80px;
+            margin-left: 80px;
+        }
+        &--form {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+
+            padding: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.team-page__box:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
+}
+
+.team-page__modal--button:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+    transition-delay: 0.1s;
+    background: #495c70;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    // left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+
+    &__main {
+        position: fixed;
+        background: white;
+        width: 100vh;
+        height: 80vh;
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+        border-width: 1px;
+        border-style: groove;
+        border-color: $color-white;
+        border-radius: 8px;
+
+        &--container {
+            padding: 75px;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-content: stretch;
+            // align-items: stretch;
+        }
+    }
+
+    &__initial {
+        width: 100%;
+        border: solid 1px $color-light-grey;
+        border-radius: 5px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    &__title {
+        object-fit: contain;
+        font-family: Helvetica;
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        &--create {
+            color: $color-blue-light;
+        }
+
+        &--join {
+            color: $color-green;
+        }
+    }
+
+    &__btn-create {
+        height: 80px;
+        border: none;
+        border-radius: 8px;
+        font-size: 36px;
+        color: white;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        background-color: $color-blue-light;
+    }
+
+    &__btn-join {
+        height: 80px;
+        border: none;
+        border-radius: 8px;
+        font-size: 36px;
+        color: white;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        background-color: $color-green;
+    }
+
+    &__btn-create:hover,
+    &__btn-join:hover {
+        cursor: pointer;
+    }
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.close-thik {
+    color: #777;
+    font: 14px/100% arial, sans-serif;
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    top: 5px;
+    cursor: pointer;
+}
+
+.validate-team {
+    display: flex;
+    border-width: 1px;
+    border-radius: 8px;
+    border: solid 4px $color-dark-three;
+    background-color: $color-dark-three;
+
+    height: 200px;
+    margin-top: 80px;
+    margin-right: 80px;
+    margin-left: 80px;
+
+    padding-left: 40px;
+    color: white;
+
+    &__text {
+        margin-top: 2%;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        width: 95%;
+        height: 84px;
+        align-content: center;
+        padding-left: 100px;
+        padding-top: 20px;
+        background-color: $color-dark;
+
+        &__announce {
+            margin-left: 25%;
+        }
+
+        &__question {
+            margin-left: 30%;
+        }
+    }
+
+    &__button {
+        position: absolute;
+        margin-left: 35%;
+        margin-top: 9%;
+        border: none;
+        cursor: pointer;
+        width: 10vw;
+        height: 5vh;
+        font-size: 20px;
+        font-family: Helvetica;
+        border-radius: 5px;
+        background-color: $color-green;
+        color: $color-white;
+    }
+}

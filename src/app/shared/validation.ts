@@ -1,63 +1,20 @@
 import api from 'app/api';
+import { ValidationError } from 'yup';
 
 export type ReduxFormValidation = undefined | string;
 
-export const isEmail = (value: string): ReduxFormValidation => {
-    if (value.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)) {
-        return undefined;
-    }
-    return 'Value has to be an email';
-};
-
-// Returns a function setting min and max for check function
-export const getMinMaxFunction = (min: number, max: number) => {
-    return (value: string): ReduxFormValidation => {
-        if (value.length < min || value.length > max) {
-            return `Value has to be between ${min} and ${max} characters.`;
-        }
-        return undefined;
-    };
-};
-
-export const getMinFunction = (min: number) => {
-    return (value: string): ReduxFormValidation => {
-        if (value.length < min) {
-            return `Value has to be at least ${min} characters.`;
-        }
-        return undefined;
-    };
-};
-
-export const getMaxFunction = (max: number) => {
-    return (value: string): ReduxFormValidation => {
-        if (value.length > max) {
-            return `Value has to be less than ${max} characters.`;
-        }
-        return undefined;
-    };
-};
-
-export const matchesPassword = (
-    value: string,
-    allValues: { password: string }
-): ReduxFormValidation =>
-    value === allValues.password
-        ? undefined
-        : 'Password and confirm password must match';
-
-export const required = (value: string): ReduxFormValidation =>
-    value ? undefined : 'Value is required';
-
 // tslint:disable-next-line: no-any
-export const isEmailAvailable = async (values: any) => {
+export const isEmailAvailable = async (
+    email: string | null | undefined
+): Promise<boolean | ValidationError> => {
     try {
         await api.post('/users/email', {
-            email: values.email,
+            email,
         });
+        return Promise.resolve(true);
     } catch {
-        return Promise.reject({ email: 'Email is already taken' });
+        return Promise.resolve(false);
     }
 };
 
-export const isMin5Max20 = getMinMaxFunction(5, 20);
-export const isMin3Max20 = getMinMaxFunction(3, 20);
+export const phoneRegExp = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;

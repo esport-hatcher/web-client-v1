@@ -1,0 +1,29 @@
+.todolist-screen {
+    display: flex;
+    color: $color-white;
+    height: 86vh;
+    z-index: -1000;
+    &__tasks {
+        margin: 10px 0 0 40px;
+
+        &__title {
+            margin-bottom: 20px;
+        }
+
+        &__button-create {
+            border: none;
+            cursor: pointer;
+            width: 6vw;
+            height: 3vh;
+            font-size: 16px;
+            font-family: Helvetica;
+            border-radius: 5px;
+            background-color: $color-green;
+            color: $color-white;
+
+            &:active {
+                background-color: darken($color-green, 5%);
+            }
+        }
+    }
+}

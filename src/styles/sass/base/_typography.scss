@@ -42,7 +42,7 @@
 
     &--md {
         font-size: 1.6rem;
-        letter-spacing: 0.28rem;
+        letter-spacing: 0.2rem;
     }
 
     &--sm {
@@ -52,7 +52,6 @@
 }
 
 .title {
-    font-size: 3rem;
     font-family: $font-family-heading;
     color: $color-white;
     font-weight: bold;
@@ -61,13 +60,21 @@
         font-size: 4rem;
     }
 
+    &--md {
+        font-size: 3.2rem;
+    }
+
+    &--sm {
+        font-size: 2.6rem;
+    }
+
     &--xs {
         font-size: 2rem;
     }
 }
 
 .important-info {
-    color: inherit;
+    color: $color-white;
     font-family: $font-family-body;
     font-weight: 700;
 
@@ -100,4 +107,8 @@
         font-style: normal;
         letter-spacing: 1.5px;
     }
+}
+
+.uppercase {
+    text-transform: uppercase;
 }

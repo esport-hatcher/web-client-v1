@@ -1,64 +1,72 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
-import { useToggler } from 'app/custom-hooks';
+import React from 'react';
+import Select, { Props as SelectProps } from 'react-select';
+import {
+    DropdownValueContainer,
+    DropdownIndicator,
+    DropdownValue,
+    DropdownOption,
+    DropdownMenu,
+    DropdownControl,
+} from './components';
 
-interface IProps {
-    items: string[];
-    onSelect: (selected: string) => void;
+export interface IOption {
+    label: string;
+    value: string;
 }
 
-export const Dropdown: React.FC<IProps> = React.memo(({ items, onSelect }) => {
-    const [value, setValue] = useState(items[0]);
-    const [listToggled, toggleList, toggleListSpec] = useToggler(false);
-    const [width, setWidth] = useState<number>(0);
-    const listRef = useRef<HTMLUListElement>(null);
+interface IDropdownProps extends SelectProps {
+    controlClassName?: string;
+    menuClassName?: string;
+    optionClassName?: string;
+    valueClassName?: string;
+    valueContainerClassName?: string;
+    iconClassName?: string;
+}
 
-    useEffect(() => {
-        const width = listRef.current ? listRef.current.offsetWidth : 0;
-        setWidth(width);
-        // eslint-disable-next-line
-    }, [listRef.current]);
-
-    const onItemSelect = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>
-    ) => {
-        const itemValue = event.currentTarget.getAttribute('data-key')!;
-        setValue(itemValue);
-        onSelect(itemValue);
-        toggleListSpec(false);
-    };
-
-    const displayList = () => {
-        return items.map((item: string) => {
-            return (
-                <li
-                    className='dropdown__list__item'
-                    key={item}
-                    data-key={item}
-                    onClick={onItemSelect}
-                >
-                    {item}
-                </li>
-            );
-        });
-    };
-
-    return (
-        <div
-            className={`dropdown ${listToggled && 'dropdown--active'}`}
-            style={{ width }}
-        >
-            <div className='dropdown__header'>
-                <div className='dropdown__header__value'>{value}</div>
-                <FiChevronDown onClick={toggleList} />
-            </div>
-            <ul
-                className={`dropdown__list ${listToggled &&
-                    'dropdown__list--active'}`}
-                ref={listRef}
-            >
-                {displayList()}
-            </ul>
-        </div>
-    );
-});
+export const Dropdown: React.FC<IDropdownProps> = React.memo(
+    ({ ...dropdownProps }) => (
+        <Select
+            {...dropdownProps}
+            classNamePrefix='dropdown'
+            className={'dropdown ' + dropdownProps['className']}
+            components={{
+                Control: React.memo(props => (
+                    <DropdownControl
+                        {...props}
+                        className={dropdownProps['controlClassName']}
+                    />
+                )),
+                Menu: React.memo(props => (
+                    <DropdownMenu
+                        {...props}
+                        className={dropdownProps['menuClassName']}
+                    />
+                )),
+                Option: React.memo(props => (
+                    <DropdownOption
+                        {...props}
+                        className={dropdownProps['optionClassName']}
+                    />
+                )),
+                SingleValue: React.memo(props => (
+                    <DropdownValue
+                        {...props}
+                        className={dropdownProps['valueClassName']}
+                    />
+                )),
+                DropdownIndicator: React.memo(props => (
+                    <DropdownIndicator
+                        {...props}
+                        className={dropdownProps['iconClassName']}
+                    />
+                )),
+                ValueContainer: React.memo(props => (
+                    <DropdownValueContainer
+                        {...props}
+                        className={dropdownProps['valueContainerClassName']}
+                    />
+                )),
+            }}
+        />
+    )
+);

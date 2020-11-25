@@ -38,6 +38,18 @@
         background-color: $color-rosy-pink;
         color: $color-white;
 
+        &--gradient {
+            color: $color-white;
+            background-image: $color-primary-gradient;
+            transition: background-color 0s ease-in-out 0s,
+                background-image 0.3s ease-in;
+
+            &:hover {
+                background-color: $color-rosy-pink;
+                background-image: none;
+            }
+        }
+
         &:hover {
             background-color: darken($color-rosy-pink, 10%);
         }
@@ -46,6 +58,18 @@
     &--secondary {
         background-color: $color-blue-light;
         color: $color-white;
+
+        &--gradient {
+            color: $color-white;
+            background-image: $color-secondary-gradient;
+            transition: background-color 0s ease-in-out 0s,
+                background-image 0.3s ease-in;
+
+            &:hover {
+                background-color: $color-blue-light;
+                background-image: none;
+            }
+        }
 
         &:hover {
             background-color: darken($color-blue-light, 10%);
@@ -59,23 +83,14 @@
         &:hover {
             background-color: darken($color-dark-two, 10%);
         }
-    }
 
-    &--primary-gradient {
-        background-image: $color-primary-gradient;
-        color: $color-white;
-
-        & > svg {
+        &--gradient {
             color: $color-white;
-        }
-    }
+            background-image: $color-tertiary-gradient;
 
-    &--secondary-gradient {
-        color: $color-white;
-        background-image: linear-gradient(176deg, #4c617b, $color-dark);
-
-        & > svg {
-            color: $color-white;
+            & > svg {
+                color: $color-white;
+            }
         }
     }
 
@@ -109,11 +124,15 @@
         border-radius: 100%;
     }
 
-    &--icon-holder {
+    &--icon {
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
+
+        &--no-padding {
+            padding: 0;
+        }
 
         &__icon {
             // font-size: 2.4rem;
@@ -121,16 +140,71 @@
             top: 25%;
             right: 10%;
         }
+
+        &--primary {
+            color: $color-white;
+
+            &:hover {
+                color: $color-rosy-pink;
+            }
+        }
+
+        &--secondary {
+            color: $color-white;
+
+            &:hover {
+                color: $color-blue-light;
+            }
+        }
     }
 
     &--rounded-bottom {
         border: none;
+        border-radius: 0;
         border-bottom-left-radius: 14px;
         border-bottom-right-radius: 14px;
+    }
+
+    &--plus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &__circle {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: #1d2938;
+            border: solid 6px white;
+        }
+
+        &__horizontal {
+            position: relative;
+            background-color: #ffffff;
+            width: 50%;
+            height: 12.5%;
+            left: 25%;
+            top: 43.75%;
+        }
+
+        &__vertical {
+            position: relative;
+            background-color: #ffffff;
+            width: 12.5%;
+            height: 50%;
+            left: 43.75%;
+            top: 12.5%;
+        }
     }
 
     &:disabled {
         opacity: 0.3;
         cursor: auto;
+        color: $color-light-grey;
+
+        &:hover {
+            color: $color-light-grey;
+        }
     }
 }
