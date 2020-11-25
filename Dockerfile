@@ -1,4 +1,4 @@
-FROM node:alpine as builder 
+FROM node:12 as builder 
 
 ENV NODE_VERSION 11.10.1
 
