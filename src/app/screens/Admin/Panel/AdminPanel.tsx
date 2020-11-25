@@ -58,7 +58,7 @@ export const _AdminPanel: React.FC<IProps & RouteComponentProps> = ({
         /** TODO: FIX URL PARAMETERS */
         // push(`/admin/Panel?${stringify(filters)}`);
         dispatch({ type: ActionTypes.adminPanelSetLoading });
-        dispatch(adminPanelFetchUsers(stringify(filters)));
+        dispatch(adminPanelFetchUsers(stringify({ ...filters })));
     }, [filters, push, dispatch]);
 
     const onSearch = useCallback(
