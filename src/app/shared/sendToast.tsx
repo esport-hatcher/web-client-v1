@@ -7,4 +7,5 @@ export const sendToast = (config: IToastConfig) => {
     toast.success(<CustomToast {...config} />, {
         className: `toast toast--${config.type}`,
     });
+    toast.clearWaitingQueue();
 };
