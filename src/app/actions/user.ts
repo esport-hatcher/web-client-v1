@@ -52,6 +52,7 @@ export const fetchUserSession = (): AppThunk => async dispatch => {
             title: 'Sign in success',
             content: `Happy to see you back ${data.username}!`,
             type: 'success',
+            id: 'signin',
         });
     } catch ({ response: { data } }) {
         await persistor.purge();

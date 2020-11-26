@@ -34,7 +34,6 @@ export const App: React.FC = () => {
                     <ToastContainer
                         autoClose={TOAST_DURATION}
                         position='top-center'
-                        limit={1}
                     />
                     <AnimatedSwitch
                         atEnter={{ opacity: 0 }}
