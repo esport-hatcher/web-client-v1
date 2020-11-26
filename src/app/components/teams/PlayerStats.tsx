@@ -52,23 +52,31 @@ export const PlayerStats: React.FC<IProps> = ({ item }) => {
                             Most played heroes:
                         </p>
                         <div className='stats__boxtwo--heroes'>
-                            {item.bestMasteryChampions.map((champion: any) => {
-                                return (
-                                    <div className='stats__boxtwo--heroe'>
-                                        <img
-                                            src={champion.imageUrl}
-                                            alt={champion.championName}
-                                        />
-                                        <span className='stats__boxtwo--tooltip'>
-                                            Name : {champion.championName}{' '}
-                                            <br />
-                                            level: {champion.championLevel}{' '}
-                                            <br />
-                                            points: {champion.championPoints}
-                                        </span>
-                                    </div>
-                                );
-                            })}
+                            {item.bestMasteryChampions.map(
+                                (champion: any, key: number) => {
+                                    return (
+                                        <div
+                                            key={key}
+                                            className='stats__boxtwo--heroe'
+                                        >
+                                            <img
+                                                src={champion.imageUrl}
+                                                alt={champion.championName}
+                                            />
+                                            <span className='stats__boxtwo--tooltip'>
+                                                Name : {champion.championName}{' '}
+                                                <br />
+                                                level: {
+                                                    champion.championLevel
+                                                }{' '}
+                                                <br />
+                                                points:{' '}
+                                                {champion.championPoints}
+                                            </span>
+                                        </div>
+                                    );
+                                }
+                            )}
                         </div>
                     </div>
                 </div>
