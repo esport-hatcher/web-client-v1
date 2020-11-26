@@ -14,6 +14,7 @@ export interface IToastConfig {
     content?: string;
     type: ToastType;
     Icon?: IconType;
+    id?: string;
 }
 
 const getIcon = (type: ToastType) => {
