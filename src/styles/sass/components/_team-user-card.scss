@@ -12,11 +12,25 @@
         position: absolute;
         font-size: 15px;
         margin-top: -1%;
-        margin-left: 10%;
+        margin-left: 40%;
         color: white;
     }
     &__date {
         font-size: 13px;
+    }
+
+    &__button {
+        margin-left: 5%;
+        margin-top: 0.5%;
+        border: none;
+        cursor: pointer;
+        width: 10vw;
+        height: 3vh;
+        font-size: 15px;
+        font-family: Helvetica;
+        border-radius: 5px;
+        background-color: $color-green;
+        color: $color-white;
     }
 }
 

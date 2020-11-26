@@ -38,6 +38,7 @@ export const TeamUserCard: React.FC<IProps> = ({ item }) => {
             )}
             {item.TeamUser && !item.TeamUser.teamStatus ? (
                 <button
+                    className='team-user-card__button'
                     onClick={() =>
                         validateTeamUser(item.id, item.TeamUser.TeamId)
                     }
